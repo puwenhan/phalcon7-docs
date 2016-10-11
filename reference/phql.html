@@ -89,6 +89,10 @@
 <li><a class="reference internal" href="#updating-data">更新数据（Updating Data）</a></li>
 <li><a class="reference internal" href="#deleting-data">删除数据（Deleting Data）</a></li>
 <li><a class="reference internal" href="#creating-queries-using-the-query-builder">使用查询构建器创建查询（Creating queries using the Query Builder）</a><ul>
+<li><a class="reference internal" href="#select-query-builder">选取查询构建器（Select Query Builder）</a></li>
+<li><a class="reference internal" href="#insert-query-builder">插入查询构建器（Insert Query Builder）</a></li>
+<li><a class="reference internal" href="#update-query-builder">更新查询构建器（Update Query Builder）</a></li>
+<li><a class="reference internal" href="#delete-query-builder">删除查询构建器（Delete Query Builder）</a></li>
 <li><a class="reference internal" href="#bound-parameters">绑定参数（Bound Parameters）</a></li>
 </ul>
 </li>
@@ -674,19 +678,26 @@ any validation messages you should check the status code returned:</p>
 <div class="section" id="creating-queries-using-the-query-builder">
 <h2>使用查询构建器创建查询（Creating queries using the Query Builder）<a class="headerlink" href="#creating-queries-using-the-query-builder" title="永久链接至标题">¶</a></h2>
 <p>A builder is available to create PHQL queries without the need to write PHQL statements, also providing IDE facilities:</p>
+<div class="section" id="select-query-builder">
+<h3>选取查询构建器（Select Query Builder）<a class="headerlink" href="#select-query-builder" title="永久链接至标题">¶</a></h3>
 <div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
 
+<span class="c1">// Create a new Query Builder for Select</span>
+<span class="nv">$robots</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">modelsManager</span><span class="o">-&gt;</span><span class="na">createBuilder</span><span class="p">();</span>
+<span class="c1">// Or</span>
+<span class="nv">$builder</span> <span class="o">=</span> <span class="nx">Phalcon\Mvc\Model\Query\Builder</span><span class="o">::</span><span class="na">create</span><span class="p">(</span><span class="nx">Phalcon\Mvc\Model\Query</span><span class="o">::</span><span class="na">TYPE_SELECT</span><span class="p">);</span>
+<span class="c1">// Or</span>
+<span class="nv">$builder</span> <span class="o">=</span> <span class="nx">Phalcon\Mvc\Model\Query\Builder</span><span class="o">::</span><span class="na">createSelectBuilder</span><span class="p">();</span>
+
 <span class="c1">// Getting a whole set</span>
-<span class="nv">$robots</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">modelsManager</span><span class="o">-&gt;</span><span class="na">createBuilder</span><span class="p">()</span>
-    <span class="o">-&gt;</span><span class="na">from</span><span class="p">(</span><span class="s1">&#39;Robots&#39;</span><span class="p">)</span>
+<span class="nv">$builder</span><span class="o">-&gt;</span><span class="na">from</span><span class="p">(</span><span class="s1">&#39;Robots&#39;</span><span class="p">)</span>
     <span class="o">-&gt;</span><span class="na">join</span><span class="p">(</span><span class="s1">&#39;RobotsParts&#39;</span><span class="p">)</span>
     <span class="o">-&gt;</span><span class="na">orderBy</span><span class="p">(</span><span class="s1">&#39;Robots.name&#39;</span><span class="p">)</span>
     <span class="o">-&gt;</span><span class="na">getQuery</span><span class="p">()</span>
     <span class="o">-&gt;</span><span class="na">execute</span><span class="p">();</span>
 
 <span class="c1">// Getting the first row</span>
-<span class="nv">$robots</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">modelsManager</span><span class="o">-&gt;</span><span class="na">createBuilder</span><span class="p">()</span>
-    <span class="o">-&gt;</span><span class="na">from</span><span class="p">(</span><span class="s1">&#39;Robots&#39;</span><span class="p">)</span>
+<span class="nv">$builder</span><span class="o">-&gt;</span><span class="na">from</span><span class="p">(</span><span class="s1">&#39;Robots&#39;</span><span class="p">)</span>
     <span class="o">-&gt;</span><span class="na">join</span><span class="p">(</span><span class="s1">&#39;RobotsParts&#39;</span><span class="p">)</span>
     <span class="o">-&gt;</span><span class="na">orderBy</span><span class="p">(</span><span class="s1">&#39;Robots.name&#39;</span><span class="p">)</span>
     <span class="o">-&gt;</span><span class="na">getQuery</span><span class="p">()</span>
@@ -696,8 +707,7 @@ any validation messages you should check the status code returned:</p>
 <p>That is the same as:</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
 
-<span class="nv">$phql</span>   <span class="o">=</span> <span class="s2">&quot;SELECT Robots.* FROM Robots JOIN RobotsParts p</span>
-<span class="s2">    ORDER BY Robots.name LIMIT 20&quot;</span><span class="p">;</span>
+<span class="nv">$phql</span>   <span class="o">=</span> <span class="s2">&quot;SELECT Robots.* FROM Robots JOIN RobotsParts p ORDER BY Robots.name LIMIT 20&quot;</span><span class="p">;</span>
 <span class="nv">$result</span> <span class="o">=</span> <span class="nv">$manager</span><span class="o">-&gt;</span><span class="na">executeQuery</span><span class="p">(</span><span class="nv">$phql</span><span class="p">);</span>
 </pre></div>
 </div>
@@ -825,6 +835,67 @@ any validation messages you should check the status code returned:</p>
 <span class="nv">$builder</span><span class="o">-&gt;</span><span class="na">from</span><span class="p">([</span><span class="s1">&#39;r&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Store\Robots&#39;</span><span class="p">])</span>
         <span class="o">-&gt;</span><span class="na">where</span><span class="p">(</span><span class="s1">&#39;r.name LIKE :name:&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;name&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;%&#39;</span> <span class="o">.</span> <span class="nv">$name</span> <span class="o">.</span> <span class="s1">&#39;%&#39;</span><span class="p">));</span>
 </pre></div>
+</div>
+</div>
+<div class="section" id="insert-query-builder">
+<h3>插入查询构建器（Insert Query Builder）<a class="headerlink" href="#insert-query-builder" title="永久链接至标题">¶</a></h3>
+<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+
+<span class="c1">// Create a new Query Builder for Insert</span>
+<span class="nv">$robots</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">modelsManager</span><span class="o">-&gt;</span><span class="na">createBuilder</span><span class="p">(</span><span class="k">NULL</span><span class="p">,</span> <span class="nx">Phalcon\Mvc\Model\Query</span><span class="o">::</span><span class="na">TYPE_INSERT</span><span class="p">);</span>
+<span class="c1">// Or</span>
+<span class="nv">$builder</span> <span class="o">=</span> <span class="nx">Phalcon\Mvc\Model\Query\Builder</span><span class="o">::</span><span class="na">create</span><span class="p">(</span><span class="nx">Phalcon\Mvc\Model\Query</span><span class="o">::</span><span class="na">TYPE_INSERT</span><span class="p">);</span>
+<span class="c1">// Or</span>
+<span class="nv">$builder</span> <span class="o">=</span> <span class="nx">Phalcon\Mvc\Model\Query\Builder</span><span class="o">::</span><span class="na">createInsertBuilder</span><span class="p">();</span>
+
+<span class="c1">// Insert two records</span>
+<span class="nv">$builder</span><span class="o">-&gt;</span><span class="na">table</span><span class="p">(</span><span class="s1">&#39;Robots&#39;</span><span class="p">)</span>
+    <span class="o">-&gt;</span><span class="na">columns</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">))</span>
+    <span class="o">-&gt;</span><span class="na">values</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s1">&#39;name&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Google&#39;</span><span class="p">),</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;name&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Baidu&#39;</span><span class="p">)))</span>
+    <span class="o">-&gt;</span><span class="na">getQuery</span><span class="p">()</span>
+    <span class="o">-&gt;</span><span class="na">execute</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="update-query-builder">
+<h3>更新查询构建器（Update Query Builder）<a class="headerlink" href="#update-query-builder" title="永久链接至标题">¶</a></h3>
+<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+
+<span class="c1">// Create a new Query Builder for Update</span>
+<span class="nv">$robots</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">modelsManager</span><span class="o">-&gt;</span><span class="na">createBuilder</span><span class="p">(</span><span class="k">NULL</span><span class="p">,</span> <span class="nx">Phalcon\Mvc\Model\Query</span><span class="o">::</span><span class="na">TYPE_UPDATE</span><span class="p">);</span>
+<span class="c1">// Or</span>
+<span class="nv">$builder</span> <span class="o">=</span> <span class="nx">Phalcon\Mvc\Model\Query\Builder</span><span class="o">::</span><span class="na">create</span><span class="p">(</span><span class="nx">Phalcon\Mvc\Model\Query</span><span class="o">::</span><span class="na">TYPE_UPDATE</span><span class="p">);</span>
+<span class="c1">// Or</span>
+<span class="nv">$builder</span> <span class="o">=</span> <span class="nx">Phalcon\Mvc\Model\Query\Builder</span><span class="o">::</span><span class="na">createUpdateBuilder</span><span class="p">();</span>
+
+<span class="c1">// Update records</span>
+<span class="nv">$builder</span><span class="o">-&gt;</span><span class="na">table</span><span class="p">(</span><span class="s1">&#39;Robots&#39;</span><span class="p">)</span>
+    <span class="o">-&gt;</span><span class="na">set</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s1">&#39;name&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Google&#39;</span><span class="p">))</span>
+    <span class="o">-&gt;</span><span class="na">getQuery</span><span class="p">()</span>
+    <span class="o">-&gt;</span><span class="na">execute</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="delete-query-builder">
+<h3>删除查询构建器（Delete Query Builder）<a class="headerlink" href="#delete-query-builder" title="永久链接至标题">¶</a></h3>
+<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+
+<span class="c1">// Create a new Query Builder for Delete</span>
+<span class="nv">$robots</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">modelsManager</span><span class="o">-&gt;</span><span class="na">createBuilder</span><span class="p">(</span><span class="k">NULL</span><span class="p">,</span> <span class="nx">Phalcon\Mvc\Model\Query</span><span class="o">::</span><span class="na">TYPE_DELETE</span><span class="p">);</span>
+<span class="c1">// Or</span>
+<span class="nv">$builder</span> <span class="o">=</span> <span class="nx">Phalcon\Mvc\Model\Query\Builder</span><span class="o">::</span><span class="na">create</span><span class="p">(</span><span class="nx">Phalcon\Mvc\Model\Query</span><span class="o">::</span><span class="na">TYPE_DELETE</span><span class="p">);</span>
+<span class="c1">// Or</span>
+<span class="nv">$builder</span> <span class="o">=</span> <span class="nx">Phalcon\Mvc\Model\Query\Builder</span><span class="o">::</span><span class="na">createDeleteBuilder</span><span class="p">();</span>
+
+<span class="c1">// Delete records</span>
+<span class="nv">$builder</span><span class="o">-&gt;</span><span class="na">table</span><span class="p">(</span><span class="s1">&#39;Robots&#39;</span><span class="p">)</span>
+    <span class="o">-&gt;</span><span class="na">where</span><span class="p">(</span><span class="s1">&#39;name = &quot;Peter&quot;&#39;</span><span class="p">)</span>
+    <span class="o">-&gt;</span><span class="na">orderBy</span><span class="p">(</span><span class="s1">&#39;Robots.id&#39;</span><span class="p">)</span>
+    <span class="o">-&gt;</span><span class="na">limit</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
+    <span class="o">-&gt;</span><span class="na">getQuery</span><span class="p">()</span>
+    <span class="o">-&gt;</span><span class="na">execute</span><span class="p">();</span>
+</pre></div>
+</div>
 </div>
 <div class="section" id="bound-parameters">
 <h3>绑定参数（Bound Parameters）<a class="headerlink" href="#bound-parameters" title="永久链接至标题">¶</a></h3>

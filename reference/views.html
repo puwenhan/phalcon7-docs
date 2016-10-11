@@ -78,7 +78,7 @@
 <li><a class="reference internal" href="#">使用视图（Using Views）</a><ul>
 <li><a class="reference internal" href="#integrating-views-with-controllers">集成视图到控制器（Integrating Views with Controllers）</a></li>
 <li><a class="reference internal" href="#hierarchical-rendering">分层渲染（Hierarchical Rendering）</a><ul>
-<li><a class="reference internal" href="#id1">带命名空间的控制器视图渲染</a></li>
+<li><a class="reference internal" href="#namespace-view-support">命名空间视图渲染（Namespace View Support）</a></li>
 <li><a class="reference internal" href="#using-templates">使用模版（Using Templates）</a></li>
 <li><a class="reference internal" href="#control-rendering-levels">渲染级别控制（Control Rendering Levels）</a></li>
 <li><a class="reference internal" href="#disabling-render-levels">关闭渲染级别（Disabling render levels）</a></li>
@@ -98,8 +98,8 @@
 </li>
 <li><a class="reference internal" href="#injecting-services-in-view">注入服务到视图（Injecting services in View）</a></li>
 <li><a class="reference internal" href="#stand-alone-component">独立的组件（Stand-Alone Component）</a><ul>
-<li><a class="reference internal" href="#id2">分层渲染（Hierarchical Rendering）</a></li>
-<li><a class="reference internal" href="#id3">简单渲染（Simple Rendering）</a></li>
+<li><a class="reference internal" href="#id1">分层渲染（Hierarchical Rendering）</a></li>
+<li><a class="reference internal" href="#id2">简单渲染（Simple Rendering）</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#multiple-views-directory">多视图目录设置（Multiple Views Directory）</a></li>
@@ -259,8 +259,8 @@
 <span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
 </pre></div>
 </div>
-<div class="section" id="id1">
-<h3>带命名空间的控制器视图渲染<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h3>
+<div class="section" id="namespace-view-support">
+<h3>命名空间视图渲染（Namespace View Support）<a class="headerlink" href="#namespace-view-support" title="永久链接至标题">¶</a></h3>
 <p>默认启用，可以关闭命名空间视图渲染：</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
 
@@ -301,7 +301,7 @@
 </tr>
 </tbody>
 </table>
-<p>视图组件会自动找到这三个视图文件。</p>
+<p>视图组件会自动找到这四个视图文件。</p>
 <table border="1" class="docutils">
 <colgroup>
 <col width="15%" />
@@ -1088,8 +1088,8 @@
 <div class="section" id="stand-alone-component">
 <h2>独立的组件（Stand-Alone Component）<a class="headerlink" href="#stand-alone-component" title="永久链接至标题">¶</a></h2>
 <p>在Phalcon的所有部件都可以作为胶水（<em>glue</em>） 组件单独使用，因为它们彼此松散耦合:</p>
-<div class="section" id="id2">
-<h3>分层渲染（Hierarchical Rendering）<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h3>
+<div class="section" id="id1">
+<h3>分层渲染（Hierarchical Rendering）<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h3>
 <p>如下所示，可以单独使用 <a class="reference internal" href="../api/Phalcon_Mvc_View.html"><em>Phalcon\Mvc\View</em></a>：</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
 
@@ -1137,8 +1137,8 @@
 </pre></div>
 </div>
 </div>
-<div class="section" id="id3">
-<h3>简单渲染（Simple Rendering）<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h3>
+<div class="section" id="id2">
+<h3>简单渲染（Simple Rendering）<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h3>
 <p>如下所示，以单独使用 <a class="reference internal" href="../api/Phalcon_Mvc_View_Simple.html"><em>Phalcon\Mvc\View\Simple</em></a>：</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
 
