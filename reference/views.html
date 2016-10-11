@@ -78,6 +78,7 @@
 <li><a class="reference internal" href="#">使用视图（Using Views）</a><ul>
 <li><a class="reference internal" href="#integrating-views-with-controllers">集成视图到控制器（Integrating Views with Controllers）</a></li>
 <li><a class="reference internal" href="#hierarchical-rendering">分层渲染（Hierarchical Rendering）</a><ul>
+<li><a class="reference internal" href="#id1">带命名空间的控制器视图渲染</a></li>
 <li><a class="reference internal" href="#using-templates">使用模版（Using Templates）</a></li>
 <li><a class="reference internal" href="#control-rendering-levels">渲染级别控制（Control Rendering Levels）</a></li>
 <li><a class="reference internal" href="#disabling-render-levels">关闭渲染级别（Disabling render levels）</a></li>
@@ -97,10 +98,11 @@
 </li>
 <li><a class="reference internal" href="#injecting-services-in-view">注入服务到视图（Injecting services in View）</a></li>
 <li><a class="reference internal" href="#stand-alone-component">独立的组件（Stand-Alone Component）</a><ul>
-<li><a class="reference internal" href="#id1">分层渲染（Hierarchical Rendering）</a></li>
-<li><a class="reference internal" href="#id2">简单渲染（Simple Rendering）</a></li>
+<li><a class="reference internal" href="#id2">分层渲染（Hierarchical Rendering）</a></li>
+<li><a class="reference internal" href="#id3">简单渲染（Simple Rendering）</a></li>
 </ul>
 </li>
+<li><a class="reference internal" href="#multiple-views-directory">多视图目录设置（Multiple Views Directory）</a></li>
 <li><a class="reference internal" href="#view-events">视图事件（View Events）</a></li>
 </ul>
 </li>
@@ -233,8 +235,7 @@
 </pre></div>
 </div>
 <p>注意方法 <code class="code docutils literal"><span class="pre">$this-&gt;getContent()</span></code> 被调用的这行。这种方法指示 <a class="reference internal" href="../api/Phalcon_Mvc_View.html"><em>Phalcon\Mvc\View</em></a> 在这里注入前面视图层次结构执行的内容。在上面的示例中，输出将会是：</p>
-<img alt="reference/../static/img/views-1.png" class="align-center" src="reference/../static/img/views-1.png" />
-<p>请求生成的HTML的将为：</p>
+<img class="align-center" src="../static/img/views-1.png"><p>请求生成的HTML的将为：</p>
 <div class="highlight-html+php"><div class="highlight"><pre><span class="c">&lt;!-- app/views/index.phtml --&gt;</span>
 <span class="p">&lt;</span><span class="nt">html</span><span class="p">&gt;</span>
     <span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
@@ -257,6 +258,81 @@
     <span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
 <span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
 </pre></div>
+</div>
+<div class="section" id="id1">
+<h3>带命名空间的控制器视图渲染<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h3>
+<p>默认启用，可以关闭命名空间视图渲染：</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+
+<span class="k">use</span> <span class="nx">Phalcon\Mvc\View</span><span class="p">;</span>
+
+<span class="nv">$di</span><span class="o">-&gt;</span><span class="na">set</span><span class="p">(</span><span class="s1">&#39;view&#39;</span><span class="p">,</span> <span class="k">function</span> <span class="p">()</span> <span class="p">{</span>
+
+    <span class="nv">$view</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">View</span><span class="p">();</span>
+
+    <span class="c1">// Disable namespace view render</span>
+    <span class="nv">$view</span><span class="o">-&gt;</span><span class="na">disableNamespaceView</span><span class="p">();</span>
+
+    <span class="k">return</span> <span class="nv">$view</span><span class="p">;</span>
+<span class="p">},</span> <span class="k">true</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>如果设置路由，对上述的URL做如下解析:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="63%" />
+<col width="37%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Server Address</td>
+<td>127.0.0.1</td>
+</tr>
+<tr class="row-even"><td>Namespace</td>
+<td>blog</td>
+</tr>
+<tr class="row-odd"><td>Controller</td>
+<td>posts</td>
+</tr>
+<tr class="row-even"><td>Action</td>
+<td>show</td>
+</tr>
+<tr class="row-odd"><td>Parameter</td>
+<td>301</td>
+</tr>
+</tbody>
+</table>
+<p>视图组件会自动找到这三个视图文件。</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="15%" />
+<col width="33%" />
+<col width="52%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">名称</th>
+<th class="head">文件</th>
+<th class="head">解释</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Action View</td>
+<td>app/views/blog/posts/show.phtml</td>
+<td>这是该动作相关的视图。</td>
+</tr>
+<tr class="row-odd"><td>Controller Layout</td>
+<td>app/views/layouts/blog/posts.phtml</td>
+<td>这是该控制器相关的视图。</td>
+</tr>
+<tr class="row-even"><td>Namespace Layout</td>
+<td>app/views/layouts/namespace/blogs.phtml</td>
+<td>这是该命名空间相关的视图。</td>
+</tr>
+<tr class="row-odd"><td>Main Layout</td>
+<td>app/views/index.phtml</td>
+<td>这是主布局。</td>
+</tr>
+</tbody>
+</table>
 </div>
 <div class="section" id="using-templates">
 <h3>使用模版（Using Templates）<a class="headerlink" href="#using-templates" title="永久链接至标题">¶</a></h3>
@@ -1012,8 +1088,8 @@
 <div class="section" id="stand-alone-component">
 <h2>独立的组件（Stand-Alone Component）<a class="headerlink" href="#stand-alone-component" title="永久链接至标题">¶</a></h2>
 <p>在Phalcon的所有部件都可以作为胶水（<em>glue</em>） 组件单独使用，因为它们彼此松散耦合:</p>
-<div class="section" id="id1">
-<h3>分层渲染（Hierarchical Rendering）<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h3>
+<div class="section" id="id2">
+<h3>分层渲染（Hierarchical Rendering）<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h3>
 <p>如下所示，可以单独使用 <a class="reference internal" href="../api/Phalcon_Mvc_View.html"><em>Phalcon\Mvc\View</em></a>：</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
 
@@ -1061,8 +1137,8 @@
 </pre></div>
 </div>
 </div>
-<div class="section" id="id2">
-<h3>简单渲染（Simple Rendering）<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h3>
+<div class="section" id="id3">
+<h3>简单渲染（Simple Rendering）<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h3>
 <p>如下所示，以单独使用 <a class="reference internal" href="../api/Phalcon_Mvc_View_Simple.html"><em>Phalcon\Mvc\View\Simple</em></a>：</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
 
@@ -1086,6 +1162,20 @@
 <span class="p">);</span>
 </pre></div>
 </div>
+</div>
+</div>
+<div class="section" id="multiple-views-directory">
+<h2>多视图目录设置（Multiple Views Directory）<a class="headerlink" href="#multiple-views-directory" title="永久链接至标题">¶</a></h2>
+<p>如下所示，视图文件将从`app/views/view1`和`app/views/view2`寻找：</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+
+<span class="k">use</span> <span class="nx">Phalcon\Mvc\View</span> <span class="k">as</span> <span class="nx">View</span><span class="p">;</span>
+
+<span class="nv">$view</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">View</span><span class="p">();</span>
+
+<span class="nv">$view</span><span class="o">-&gt;</span><span class="na">setBasePath</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s2">&quot;../app/views/&quot;</span><span class="p">));</span>
+<span class="nv">$view</span><span class="o">-&gt;</span><span class="na">setViewsDir</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s2">&quot;./view1/&quot;</span><span class="p">,</span> <span class="s2">&quot;./view2/&quot;</span><span class="p">));</span>
+</pre></div>
 </div>
 </div>
 <div class="section" id="view-events">

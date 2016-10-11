@@ -327,8 +327,7 @@
 </pre></div>
 </div>
 <p>该控制器类必须有“Controller”后缀，且控制器动作必须有“Action”后缀。如果你从浏览器访问应用程序，你应该看到这样的事情：</p>
-<img alt="reference/../static/img/tutorial-1.png" class="align-center" src="reference/../static/img/tutorial-1.png" />
-<p>恭喜, 让Phalcon带你飞!</p>
+<img class="align-center" src="../static/img/tutorial-1.png"><p>恭喜, 让Phalcon带你飞!</p>
 </div>
 <div class="section" id="sending-output-to-a-view">
 <h3>输出到视图（Sending output to a view）<a class="headerlink" href="#sending-output-to-a-view" title="永久链接至标题">¶</a></h3>
@@ -369,8 +368,7 @@
 </pre></div>
 </div>
 <p>我们使用类 <a class="reference internal" href="../api/Phalcon_Tag.html"><em>Phalcon\Tag</em></a> 去生成标记。 这是一个让我们构建HTML标记的实用类。 关于生成HTML更详细的文章可以查看 <a class="reference internal" href="tags.html"><em>视图助手</em></a></p>
-<img alt="reference/../static/img/tutorial-2.png" class="align-center" src="reference/../static/img/tutorial-2.png" />
-<p>这是一个注册控制器 (app/controllers/SignupController.php):</p>
+<img class="align-center" src="../static/img/tutorial-2.png"><p>这是一个注册控制器 (app/controllers/SignupController.php):</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
 
 <span class="k">use</span> <span class="nx">Phalcon\Mvc\Controller</span><span class="p">;</span>
@@ -408,8 +406,7 @@
 </pre></div>
 </div>
 <p>在浏览器中查看表单将显示类似的页面：</p>
-<img alt="reference/../static/img/tutorial-3.png" class="align-center" src="reference/../static/img/tutorial-3.png" />
-<p><a class="reference internal" href="../api/Phalcon_Tag.html"><em>Phalcon\Tag</em></a> 还提供了有用的方法来构建表单元素。</p>
+<img class="align-center" src="../static/img/tutorial-3.png"><p><a class="reference internal" href="../api/Phalcon_Tag.html"><em>Phalcon\Tag</em></a> 还提供了有用的方法来构建表单元素。</p>
 <p><code class="code docutils literal"><span class="pre">Phalcon\Tag::form()</span></code> 方法只接受一个参数实例, 一个相对uri到这个应用的一个控制器/动作。</p>
 <p>通过单击“Send”按钮，您将注意到框架抛出了一个异常，这表明我们是错过了在控制器中注册“register”动作。我们的 public/index.php 文件抛出这个异常：</p>
 <blockquote>
@@ -564,8 +561,7 @@
 <p>然后我们实例化用户类，它对应于一个用户记录。类的公共属性映射到用户表中的记录的字段。在新记录中设置相应的值并调用save()将在数据库中存储的数据记录。save()方法返回一个布尔值，表示存储的数据是否成功。</p>
 <p>ORM自动转义输入以防止SQL注入，所以我们只需要将请求传递给save()方法。</p>
 <p>附加的自动验证会验证字段定义为not null(必需)。如果我们不输入任何必需的注册表单中的字段，我们的屏幕将会看起来像这样：</p>
-<img alt="reference/../static/img/tutorial-4.png" class="align-center" src="reference/../static/img/tutorial-4.png" />
-</div>
+<img class="align-center" src="../static/img/tutorial-4.png"></div>
 </div>
 <div class="section" id="conclusion">
 <h2>结束语（Conclusion）<a class="headerlink" href="#conclusion" title="永久链接至标题">¶</a></h2>

@@ -302,8 +302,7 @@ columns without having the risk of a SQL injection.</p>
 to check that only registered users have access to these controllers. If you aren&#8217;t logged
 into the application and you try to access, for example, the products controller (which is private)
 you will see a screen like this:</p>
-<img alt="reference/../static/img/invo-2.png" class="align-center" src="reference/../static/img/invo-2.png" />
-<p>Every time someone attempts to access any controller/action, the application verifies that the
+<img class="align-center" src="../static/img/invo-2.png"><p>Every time someone attempts to access any controller/action, the application verifies that the
 current role (in session) has access to it, otherwise it displays a message like the above and
 forwards the flow to the home page.</p>
 <p>Now let&#8217;s find out how the application accomplishes this. The first thing to know is that

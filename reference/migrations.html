@@ -113,14 +113,11 @@
 <h2>图解导出（Schema Dumping）<a class="headerlink" href="#schema-dumping" title="永久链接至标题">¶</a></h2>
 <p>The <a class="reference internal" href="tools.html"><em>Phalcon Developer Tools</em></a> provides scripts to manage migrations (generation, running and rollback).</p>
 <p>The available options for generating migrations are:</p>
-<img alt="reference/../static/img/migrations-1.png" class="align-center" src="reference/../static/img/migrations-1.png" />
-<p>Running this script without any parameters will simply dump every object (tables and views) from your database into migration classes.</p>
+<img class="align-center" src="../static/img/migrations-1.png"><p>Running this script without any parameters will simply dump every object (tables and views) from your database into migration classes.</p>
 <p>Each migration has a version identifier associated with it. The version number allows us to identify if the migration is newer or older than the current &#8216;version&#8217; of our database. Versions will also inform Phalcon of the running order when executing a migration.</p>
-<img alt="reference/../static/img/migrations-2.png" class="align-center" src="reference/../static/img/migrations-2.png" />
-<p>When a migration is generated, instructions are displayed on the console to describe the different steps of the migration and the execution time of those statements. At the end, a migration version is generated.</p>
+<img class="align-center" src="../static/img/migrations-2.png"><p>When a migration is generated, instructions are displayed on the console to describe the different steps of the migration and the execution time of those statements. At the end, a migration version is generated.</p>
 <p>By default <a class="reference internal" href="tools.html"><em>Phalcon Developer Tools</em></a> uses the <em>app/migrations</em> directory to dump the migration files. You can change the location by setting one of the parameters on the generation script. Each table in the database has its respective class generated in a separated file under a directory referring its version:</p>
-<img alt="reference/../static/img/migrations-3.png" class="align-center" src="reference/../static/img/migrations-3.png" />
-</div>
+<img class="align-center" src="../static/img/migrations-3.png"></div>
 <div class="section" id="migration-class-anatomy">
 <h2>迁移类剖析（Migration Class Anatomy）<a class="headerlink" href="#migration-class-anatomy" title="永久链接至标题">¶</a></h2>
 <p>Each file contains a unique class that extends the <code class="code docutils literal"><span class="pre">Phalcon\Mvc\Model\Migration</span></code> class. These classes normally have two methods: <code class="code docutils literal"><span class="pre">up()</span></code> and <code class="code docutils literal"><span class="pre">down()</span></code>. <code class="code docutils literal"><span class="pre">up()</span></code> performs the migration, while <code class="code docutils literal"><span class="pre">down()</span></code> rolls it back.</p>
@@ -396,9 +393,7 @@
 <div class="section" id="running-migrations">
 <h2>执行迁移（Running Migrations）<a class="headerlink" href="#running-migrations" title="永久链接至标题">¶</a></h2>
 <p>Once the generated migrations are uploaded on the target server, you can easily run them as shown in the following example:</p>
-<img alt="reference/../static/img/migrations-4.png" class="align-center" src="reference/../static/img/migrations-4.png" />
-<img alt="reference/../static/img/migrations-5.png" class="align-center" src="reference/../static/img/migrations-5.png" />
-<p>Depending on how outdated is the database with respect to migrations, Phalcon may run multiple migration versions in the same migration process. If you specify a target version, Phalcon will run the required migrations until it reaches the specified version.</p>
+<img class="align-center" src="../static/img/migrations-4.png"><img class="align-center" src="../static/img/migrations-5.png"><p>Depending on how outdated is the database with respect to migrations, Phalcon may run multiple migration versions in the same migration process. If you specify a target version, Phalcon will run the required migrations until it reaches the specified version.</p>
 </div>
 </div>
 

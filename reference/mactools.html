@@ -109,32 +109,27 @@
 <h2>下载（Download）<a class="headerlink" href="#download" title="永久链接至标题">¶</a></h2>
 <p>You can download a cross platform package containing the developer tools from the <a class="reference external" href="http://phalconphp.com/download&gt;">Download</a> section. You can also clone it from <a class="reference external" href="https://github.com/phalcon/phalcon-devtools">Github</a>.</p>
 <p>Open the terminal application:</p>
-<img alt="reference/../static/img/mac-1.png" class="align-center" src="reference/../static/img/mac-1.png" />
-<p>Copy &amp; Paste the commands below in your terminal:</p>
+<img class="align-center" src="../static/img/mac-1.png"><p>Copy &amp; Paste the commands below in your terminal:</p>
 <div class="highlight-bash"><div class="highlight"><pre>wget -q --no-check-certificate -O phalcon-tools.zip http://github.com/phalcon/phalcon-devtools/zipball/master
 unzip -q phalcon-tools.zip
 mv phalcon-phalcon-devtools-* phalcon-tools
 </pre></div>
 </div>
 <p>Check where the phalcon-tools directory was installed using a <em>pwd</em> command in your terminal:</p>
-<img alt="reference/../static/img/mac-2.png" class="align-center" src="reference/../static/img/mac-2.png" />
-<p>On the Mac platform, you need to configure your user PATH to include Phalcon tools. Edit your .profile and append the Phalcon tools path to the environment variable PATH:</p>
-<img alt="reference/../static/img/mac-3.png" class="align-center" src="reference/../static/img/mac-3.png" />
-<p>Insert these two lines at the end of the file:</p>
+<img class="align-center" src="../static/img/mac-2.png"><p>On the Mac platform, you need to configure your user PATH to include Phalcon tools. Edit your .profile and append the Phalcon tools path to the environment variable PATH:</p>
+<img class="align-center" src="../static/img/mac-3.png"><p>Insert these two lines at the end of the file:</p>
 <div class="highlight-bash"><div class="highlight"><pre><span class="nb">export</span> <span class="nv">PATH</span><span class="o">=</span>$PATH:/Users/scott/phalcon-tools
 <span class="nb">export</span> <span class="nv">PTOOLSPATH</span><span class="o">=</span>/Users/scott/phalcon-tools
 </pre></div>
 </div>
 <p>The .profile should look like this:</p>
-<img alt="reference/../static/img/mac-4.png" class="align-center" src="reference/../static/img/mac-4.png" />
-<p>Save your changes and close the editor. In the terminal window, type the following commands to create a symbolic link to the phalcon.php script:</p>
+<img class="align-center" src="../static/img/mac-4.png"><p>Save your changes and close the editor. In the terminal window, type the following commands to create a symbolic link to the phalcon.php script:</p>
 <div class="highlight-bash"><div class="highlight"><pre>ln -s ~/phalcon-tools/phalcon.php ~/phalcon-tools/phalcon
 chmod +x ~/phalcon-tools/phalcon
 </pre></div>
 </div>
 <p>Type the command &#8220;phalcon&#8221; and you will see something like this:</p>
-<img alt="reference/../static/img/mac-5.png" class="align-center" src="reference/../static/img/mac-5.png" />
-<p>Congratulations you now have Phalcon tools installed!</p>
+<img class="align-center" src="../static/img/mac-5.png"><p>Congratulations you now have Phalcon tools installed!</p>
 <div class="section" id="related-guides">
 <h3>相关指南（Related Guides）<a class="headerlink" href="#related-guides" title="永久链接至标题">¶</a></h3>
 <ul class="simple">

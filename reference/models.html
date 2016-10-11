@@ -925,8 +925,7 @@ another model. Each of these methods requires 3 parameters: local fields, refere
 <li>The model &#8220;Robots&#8221; has a relation many-to-many to &#8220;Parts&#8221; through &#8220;RobotsParts&#8221;.</li>
 </ul>
 <p>Check the EER diagram to understand better the relations:</p>
-<img alt="reference/../static/img/eer-1.png" class="align-center" src="reference/../static/img/eer-1.png" />
-<p>The models with their relations could be implemented as follows:</p>
+<img class="align-center" src="../static/img/eer-1.png"><p>The models with their relations could be implemented as follows:</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
 
 <span class="k">use</span> <span class="nx">Phalcon\Mvc\Model</span><span class="p">;</span>
@@ -1144,8 +1143,7 @@ and without:</p>
 </pre></div>
 </div>
 <p>Both &#8220;robots_id&#8221; and &#8220;similar_robots_id&#8221; have a relation to the model Robots:</p>
-<img alt="reference/../static/img/eer-2.png" class="align-center" src="reference/../static/img/eer-2.png" />
-<p>A model that maps this table and its relationships is the following:</p>
+<img class="align-center" src="../static/img/eer-2.png"><p>A model that maps this table and its relationships is the following:</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
 
 <span class="k">class</span> <span class="nc">RobotsSimilar</span> <span class="k">extends</span> <span class="nx">Phalcon\Mvc\Model</span>
