@@ -81,7 +81,10 @@
 			<div class="panel-body"><ul>
 <li><a class="reference internal" href="#">验证（Validation）</a><ul>
 <li><a class="reference internal" href="#initializing-validation">初始化验证（Initializing Validation）</a></li>
-<li><a class="reference internal" href="#validators">验证器（Validators）</a></li>
+<li><a class="reference internal" href="#validators">验证器（Validators）</a><ul>
+<li><a class="reference internal" href="#the-use-of-the-validator">验证器的使用（The use of the validator）</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#validation-messages">验证信息（Validation Messages）</a></li>
 <li><a class="reference internal" href="#filtering-of-data">过滤数据（Filtering of Data）</a></li>
 <li><a class="reference internal" href="#validation-events">验证事件（Validation Events）</a></li>
@@ -262,8 +265,16 @@
 <td><a class="reference internal" href="../api/Phalcon_Validation_Validator_Confirmation.html"><em>Example</em></a></td>
 </tr>
 <tr class="row-odd"><td>Url</td>
-<td>Validates that field contains a valid URL</td>
+<td>监测值是否是合法的URL</td>
 <td><a class="reference internal" href="../api/Phalcon_Validation_Validator_Url.html"><em>Example</em></a></td>
+</tr>
+<tr class="row-even"><td>Uniqueness</td>
+<td>监测值是否已存在</td>
+<td><a class="reference internal" href="../api/Phalcon_Validation_Validator_Uniqueness.html"><em>Example</em></a></td>
+</tr>
+<tr class="row-odd"><td>Json</td>
+<td>监测值是否是合法的JSON</td>
+<td><a class="reference internal" href="../api/Phalcon_Validation_Validator_Json.html"><em>Example</em></a></td>
 </tr>
 </tbody>
 </table>
@@ -287,7 +298,7 @@
     <span class="p">{</span>
         <span class="nv">$value</span> <span class="o">=</span> <span class="nv">$validator</span><span class="o">-&gt;</span><span class="na">getValue</span><span class="p">(</span><span class="nv">$attribute</span><span class="p">);</span>
 
-        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nb">filter_var</span><span class="p">(</span><span class="nv">$value</span><span class="p">,</span> <span class="nx">FILTER_VALIDATE_IP</span><span class="p">,</span> <span class="nx">FILTER_FLAG_IPV4</span> <span class="o">|</span> <span class="nx">FILTER_FLAG_IPV6</span><span class="p">))</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">valid</span><span class="p">(</span><span class="nv">$value</span><span class="p">))</span> <span class="p">{</span>
 
             <span class="nv">$message</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getOption</span><span class="p">(</span><span class="s1">&#39;message&#39;</span><span class="p">);</span>
             <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nv">$message</span><span class="p">)</span> <span class="p">{</span>
@@ -301,10 +312,48 @@
 
         <span class="k">return</span> <span class="k">true</span><span class="p">;</span>
     <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">valid</span><span class="p">(</span><span class="nv">$value</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nb">filter_var</span><span class="p">(</span><span class="nv">$value</span><span class="p">,</span> <span class="nx">FILTER_VALIDATE_IP</span><span class="p">,</span> <span class="nx">FILTER_FLAG_IPV4</span> <span class="o">|</span> <span class="nx">FILTER_FLAG_IPV6</span><span class="p">))</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="k">false</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="k">return</span> <span class="k">true</span><span class="p">;</span>
+    <span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>最重要的一点即是难证器要返回一个布尔值以标识验证是否成功：</p>
+<p>最重要的一点即是难证器要返回一个布尔值以标识验证是否成功。</p>
+<div class="section" id="the-use-of-the-validator">
+<h3>验证器的使用（The use of the validator）<a class="headerlink" href="#the-use-of-the-validator" title="永久链接至标题">¶</a></h3>
+<p>下面的例子中展示了如何单独使用验证器：</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+
+<span class="nv">$ipValidator</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">IpValidator</span><span class="p">;</span>
+<span class="nv">$valid</span> <span class="o">=</span> <span class="nv">$ipValidator</span><span class="o">-&gt;</span><span class="na">valid</span><span class="p">(</span><span class="s1">&#39;192.168.1.1&#39;</span><span class="p">);</span>
+
+<span class="nv">$emailValidator</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phalcon\Validation\Validator\Email</span><span class="p">;</span>
+<span class="nv">$valid</span> <span class="o">=</span> <span class="nv">$emailValidator</span><span class="o">-&gt;</span><span class="na">valid</span><span class="p">(</span><span class="s1">&#39;dreamsxin@qq.com&#39;</span><span class="p">);</span>
+
+<span class="nv">$betweenValidator</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phalcon\Validation\Validator\Between</span><span class="p">;</span>
+<span class="nv">$min</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="nv">$max</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+<span class="nv">$valid</span> <span class="o">=</span> <span class="nv">$betweenValidator</span><span class="o">-&gt;</span><span class="na">valid</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="nv">$min</span><span class="p">,</span> <span class="nv">$max</span><span class="p">);</span>
+
+<span class="c1">// 判断 json 格式是否合法</span>
+<span class="nv">$jsonValidator</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phalcon\Validation\Validator\Json</span><span class="p">;</span>
+<span class="nv">$valid</span> <span class="o">=</span> <span class="nv">$jsonValidator</span><span class="o">-&gt;</span><span class="na">valid</span><span class="p">(</span><span class="s1">&#39;{&quot;name&quot;=&gt;&quot;dreamsxin&quot;}&#39;</span><span class="p">);</span>
+
+<span class="c1">// 查找 email 值是否已存在</span>
+<span class="nv">$uniquenessValidator</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phalcon\Validation\Validator\Uniqueness</span><span class="p">;</span>
+<span class="nv">$valid</span> <span class="o">=</span> <span class="nv">$uniquenessValidator</span><span class="o">-&gt;</span><span class="na">valid</span><span class="p">(</span><span class="k">new</span> <span class="nx">Users</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;email&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;dreamsxin@qq.com&#39;</span><span class="p">));</span>
+
+<span class="c1">// 排除指定提交记录</span>
+<span class="nv">$user</span> <span class="o">=</span> <span class="nx">Users</span><span class="o">::</span><span class="na">findFirst</span><span class="p">();</span>
+<span class="nv">$valid</span> <span class="o">=</span> <span class="nv">$uniquenessValidator</span><span class="o">-&gt;</span><span class="na">valid</span><span class="p">(</span><span class="nv">$user</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;email&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;dreamsxin@qq.com&#39;</span><span class="p">),</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;id&#39;</span> <span class="o">=&gt;</span> <span class="nv">$user</span><span class="o">-&gt;</span><span class="na">id</span><span class="p">));</span>
+</pre></div>
+</div>
+</div>
 </div>
 <div class="section" id="validation-messages">
 <h2>验证信息（Validation Messages）<a class="headerlink" href="#validation-messages" title="永久链接至标题">¶</a></h2>

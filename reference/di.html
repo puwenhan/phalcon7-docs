@@ -109,6 +109,7 @@
 <li><a class="reference internal" href="#accessing-the-di-in-a-static-way">使用静态的方式访问注入器（Accessing the DI in a static way）</a></li>
 <li><a class="reference internal" href="#factory-default-di">注入器默认工厂（Factory Default DI）</a></li>
 <li><a class="reference internal" href="#service-name-conventions">服务名称约定（Service Name Conventions）</a></li>
+<li><a class="reference internal" href="#replace-the-built-in-service">替换内置服务（Replace The Built-in Service ）</a></li>
 <li><a class="reference internal" href="#implementing-your-own-di">自定义注入器（Implementing your own DI）</a></li>
 </ul>
 </li>
@@ -1061,10 +1062,10 @@ DI会回退到一个有效的自动加载类中，去加载这个类。通过这
 <p>尽管你可以用你喜欢的名字来注册服务，但是Phalcon有一些命名约定，这些约定让你在需要的时候，可以获得正确的（内置）服务。</p>
 <table border="1" class="docutils">
 <colgroup>
-<col width="11%" />
-<col width="24%" />
-<col width="54%" />
-<col width="10%" />
+<col width="15%" />
+<col width="23%" />
+<col width="52%" />
+<col width="9%" />
 </colgroup>
 <thead valign="bottom">
 <tr class="row-odd"><th class="head">服务名称</th>
@@ -1166,8 +1167,48 @@ DI会回退到一个有效的自动加载类中，去加载这个类。通过这
 </tr>
 <tr class="row-even"><td>modelsMetadata</td>
 <td>model元数据服务</td>
-<td><a class="reference internal" href="../api/Phalcon_Mvc_Model_MetaData_Memory.html"><em>Phalcon\Mvc\Model\MetaData\Memory</em></a></td>
+<td><a class="reference internal" href="../api/Phalcon_Mvc_Model_MetaData.html"><em>Phalcon\Mvc\Model\MetaData</em></a></td>
 <td>是</td>
+</tr>
+<tr class="row-odd"><td>modelsCriteria</td>
+<td>model动态条件查询服务</td>
+<td><a class="reference internal" href="../api/Phalcon_Mvc_Model_Criteria.html"><em>Phalcon\Mvc\Model\Criteria</em></a></td>
+<td>No</td>
+</tr>
+<tr class="row-even"><td>modelsQuery</td>
+<td>model查询服务</td>
+<td><a class="reference internal" href="../api/Phalcon_Mvc_Model_Query.html"><em>Phalcon\Mvc\Model\Query</em></a></td>
+<td>No</td>
+</tr>
+<tr class="row-odd"><td>modelsQueryBuilderForSelect</td>
+<td>model查询构造器服务</td>
+<td><a class="reference internal" href="../api/Phalcon_Mvc_Model_Query_Builder_Select.html"><em>Phalcon\Mvc\Model\Query\Builder\Select</em></a></td>
+<td>No</td>
+</tr>
+<tr class="row-even"><td>modelsQueryBuilderForInsert</td>
+<td>model插入构造器服务</td>
+<td><a class="reference internal" href="../api/Phalcon_Mvc_Model_Query_Builder_Insert.html"><em>Phalcon\Mvc\Model\Query\Builder\Insert</em></a></td>
+<td>No</td>
+</tr>
+<tr class="row-odd"><td>modelsQueryBuilderForUpdate</td>
+<td>model更新构造器服务</td>
+<td><a class="reference internal" href="../api/Phalcon_Mvc_Model_Query_Builder_Update.html"><em>Phalcon\Mvc\Model\Query\Builder\Update</em></a></td>
+<td>No</td>
+</tr>
+<tr class="row-even"><td>modelsQueryBuilderForDelete</td>
+<td>model删除构造器服务</td>
+<td><a class="reference internal" href="../api/Phalcon_Mvc_Model_Query_Builder_Delete.html"><em>Phalcon\Mvc\Model\Query\Builder\Delete</em></a></td>
+<td>No</td>
+</tr>
+<tr class="row-odd"><td>modelsResultsetSimple</td>
+<td>model简单结果集服务</td>
+<td><a class="reference internal" href="../api/Phalcon_Mvc_Model_Resultset_Simple.html"><em>Phalcon\Mvc\Model\Resultset\Simple</em></a></td>
+<td>No</td>
+</tr>
+<tr class="row-even"><td>modelsResultsetComplex</td>
+<td>model复杂结果集服务</td>
+<td><a class="reference internal" href="../api/Phalcon_Mvc_Model_Resultset_Complex.html"><em>Phalcon\Mvc\Model\Resultset\Complex</em></a></td>
+<td>No</td>
 </tr>
 <tr class="row-odd"><td>transactionManager</td>
 <td>model事务管理服务</td>
@@ -1186,6 +1227,23 @@ DI会回退到一个有效的自动加载类中，去加载这个类。通过这
 </tr>
 </tbody>
 </table>
+</div>
+<div class="section" id="replace-the-built-in-service">
+<h2>替换内置服务（Replace The Built-in Service ）<a class="headerlink" href="#replace-the-built-in-service" title="永久链接至标题">¶</a></h2>
+<p>如果你想对已有的服务类进行扩展，只需要继承对应服务类或者实现对应接口，然后注入替换即可，示范：</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+
+<span class="k">class</span> <span class="nc">MyQuery</span> <span class="k">extends</span> <span class="nx">Phalcon\Mvc\Model\Query</span> <span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">beforeExecute</span><span class="p">(){</span>
+        <span class="c1">// ToDo;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="nv">$di</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phalcon\DI\FactoryDefault</span><span class="p">;</span>
+<span class="c1">// 使用自己的 query 服务</span>
+<span class="nv">$di</span><span class="o">-&gt;</span><span class="na">set</span><span class="p">(</span><span class="s1">&#39;modelsQuery&#39;</span><span class="p">,</span> <span class="s1">&#39;MyQuery&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
 </div>
 <div class="section" id="implementing-your-own-di">
 <h2>自定义注入器（Implementing your own DI）<a class="headerlink" href="#implementing-your-own-di" title="永久链接至标题">¶</a></h2>
