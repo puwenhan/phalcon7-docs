@@ -81,7 +81,10 @@
 			<div class="panel-body"><ul>
 <li><a class="reference internal" href="#">命令行应用（Command Line Applications）</a><ul>
 <li><a class="reference internal" href="#structure">结构（Structure）</a></li>
-<li><a class="reference internal" href="#creating-a-bootstrap">创建引导（Creating a Bootstrap）</a></li>
+<li><a class="reference internal" href="#creating-a-bootstrap">创建引导（Creating a Bootstrap）</a><ul>
+<li><a class="reference internal" href="#id1">从命令行参数列表中获取选项</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#tasks">任务（Tasks）</a></li>
 <li><a class="reference internal" href="#processing-action-parameters">处理动作参数（Processing action parameters）</a></li>
 <li><a class="reference internal" href="#running-tasks-in-a-chain">链中运行任务（Running tasks in a chain）</a></li>
@@ -184,6 +187,43 @@
 
 这样程序会直接执行默认的任务及默认动作.
 </pre></div>
+</div>
+<div class="section" id="id1">
+<h3>从命令行参数列表中获取选项<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h3>
+<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<span class="nv">$shortopts</span>  <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">;</span>
+<span class="nv">$shortopts</span> <span class="o">.=</span> <span class="s2">&quot;ns:&quot;</span><span class="p">;</span> <span class="c1">// -ns=&quot;Phalcon&quot;</span>
+<span class="nv">$shortopts</span> <span class="o">.=</span> <span class="s2">&quot;d::&quot;</span><span class="p">;</span> <span class="c1">// -d</span>
+<span class="nv">$shortopts</span> <span class="o">.=</span> <span class="s2">&quot;D&quot;</span><span class="p">;</span>   <span class="c1">// -D</span>
+
+<span class="nv">$options</span> <span class="o">=</span> <span class="nb">getopt</span><span class="p">(</span>
+    <span class="nv">$shortopts</span><span class="p">,</span>
+    <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;namespace:&#39;</span><span class="p">,</span> <span class="c1">// 必选项 --namespace=Phalcon</span>
+        <span class="s1">&#39;task::&#39;</span><span class="p">,</span>     <span class="c1">// 可选项 --task=main</span>
+        <span class="s1">&#39;dev::&#39;</span><span class="p">,</span>      <span class="c1">// 可选项 --dev=true</span>
+        <span class="s1">&#39;debug&#39;</span>       <span class="c1">// 无值   --debug</span>
+    <span class="p">)</span>
+<span class="p">);</span>
+
+<span class="c1">// 创建console应用</span>
+<span class="nv">$console</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">\Phalcon\CLI\Console</span><span class="p">();</span>
+<span class="nv">$console</span><span class="o">-&gt;</span><span class="na">setDI</span><span class="p">(</span><span class="nv">$di</span><span class="p">);</span>
+
+<span class="c1">// 处理console应用参数</span>
+<span class="nv">$arguments</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;namespace&#39;</span> <span class="o">=&gt;</span> <span class="nx">\Phalcon\Arr</span><span class="o">::</span><span class="na">get</span><span class="p">(</span><span class="nv">$opts</span><span class="p">,</span> <span class="s1">&#39;namespace&#39;</span><span class="p">),</span>
+    <span class="s1">&#39;task&#39;</span> <span class="o">=&gt;</span> <span class="nx">\Phalcon\Arr</span><span class="o">::</span><span class="na">get</span><span class="p">(</span><span class="nv">$opts</span><span class="p">,</span> <span class="s1">&#39;task&#39;</span><span class="p">),</span>
+    <span class="s1">&#39;action&#39;</span> <span class="o">=&gt;</span> <span class="nx">\Phalcon\Arr</span><span class="o">::</span><span class="na">get</span><span class="p">(</span><span class="nv">$opts</span><span class="p">,</span> <span class="s1">&#39;action&#39;</span><span class="p">)</span>
+<span class="p">);</span>
+
+<span class="k">try</span> <span class="p">{</span>
+    <span class="nv">$console</span><span class="o">-&gt;</span><span class="na">handle</span><span class="p">(</span><span class="nv">$arguments</span><span class="p">);</span>
+<span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">\Phalcon\Exception</span> <span class="nv">$e</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">echo</span> <span class="nv">$e</span><span class="o">-&gt;</span><span class="na">getMessage</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
 </div>
 </div>
 <div class="section" id="tasks">

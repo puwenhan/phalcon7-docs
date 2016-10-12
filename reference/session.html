@@ -81,11 +81,12 @@
 			<div class="panel-body"><ul>
 <li><a class="reference internal" href="#">使用 Session 存储数据（Storing data in Session）</a><ul>
 <li><a class="reference internal" href="#starting-the-session">启动会话（Starting the Session）</a></li>
-<li><a class="reference internal" href="#session-storing-retrieving-data-in-session">Session 的存储与读取（Storing/Retrieving data in Session）</a></li>
-<li><a class="reference internal" href="#sessions-removing-destroying-sessions">Sessions 的删除和销毁（Removing/Destroying Sessions）</a></li>
+<li><a class="reference internal" href="#storing-retrieving-data-in-session">会话数据的存储与读取（Storing/Retrieving data in Session）</a></li>
+<li><a class="reference internal" href="#removing-destroying-sessions">会话数据的删除和销毁（Removing/Destroying Sessions）</a></li>
 <li><a class="reference internal" href="#isolating-session-data-between-applications">隔离不同应用的会话数据（Isolating Session Data between Applications）</a></li>
 <li><a class="reference internal" href="#session-bags">会话袋（Session Bags）</a></li>
 <li><a class="reference internal" href="#persistent-data-in-components">组件的持久数据（Persistent Data in Components）</a></li>
+<li><a class="reference internal" href="#session-adapters">会话适配器（Session Adapters）</a></li>
 <li><a class="reference internal" href="#implementing-your-own-adapters">自定义适配器（Implementing your own adapters）</a></li>
 </ul>
 </li>
@@ -129,8 +130,8 @@ Thanks to the service container, we can ensure that the session is accessed only
 </pre></div>
 </div>
 </div>
-<div class="section" id="session-storing-retrieving-data-in-session">
-<h2>Session 的存储与读取（Storing/Retrieving data in Session）<a class="headerlink" href="#session-storing-retrieving-data-in-session" title="永久链接至标题">¶</a></h2>
+<div class="section" id="storing-retrieving-data-in-session">
+<h2>会话数据的存储与读取（Storing/Retrieving data in Session）<a class="headerlink" href="#storing-retrieving-data-in-session" title="永久链接至标题">¶</a></h2>
 <p>From a controller, a view or any other component that extends <a class="reference internal" href="../api/Phalcon_DI_Injectable.html"><em>Phalcon\Di\Injectable</em></a> you can access the session service
 and store items and retrieve them in the following way:</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
@@ -159,8 +160,8 @@ and store items and retrieve them in the following way:</p>
 </pre></div>
 </div>
 </div>
-<div class="section" id="sessions-removing-destroying-sessions">
-<h2>Sessions 的删除和销毁（Removing/Destroying Sessions）<a class="headerlink" href="#sessions-removing-destroying-sessions" title="永久链接至标题">¶</a></h2>
+<div class="section" id="removing-destroying-sessions">
+<h2>会话数据的删除和销毁（Removing/Destroying Sessions）<a class="headerlink" href="#removing-destroying-sessions" title="永久链接至标题">¶</a></h2>
 <p>It&#8217;s also possible remove specific variables or destroy the whole session:</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
 
@@ -274,6 +275,37 @@ Thanks to this you can persist data between requests in every class in an indepe
 </div>
 <p>The data added to the session (<code class="code docutils literal"><span class="pre">$this-&gt;session</span></code>) are available throughout the application, while persistent (<code class="code docutils literal"><span class="pre">$this-&gt;persistent</span></code>)
 can only be accessed in the scope of the current class.</p>
+</div>
+<div class="section" id="session-adapters">
+<h2>会话适配器（Session Adapters）<a class="headerlink" href="#session-adapters" title="永久链接至标题">¶</a></h2>
+<p>这些适配器封装特定的数据存储方式的详细操作，下面是我们支持的数据存储方式：</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="7%" />
+<col width="49%" />
+<col width="44%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">名称</th>
+<th class="head">描述</th>
+<th class="head">API</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Files</td>
+<td>将会话数据存储在文本文件</td>
+<td><a class="reference internal" href="../api/Phalcon_Session_Adapter_Files.html"><em>Phalcon\Session\Adapter\Files</em></a></td>
+</tr>
+<tr class="row-odd"><td>Libmemcached</td>
+<td>利用Memcached扩展，将会话数据存储在 Memcached</td>
+<td><a class="reference internal" href="../api/Phalcon_Session_Adapter_Libmemcached.html"><em>Phalcon\Session\Adapter\Libmemcached</em></a></td>
+</tr>
+<tr class="row-even"><td>Memcache</td>
+<td>利用Memcache扩展，将会话数据存储在 Memcached</td>
+<td><a class="reference internal" href="../api/Phalcon_Session_Adapter_Memcache.html"><em>Phalcon\Session\Adapter\Memcache</em></a></td>
+</tr>
+</tbody>
+</table>
 </div>
 <div class="section" id="implementing-your-own-adapters">
 <h2>自定义适配器（Implementing your own adapters）<a class="headerlink" href="#implementing-your-own-adapters" title="永久链接至标题">¶</a></h2>

@@ -81,6 +81,8 @@
 			<div class="panel-body"><ul>
 <li><a class="reference internal" href="#">路由（Routing）</a><ul>
 <li><a class="reference internal" href="#defining-routes">定义路由（Defining Routes）</a><ul>
+<li><a class="reference internal" href="#default-placeholders-regular-expressions">默认占位符对应正则表达式（Default Placeholders Regular Expressions）</a></li>
+<li><a class="reference internal" href="#define-placeholders-regular-expressions">更改占位符对应正则表达式（Define Placeholders Regular Expressions）</a></li>
 <li><a class="reference internal" href="#parameters-with-names">参数名称（Parameters with Names）</a></li>
 <li><a class="reference internal" href="#short-syntax">短语法（Short Syntax）</a></li>
 <li><a class="reference internal" href="#mixing-array-and-short-syntax">混合使用数组和短语法（Mixing Array and Short Syntax）</a></li>
@@ -212,6 +214,8 @@ delimiters. All route patterns are case-insensitive.</p>
 <p>The second parameter defines how the matched parts should bind to the controller/action/parameters. Matching
 parts are placeholders or subpatterns delimited by parentheses (round brackets). In the example given above, the
 first subpattern matched (<code class="code docutils literal"><span class="pre">:controller</span></code>) is the controller part of the route, the second the action and so on.</p>
+<div class="section" id="default-placeholders-regular-expressions">
+<h3>默认占位符对应正则表达式（Default Placeholders Regular Expressions）<a class="headerlink" href="#default-placeholders-regular-expressions" title="永久链接至标题">¶</a></h3>
 <p>These placeholders help writing regular expressions that are more readable for developers and easier
 to understand. The following placeholders are supported:</p>
 <table border="1" class="docutils">
@@ -228,24 +232,20 @@ to understand. The following placeholders are supported:</p>
 </thead>
 <tbody valign="top">
 <tr class="row-even"><td><code class="code docutils literal"><span class="pre">/:module</span></code></td>
-<td><code class="code docutils literal"><span class="pre">/([a-zA-Z0-9\_\-]+)</span></code></td>
-<td>Matches a valid module name with alpha-numeric characters only</td>
+<td colspan="2"><code class="code docutils literal"><span class="pre">/([\\w0-9\\_\\-]+)</span></code> | Matches a valid module name with alpha-numeric characters only</td>
 </tr>
 <tr class="row-odd"><td><code class="code docutils literal"><span class="pre">/:controller</span></code></td>
-<td><code class="code docutils literal"><span class="pre">/([a-zA-Z0-9\_\-]+)</span></code></td>
-<td>Matches a valid controller name with alpha-numeric characters only</td>
+<td colspan="2"><code class="code docutils literal"><span class="pre">/([\\w0-9\\_\\-]+)</span></code> | Matches a valid controller name with alpha-numeric characters only</td>
 </tr>
 <tr class="row-even"><td><code class="code docutils literal"><span class="pre">/:action</span></code></td>
-<td><code class="code docutils literal"><span class="pre">/([a-zA-Z0-9\_]+)</span></code></td>
-<td>Matches a valid action name with alpha-numeric characters only</td>
+<td colspan="2"><code class="code docutils literal"><span class="pre">/([\\w0-9\\_\\-]+)</span></code>   | Matches a valid action name with alpha-numeric characters only</td>
 </tr>
 <tr class="row-odd"><td><code class="code docutils literal"><span class="pre">/:params</span></code></td>
 <td><code class="code docutils literal"><span class="pre">(/.*)*</span></code></td>
 <td>Matches a list of optional words separated by slashes. Only use this placeholder at the end of a route</td>
 </tr>
 <tr class="row-even"><td><code class="code docutils literal"><span class="pre">/:namespace</span></code></td>
-<td><code class="code docutils literal"><span class="pre">/([a-zA-Z0-9\_\-]+)</span></code></td>
-<td>Matches a single level namespace name</td>
+<td colspan="2"><code class="code docutils literal"><span class="pre">/([\\w0-9\\_\\-]+)</span></code> | Matches a single level namespace name</td>
 </tr>
 <tr class="row-odd"><td><code class="code docutils literal"><span class="pre">/:int</span></code></td>
 <td><code class="code docutils literal"><span class="pre">/([0-9]+)</span></code></td>
@@ -259,6 +259,32 @@ is uppercased. For instance, some_controller is converted to SomeController.</p>
 their relevance, latest routes added have more relevance than first added. Internally, all defined routes
 are traversed in reverse order until <a class="reference internal" href="../api/Phalcon_Mvc_Router.html"><em>Phalcon\Mvc\Router</em></a> finds the
 one that matches the given URI and processes it, while ignoring the rest.</p>
+</div>
+<div class="section" id="define-placeholders-regular-expressions">
+<h3>更改占位符对应正则表达式（Define Placeholders Regular Expressions）<a class="headerlink" href="#define-placeholders-regular-expressions" title="永久链接至标题">¶</a></h3>
+<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+
+    <span class="nv">$router</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phalcon\Mvc\Router</span><span class="p">(</span><span class="k">false</span><span class="p">);</span>
+
+    <span class="c1">// Default</span>
+    <span class="nv">$router</span><span class="o">-&gt;</span><span class="na">add</span><span class="p">(</span><span class="s1">&#39;/:controller/:action/:params&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s2">&quot;controller&quot;</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="s2">&quot;action&quot;</span> <span class="o">=&gt;</span> <span class="mi">2</span><span class="p">,</span>
+        <span class="s2">&quot;params&quot;</span> <span class="o">=&gt;</span> <span class="mi">3</span><span class="p">,</span>
+    <span class="p">));</span>
+    <span class="c1">// Define new</span>
+    <span class="nv">$router</span><span class="o">-&gt;</span><span class="na">add</span><span class="p">(</span><span class="s1">&#39;/:controller/:action/:params&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s2">&quot;controller&quot;</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="s2">&quot;action&quot;</span> <span class="o">=&gt;</span> <span class="mi">2</span><span class="p">,</span>
+        <span class="s2">&quot;params&quot;</span> <span class="o">=&gt;</span> <span class="mi">3</span><span class="p">,</span>
+    <span class="p">),</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;/:controller&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;/([a-zA-Z0-9_-]+)&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;/:action&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;/([a-zA-Z0-9_-]+)&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;/:params&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;([/]?)([a-zA-Z0-9_-]+)?&#39;</span><span class="p">,</span>
+    <span class="p">));</span>
+</pre></div>
+</div>
+</div>
 <div class="section" id="parameters-with-names">
 <h3>参数名称（Parameters with Names）<a class="headerlink" href="#parameters-with-names" title="永久链接至标题">¶</a></h3>
 <p>The example below demonstrates how to define names to route parameters:</p>

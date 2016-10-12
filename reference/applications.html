@@ -88,6 +88,7 @@
 <li><a class="reference internal" href="#understanding-the-default-behavior">理解默认行为（Understanding the default behavior）</a></li>
 <li><a class="reference internal" href="#manual-bootstrapping">手动启动（Manual bootstrapping）</a></li>
 <li><a class="reference internal" href="#application-events">应用事件（Application Events）</a></li>
+<li><a class="reference internal" href="#disable-view-component">禁用视图组件（Disable View Component）</a></li>
 <li><a class="reference internal" href="#external-resources">外部资源（External Resources）</a></li>
 </ul>
 </li>
@@ -107,9 +108,7 @@
 			  
   <div class="section" id="mvc-mvc-applications">
 <h1>MVC 应用（MVC Applications）<a class="headerlink" href="#mvc-mvc-applications" title="永久链接至标题">¶</a></h1>
-<p>在Phalcon，策划MVC操作背后的全部困难工作通常都可以
-通过 <a class="reference internal" href="../api/Phalcon_Mvc_Application.html"><em>Phalcon\Mvc\Application</em></a> 做到。这个组件封装了全部后端所需要的复杂
-操作，实例化每一个需要用到的组件并与项目整合在一起，从而使得MVC模式可以如期地运行。</p>
+<p>在Phalcon，策划MVC操作背后的全部困难工作通常都可以通过 <a class="reference internal" href="../api/Phalcon_Mvc_Application.html"><em>Phalcon\Mvc\Application</em></a> 做到。这个组件封装了全部后端所需要的复杂操作，实例化每一个需要用到的组件并与项目整合在一起，从而使得MVC模式可以如期地运行。</p>
 <div class="section" id="single-or-multi-module-applications">
 <h2>单模块或多模块应用（Single or Multi Module Applications）<a class="headerlink" href="#single-or-multi-module-applications" title="永久链接至标题">¶</a></h2>
 <p>通过这个组件，你可以运行各式各样的MVC结构：</p>
@@ -598,6 +597,15 @@
         <span class="c1">// ...</span>
     <span class="p">}</span>
 <span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="disable-view-component">
+<h2>禁用视图组件（Disable View Component）<a class="headerlink" href="#disable-view-component" title="永久链接至标题">¶</a></h2>
+<p>MVC 应用默认开启视图组件，以下示例演示了如何禁用视图组件：</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+
+<span class="nv">$application</span><span class="o">-&gt;</span><span class="na">useImplicitView</span><span class="p">(</span><span class="k">false</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
