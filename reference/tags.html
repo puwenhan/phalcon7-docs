@@ -92,7 +92,10 @@
 <li><a class="reference internal" href="#specifying-values-directly">直接设置值（Specifying values directly）</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#changing-dynamically-the-document-title">动态设置文档标题（Changing dynamically the Document Title）</a></li>
+<li><a class="reference internal" href="#changing-dynamically-the-document-title">动态设置文档标题（Changing dynamically the Document Title）</a><ul>
+<li><a class="reference internal" href="#set-the-title-separator">设置标题分隔符（Set the title separator）</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#static-content-helpers">静态内容助手（Static Content Helpers）</a><ul>
 <li><a class="reference internal" href="#images">图片（Images）</a></li>
 <li><a class="reference internal" href="#stylesheets">样式表（Stylesheets）</a></li>
@@ -125,8 +128,7 @@ be taken into consideration. Phalcon deals with this complexity by offering <a c
 view helpers to generate HTML markup.</p>
 <p>This component can be used in a plain HTML+PHP view or in a <code class="xref doc docutils literal"><span class="pre">Volt</span></code> template.</p>
 <blockquote class="highlights">
-<div>This guide is not intended to be a complete documentation of available helpers and their arguments. Please visit
-the <a class="reference internal" href="../api/Phalcon_Tag.html"><em>Phalcon\Tag</em></a> page in the API for a complete reference.</div></blockquote>
+<div>本指南不是一个完整的视图助手使用文档，完整说明请查看 <a class="reference internal" href="../api/Phalcon_Tag.html"><em>Phalcon\Tag</em></a>。</div></blockquote>
 <div class="section" id="document-type-of-content">
 <h2>文档类型（Document Type of Content）<a class="headerlink" href="#document-type-of-content" title="永久链接至标题">¶</a></h2>
 <p>Phalcon provides <code class="code docutils literal"><span class="pre">Phalcon\Tag::setDoctype()</span></code> helper to set document type of the content. Document type setting may affect HTML output produced by other tag helpers.
@@ -432,6 +434,7 @@ of form helpers between requests. This way you can easily show validation messag
 <h3>直接设置值（Specifying values directly）<a class="headerlink" href="#specifying-values-directly" title="永久链接至标题">¶</a></h3>
 <p>Every form helper supports the parameter &#8220;value&#8221;. With it you can specify a value for the helper directly.
 When this parameter is present, any preset value using setDefault() or via request will be ignored.</p>
+<p>所有的表单方法都支持参数 <cite>value</cite>。你可以直接设置一个明确的值给表单方法。当这个值被明确设定的时候，任何通过 setDefault() 或者通过 请求(request) 所设置的值将被直接忽略。</p>
 </div>
 </div>
 <div class="section" id="changing-dynamically-the-document-title">
@@ -477,6 +480,52 @@ The following example demonstrates just that:</p>
     <span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
 <span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
 </pre></div>
+</div>
+<div class="section" id="set-the-title-separator">
+<h3>设置标题分隔符（Set the title separator）<a class="headerlink" href="#set-the-title-separator" title="永久链接至标题">¶</a></h3>
+<p>设置标题分隔符，用以连接追加或前置的标题内容:</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+
+<span class="k">use</span> <span class="nx">Phalcon\Mvc\Controller</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">PostsController</span> <span class="k">extends</span> <span class="nx">Controller</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">initialize</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">tag</span><span class="o">-&gt;</span><span class="na">setTitle</span><span class="p">(</span><span class="s2">&quot;Your&quot;</span><span class="p">);</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">tag</span><span class="o">-&gt;</span><span class="na">appendTitle</span><span class="p">(</span><span class="s2">&quot;Website&quot;</span><span class="p">);</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">tag</span><span class="o">-&gt;</span><span class="na">setTitleSeparator</span><span class="p">(</span><span class="s1">&#39; - &#39;</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">indexAction</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">tag</span><span class="o">-&gt;</span><span class="na">prependTitle</span><span class="p">(</span><span class="s2">&quot;Index of Posts&quot;</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="highlight-html+php"><div class="highlight"><pre><span class="p">&lt;</span><span class="nt">html</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+        <span class="cp">&lt;?php</span> <span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">tag</span><span class="o">-&gt;</span><span class="na">getTitle</span><span class="p">();</span> <span class="cp">?&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+
+    <span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+<p>将生成如下的 HTML 内容:</p>
+<div class="highlight-html+php"><div class="highlight"><pre><span class="p">&lt;</span><span class="nt">html</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>Index of Posts - Your - Website<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+
+    <span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+
+    <span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</pre></div>
+</div>
 </div>
 </div>
 <div class="section" id="static-content-helpers">
