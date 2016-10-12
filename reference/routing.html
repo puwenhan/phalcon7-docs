@@ -935,6 +935,11 @@ You can set up the router to automatically remove the slashes from the end of ha
     <span class="s1">&#39;controller&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;index&#39;</span><span class="p">,</span>
     <span class="s1">&#39;action&#39;</span> <span class="o">=&gt;</span>  <span class="s1">&#39;index&#39;</span>
 <span class="p">));</span>
+<span class="c1">// Or</span>
+<span class="nv">$router</span><span class="o">-&gt;</span><span class="na">add</span><span class="p">(</span><span class="s1">&#39;/phalcon[/]?&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;controller&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;index&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;action&#39;</span> <span class="o">=&gt;</span>  <span class="s1">&#39;index&#39;</span>
+<span class="p">));</span>
 </pre></div>
 </div>
 <p>设置后:</p>
