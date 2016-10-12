@@ -441,11 +441,14 @@ Phalcon 也是松耦合的，可以根据项目的需要任意使用其他对象
 <li class="toctree-l2"><a class="reference internal" href="reference/applications.html#understanding-the-default-behavior">理解默认行为（Understanding the default behavior）</a></li>
 <li class="toctree-l2"><a class="reference internal" href="reference/applications.html#manual-bootstrapping">手动启动（Manual bootstrapping）</a></li>
 <li class="toctree-l2"><a class="reference internal" href="reference/applications.html#application-events">应用事件（Application Events）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/applications.html#disable-view-component">禁用视图组件（Disable View Component）</a></li>
 <li class="toctree-l2"><a class="reference internal" href="reference/applications.html#external-resources">外部资源（External Resources）</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="reference/routing.html">路由（Routing）</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="reference/routing.html#defining-routes">定义路由（Defining Routes）</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="reference/routing.html#default-placeholders-regular-expressions">默认占位符对应正则表达式（Default Placeholders Regular Expressions）</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/routing.html#define-placeholders-regular-expressions">更改占位符对应正则表达式（Define Placeholders Regular Expressions）</a></li>
 <li class="toctree-l3"><a class="reference internal" href="reference/routing.html#parameters-with-names">参数名称（Parameters with Names）</a></li>
 <li class="toctree-l3"><a class="reference internal" href="reference/routing.html#short-syntax">短语法（Short Syntax）</a></li>
 <li class="toctree-l3"><a class="reference internal" href="reference/routing.html#mixing-array-and-short-syntax">混合使用数组和短语法（Mixing Array and Short Syntax）</a></li>
@@ -468,6 +471,7 @@ Phalcon 也是松耦合的，可以根据项目的需要任意使用其他对象
 <li class="toctree-l2"><a class="reference internal" href="reference/routing.html#uri-uri-sources">URI 来源（URI Sources）</a></li>
 <li class="toctree-l2"><a class="reference internal" href="reference/routing.html#testing-your-routes">测试路由（Testing your routes）</a></li>
 <li class="toctree-l2"><a class="reference internal" href="reference/routing.html#annotations-router">注解路由（Annotations Router）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/routing.html#url-setting-url-generator">设置 URL 生成器（Setting URL Generator）</a></li>
 <li class="toctree-l2"><a class="reference internal" href="reference/routing.html#registering-router-instance">注册路由实例（Registering Router instance）</a></li>
 <li class="toctree-l2"><a class="reference internal" href="reference/routing.html#implementing-your-own-router">自定义路由（Implementing your own Router）</a></li>
 </ul>
@@ -490,7 +494,7 @@ Phalcon 也是松耦合的，可以根据项目的需要任意使用其他对象
 <li class="toctree-l2"><a class="reference internal" href="reference/dispatching.html#implementing-your-own-dispatcher">自定义调度器（Implementing your own Dispatcher）</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="reference/micro.html">Micro Applications</a><ul>
+<li class="toctree-l1"><a class="reference internal" href="reference/micro.html">微应用（Micro Applications）</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="reference/micro.html#creating-a-micro-application">创建微应用（Creating a Micro Application）</a></li>
 <li class="toctree-l2"><a class="reference internal" href="reference/micro.html#defining-routes">定义路由（Defining routes）</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="reference/micro.html#routes-with-parameters">路由参数（Routes with Parameters）</a></li>
@@ -569,11 +573,12 @@ Phalcon 也是松耦合的，可以根据项目的需要任意使用其他对象
 </li>
 <li class="toctree-l1"><a class="reference internal" href="reference/session.html">使用 Session 存储数据（Storing data in Session）</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="reference/session.html#starting-the-session">启动会话（Starting the Session）</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reference/session.html#session-storing-retrieving-data-in-session">Session 的存储与读取（Storing/Retrieving data in Session）</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reference/session.html#sessions-removing-destroying-sessions">Sessions 的删除和销毁（Removing/Destroying Sessions）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/session.html#storing-retrieving-data-in-session">会话数据的存储与读取（Storing/Retrieving data in Session）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/session.html#removing-destroying-sessions">会话数据的删除和销毁（Removing/Destroying Sessions）</a></li>
 <li class="toctree-l2"><a class="reference internal" href="reference/session.html#isolating-session-data-between-applications">隔离不同应用的会话数据（Isolating Session Data between Applications）</a></li>
 <li class="toctree-l2"><a class="reference internal" href="reference/session.html#session-bags">会话袋（Session Bags）</a></li>
 <li class="toctree-l2"><a class="reference internal" href="reference/session.html#persistent-data-in-components">组件的持久数据（Persistent Data in Components）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/session.html#session-adapters">会话适配器（Session Adapters）</a></li>
 <li class="toctree-l2"><a class="reference internal" href="reference/session.html#implementing-your-own-adapters">自定义适配器（Implementing your own adapters）</a></li>
 </ul>
 </li>
@@ -748,7 +753,10 @@ Phalcon 也是松耦合的，可以根据项目的需要任意使用其他对象
 </li>
 <li class="toctree-l1"><a class="reference internal" href="reference/cli.html">命令行应用（Command Line Applications）</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="reference/cli.html#structure">结构（Structure）</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reference/cli.html#creating-a-bootstrap">创建引导（Creating a Bootstrap）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/cli.html#creating-a-bootstrap">创建引导（Creating a Bootstrap）</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="reference/cli.html#id1">从命令行参数列表中获取选项</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="reference/cli.html#tasks">任务（Tasks）</a></li>
 <li class="toctree-l2"><a class="reference internal" href="reference/cli.html#processing-action-parameters">处理动作参数（Processing action parameters）</a></li>
 <li class="toctree-l2"><a class="reference internal" href="reference/cli.html#running-tasks-in-a-chain">链中运行任务（Running tasks in a chain）</a></li>

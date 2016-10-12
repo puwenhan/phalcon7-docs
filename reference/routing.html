@@ -105,6 +105,7 @@
 <li><a class="reference internal" href="#uri-uri-sources">URI 来源（URI Sources）</a></li>
 <li><a class="reference internal" href="#testing-your-routes">测试路由（Testing your routes）</a></li>
 <li><a class="reference internal" href="#annotations-router">注解路由（Annotations Router）</a></li>
+<li><a class="reference internal" href="#url-setting-url-generator">设置 URL 生成器（Setting URL Generator）</a></li>
 <li><a class="reference internal" href="#registering-router-instance">注册路由实例（Registering Router instance）</a></li>
 <li><a class="reference internal" href="#implementing-your-own-router">自定义路由（Implementing your own Router）</a></li>
 </ul>
@@ -1254,6 +1255,19 @@ Phalcon, you can also use <code class="code docutils literal"><span class="pre">
 
     <span class="k">return</span> <span class="nv">$router</span><span class="p">;</span>
 <span class="p">};</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="url-setting-url-generator">
+<h2>设置 URL 生成器（Setting URL Generator）<a class="headerlink" href="#url-setting-url-generator" title="永久链接至标题">¶</a></h2>
+<p>URL 生成器，帮助 URL 组件生成 URL，例子：</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+
+<span class="nv">$route</span> <span class="o">=</span> <span class="nv">$router</span><span class="o">-&gt;</span><span class="na">add</span><span class="p">(</span><span class="s2">&quot;/posts/{year}/{title}&quot;</span><span class="p">,</span> <span class="s2">&quot;Posts::show&quot;</span><span class="p">);</span>
+<span class="nv">$route</span><span class="o">-&gt;</span><span class="na">setName</span><span class="p">(</span><span class="s2">&quot;blog-post&quot;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">setUrlGenerator</span><span class="p">(</span><span class="k">function</span><span class="p">(</span><span class="nv">$base_uri</span><span class="p">,</span> <span class="nv">$paths</span><span class="p">,</span> <span class="nv">$uri</span><span class="p">){</span>
+    <span class="k">return</span> <span class="nv">$base_uri</span><span class="o">.</span><span class="s1">&#39;posts/&#39;</span><span class="o">.</span><span class="nv">$uri</span><span class="p">[</span><span class="s1">&#39;year&#39;</span><span class="p">]</span><span class="o">.</span><span class="s1">&#39;-&#39;</span><span class="o">.</span><span class="nv">$uri</span><span class="p">[</span><span class="s1">&#39;title&#39;</span><span class="p">]</span><span class="o">.</span><span class="s1">&#39;.html&#39;</span><span class="p">;</span>
+<span class="p">});</span>
+<span class="nv">$url</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s1">&#39;for&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;blog-post&#39;</span><span class="p">,</span> <span class="s1">&#39;title&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;some-cool-stuff&#39;</span><span class="p">,</span> <span class="s1">&#39;year&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;2012&#39;</span><span class="p">));</span>
 </pre></div>
 </div>
 </div>
