@@ -111,11 +111,11 @@
 <p>Test if a value is an array with an additional check for array-like objects. // Returns TRUE \Phalcon\Arr::is_array(array());</p>
 <p>public static <em>mixed</em>  <strong>path</strong> (<em>array</em> $array, <em>mixed</em> $path, [<em>unknown</em> $default_value], [<em>string</em> $delimiter])</p>
 <p>Gets a value from an array using a dot separated path. // Get the value of $array[&#8216;foo&#8217;][&#8216;bar&#8217;] $value = \Phalcon\Arr::path($array, &#8216;foo.bar&#8217;); Using a wildcard &#8220;*&#8221; will search intermediate arrays and return an array. // Get the values of &#8220;color&#8221; in theme $colors = \Phalcon\Arr::path($array, &#8216;theme.*.color&#8217;); // Using an array of keys $colors = \Phalcon\Arr::path($array, array(&#8216;theme&#8217;, &#8216;*&#8217;, &#8216;color&#8217;));</p>
-<p>public static  <strong>set_path</strong> (<em>array</em> $array, <em>string</em> $path, <em>mixed</em> $value, [<em>string</em> $delimiter])</p>
+<p>public static  <strong>set_path</strong> (<em>array</em> $array, <em>string</em> $path, <em>mixed</em> $value, [<em>string</em> $delimiter], [<em>unknown</em> $flag])</p>
 <p>Set a value on an array by path. Using a wildcard &#8220;*&#8221; will search intermediate arrays and return an array. // Set the values of &#8220;color&#8221; in theme $array = array(&#8216;theme&#8217; =&gt; array(&#8216;one&#8217; =&gt; array(&#8216;color&#8217; =&gt; &#8216;green&#8217;), &#8216;two&#8217; =&gt; array(&#8216;size&#8217; =&gt; 11)); \Phalcon\Arr::set_path($array, &#8216;theme.*.color&#8217;, &#8216;red&#8217;); // Result: array(&#8216;theme&#8217; =&gt; array(&#8216;one&#8217; =&gt; array(&#8216;color&#8217; =&gt; &#8216;red&#8217;), &#8216;two&#8217; =&gt; array(&#8216;size&#8217; =&gt; 11, &#8216;color&#8217; =&gt; &#8216;red&#8217;));</p>
 <p>public static <em>array</em>  <strong>range</strong> ([<em>integer</em> $step], [<em>integer</em> $max])</p>
 <p>Fill an array with a range of numbers. // Fill an array with values 5, 10, 15, 20 $values = \Phalcon\Arr::range(5, 20);</p>
-<p>public static <em>mixed</em>  <strong>get</strong> (<em>array</em> $array, <em>string|array</em> $key, [<em>mixed</em> $default_value])</p>
+<p>public static <em>mixed</em>  <strong>get</strong> (<em>array</em> $array, <em>string|array|Closure</em> $key, [<em>mixed</em> $default_value])</p>
 <p>Retrieve a single key from an array. If the key does not exist in the array, the default value will be returned instead. // Get the value &#8220;username&#8221; from $_POST, if it exists $username = \Phalcon\Arr::get($_POST, &#8216;username&#8217;);</p>
 <p>public static <em>mixed</em>  <strong>choice</strong> (<em>array</em> $array, <em>string</em> $key, <em>string</em> $value1, [<em>string</em> $value2])</p>
 <p>Choice one value, If the key does not exist in the array, the value2 will be returned instead. // Choice the &#8220;value1&#8221;, if exists the value &#8220;email&#8221; of $_POST $username = \Phalcon\Arr::choice($_POST, &#8216;email&#8217;, &#8216;value1&#8217;, &#8216;value2&#8217;);</p>
@@ -135,14 +135,21 @@
 <p>Creates a callable function and parameter list from a string representation. Note that this function does not validate the callback string. // Get the callback function and parameters list($func, $params) = \Phalcon\Arr::callback(&#8216;Foo::bar(apple,orange)&#8217;); // Get the result of the callback $result = call_user_func_array($func, $params);</p>
 <p>public static <em>array</em>  <strong>flatten</strong> (<em>array</em> $array)</p>
 <p>Convert a multi-dimensional array into a single-dimensional array. $array = array(&#8216;set&#8217; =&gt; array(&#8216;one&#8217; =&gt; &#8216;something&#8217;), &#8216;two&#8217; =&gt; &#8216;other&#8217;); // Flatten the array $array = \Phalcon\Arr::flatten($array); // The array will now be array(&#8216;one&#8217; =&gt; &#8216;something&#8217;, &#8216;two&#8217; =&gt; &#8216;other&#8217;);</p>
-<p>public static  <strong>arrayobject</strong> (<em>unknown</em> $array)</p>
-<p>...</p>
-<p>public static  <strong>key</strong> (<em>unknown</em> $array, [<em>unknown</em> $postion])</p>
-<p>...</p>
-<p>public static  <strong>filter</strong> (<em>unknown</em> $array, [<em>unknown</em> $callback])</p>
-<p>...</p>
+<p>public static <em>ArrayObject</em>  <strong>arrayobject</strong> (<em>array</em> $array)</p>
+<p>Convert a array to a array object. $array = array(&#8216;name&#8217; =&gt; &#8216;Phalcon7&#8217;, &#8216;version&#8217; =&gt; &#8216;1.0.x&#8217;); $arrayobject = \Phalcon\Arr::arrayobject($array);</p>
+<p>public static <em>mixed</em>  <strong>key</strong> (<em>array</em> $array, [<em>int</em> $postion])</p>
+<p>Gets array key of the postion $array = array(&#8216;name&#8217; =&gt; &#8216;Phalcon7&#8217;, &#8216;version&#8217; =&gt; &#8216;1.0.x&#8217;); $key = \Phalcon\Arr::key($array, 1);</p>
+<p>public static <em>array</em>  <strong>filter</strong> (<em>array</em> $array, [<em>unknown</em> $callback])</p>
+<p>Filters elements of an array using a the filter $array = array(&#8216;name&#8217; =&gt; &#8216;Phalcon7&#8217;, &#8216;version&#8217; =&gt; &#8216;1.0.x&#8217;); $key = \Phalcon\Arr::filter($array, &#8216;int&#8217;);</p>
 <p>public static <em>mixed</em>  <strong>sum</strong> (<em>array</em> $array, [<em>mixed</em> $path])</p>
-<p>Return the sum of all the values in the array using a dot separated path.</p>
+<p>Return the sum of all the values in the array using a dot separated path</p>
+<p>public static <em>array</em>  <strong>toArray</strong> (<em>object|array|string</em> $object, [<em>bool</em> $recursive], [<em>array</em> $properties])</p>
+<p>Converts an object or an array of objects into an array</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+
+<span class="nb">print_r</span><span class="p">(</span><span class="nx">Phalcon\Arr</span><span class="o">::</span><span class="na">toArray</span><span class="p">(</span><span class="nv">$user</span><span class="p">);</span>
+</pre></div>
+</div>
 </div>
 </div>
 

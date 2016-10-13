@@ -143,7 +143,10 @@
 </li>
 <li><a class="reference internal" href="#record-snapshots">记录快照（Record Snapshots）</a></li>
 <li><a class="reference internal" href="#pointing-to-a-different-schema">设置模式（Pointing to a different schema）</a></li>
-<li><a class="reference internal" href="#setting-multiple-databases">设置多个数据库（Setting multiple databases）</a></li>
+<li><a class="reference internal" href="#setting-multiple-databases">设置多个数据库（Setting multiple databases）</a><ul>
+<li><a class="reference internal" href="#reading-and-writing-separation">实现读写分离（Reading and Writing Separation）</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#sql-logging-low-level-sql-statements">记录底层 SQL 语句（Logging Low-Level SQL Statements）</a></li>
 <li><a class="reference internal" href="#sql-profiling-sql-statements">分析 SQL 语句（Profiling SQL Statements）</a></li>
 <li><a class="reference internal" href="#injecting-services-into-models">注入服务到模型（Injecting services into Models）</a></li>
@@ -192,8 +195,6 @@
 </div>
 <p>上面的例子显示了 &#8220;Robots&#8221; 模型的实现。 需要注意的是 Robots 继承自 <a class="reference internal" href="../api/Phalcon_Mvc_Model.html"><em>Phalcon\Mvc\Model</em></a> 。
 因此，Robots 模型拥有了大量继承自该组件功能，包括基本的数据库 CRUD (Create, Read, Update, Delete) 操作，数据验证以及复杂的搜索支持，并且可以同时关联多个模型。</p>
-<blockquote class="highlights">
-<div>如果使用 PHP 5.4/5.5 建议在模型中预先定义好所有的列，这样可以减少模型内存的开销以及内存分配。</div></blockquote>
 <p>默认情况下，模型 &#8220;Robots&#8221; 对应的是数据库表 &#8220;robots&#8221;， 如果想映射到其他数据库表，可以使用 <code class="code docutils literal"><span class="pre">getSource()</span></code> 方法：</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
 
@@ -417,7 +418,7 @@
 </pre></div>
 </div>
 <blockquote class="highlights">
-<div>If you want find record by external data (such as user input) or variable data you must use <a class="reference internal" href="#binding-parameters">绑定参数（Binding Parameters）</a>.</div></blockquote>
+<div>如果需要通过外部数据（比如用户输入）或变量来查询记录，则必须要用`Binding Parameters`（绑定参数）的方式来防止SQL注入.</div></blockquote>
 <p>你可以使用 <code class="code docutils literal"><span class="pre">findFirst()</span></code> 方法获取第一条符合查询条件的结果：</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
 
@@ -3059,10 +3060,11 @@ in the application&#8217;s services container. You can overwrite this service se
 <span class="p">}</span>
 </pre></div>
 </div>
+<div class="section" id="reading-and-writing-separation">
+<h3>实现读写分离（Reading and Writing Separation）<a class="headerlink" href="#reading-and-writing-separation" title="永久链接至标题">¶</a></h3>
 <p>But Phalcon offers you more flexibility, you can define the connection that must be used to &#8216;read&#8217; and for &#8216;write&#8217;. This is specially useful
 to balance the load to your databases implementing a master-slave architecture:</p>
-<p>另外Phalcon还提供了更多的灵活性，你可分别定义用来读取和写入的数据库连接。这对实现主从架构的数据库负载均衡非常有用。
-（译者注：EvaEngine项目为使用Phalcon提供了更多的灵活性，推荐了解和使用）</p>
+<p>另外Phalcon还提供了更多的灵活性，你可分别定义用来读取和写入的数据库连接。这对实现主从架构的数据库负载均衡非常有用。</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
 
 <span class="k">use</span> <span class="nx">Phalcon\Mvc\Model</span><span class="p">;</span>
@@ -3077,6 +3079,39 @@ to balance the load to your databases implementing a master-slave architecture:<
 <span class="p">}</span>
 </pre></div>
 </div>
+<p>也可以用如下方法实现：</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+
+<span class="k">use</span> <span class="nx">Phalcon\Mvc\Model</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">Robots</span> <span class="k">extends</span> <span class="nx">Model</span>
+<span class="p">{</span>
+    <span class="sd">/**</span>
+<span class="sd">     * 动态选择读数据库连接</span>
+<span class="sd">     *</span>
+<span class="sd">     * @param array $intermediate</span>
+<span class="sd">     * @param array $bindParams</span>
+<span class="sd">     * @param array $bindTypes</span>
+<span class="sd">     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">selectReadConnection</span><span class="p">(</span><span class="nv">$intermediate</span><span class="p">,</span> <span class="nv">$bindParams</span><span class="p">,</span> <span class="nv">$bindTypes</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getDI</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;readDB&#39;</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="sd">/**</span>
+<span class="sd">     * 动态选择写数据库连接</span>
+<span class="sd">     *</span>
+<span class="sd">     * @param array $intermediate</span>
+<span class="sd">     * @param array $bindParams</span>
+<span class="sd">     * @param array $bindTypes</span>
+<span class="sd">     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">selectWriteConnection</span><span class="p">(</span><span class="nv">$intermediate</span><span class="p">,</span> <span class="nv">$bindParams</span><span class="p">,</span> <span class="nv">$bindTypes</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getDI</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;writeDB&#39;</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
 <p>The ORM also provides Horizontal Sharding facilities, by allowing you to implement a &#8216;shard&#8217; selection
 according to the current query conditions:</p>
 <p>另外ORM还可以通过根据当前查询条件来实现一个 &#8216;shard&#8217; 选择器，来实现水平切分的功能。</p>
@@ -3087,7 +3122,7 @@ according to the current query conditions:</p>
 <span class="k">class</span> <span class="nc">Robots</span> <span class="k">extends</span> <span class="nx">Model</span>
 <span class="p">{</span>
     <span class="sd">/**</span>
-<span class="sd">     * Dynamically selects a shard</span>
+<span class="sd">     * 动态选择读数据库连接</span>
 <span class="sd">     *</span>
 <span class="sd">     * @param array $intermediate</span>
 <span class="sd">     * @param array $bindParams</span>
@@ -3117,6 +3152,21 @@ according to the current query conditions:</p>
         <span class="c1">// Use a default shard</span>
         <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getDI</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;dbShard0&#39;</span><span class="p">);</span>
     <span class="p">}</span>
+
+    <span class="sd">/**</span>
+<span class="sd">     * 动态选择写数据库连接</span>
+<span class="sd">     *</span>
+<span class="sd">     * @param array $intermediate</span>
+<span class="sd">     * @param array $bindParams</span>
+<span class="sd">     * @param array $bindTypes</span>
+<span class="sd">     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">selectWriteConnection</span><span class="p">(</span><span class="nv">$intermediate</span><span class="p">,</span> <span class="nv">$bindParams</span><span class="p">,</span> <span class="nv">$bindTypes</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="c1">// Check if there is a &#39;where&#39; clause in the select</span>
+
+        <span class="c1">// Use a default shard</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getDI</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;dbShard0&#39;</span><span class="p">);</span>
+    <span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -3127,6 +3177,9 @@ query executed:</p>
 
 <span class="nv">$robot</span> <span class="o">=</span> <span class="nx">Robots</span><span class="o">::</span><span class="na">findFirst</span><span class="p">(</span><span class="s1">&#39;id = 101&#39;</span><span class="p">);</span>
 </pre></div>
+</div>
+<blockquote class="highlights">
+<div>在 <a class="reference internal" href="phql.html"><em>Model查询器</em></a> 中可实现同样的功能。</div></blockquote>
 </div>
 </div>
 <div class="section" id="sql-logging-low-level-sql-statements">

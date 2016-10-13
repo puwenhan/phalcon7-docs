@@ -300,7 +300,10 @@ Phalcon 也是松耦合的，可以根据项目的需要任意使用其他对象
 </li>
 <li class="toctree-l2"><a class="reference internal" href="reference/models.html#record-snapshots">记录快照（Record Snapshots）</a></li>
 <li class="toctree-l2"><a class="reference internal" href="reference/models.html#pointing-to-a-different-schema">设置模式（Pointing to a different schema）</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reference/models.html#setting-multiple-databases">设置多个数据库（Setting multiple databases）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/models.html#setting-multiple-databases">设置多个数据库（Setting multiple databases）</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="reference/models.html#reading-and-writing-separation">实现读写分离（Reading and Writing Separation）</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="reference/models.html#sql-logging-low-level-sql-statements">记录底层 SQL 语句（Logging Low-Level SQL Statements）</a></li>
 <li class="toctree-l2"><a class="reference internal" href="reference/models.html#sql-profiling-sql-statements">分析 SQL 语句（Profiling SQL Statements）</a></li>
 <li class="toctree-l2"><a class="reference internal" href="reference/models.html#injecting-services-into-models">注入服务到模型（Injecting services into Models）</a></li>
@@ -349,6 +352,7 @@ Phalcon 也是松耦合的，可以根据项目的需要任意使用其他对象
 <li class="toctree-l2"><a class="reference internal" href="reference/phql.html#escaping-reserved-words">转义保留字（Escaping Reserved Words）</a></li>
 <li class="toctree-l2"><a class="reference internal" href="reference/phql.html#phql-phql-lifecycle">PHQL 生命周期（PHQL Lifecycle）</a></li>
 <li class="toctree-l2"><a class="reference internal" href="reference/phql.html#sql-using-raw-sql">使用原生 SQL（Using Raw SQL）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/phql.html#reading-and-writing-separation">实现读写分离（Reading and Writing Separation）</a></li>
 <li class="toctree-l2"><a class="reference internal" href="reference/phql.html#troubleshooting">注意事项（Troubleshooting）</a></li>
 </ul>
 </li>
@@ -409,7 +413,7 @@ Phalcon 也是松耦合的，可以根据项目的需要任意使用其他对象
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="reference/tags.html#changing-dynamically-the-document-title">动态设置文档标题（Changing dynamically the Document Title）</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="reference/tags.html#set-the-title-separator">设置标题分隔符（Set the title separator）</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/tags.html#set-the-title-separator">设置标题分隔符（Set The Title Separator）</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="reference/tags.html#static-content-helpers">静态内容助手（Static Content Helpers）</a><ul>
@@ -639,6 +643,14 @@ Phalcon 也是松耦合的，可以根据项目的需要任意使用其他对象
 <li class="toctree-l2"><a class="reference internal" href="reference/config.html#merging-configurations">合并配置（Merging Configurations）</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="reference/arr.html">数组助手（Array Helper）</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="reference/arr.html#gets-value">获取值（Gets Value）</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="reference/arr.html#id1">通过路径获取值（Gets Value）</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="reference/arr.html#converts-an-object-into-an-array">对象转换为数组（Converts an object into an array）</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="reference/pagination.html">分页（Pagination）</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="reference/pagination.html#data-adapters">数据适配器（Data Adapters）</a></li>
 <li class="toctree-l2"><a class="reference internal" href="reference/pagination.html#examples">示例（Examples）</a></li>
@@ -823,7 +835,15 @@ Phalcon 也是松耦合的，可以根据项目的需要任意使用其他对象
 <li class="toctree-l2"><a class="reference internal" href="reference/migrations.html#running-migrations">执行迁移（Running Migrations）</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="reference/helpers.html">助手类（Helpers）</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="reference/helpers.html#overview">助手一览（Overview）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/helpers.html#array-helper">数组助手（Array Helper）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/helpers.html#text-helpers">文本助手（Text Helpers）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/helpers.html#view-helpers">视图助手（View Helpers）</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="reference/debug.html">调试应用程序（Debugging Applications）</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="reference/debug.html#debug-mode">调试模式（Debug Mode）</a></li>
 <li class="toctree-l2"><a class="reference internal" href="reference/debug.html#catching-exceptions">捕获异常（Catching Exceptions）</a></li>
 <li class="toctree-l2"><a class="reference internal" href="reference/debug.html#debug-component">调试组件（Debug component）</a></li>
 <li class="toctree-l2"><a class="reference internal" href="reference/debug.html#reflection-and-introspection">反射与内省（Reflection and Introspection）</a></li>
