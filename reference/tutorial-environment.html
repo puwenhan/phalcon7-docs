@@ -41,6 +41,7 @@
 			<ul class="nav navbar-nav main-menu">
 			  <li class="first"><a href="https://github.com/dreamsxin/cphalcon7" class="header-nav-link">GitHub</a></li>
 			  <li class="first"><a href="https://github.com/dreamsxin/cphalcon7/releases" class="header-nav-link">Download</a></li>
+			  <li class="first"><a href="/api/" class="header-nav-link">API</a></li>
 			</ul>
 		</div>
 	</div>
@@ -142,7 +143,7 @@ app/
     <span class="nv">$environment</span> <span class="o">=</span> <span class="s1">&#39;prod&#39;</span><span class="p">;</span>
 <span class="p">}</span>
 
-    <span class="k">if</span> <span class="p">(</span><span class="nv">$environment</span> <span class="o">==</span> <span class="s1">&#39;dev&#39;</span><span class="p">)</span> <span class="p">{</span>
+<span class="k">if</span> <span class="p">(</span><span class="nv">$environment</span> <span class="o">==</span> <span class="s1">&#39;dev&#39;</span><span class="p">)</span> <span class="p">{</span>
     <span class="nv">$filename</span> <span class="o">=</span> <span class="s1">&#39;config.dev.php&#39;</span><span class="p">;</span>
     <span class="k">if</span> <span class="p">(</span><span class="nb">file_exists</span><span class="p">(</span><span class="nv">$config_basedir</span> <span class="o">.</span> <span class="nv">$filename</span><span class="p">))</span> <span class="p">{</span>
         <span class="nv">$config</span><span class="o">-&gt;</span><span class="na">merge</span><span class="p">(</span><span class="nv">$config</span><span class="o">-&gt;</span><span class="na">load</span><span class="p">(</span><span class="nv">$filename</span><span class="p">));</span>
