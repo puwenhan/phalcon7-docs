@@ -5,7 +5,7 @@
     
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Tutorial 3: Securing INVO &mdash; Phalcon7 1.0.0 文档</title>
+    <title>教程 3: 保护INVO（Tutorial 3: Securing INVO） &mdash; Phalcon7 1.0.0 文档</title>
     <meta name="keywords" content="php, phalcon, phalcon7, phalcon php, php framework, faster php framework">
     <link rel="stylesheet" type="text/css" href="../static/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="../static/phalcon.css" />
@@ -79,9 +79,9 @@
 		<div class="panel panel-default">
 			<div class="panel-heading"><a href="../index.html">內容目录</a></div>
 			<div class="panel-body"><ul>
-<li><a class="reference internal" href="#">Tutorial 3: Securing INVO</a><ul>
+<li><a class="reference internal" href="#">教程 3: 保护INVO（Tutorial 3: Securing INVO）</a><ul>
 <li><a class="reference internal" href="#log-into-the-application">登录应用（Log into the Application）</a></li>
-<li><a class="reference internal" href="#securing-the-backend">保护后端（Securing the Backend）</a><ul>
+<li><a class="reference internal" href="#securing-the-backend">后端安全（Securing the Backend）</a><ul>
 <li><a class="reference internal" href="#events-management">事件管理（Events Management）</a></li>
 <li><a class="reference internal" href="#acl-providing-an-acl-list">提供 ACL 列表（Providing an ACL list）</a></li>
 </ul>
@@ -102,20 +102,16 @@
 		  <div class="bodywrapper">
 			<div class="body" >
 			  
-  <div class="section" id="tutorial-3-securing-invo">
-<h1>Tutorial 3: Securing INVO<a class="headerlink" href="#tutorial-3-securing-invo" title="永久链接至标题">¶</a></h1>
+  <div class="section" id="invo-tutorial-3-securing-invo">
+<h1>教程 3: 保护INVO（Tutorial 3: Securing INVO）<a class="headerlink" href="#invo-tutorial-3-securing-invo" title="永久链接至标题">¶</a></h1>
 <p>In this chapter, we continue explaining how INVO is structured, we&#8217;ll talk
 about the implementation of authentication, authorization using events and plugins and
 an access control list (ACL) managed by Phalcon.</p>
 <div class="section" id="log-into-the-application">
 <h2>登录应用（Log into the Application）<a class="headerlink" href="#log-into-the-application" title="永久链接至标题">¶</a></h2>
-<p>A &#8220;log in&#8221; facility will allow us to work on backend controllers. The separation between backend controllers and
-frontend ones is only logical. All controllers are located in the same directory (app/controllers/).</p>
-<p>To enter the system, users must have a valid username and password. Users are stored in the table &#8220;users&#8221;
-in the database &#8220;invo&#8221;.</p>
-<p>Before we can start a session, we need to configure the connection to the database in the application. A service
-called &#8220;db&#8221; is set up in the service container with the connection information. As with the autoloader, we are
-again taking parameters from the configuration file in order to configure a service:</p>
+<p>一个 “登录” 功能将允许我们在后台控制器中工作。分离后台和前台的控制器是合理的。所有加载的控制器都位于相同的目录 (app/controllers/)。</p>
+<p>为了进入系统，用户必须有一个有效的用户名和密码。用户存储在数据库 “invo” 里面的 “users” 表里面。</p>
+<p>在我们开始会话之前，我们需要在数据库配置数据库的连接。注册一个 “db” 服务在服务容器中，并设置连接信息：</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
 
 <span class="k">use</span> <span class="nx">Phalcon\Db\Adapter\Pdo\Mysql</span> <span class="k">as</span> <span class="nx">DbAdapter</span><span class="p">;</span>
@@ -135,36 +131,30 @@ again taking parameters from the configuration file in order to configure a serv
 <span class="p">});</span>
 </pre></div>
 </div>
-<p>Here, we return an instance of the MySQL connection adapter. If needed, you could do extra actions such as adding a
-logger, a profiler or change the adapter, setting it up as you want.</p>
-<p>The following simple form (app/views/session/index.volt) requests the login information. We&#8217;ve removed
-some HTML code to make the example more concise:</p>
-<div class="highlight-html+jinja"><div class="highlight"><pre><span class="cp">{{</span> <span class="nv">form</span><span class="o">(</span><span class="s1">&#39;session/start&#39;</span><span class="o">)</span> <span class="cp">}}</span>
+<p>这里，我们将会返回一个 MySQL 连接适配器的一个实例。如果需要，你可以做一些额外的操作比如添加一个日志记录，一个分析器或者更换成其他数据库适配器，设置你想要的。</p>
+<p>下面是一个登录信息的表单 (app/views/session/index.phtml) 。我们已经删除了一些 HTML 代码来让例子更加简洁:</p>
+<div class="highlight-html+jinja"><div class="highlight"><pre><span class="cp">&lt;?php echo Phalcon\Tag::form(&quot;session/start&quot;); ?&gt;</span>
     <span class="p">&lt;</span><span class="nt">fieldset</span><span class="p">&gt;</span>
         <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
             <span class="p">&lt;</span><span class="nt">label</span> <span class="na">for</span><span class="o">=</span><span class="s">&quot;email&quot;</span><span class="p">&gt;</span>Username/Email<span class="p">&lt;/</span><span class="nt">label</span><span class="p">&gt;</span>
             <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
-                <span class="cp">{{</span> <span class="nv">text_field</span><span class="o">(</span><span class="s1">&#39;email&#39;</span><span class="o">)</span> <span class="cp">}}</span>
+                <span class="cp">&lt;?php echo Phalcon\Tag::textField(&quot;email&quot;); ?&gt;</span>
             <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
         <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
         <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
             <span class="p">&lt;</span><span class="nt">label</span> <span class="na">for</span><span class="o">=</span><span class="s">&quot;password&quot;</span><span class="p">&gt;</span>Password<span class="p">&lt;/</span><span class="nt">label</span><span class="p">&gt;</span>
             <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
-                <span class="cp">{{</span> <span class="nv">password_field</span><span class="o">(</span><span class="s1">&#39;password&#39;</span><span class="o">)</span> <span class="cp">}}</span>
+                <span class="cp">&lt;?php echo Phalcon\Tag::passwordField(&quot;password&quot;); ?&gt;</span>
             <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
         <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
         <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
-            <span class="cp">{{</span> <span class="nv">submit_button</span><span class="o">(</span><span class="s1">&#39;Login&#39;</span><span class="o">)</span> <span class="cp">}}</span>
+            <span class="cp">&lt;?php echo Phalcon\Tag::submitButton(&quot;Login&quot;); ?&gt;</span>
         <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
     <span class="p">&lt;/</span><span class="nt">fieldset</span><span class="p">&gt;</span>
 <span class="p">&lt;/</span><span class="nt">form</span><span class="p">&gt;</span>
 </pre></div>
 </div>
-<p>Instead of using raw PHP as the previous tutorial, we started to use <code class="xref doc docutils literal"><span class="pre">Volt</span></code>. This is a built-in
-template engine inspired in <a class="reference external" href="http://jinja.pocoo.org/">Jinja</a> providing a simpler and friendly syntax to create templates.
-It will not take too long before you become familiar with Volt.</p>
-<p>The <code class="code docutils literal"><span class="pre">SessionController::startAction</span></code> function (app/controllers/SessionController.php) has the task of validating the
-data entered in the form including checking for a valid user in the database:</p>
+<p><code class="code docutils literal"><span class="pre">SessionController::startAction</span></code> 方法 (app/controllers/SessionController.php) 有验证表单中输入的数据包括检查在数据库中是否为有效用户的任务：</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
 
 <span class="k">class</span> <span class="nc">SessionController</span> <span class="k">extends</span> <span class="nx">ControllerBase</span>
@@ -233,14 +223,10 @@ data entered in the form including checking for a valid user in the database:</p
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>For the sake of simplicity, we have used &#8220;<a class="reference external" href="http://php.net/manual/zh/function.sha1.php">sha1</a>&#8221; to store the password hashes in the database, however, this algorithm is
-not recommended in real applications, use &#8220;<a class="reference internal" href="security.html"><em>bcrypt</em></a>&#8221; instead.</p>
-<p>Note that multiple public attributes are accessed in the controller like: <code class="code docutils literal"><span class="pre">$this-&gt;flash</span></code>, <code class="code docutils literal"><span class="pre">$this-&gt;request</span></code> or <code class="code docutils literal"><span class="pre">$this-&gt;session</span></code>.
-These are services defined in the services container from earlier (app/config/services.php).
-When they&#8217;re accessed the first time, they are injected as part of the controller.</p>
-<p>These services are &#8220;shared&#8221;, which means that we are always accessing the same instance regardless of the place
-where we invoke them.</p>
-<p>For instance, here we invoke the &#8220;session&#8221; service and then we store the user identity in the variable &#8220;auth&#8221;:</p>
+<p>为简单起见，我们使用 &#8220;<a class="reference external" href="http://php.net/manual/zh/function.sha1.php">sha1</a>&#8221; 在数据库中存储密码散列，然而，在实际应用中不建议采用此算法，使用 &#8220;<a class="reference internal" href="security.html"><em>bcrypt</em></a>&#8221; 代替。</p>
+<p>请注意，多个公共属性在控制器访问，像: <code class="code docutils literal"><span class="pre">$this-&gt;flash</span></code>，<code class="code docutils literal"><span class="pre">$this-&gt;request</span></code> 或者 <code class="code docutils literal"><span class="pre">$this-&gt;session</span></code>。这些是先前在服务容器中定义的服务 (app/config/services。php)。当它们第一次访问的时候，它们被注入作为控制器的一部分。</p>
+<p>这些服务是&#8221;共享&#8221;的，这意味着我们总是访问相同的地方，无论我们在哪里调用它们。</p>
+<p>例如，这里我们调用 &#8220;session&#8221; 服务然后我们在变量 &#8220;auth&#8221; 中存储用户身份：</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
 
 <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">session</span><span class="o">-&gt;</span><span class="na">set</span><span class="p">(</span>
@@ -252,21 +238,20 @@ where we invoke them.</p>
 <span class="p">);</span>
 </pre></div>
 </div>
-<p>Another important aspect of this section is how the user is validated as a valid one,
-first we validate whether the request has been made using method POST:</p>
+<p>本节的另外一个重要方面是如何验证用户为有效的，首先我们验证是否是POST请求的：</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
 
 <span class="k">if</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">isPost</span><span class="p">())</span> <span class="p">{</span>
 </pre></div>
 </div>
-<p>Then, we receive the parameters from the form:</p>
+<p>然后，我们接收表单中的参数：</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
 
 <span class="nv">$email</span>    <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">getPost</span><span class="p">(</span><span class="s1">&#39;email&#39;</span><span class="p">);</span>
 <span class="nv">$password</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">getPost</span><span class="p">(</span><span class="s1">&#39;password&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
-<p>Now, we have to check if there is one user with the same username or email and password:</p>
+<p>现在，我们需要检查是否存在一个相同的用户名或邮箱和密码的用户：</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
 
 <span class="nv">$user</span> <span class="o">=</span> <span class="nx">Users</span><span class="o">::</span><span class="na">findFirst</span><span class="p">(</span>
@@ -280,10 +265,7 @@ first we validate whether the request has been made using method POST:</p>
 <span class="p">);</span>
 </pre></div>
 </div>
-<p>Note, the use of &#8216;bound parameters&#8217;, placeholders :email: and :password: are placed where values should be,
-then the values are &#8216;bound&#8217; using the parameter &#8216;bind&#8217;. This safely replaces the values for those
-columns without having the risk of a SQL injection.</p>
-<p>If the user is valid we register it in session and forwards him/her to the dashboard:</p>
+<p>如果用户是有效的，我们将会在session中注册它，并且转发到 dashboard：</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
 
 <span class="k">if</span> <span class="p">(</span><span class="nv">$user</span> <span class="o">!=</span> <span class="k">false</span><span class="p">)</span> <span class="p">{</span>
@@ -294,7 +276,7 @@ columns without having the risk of a SQL injection.</p>
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>If the user does not exist we forward the user back again to action where the form is displayed:</p>
+<p>如果用户不存在，用户将返回登录表单页：</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
 
 <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">forward</span><span class="p">(</span><span class="s1">&#39;session/index&#39;</span><span class="p">);</span>
@@ -302,14 +284,9 @@ columns without having the risk of a SQL injection.</p>
 </div>
 </div>
 <div class="section" id="securing-the-backend">
-<h2>保护后端（Securing the Backend）<a class="headerlink" href="#securing-the-backend" title="永久链接至标题">¶</a></h2>
-<p>The backend is a private area where only registered users have access. Therefore, it is necessary
-to check that only registered users have access to these controllers. If you aren&#8217;t logged
-into the application and you try to access, for example, the products controller (which is private)
-you will see a screen like this:</p>
-<img class="align-center" src="../static/img/invo-2.png"><p>Every time someone attempts to access any controller/action, the application verifies that the
-current role (in session) has access to it, otherwise it displays a message like the above and
-forwards the flow to the home page.</p>
+<h2>后端安全（Securing the Backend）<a class="headerlink" href="#securing-the-backend" title="永久链接至标题">¶</a></h2>
+<p>后端是一个私有区域，只有已经注册并登录的用户才可以访问。因此，只有登录用户才能访问控制器这样的检验是有必要的。如果你没有登录到应用中并试图访问，例如 products 控制器 (这是私有的) 你将会看到如下屏幕：</p>
+<img class="align-center" src="../static/img/invo-2.png"><p>每次有人试图访问任何 <cite>controller/action</cite>，应用将会验证当前角色 (在session中) 是否能够访问它，否则就会显示一个像上面那样的消息并转发到首页。</p>
 <p>Now let&#8217;s find out how the application accomplishes this. The first thing to know is that
 there is a component called <a class="reference internal" href="dispatching.html"><em>Dispatcher</em></a>. It is informed about the route
 found by the <a class="reference internal" href="routing.html"><em>Routing</em></a> component. Then, it is responsible for loading the

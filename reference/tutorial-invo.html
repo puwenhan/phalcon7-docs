@@ -22,7 +22,7 @@
     <script src="../static/jquery.min.js"></script>
     <link rel="shortcut icon" href="../static/img/favicon.ico"/>
     <link rel="top" title="Phalcon7 1.0.0 文档" href="../index.html" />
-    <link rel="next" title="Tutorial 3: Securing INVO" href="tutorial-invo-2.html" />
+    <link rel="next" title="教程 3: 保护INVO（Tutorial 3: Securing INVO）" href="tutorial-invo-2.html" />
     <link rel="prev" title="教程 1：让我们通过例子来学习（Tutorial 1: Let’s learn by example）" href="tutorial.html" /> 
 </head>
 <body>
@@ -63,7 +63,7 @@
           <a href="../genindex.html" title="总目录"
              accesskey="I">索引</a></li>
         <li class="right" >
-          <a href="tutorial-invo-2.html" title="Tutorial 3: Securing INVO"
+          <a href="tutorial-invo-2.html" title="教程 3: 保护INVO（Tutorial 3: Securing INVO）"
              accesskey="N">下一页</a> |</li>
         <li class="right" >
           <a href="tutorial.html" title="教程 1：让我们通过例子来学习（Tutorial 1: Let’s learn by example）"
@@ -84,8 +84,8 @@
 <li><a class="reference internal" href="#routing">路由（Routing）</a></li>
 <li><a class="reference internal" href="#configuration">配置（Configuration）</a></li>
 <li><a class="reference internal" href="#autoloaders">自动加载（Autoloaders）</a></li>
-<li><a class="reference internal" href="#registering-services">Registering services</a></li>
-<li><a class="reference internal" href="#handling-the-request">Handling the Request</a></li>
+<li><a class="reference internal" href="#registering-services">注册服务（Registering services）</a></li>
+<li><a class="reference internal" href="#handling-the-request">处理请求（Handling the Request）</a></li>
 <li><a class="reference internal" href="#dependency-injection">依赖注入（Dependency Injection）</a></li>
 </ul>
 </li>
@@ -94,7 +94,7 @@
 			<div class="panel-heading">上一个主题</div>
             <div class="panel-body"><p class="topless"><a href="tutorial.html" title="上一章">&lt; 教程 1：让我们通过例子来学习（Tutorial 1: Let&#8217;s learn by example）</a></p></div>
 			<div class="panel-heading">下一个主题</div>
-            <div class="panel-body"><p class="topless"><a href="tutorial-invo-2.html" title="下一章">Tutorial 3: Securing INVO &gt;</a></p></div>
+            <div class="panel-body"><p class="topless"><a href="tutorial-invo-2.html" title="下一章">教程 3: 保护INVO（Tutorial 3: Securing INVO） &gt;</a></p></div>
 		</div>
 	</div>
   <div class="col-md-9 second-box" valign="top">
@@ -105,14 +105,12 @@
 			  
   <div class="section" id="introducing-invo-tutorial-2-introducing-invo">
 <h1>教程 2：Introducing INVO（Tutorial 2: Introducing INVO）<a class="headerlink" href="#introducing-invo-tutorial-2-introducing-invo" title="永久链接至标题">¶</a></h1>
-<p>In this second tutorial, we&#8217;ll explain a more complete application in order to deepen the development with Phalcon.
-INVO is one of the applications we have created as samples. INVO is a small website that allows their users to
-generate invoices, and do other tasks such as manage their customers and products. You can clone its code from <a class="reference external" href="https://github.com/phalcon/invo">Github</a>.</p>
-<p>Also, INVO was made with <a class="reference external" href="http://getbootstrap.com/">Bootstrap</a> as client-side framework. Although the application does not generate
-invoices, it still serves as an example to understand how the framework works.</p>
+<p>在第二部分，我们将会说明一个完整的应用用来加深Phalcon的开发。
+INVO是我们创建的一个程序样本。INVO是一个简单的用来允许用户生成发票的网站，并且可以做其他的任务，比如管理他们的客户或者产品。你可以从 <a class="reference external" href="https://github.com/dreamsxin/invo">Github</a> 中复制它的代码。</p>
+<p>同样，INVO使用 <a class="reference external" href="http://getbootstrap.com/">Bootstrap</a> 做的前端框架。虽然这个应用不能生成发票，但是它仍然可以作为一个例子来理解框架是如何工作的。</p>
 <div class="section" id="project-structure">
 <h2>项目结构（Project Structure）<a class="headerlink" href="#project-structure" title="永久链接至标题">¶</a></h2>
-<p>Once you clone the project in your document root you&#8217;ll see the following structure:</p>
+<p>一旦你从你的文档根目录复制了这个项目，你将会看到以下结构：</p>
 <div class="highlight-bash"><div class="highlight"><pre>invo/
     app/
         config/
@@ -124,7 +122,6 @@ invoices, it still serves as an example to understand how the framework works.</
         plugins/
         views/
     cache/
-        volt/
     docs/
     public/
         css/
@@ -133,24 +130,18 @@ invoices, it still serves as an example to understand how the framework works.</
     schemas/
 </pre></div>
 </div>
-<p>As you know, Phalcon does not impose a particular file structure for application development. This project
-provides a simple MVC structure and a public document root.</p>
-<p>Once you open the application in your browser <a class="reference external" href="http://localhost/invo">http://localhost/invo</a> you&#8217;ll see something like this:</p>
-<img class="align-center" src="../static/img/invo-1.png"><p>The application is divided into two parts, a frontend, that is a public part where visitors can receive information
-about INVO and request contact information. The second part is the backend, an administrative area where a
-registered user can manage his/her products and customers.</p>
+<p>正如你所知道的，Phalcon不会强求应用程序使用特定的文件结构。这个项目提供了一个简单的MVC模型和公共文档根目录。</p>
+<p>一旦你打开浏览器输入 <a class="reference external" href="http://localhost/invo">http://localhost/invo</a> 浏览应用程序你将会看到下面这样：</p>
+<img class="align-center" src="../static/img/invo-1.png"><p>这个应用分为两部分，一部分是前端，这个是一个公开的部分，浏览者可以接收关于INVO的信息，也可以请求联系人信息。第二部分是后端，一个管理员区域，一个注册用户可以管理他/她的产品和客户。</p>
 </div>
 <div class="section" id="routing">
 <h2>路由（Routing）<a class="headerlink" href="#routing" title="永久链接至标题">¶</a></h2>
-<p>INVO uses the standard route that is built-in with the <a class="reference internal" href="routing.html"><em>Router</em></a> component. These routes match the following
-pattern: /:controller/:action/:params. This means that the first part of a URI is the controller, the second the
-action and the rest are the parameters.</p>
-<p>The following route <cite>/session/register</cite> executes the controller SessionController and its action registerAction.</p>
+<p>INVO使用内置的标准路由. <a class="reference internal" href="routing.html"><em>Router</em></a> 组件. 路由符合以下格式：<cite>/:controller/:action/:params</cite>. 这就意味着第一部分URI是控制器，第二部分是方法，剩余的是参数。</p>
+<p>下面的路由 <cite>/session/register</cite> 执行的是 <cite>SessionController</cite> 控制器和它的 <cite>registerAction</cite> 方法。</p>
 </div>
 <div class="section" id="configuration">
 <h2>配置（Configuration）<a class="headerlink" href="#configuration" title="永久链接至标题">¶</a></h2>
-<p>INVO has a configuration file that sets general parameters in the application. This file is located at
-app/config/config.ini and it&#8217;s loaded in the very first lines of the application bootstrap (public/index.php):</p>
+<p>INVO有一个设置应用常规参数的配置文件。这个文件位于 <cite>app/config/config.ini</cite>，并且他在应用引导文件的最开始就开始加载 (<cite>public/index.php</cite>)：</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
 
 <span class="k">use</span> <span class="nx">Phalcon\Config\Adapter\Ini</span> <span class="k">as</span> <span class="nx">ConfigIni</span><span class="p">;</span>
@@ -161,9 +152,7 @@ app/config/config.ini and it&#8217;s loaded in the very first lines of the appli
 <span class="nv">$config</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ConfigIni</span><span class="p">(</span><span class="nx">APP_PATH</span> <span class="o">.</span> <span class="s1">&#39;app/config/config.ini&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
-<p><a class="reference internal" href="config.html"><em>Phalcon\Config</em></a> allows us to manipulate the file in an object-oriented way.
-In this example, we&#8217;re using a ini file as configuration, however, there are more adapters supported
-for configuration files. The configuration file contains the following settings:</p>
+<p><a class="reference internal" href="config.html"><em>Phalcon\Config</em></a> 允许我们使用面向对象的方式来操作文件。在这个例子中，我们使用ini文件作为配置文件，然而，它对于配置文件有更多的适配支持。这个配置文件包含以下配置：</p>
 <div class="highlight-ini"><div class="highlight"><pre><span class="k">[database]</span>
 <span class="na">host</span>     <span class="o">=</span> <span class="s">localhost</span>
 <span class="na">username</span> <span class="o">=</span> <span class="s">root</span>
@@ -180,12 +169,11 @@ for configuration files. The configuration file contains the following settings:
 <span class="na">baseUri</span>        <span class="o">=</span> <span class="s">/invo/</span>
 </pre></div>
 </div>
-<p>Phalcon hasn&#8217;t any pre-defined convention settings. Sections help us to organize the options as appropriate.
-In this file there are two sections to be used later &#8220;application&#8221; and &#8220;database&#8221;.</p>
+<p>对于配置文件，Phalcon 没有任何提前预约好的惯例配置。通过节（Sections）帮助我们组织相应选项。在这个文件里 <cite>application</cite> 和 <cite>database</cite> 这两个部分将被用于后面的程序。</p>
 </div>
 <div class="section" id="autoloaders">
 <h2>自动加载（Autoloaders）<a class="headerlink" href="#autoloaders" title="永久链接至标题">¶</a></h2>
-<p>The second part that appears in the bootstrap file (public/index.php) is the autoloader:</p>
+<p>在引导文件 (public/index.php) 的第二部分是自动加载器:</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
 
 <span class="sd">/**</span>
@@ -194,8 +182,7 @@ In this file there are two sections to be used later &#8220;application&#8221; a
 <span class="k">require</span> <span class="nx">APP_PATH</span> <span class="o">.</span> <span class="s1">&#39;app/config/loader.php&#39;</span><span class="p">;</span>
 </pre></div>
 </div>
-<p>The autoloader registers a set of directories in which the application will look for
-the classes that it eventually will need.</p>
+<p>自动加载器注册一组目录列表，应用程序将根据需要从这组目录里查找需要的类文件。</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
 
 <span class="nv">$loader</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phalcon\Loader</span><span class="p">();</span>
@@ -212,10 +199,8 @@ the classes that it eventually will need.</p>
 <span class="p">)</span><span class="o">-&gt;</span><span class="na">register</span><span class="p">();</span>
 </pre></div>
 </div>
-<p>Note that the above code has registered the directories that were defined in the configuration file. The only
-directory that is not registered is the viewsDir, because it contains HTML + PHP files but no classes.
-Also, note that we have using a constant called APP_PATH, this constant is defined in the bootstrap
-(public/index.php) to allow us have a reference to the root of our project:</p>
+<p>注意, 以上代码注册的目录是在配置文件中定义的. 唯一没有注册的目录是 <cite>viewsDir</cite>, 因为它包含 <cite>HTML</cite> + <cite>PHP</cite> 文件但不是类.
+同时, 也要注意我们使用了常量 <cite>APP_PATH</cite>, 这个常量在引导文件 (public/index.php) 中被定义, 允许我们对我们项目的根路径有一个参考:</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
 
 <span class="c1">// ...</span>
@@ -225,19 +210,8 @@ Also, note that we have using a constant called APP_PATH, this constant is defin
 </div>
 </div>
 <div class="section" id="registering-services">
-<h2>Registering services<a class="headerlink" href="#registering-services" title="永久链接至标题">¶</a></h2>
-<p>Another file that is required in the bootstrap is (app/config/services.php). This file allow
-us to organize the services that INVO does use.</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
-
-<span class="sd">/**</span>
-<span class="sd"> * Load application services</span>
-<span class="sd"> */</span>
-<span class="k">require</span> <span class="nx">APP_PATH</span> <span class="o">.</span> <span class="s1">&#39;app/config/services.php&#39;</span><span class="p">;</span>
-</pre></div>
-</div>
-<p>Service registration is achieved as in the previous tutorial, making use of a closure to lazily loads
-the required components:</p>
+<h2>注册服务（Registering services）<a class="headerlink" href="#registering-services" title="永久链接至标题">¶</a></h2>
+<p>服务注册已经在前面的教程中实现了, 利用一个闭包来实现惰性加载组件：</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
 
 <span class="k">use</span> <span class="nx">Phalcon\Mvc\Url</span> <span class="k">as</span> <span class="nx">UrlProvider</span><span class="p">;</span>
@@ -259,16 +233,15 @@ the required components:</p>
 <p>We will discuss this file in depth later.</p>
 </div>
 <div class="section" id="handling-the-request">
-<h2>Handling the Request<a class="headerlink" href="#handling-the-request" title="永久链接至标题">¶</a></h2>
-<p>If we skip to the end of the file (public/index.php), the request is finally handled by <a class="reference internal" href="../api/Phalcon_Mvc_Application.html"><em>Phalcon\Mvc\Application</em></a>
-which initializes and executes all that is necessary to make the application run:</p>
+<h2>处理请求（Handling the Request）<a class="headerlink" href="#handling-the-request" title="永久链接至标题">¶</a></h2>
+<p>如果我们忽略文件 (public/index.php) 的结束, 请求最终会被 <a class="reference internal" href="../api/Phalcon_Mvc_Application.html"><em>Phalcon\Mvc\Application</em></a> 处理, 它会初始化并执行所有必要条件，使应用程序运行：</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
 
 <span class="k">use</span> <span class="nx">Phalcon\Mvc\Application</span><span class="p">;</span>
 
 <span class="c1">// ...</span>
 
-<span class="nv">$app</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Application</span><span class="p">(</span><span class="nv">$di</span><span class="p">);</span>
+<span class="nv">$app</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Application</span><span class="p">();</span>
 
 <span class="k">echo</span> <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">handle</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">getContent</span><span class="p">();</span>
 </pre></div>
@@ -276,16 +249,9 @@ which initializes and executes all that is necessary to make the application run
 </div>
 <div class="section" id="dependency-injection">
 <h2>依赖注入（Dependency Injection）<a class="headerlink" href="#dependency-injection" title="永久链接至标题">¶</a></h2>
-<p>Look at the first line of the code block above, the Application class constructor is receiving the variable
-<code class="code docutils literal"><span class="pre">$di</span></code> as an argument. What is the purpose of that variable? Phalcon is a highly decoupled framework,
-so we need a component that acts as glue to make everything work together. That component is <a class="reference internal" href="../api/Phalcon_DI.html"><em>Phalcon\Di</em></a>.
-It is a service container that also performs dependency injection and service location,
-instantiating all components as they are needed by the application.</p>
-<p>There are many ways of registering services in the container. In INVO, most services have been registered using
-anonymous functions/closures. Thanks to this, the objects are instantiated in a lazy way, reducing the resources needed
-by the application.</p>
-<p>For instance, in the following excerpt the session service is registered. The anonymous function will only be
-called when the application requires access to the session data:</p>
+<p>Phalcon 是一个高度解耦的框架，所以我们一个组件来充当胶水来让每个组件都能正常工作。这个组件就是 <code class="xref doc docutils literal"><span class="pre">Phalcon\Di</span></code>。这是一个服务容器，可以执行依赖注入和服务定位，实例化应用所需要的所有组件。</p>
+<p>在容器中有多种注册服务的方法。在INVO里, 大部分服务使用匿名函数或者闭包来进行注册的, 对象以惰性的方式被实例化，减少了应用程序所需要的资源。</p>
+<p>例如，下面摘录了 Session 服务的注册。当应用程序需要访问 Session 数据的时候，匿名函数才会被调用：</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
 
 <span class="k">use</span> <span class="nx">Phalcon\Session\Adapter\Files</span> <span class="k">as</span> <span class="nx">Session</span><span class="p">;</span>
@@ -302,12 +268,8 @@ called when the application requires access to the session data:</p>
 <span class="p">});</span>
 </pre></div>
 </div>
-<p>Here, we have the freedom to change the adapter, perform additional initialization and much more. Note that the service
-was registered using the name &#8220;session&#8221;. This is a convention that will allow the framework to identify the active
-service in the services container.</p>
-<p>A request can use many services and registering each service individually can be a cumbersome task. For that reason,
-the framework provides a variant of <a class="reference internal" href="../api/Phalcon_DI.html"><em>Phalcon\Di</em></a> called <a class="reference internal" href="../api/Phalcon_DI_FactoryDefault.html"><em>Phalcon\Di\FactoryDefault</em></a> whose task is to register
-all services providing a full-stack framework.</p>
+<p>这里，我们可以自由的更改适配器，执行额外的初始化或者其他操作。注意，这个服务器是使用 <cite>session</cite> 名字进行注册的。这是一个惯例，来允许框架在服务容器中识别正在活动的服务.</p>
+<p>一个请求可以使用多个服务，单独注册每个服务可以说是一个繁重的任务。因此，框架提供了 <code class="xref doc docutils literal"><span class="pre">Phalcon\Di</span></code> 的一个变种，称作  <code class="xref doc docutils literal"><span class="pre">Phalcon\Di\FactoryDefault</span></code>，其任务是注册所有 MVC 所需要的服务来提供一个全栈框架。</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
 
 <span class="k">use</span> <span class="nx">Phalcon\DI\FactoryDefault</span><span class="p">;</span>
@@ -319,10 +281,8 @@ all services providing a full-stack framework.</p>
 <span class="nv">$di</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">FactoryDefault</span><span class="p">();</span>
 </pre></div>
 </div>
-<p>It registers the majority of services with components provided by the framework as standard. If we need to override
-the definition of some service we could just set it again as we did above with &#8220;session&#8221; or &#8220;url&#8221;.
-This is the reason for the existence of the variable <code class="code docutils literal"><span class="pre">$di</span></code>.</p>
-<p>In next chapter, we will see how to authentication and authorization is implemented in INVO.</p>
+<p>它注册了大部分框架提供的标准服务和组件。如果我们需要重写某些已经定义的服务，我们仅仅需要重新定义它，就像上面的 &#8220;session&#8221; 和 &#8220;url&#8221;一样，这就是变量  <code class="code docutils literal"><span class="pre">$di</span></code> 存在的原因.</p>
+<p>在下一章，我们将会看到如何在INVO中实施认证和授权。</p>
 </div>
 </div>
 
@@ -339,7 +299,7 @@ This is the reason for the existence of the variable <code class="code docutils 
           <a href="../genindex.html" title="总目录"
              >索引</a></li>
         <li class="right" >
-          <a href="tutorial-invo-2.html" title="Tutorial 3: Securing INVO"
+          <a href="tutorial-invo-2.html" title="教程 3: 保护INVO（Tutorial 3: Securing INVO）"
              >下一页</a> |</li>
         <li class="right" >
           <a href="tutorial.html" title="教程 1：让我们通过例子来学习（Tutorial 1: Let’s learn by example）"
