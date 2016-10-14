@@ -90,7 +90,7 @@
 <li><a class="reference internal" href="#manual-bootstrapping">手动启动（Manual bootstrapping）</a></li>
 <li><a class="reference internal" href="#application-events">应用事件（Application Events）</a></li>
 <li><a class="reference internal" href="#disable-view-component">禁用视图组件（Disable View Component）</a></li>
-<li><a class="reference internal" href="#external-resources">外部资源（External Resources）</a></li>
+<li><a class="reference internal" href="#hmvc-hmvc-request-system">HMVC 请求（HMVC request system）</a></li>
 </ul>
 </li>
 </ul>
@@ -610,11 +610,26 @@
 </pre></div>
 </div>
 </div>
-<div class="section" id="external-resources">
-<h2>外部资源（External Resources）<a class="headerlink" href="#external-resources" title="永久链接至标题">¶</a></h2>
-<ul class="simple">
-<li><a class="reference external" href="https://github.com/phalcon/mvc">Github上的MVC示例</a></li>
-</ul>
+<div class="section" id="hmvc-hmvc-request-system">
+<h2>HMVC 请求（HMVC request system）<a class="headerlink" href="#hmvc-hmvc-request-system" title="永久链接至标题">¶</a></h2>
+<p>以下示例演示了如何完成 HMVC 请求：</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+
+<span class="k">class</span> <span class="nc">HmvcController</span> <span class="k">extends</span> <span class="nx">Phalcon\Mvc\Controller</span>
+<span class="p">{</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">oneAction</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">app</span><span class="o">-&gt;</span><span class="na">request</span><span class="p">(</span><span class="s1">&#39;/hmvc/two&#39;</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">twoAction</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">dispatcher</span><span class="o">-&gt;</span><span class="na">getActionName</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
 </div>
 </div>
 
