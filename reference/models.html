@@ -81,7 +81,7 @@
 			<div class="panel-heading"><a href="../index.html">內容目录</a></div>
 			<div class="panel-body"><ul>
 <li><a class="reference internal" href="#">使用模型（Working with Models）</a><ul>
-<li><a class="reference internal" href="#id1">创建模型</a><ul>
+<li><a class="reference internal" href="#creating-models">创建模型（Creating Models）</a><ul>
 <li><a class="reference internal" href="#setters-getters-public-properties-vs-setters-getters">公共属性对比设置与取值 Setters/Getters（Public properties vs. Setters/Getters）</a></li>
 <li><a class="reference internal" href="#models-in-namespaces">模型放入命名空间（Models in Namespaces）</a></li>
 </ul>
@@ -153,6 +153,12 @@
 <li><a class="reference internal" href="#injecting-services-into-models">注入服务到模型（Injecting services into Models）</a></li>
 <li><a class="reference internal" href="#disabling-enabling-features">禁用或启用特性（Disabling/Enabling Features）</a></li>
 <li><a class="reference internal" href="#stand-alone-component">独立的组件（Stand-Alone component）</a></li>
+<li><a class="reference internal" href="#meta-data">元数据（Meta-Data）</a><ul>
+<li><a class="reference internal" href="#manual-meta-data">自定义元数据（Manual Meta-Data）</a></li>
+<li><a class="reference internal" href="#manual-fields">自定义字段（Manual Fields）</a></li>
+<li><a class="reference internal" href="#gets-real-field">获取字段真实名称（Gets Real Field）</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -180,8 +186,8 @@
 <blockquote class="highlights">
 <div>模型是数据库的高级抽象层。如果您想进行低层次的数据库操作，您可以查看
 <a class="reference internal" href="../api/Phalcon_Db.html"><em>Phalcon\Db</em></a> 组件文档。</div></blockquote>
-<div class="section" id="id1">
-<h2>创建模型<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h2>
+<div class="section" id="creating-models">
+<h2>创建模型（Creating Models）<a class="headerlink" href="#creating-models" title="永久链接至标题">¶</a></h2>
 <p>模型是一个继承自 <a class="reference internal" href="../api/Phalcon_Mvc_Model.html"><em>Phalcon\Mvc\Model</em></a> 的一个类。 它必须放到 models 文件夹。一个模型文件必须包含一个类，
 同时它的类名必须符合驼峰命名法：</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
@@ -3444,6 +3450,58 @@ According to how you use the ORM you can disable that you aren&#8217;t using. Th
 <span class="c1">// Use the model</span>
 <span class="k">echo</span> <span class="nx">Robots</span><span class="o">::</span><span class="na">count</span><span class="p">();</span>
 </pre></div>
+</div>
+</div>
+<div class="section" id="meta-data">
+<h2>元数据（Meta-Data）<a class="headerlink" href="#meta-data" title="永久链接至标题">¶</a></h2>
+<p>在这里将介绍如何获取模型在数据库中对应表的元数据。</p>
+<div class="section" id="manual-meta-data">
+<h3>自定义元数据（Manual Meta-Data）<a class="headerlink" href="#manual-meta-data" title="永久链接至标题">¶</a></h3>
+<p>在模型中添加 <code class="code docutils literal"><span class="pre">metaData</span></code> 方法即可。 <a class="reference internal" href="models-metadata.html"><em>了解更多</em></a></p>
+</div>
+<div class="section" id="manual-fields">
+<h3>自定义字段（Manual Fields）<a class="headerlink" href="#manual-fields" title="永久链接至标题">¶</a></h3>
+<p>有时候我们只是想简单的隐藏一些字段，在模型中覆盖 <code class="code docutils literal"><span class="pre">getAttributes</span></code> 方法即可，实现代码如下：</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+
+<span class="c1">// Create a model</span>
+<span class="k">class</span> <span class="nc">Robots</span> <span class="k">extends</span> <span class="nx">Model</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">getAttributes</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="gets-real-field">
+<h3>获取字段真实名称（Gets Real Field）<a class="headerlink" href="#gets-real-field" title="永久链接至标题">¶</a></h3>
+<p>实现代码如下：</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+
+
+<span class="k">use</span> <span class="nx">Phalcon\Mvc\Model</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">Robots</span> <span class="k">extends</span> <span class="nx">Model</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">columnMap</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="c1">// Keys are the real names in the table and</span>
+        <span class="c1">// the values their names in the application</span>
+        <span class="k">return</span> <span class="k">array</span><span class="p">(</span>
+            <span class="s1">&#39;id&#39;</span>       <span class="o">=&gt;</span> <span class="s1">&#39;code&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;the_name&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;theName&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;the_type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;theType&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;the_year&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;theYear&#39;</span>
+        <span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="nv">$robot</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Robots</span><span class="p">;</span>
+<span class="k">echo</span> <span class="nv">$robot</span><span class="o">-&gt;</span><span class="na">getRealAttribute</span><span class="p">(</span><span class="s1">&#39;code&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
 </div>
 </div>
 </div>

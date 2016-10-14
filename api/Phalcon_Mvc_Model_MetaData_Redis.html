@@ -240,11 +240,18 @@
 <span class="nb">print_r</span><span class="p">(</span><span class="nv">$metaData</span><span class="o">-&gt;</span><span class="na">getDataSize</span><span class="p">(</span><span class="k">new</span> <span class="nx">Robots</span><span class="p">(),</span> <span class="s1">&#39;type&#39;</span><span class="p">));</span>
 </pre></div>
 </div>
-<p>public <em>int</em>  <strong>getDataBytes</strong> (<a class="reference internal" href="Phalcon_Mvc_ModelInterface.html"><em>Phalcon\Mvc\ModelInterface</em></a> $model, <em>string</em> $attribute) inherited from Phalcon\Mvc\Model\MetaData</p>
-<p>Returns attribute data bytes</p>
+<p>public <em>int</em>  <strong>getDataBytes</strong> (<a class="reference internal" href="Phalcon_Mvc_ModelInterface.html"><em>Phalcon\Mvc\ModelInterface</em></a> $model) inherited from Phalcon\Mvc\Model\MetaData</p>
+<p>Returns attributes and their data bytes</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
 
-<span class="nb">print_r</span><span class="p">(</span><span class="nv">$metaData</span><span class="o">-&gt;</span><span class="na">getDataBytes</span><span class="p">(</span><span class="k">new</span> <span class="nx">Robots</span><span class="p">(),</span> <span class="s1">&#39;type&#39;</span><span class="p">));</span>
+<span class="nb">print_r</span><span class="p">(</span><span class="nv">$metaData</span><span class="o">-&gt;</span><span class="na">getDataBytes</span><span class="p">(</span><span class="k">new</span> <span class="nx">Robots</span><span class="p">()));</span>
+</pre></div>
+</div>
+<p>public <em>int</em>  <strong>getDataByte</strong> (<a class="reference internal" href="Phalcon_Mvc_ModelInterface.html"><em>Phalcon\Mvc\ModelInterface</em></a> $model, <em>string</em> $attribute) inherited from Phalcon\Mvc\Model\MetaData</p>
+<p>Returns attribute data byte</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+
+<span class="nb">print_r</span><span class="p">(</span><span class="nv">$metaData</span><span class="o">-&gt;</span><span class="na">getDataByte</span><span class="p">(</span><span class="k">new</span> <span class="nx">Robots</span><span class="p">(),</span> <span class="s1">&#39;type&#39;</span><span class="p">));</span>
 </pre></div>
 </div>
 <p>public <em>array</em>  <strong>getDataScales</strong> (<a class="reference internal" href="Phalcon_Mvc_ModelInterface.html"><em>Phalcon\Mvc\ModelInterface</em></a> $model) inherited from Phalcon\Mvc\Model\MetaData</p>
@@ -352,18 +359,18 @@
 <span class="nb">var_dump</span><span class="p">(</span><span class="nv">$metaData</span><span class="o">-&gt;</span><span class="na">getAttribute</span><span class="p">(</span><span class="k">new</span> <span class="nx">Robots</span><span class="p">(),</span> <span class="s1">&#39;name&#39;</span><span class="p">));</span>
 </pre></div>
 </div>
-<p>public <em>boolean</em>  <strong>hasColumn</strong> (<a class="reference internal" href="Phalcon_Mvc_ModelInterface.html"><em>Phalcon\Mvc\ModelInterface</em></a> $model, <em>string</em> $column) inherited from Phalcon\Mvc\Model\MetaData</p>
+<p>public <em>boolean</em>  <strong>hasRealAttribute</strong> (<a class="reference internal" href="Phalcon_Mvc_ModelInterface.html"><em>Phalcon\Mvc\ModelInterface</em></a> $model, <em>string</em> $column) inherited from Phalcon\Mvc\Model\MetaData</p>
 <p>Check if a model has real attribute name</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
 
-<span class="nb">var_dump</span><span class="p">(</span><span class="nv">$metaData</span><span class="o">-&gt;</span><span class="na">hasColumn</span><span class="p">(</span><span class="k">new</span> <span class="nx">Robots</span><span class="p">(),</span> <span class="s1">&#39;name&#39;</span><span class="p">));</span>
+<span class="nb">var_dump</span><span class="p">(</span><span class="nv">$metaData</span><span class="o">-&gt;</span><span class="na">hasRealAttribute</span><span class="p">(</span><span class="k">new</span> <span class="nx">Robots</span><span class="p">(),</span> <span class="s1">&#39;name&#39;</span><span class="p">));</span>
 </pre></div>
 </div>
-<p>public <em>string</em>  <strong>getColumn</strong> (<a class="reference internal" href="Phalcon_Mvc_ModelInterface.html"><em>Phalcon\Mvc\ModelInterface</em></a> $model, <em>string</em> $column) inherited from Phalcon\Mvc\Model\MetaData</p>
+<p>public <em>string</em>  <strong>getRealAttribute</strong> (<a class="reference internal" href="Phalcon_Mvc_ModelInterface.html"><em>Phalcon\Mvc\ModelInterface</em></a> $model, <em>string</em> $column) inherited from Phalcon\Mvc\Model\MetaData</p>
 <p>Gets a real attribute name</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
 
-<span class="nb">var_dump</span><span class="p">(</span><span class="nv">$metaData</span><span class="o">-&gt;</span><span class="na">getColumn</span><span class="p">(</span><span class="k">new</span> <span class="nx">Robots</span><span class="p">(),</span> <span class="s1">&#39;name&#39;</span><span class="p">));</span>
+<span class="nb">var_dump</span><span class="p">(</span><span class="nv">$metaData</span><span class="o">-&gt;</span><span class="na">getRealAttribute</span><span class="p">(</span><span class="k">new</span> <span class="nx">Robots</span><span class="p">(),</span> <span class="s1">&#39;name&#39;</span><span class="p">));</span>
 </pre></div>
 </div>
 <p>public <em>boolean</em>  <strong>isEmpty</strong> () inherited from Phalcon\Mvc\Model\MetaData</p>

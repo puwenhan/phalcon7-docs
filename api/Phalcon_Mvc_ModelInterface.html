@@ -98,6 +98,48 @@
 <p>Returns table name mapped in the model</p>
 <p>abstract public <em>string</em>  <strong>getSchema</strong> ()</p>
 <p>Returns schema name where table mapped is located</p>
+<p>abstract public <em>string</em>  <strong>getIdentityField</strong> ()</p>
+<p>Returns the name of identity field (if one is present)</p>
+<p>abstract public <em>array</em>  <strong>getColumnMap</strong> ()</p>
+<p>Returns the column map if any</p>
+<p>abstract public <em>array</em>  <strong>getReverseColumnMap</strong> ()</p>
+<p>Returns the reverse column map if any</p>
+<p>abstract public <em>array</em>  <strong>getAttributes</strong> ()</p>
+<p>Returns table attributes names (fields)</p>
+<p>abstract public <em>array</em>  <strong>getPrimaryKeyAttributes</strong> ()</p>
+<p>Returns an array of fields which are part of the primary key</p>
+<p>abstract public <em>array</em>  <strong>getNonPrimaryKeyAttributes</strong> ()</p>
+<p>Returns an arrau of fields which are not part of the primary key</p>
+<p>abstract public <em>array</em>  <strong>getNotNullAttributes</strong> ()</p>
+<p>Returns an array of not null attributes</p>
+<p>abstract public <em>array</em>  <strong>getDataTypesNumeric</strong> ()</p>
+<p>Returns attributes which types are numerical</p>
+<p>abstract public <em>array</em>  <strong>isNotNull</strong> (<em>unknown</em> $attribute)</p>
+<p>Checks if the attribute is not null</p>
+<p>abstract public <em>array</em>  <strong>getDataTypes</strong> ()</p>
+<p>Returns the columns data types</p>
+<p>abstract public <em>array</em>  <strong>getDataSize</strong> (<em>string</em> $attribute)</p>
+<p>Returns attribute data size</p>
+<p>abstract public <em>array</em>  <strong>getDataByte</strong> (<em>string</em> $attribute)</p>
+<p>Returns attribute data byte</p>
+<p>abstract public <em>array</em>  <strong>getDataScale</strong> (<em>string</em> $attribute)</p>
+<p>Returns attribute data scale</p>
+<p>abstract public <em>array</em>  <strong>getBindTypes</strong> ()</p>
+<p>Returns attributes and their bind data types</p>
+<p>abstract public <em>array</em>  <strong>getDefaultValues</strong> ()</p>
+<p>Returns attributes and their default values</p>
+<p>abstract public <em>array</em>  <strong>getAutomaticCreateAttributes</strong> ()</p>
+<p>Returns attributes that must be ignored from the INSERT SQL generation</p>
+<p>abstract public <em>array</em>  <strong>getAutomaticUpdateAttributes</strong> ()</p>
+<p>Returns attributes that must be ignored from the UPDATE SQL generation</p>
+<p>abstract public <em>boolean</em>  <strong>hasRealAttribute</strong> (<em>string</em> $column)</p>
+<p>Check if a model has certain column</p>
+<p>abstract public  <strong>getRealAttribute</strong> (<em>unknown</em> $column)</p>
+<p>...</p>
+<p>abstract public <em>boolean</em>  <strong>hasAttribute</strong> (<em>string</em> $attribute)</p>
+<p>Check if a model has certain attribute</p>
+<p>abstract public <em>string</em>  <strong>getAttribute</strong> (<em>string</em> $attribute)</p>
+<p>Gets a model certain attribute</p>
 <p>abstract public  <strong>setConnectionService</strong> (<em>string</em> $connectionService)</p>
 <p>Sets both read/write connection services</p>
 <p>abstract public  <strong>setWriteConnectionService</strong> (<em>string</em> $connectionService)</p>
