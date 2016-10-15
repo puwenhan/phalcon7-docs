@@ -81,6 +81,7 @@
 			<div class="panel-heading"><a href="../index.html">內容目录</a></div>
 			<div class="panel-body"><ul>
 <li><a class="reference internal" href="#">表单（Forms）</a><ul>
+<li><a class="reference internal" href="#forms-elements">表单元素（Forms Elements）</a></li>
 <li><a class="reference internal" href="#initializing-forms">初始化表单（Initializing forms）</a></li>
 <li><a class="reference internal" href="#validation">验证（Validation）</a></li>
 <li><a class="reference internal" href="#filtering">过滤（Filtering）</a></li>
@@ -90,6 +91,7 @@
 <li><a class="reference internal" href="#event-callbacks">事件回调（Event Callbacks）</a></li>
 <li><a class="reference internal" href="#rendering-forms">渲染表单（Rendering Forms）</a></li>
 <li><a class="reference internal" href="#creating-form-elements">创建表单控件（Creating Form Elements）</a></li>
+<li><a class="reference internal" href="#id1">表单元素转换为数组（Creating Form Elements）</a></li>
 <li><a class="reference internal" href="#forms-manager">表单管理（Forms Manager）</a></li>
 <li><a class="reference internal" href="#external-resources">外部资源（External Resources)</a></li>
 </ul>
@@ -184,9 +186,20 @@
 <span class="p">);</span>
 </pre></div>
 </div>
+<div class="section" id="forms-elements">
+<h2>表单元素（Forms Elements）<a class="headerlink" href="#forms-elements" title="永久链接至标题">¶</a></h2>
+<p>所有 <a class="reference internal" href="../api/Phalcon_Tag.html"><em>Phalcon\Tag</em></a> 支持的 HTML 元素，都可以作为表单元素来使用。
+例如，Phalcon 内置不存在 <cite>PhalconFormsElementTel</cite> 元素类，但 <a class="reference internal" href="../api/Phalcon_Tag.html"><em>Phalcon\Tag</em></a> 中存在 <code class="code docutils literal"><span class="pre">tel</span></code> 方法，我们仍然可以用下面的方式创建表单元素：</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+
+<span class="nv">$element</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phalcon\Forms\Element</span><span class="p">(</span><span class="s1">&#39;mytel&#39;</span><span class="p">,</span> <span class="k">NULL</span><span class="p">,</span> <span class="k">NULL</span><span class="p">,</span> <span class="k">NULL</span><span class="p">,</span> <span class="s1">&#39;tel&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>构造函数的第一个参数是元素名称（name），第二个参数是元素属性，第三个参数是用户选项值（自定义数据），第四个参数是选项值（比如下拉列表的值）。</p>
+</div>
 <div class="section" id="initializing-forms">
 <h2>初始化表单（Initializing forms）<a class="headerlink" href="#initializing-forms" title="永久链接至标题">¶</a></h2>
-<p>从上面的例子我们可以看到表单项也可以在form对象初始化后进行添加。 当然开发者也可以对原有的Form类进行扩展：</p>
+<p>从上面的例子我们可以看到表单项也可以在form对象初始化后进行添加。当然开发者也可以对原有的Form类进行扩展：</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
 
 <span class="k">use</span> <span class="nx">Phalcon\Forms\Form</span><span class="p">;</span>
@@ -620,6 +633,45 @@
         <span class="k">return</span> <span class="nv">$html</span><span class="p">;</span>
     <span class="p">}</span>
 <span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id1">
+<h2>表单元素转换为数组（Creating Form Elements）<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h2>
+<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+
+<span class="nv">$nameElement</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">\Phalcon\Forms\Element</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;class&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;big-input&#39;</span><span class="p">),</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;some&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;value&#39;</span><span class="p">),</span> <span class="k">NULL</span><span class="p">,</span> <span class="s2">&quot;text&quot;</span><span class="p">);</span>
+<span class="nv">$versionElement</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">\Phalcon\Forms\Element</span><span class="p">(</span><span class="s2">&quot;version&quot;</span><span class="p">,</span> <span class="k">NULL</span><span class="p">,</span> <span class="k">NULL</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;phalcon&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Phalcon&#39;</span><span class="p">,</span> <span class="s1">&#39;phalcon7&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Phalcon7&#39;</span><span class="p">),</span> <span class="s2">&quot;select&quot;</span><span class="p">);</span>
+
+<span class="nv">$form</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">\Phalcon\Forms\Form</span><span class="p">();</span>
+<span class="nv">$form</span><span class="o">-&gt;</span><span class="na">add</span><span class="p">(</span><span class="nv">$nameElement</span><span class="p">);</span>
+<span class="nv">$form</span><span class="o">-&gt;</span><span class="na">add</span><span class="p">(</span><span class="nv">$versionElement</span><span class="p">);</span>
+<span class="nv">$data</span> <span class="o">=</span> <span class="nv">$form</span><span class="o">-&gt;</span><span class="na">toArray</span><span class="p">();</span>
+</pre></div>
+</div>
+<p><code class="code docutils literal"><span class="pre">$data</span></code> 值如下：</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+
+<span class="k">array</span><span class="p">(</span>
+     <span class="s2">&quot;name&quot;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+          <span class="s2">&quot;name&quot;</span> <span class="o">=&gt;</span> <span class="s2">&quot;name&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;type&quot;</span> <span class="o">=&gt;</span> <span class="s2">&quot;text&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;attributes&quot;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+               <span class="s2">&quot;class&quot;</span> <span class="o">=&gt;</span> <span class="s2">&quot;big-input&quot;</span><span class="p">,</span>
+          <span class="p">),</span>
+          <span class="s2">&quot;options&quot;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+               <span class="s2">&quot;some&quot;</span> <span class="o">=&gt;</span> <span class="s2">&quot;value&quot;</span><span class="p">,</span>
+          <span class="p">),</span>
+     <span class="p">),</span>
+     <span class="s2">&quot;version&quot;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+          <span class="s2">&quot;name&quot;</span> <span class="o">=&gt;</span> <span class="s2">&quot;version&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;type&quot;</span> <span class="o">=&gt;</span> <span class="s2">&quot;select&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;optionsValues&quot;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+               <span class="s2">&quot;phalcon&quot;</span> <span class="o">=&gt;</span> <span class="s2">&quot;Phalcon&quot;</span><span class="p">,</span>
+               <span class="s2">&quot;phalcon7&quot;</span> <span class="o">=&gt;</span> <span class="s2">&quot;Phalcon7&quot;</span><span class="p">,</span>
+          <span class="p">),</span>
+     <span class="p">)</span>
+<span class="p">);</span>
 </pre></div>
 </div>
 </div>
