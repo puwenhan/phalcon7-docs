@@ -78,6 +78,15 @@
 <div class="container-fluid">
 	<div class="col-md-3 primary-box">
 		<div class="panel panel-default">
+			<div class="panel-heading"><a href="../index.html">內容目录</a></div>
+			<div class="panel-body"><ul>
+<li><a class="reference internal" href="#">HTTP 请求客户端（HTTP Request Client）</a><ul>
+<li><a class="reference internal" href="#get-get-request">GET 请求（GET Request）</a></li>
+<li><a class="reference internal" href="#post-post-request">POST 请求（POST Request）</a></li>
+</ul>
+</li>
+</ul>
+</div>
 			<div class="panel-heading">上一个主题</div>
             <div class="panel-body"><p class="topless"><a href="image.html" title="上一章">&lt; 图像处理（Image manipulation）</a></p></div>
 			<div class="panel-heading">下一个主题</div>
@@ -93,6 +102,8 @@
   <div class="section" id="http-http-request-client">
 <h1>HTTP 请求客户端（HTTP Request Client）<a class="headerlink" href="#http-http-request-client" title="永久链接至标题">¶</a></h1>
 <p>通过 <a class="reference internal" href="../api/Phalcon_Http_Client.html"><em>Phalcon\Http\Client</em></a> 我们可以发起 HTTP 请求。</p>
+<div class="section" id="get-get-request">
+<h2>GET 请求（GET Request）<a class="headerlink" href="#get-get-request" title="永久链接至标题">¶</a></h2>
 <div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
 
 <span class="k">use</span> <span class="nx">Phalcon\Http\Client\Adapter\Curl</span> <span class="k">as</span> <span class="nx">Client</span><span class="p">;</span>
@@ -100,9 +111,27 @@
 <span class="c1">// Create a client instance</span>
 <span class="nv">$client</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Client</span><span class="p">();</span>
 
+<span class="c1">// Or auto create</span>
+<span class="nv">$client</span> <span class="o">=</span> <span class="nx">Phalcon\Http\Client</span><span class="o">::</span><span class="na">factory</span><span class="p">();</span>
+
 <span class="c1">// Send GET request</span>
 <span class="nv">$response</span> <span class="o">=</span> <span class="nv">$client</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;http://localhost/&#39;</span><span class="p">);</span>
 </pre></div>
+</div>
+</div>
+<div class="section" id="post-post-request">
+<h2>POST 请求（POST Request）<a class="headerlink" href="#post-post-request" title="永久链接至标题">¶</a></h2>
+<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+
+<span class="k">use</span> <span class="nx">Phalcon\Http\Client\Adapter\Curl</span> <span class="k">as</span> <span class="nx">Client</span><span class="p">;</span>
+
+<span class="c1">// Create a client instance</span>
+<span class="nv">$client</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Client</span><span class="p">();</span>
+
+<span class="c1">// Send POST request</span>
+<span class="nv">$response</span> <span class="o">=</span> <span class="nv">$client</span><span class="o">-&gt;</span><span class="na">post</span><span class="p">(</span><span class="s1">&#39;http://localhost/auth/login&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;username&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;test&#39;</span><span class="p">,</span> <span class="s1">&#39;password&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;test&#39;</span><span class="p">));</span>
+</pre></div>
+</div>
 </div>
 </div>
 
