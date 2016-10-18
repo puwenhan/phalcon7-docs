@@ -133,8 +133,8 @@ time you use the table. This could be done caching the meta-data using any of th
 <table border="1" class="docutils">
 <colgroup>
 <col width="2%" />
-<col width="77%" />
-<col width="21%" />
+<col width="74%" />
+<col width="23%" />
 </colgroup>
 <thead valign="bottom">
 <tr class="row-odd"><th class="head">Adapter</th>
@@ -144,11 +144,11 @@ time you use the table. This could be done caching the meta-data using any of th
 </thead>
 <tbody valign="top">
 <tr class="row-even"><td>Memory</td>
-<td>This adapter is the default. The meta-data is cached only during the request. When the request is completed, the meta-data are released as part of the normal memory of the request. This adapter is perfect when the application is in development so as to refresh the meta-data in each request containing the new and/or modified fields.</td>
+<td>这个是默认适配器，将元数据缓存在内存中。当请求完成时，元数据缓存将被释放，适合在应用程序开发阶段使用，每个请求都会重新获取字段信息。</td>
 <td><a class="reference internal" href="../api/Phalcon_Mvc_Model_MetaData_Memory.html"><em>Phalcon\Mvc\Model\MetaData\Memory</em></a></td>
 </tr>
 <tr class="row-odd"><td>Session</td>
-<td>This adapter stores meta-data in the <code class="code docutils literal"><span class="pre">$_SESSION</span></code> superglobal. This adapter is recommended only when the application is actually using a small number of models. The meta-data are refreshed every time a new session starts. This also requires the use of <code class="code docutils literal"><span class="pre">session_start()</span></code> to start the session before using any models.</td>
+<td>这个适配器将元数据缓存在 <code class="code docutils literal"><span class="pre">$_SESSION</span></code> 超全局变量中。该适配器只适合在拥有少量模型的时候使用，每次启动新的 Session 该适配器缓存就会失效。必须在 <code class="code docutils literal"><span class="pre">session_start()</span></code> 启动 Session 之后使用。</td>
 <td><a class="reference internal" href="../api/Phalcon_Mvc_Model_MetaData_Session.html"><em>Phalcon\Mvc\Model\MetaData\Session</em></a></td>
 </tr>
 <tr class="row-even"><td>Apc</td>
