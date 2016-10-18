@@ -16,16 +16,6 @@
   |          Eduar Carvajal <eduar@phalconphp.com>                         |
   +------------------------------------------------------------------------+
 */
-
-@import url(http://fonts.googleapis.com/css?family=Open+Sans);
-
-body
-{
-	font-family: "Open Sans", Helvetica, Arial, sans-serif;
-	/*background: #423a4a;*/
-	margin: 0px;
-}
-
 .str,
 .atv
 {
@@ -130,7 +120,7 @@ li.highlight {
 
 .error-scroll
 {
-	height: 250px;
+	height: 350px;
 	overflow-y: scroll;
 }
 
