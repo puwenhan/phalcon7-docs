@@ -86,7 +86,12 @@
 </ul>
 </li>
 <li><a class="reference internal" href="#catching-exceptions">捕获异常（Catching Exceptions）</a></li>
-<li><a class="reference internal" href="#debug-component">调试组件（Debug component）</a></li>
+<li><a class="reference internal" href="#debug-component">调试组件（Debug component）</a><ul>
+<li><a class="reference internal" href="#adds-a-variable-to-the-debug-output">在调试中输出变量（Adds a variable to the debug output）</a></li>
+<li><a class="reference internal" href="#clears-are-variables-added-previously">清除变量（Clears are variables added previously）</a></li>
+<li><a class="reference internal" href="#halts-the-request-showing-a-backtrace">中断请求显示回溯信息（Halts the request showing a backtrace）</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#reflection-and-introspection">反射与内省（Reflection and Introspection）</a></li>
 <li><a class="reference internal" href="#xdebug-using-xdebug">使用 XDebug（Using XDebug）</a></li>
 </ul>
@@ -218,16 +223,42 @@ PHP产生的所有异常都是基于 <a class="reference external" href="http://
 </div>
 <div class="section" id="debug-component">
 <h2>调试组件（Debug component）<a class="headerlink" href="#debug-component" title="永久链接至标题">¶</a></h2>
-<p>Phalcon提供的调试组件可以使开发者更容易的定位代码中的错误。</p>
-<p>下面的视频中展示了如何工作的：</p>
-<img class="align-center" src="../static/img/debug.png"><p>要打开调试功能只需要如下做：</p>
+<p>Phalcon提供的调试组件可以使开发者更容易的定位代码中的错误，注意一定要去掉Try/Catch块才可以，否则异常信息不会正确的输出。</p>
+<img class="align-center img-responsive" src="../static/img/debug.png"><p>要打开调试功能只需要如下做：</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
 
 <span class="nv">$debug</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">\Phalcon\Debug</span><span class="p">();</span>
 <span class="nv">$debug</span><span class="o">-&gt;</span><span class="na">listen</span><span class="p">();</span>
 </pre></div>
 </div>
-<p>注意一定要去掉Try/Catch块才可以， 否则异常信息不会正确的输出（事实上很多时候Phalcon显示异常信息是非常耗时的）。</p>
+<div class="section" id="adds-a-variable-to-the-debug-output">
+<h3>在调试中输出变量（Adds a variable to the debug output）<a class="headerlink" href="#adds-a-variable-to-the-debug-output" title="永久链接至标题">¶</a></h3>
+<p>我们可以在代码中添加调试信息，开启调试模式后才会输出：</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+
+<span class="nv">$var</span> <span class="o">=</span> <span class="s1">&#39;Hello world&#39;</span><span class="p">;</span>
+<span class="nv">$debug</span><span class="o">-&gt;</span><span class="na">debugVar</span><span class="p">(</span><span class="nv">$var</span><span class="p">,</span> <span class="s1">&#39;var&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="clears-are-variables-added-previously">
+<h3>清除变量（Clears are variables added previously）<a class="headerlink" href="#clears-are-variables-added-previously" title="永久链接至标题">¶</a></h3>
+<p>清除之前在代码中添加调试信息：</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+
+<span class="nv">$debug</span><span class="o">-&gt;</span><span class="na">clearVars</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="halts-the-request-showing-a-backtrace">
+<h3>中断请求显示回溯信息（Halts the request showing a backtrace）<a class="headerlink" href="#halts-the-request-showing-a-backtrace" title="永久链接至标题">¶</a></h3>
+<p>方法如下：</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+
+<span class="nv">$debug</span><span class="o">-&gt;</span><span class="na">halt</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
 </div>
 <div class="section" id="reflection-and-introspection">
 <h2>反射与内省（Reflection and Introspection）<a class="headerlink" href="#reflection-and-introspection" title="永久链接至标题">¶</a></h2>
