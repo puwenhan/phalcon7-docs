@@ -129,14 +129,11 @@ PHP产生的所有异常都是基于 `Exception class`_ ， 且至少含有如�
 
 调试组件（Debug component）
 ---------------------------
-Phalcon提供的调试组件可以使开发者更容易的定位代码中的错误。
-
-下面的视频中展示了如何工作的：
-
+Phalcon提供的调试组件可以使开发者更容易的定位代码中的错误，注意一定要去掉Try/Catch块才可以，否则异常信息不会正确的输出。
 
 .. raw:: html
 
-    <img class="align-center" src="../static/img/debug.png">
+    <img class="align-center img-responsive" src="../static/img/debug.png">
 
 要打开调试功能只需要如下做：
 
@@ -147,7 +144,36 @@ Phalcon提供的调试组件可以使开发者更容易的定位代码中的错�
     $debug = new \Phalcon\Debug();
     $debug->listen();
 
-注意一定要去掉Try/Catch块才可以， 否则异常信息不会正确的输出（事实上很多时候Phalcon显示异常信息是非常耗时的）。
+在调试中输出变量（Adds a variable to the debug output）
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+我们可以在代码中添加调试信息，开启调试模式后才会输出：
+
+.. code-block:: php
+
+    <?php
+
+    $var = 'Hello world';
+    $debug->debugVar($var, 'var');
+
+清除变量（Clears are variables added previously）
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+清除之前在代码中添加调试信息：
+
+.. code-block:: php
+
+    <?php
+
+    $debug->clearVars();
+
+中断请求显示回溯信息（Halts the request showing a backtrace）
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+方法如下：
+
+.. code-block:: php
+
+    <?php
+
+    $debug->halt();
 
 反射与内省（Reflection and Introspection）
 ------------------------------------------
