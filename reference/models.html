@@ -120,7 +120,7 @@
 <li><a class="reference internal" href="#using-a-custom-events-manager">使用自定义事件管理器（Using a custom Events Manager）</a></li>
 <li><a class="reference internal" href="#implementing-a-business-rule">实现业务逻辑（Implementing a Business Rule）</a></li>
 <li><a class="reference internal" href="#validating-data-integrity">验证数据完整性（Validating Data Integrity）</a></li>
-<li><a class="reference internal" href="#avoiding-sql-injections">Avoiding SQL injections</a></li>
+<li><a class="reference internal" href="#sql-avoiding-sql-injections">防止 SQL 注入（Avoiding SQL injections）</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#skipping-columns">忽略指定列的数据（Skipping Columns）</a><ul>
@@ -142,7 +142,7 @@
 <li><a class="reference internal" href="#deleting-related-records">删除关联表记录（Deleting related records）</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#record-snapshots">记录快照（Record Snapshots）</a></li>
+<li><a class="reference internal" href="#use-dynamic-update">动态更新（Use Dynamic Update）</a></li>
 <li><a class="reference internal" href="#pointing-to-a-different-schema">设置模式（Pointing to a different schema）</a></li>
 <li><a class="reference internal" href="#setting-multiple-databases">设置多个数据库（Setting multiple databases）</a><ul>
 <li><a class="reference internal" href="#reading-and-writing-separation">实现读写分离（Reading and Writing Separation）</a></li>
@@ -2265,8 +2265,8 @@ instance (<code class="code docutils literal"><span class="pre">public</span> <s
 </pre></div>
 </div>
 </div>
-<div class="section" id="avoiding-sql-injections">
-<h3>Avoiding SQL injections<a class="headerlink" href="#avoiding-sql-injections" title="永久链接至标题">¶</a></h3>
+<div class="section" id="sql-avoiding-sql-injections">
+<h3>防止 SQL 注入（Avoiding SQL injections）<a class="headerlink" href="#sql-avoiding-sql-injections" title="永久链接至标题">¶</a></h3>
 <p>Every value assigned to a model attribute is escaped depending of its data type. A developer doesn&#8217;t need to escape manually
 each value before storing it on the database. Phalcon uses internally the <a class="reference external" href="http://php.net/manual/en/pdostatement.bindparam.php">bound parameters</a>
 capability provided by PDO to automatically escape every value to be stored in the database.</p>
@@ -2964,10 +2964,9 @@ in the code. A change in the column map in the model will take care of the rest.
 </div>
 </div>
 </div>
-<div class="section" id="record-snapshots">
-<h2>记录快照（Record Snapshots）<a class="headerlink" href="#record-snapshots" title="永久链接至标题">¶</a></h2>
-<p>Specific models could be set to maintain a record snapshot when they&#8217;re queried. You can use this feature to implement auditing or just to know what
-fields are changed according to the data queried from the persistence:</p>
+<div class="section" id="use-dynamic-update">
+<h2>动态更新（Use Dynamic Update）<a class="headerlink" href="#use-dynamic-update" title="永久链接至标题">¶</a></h2>
+<p>设置了动态更新，模型将会自动根据查询快照，去判断是否有字段值发生了更改，如果有更改才会去保存更新：</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
 
 <span class="k">use</span> <span class="nx">Phalcon\Mvc\Model</span><span class="p">;</span>
@@ -2976,13 +2975,12 @@ fields are changed according to the data queried from the persistence:</p>
 <span class="p">{</span>
     <span class="k">public</span> <span class="k">function</span> <span class="nf">initialize</span><span class="p">()</span>
     <span class="p">{</span>
-        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">keepSnapshots</span><span class="p">(</span><span class="k">true</span><span class="p">);</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">useDynamicUpdate</span><span class="p">(</span><span class="k">true</span><span class="p">);</span>
     <span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>When activating this feature the application consumes a bit more of memory to keep track of the original values obtained from the persistence.
-In models that have this feature activated you can check what fields changed:</p>
+<p>获取发生变化的字段列表：</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
 
 <span class="c1">// Get a record from the database</span>
