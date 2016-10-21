@@ -125,23 +125,18 @@
 			  
   <div class="section" id="phalcon-phalcon-query-language-phql">
 <h1>Phalcon 查询语言（Phalcon Query Language (PHQL)）<a class="headerlink" href="#phalcon-phalcon-query-language-phql" title="永久链接至标题">¶</a></h1>
-<p>Phalcon Query Language, PhalconQL or simply PHQL is a high-level, object-oriented SQL dialect that allows to write queries using a
-standardized SQL-like language. PHQL is implemented as a parser (written in C) that translates syntax in that of the target RDBMS.</p>
-<p>To achieve the highest performance possible, Phalcon provides a parser that uses the same technology as <a class="reference external" href="http://en.wikipedia.org/wiki/Lemon_Parser_Generator">SQLite</a>. This technology
-provides a small in-memory parser with a very low memory footprint that is also thread-safe.</p>
-<p>The parser first checks the syntax of the pass PHQL statement, then builds an intermediate representation of the statement and
-finally it converts it to the respective SQL dialect of the target RDBMS.</p>
-<p>In PHQL, we&#8217;ve implemented a set of features to make your access to databases more secure:</p>
+<p>Phalcon 查询语言（以下简称 PHQL）是一种面向对象的高级 SQL 方言，与标准化的 SQL 相似。Phalcon 内部实现了一个解析器（和 SQLite 中相似的解析器）语句解析成符合 RDBMS 的语法。</p>
+<p>在 PHQL 中，我们实现一组特性使你对数据库的访问更安全：</p>
 <ul class="simple">
-<li>Bound parameters are part of the PHQL language helping you to secure your code</li>
-<li>PHQL only allows one SQL statement to be executed per call preventing injections</li>
-<li>PHQL ignores all SQL comments which are often used in SQL injections</li>
-<li>PHQL only allows data manipulation statements, avoiding altering or dropping tables/databases by mistake or externally without authorization</li>
-<li>PHQL implements a high-level abstraction allowing you to handle tables as models and fields as class attributes</li>
+<li>绑定参数，使你的代码更安全</li>
+<li>使用预处理语句</li>
+<li>忽略语句中的所有注释</li>
+<li>只允许数据操作语句，避免误修改、删除表或数据库</li>
+<li>允许在模型中处理表中字段</li>
 </ul>
 <div class="section" id="usage-example">
 <h2>范例（Usage Example）<a class="headerlink" href="#usage-example" title="永久链接至标题">¶</a></h2>
-<p>To better explain how PHQL works consider the following example. We have two models “Cars” and “Brands”:</p>
+<p>通过下面的列子让我们更清除的了解 PHQL 是如何工作的。我们有两个模型 “Cars” 和 “Brands”：</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
 
 <span class="k">use</span> <span class="nx">Phalcon\Mvc\Model</span><span class="p">;</span>
@@ -178,7 +173,7 @@ finally it converts it to the respective SQL dialect of the target RDBMS.</p>
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>And every Car has a Brand, so a Brand has many Cars:</p>
+<p>每辆车都属于一个品牌，所以每个品牌下面拥有多辆车：</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
 
 <span class="k">use</span> <span class="nx">Phalcon\Mvc\Model</span><span class="p">;</span>
@@ -210,7 +205,7 @@ finally it converts it to the respective SQL dialect of the target RDBMS.</p>
 </div>
 <div class="section" id="phql-creating-phql-queries">
 <h2>创建 PHQL 查询（Creating PHQL Queries）<a class="headerlink" href="#phql-creating-phql-queries" title="永久链接至标题">¶</a></h2>
-<p>PHQL queries can be created just by instantiating the class <a class="reference internal" href="../api/Phalcon_Mvc_Model_Query.html"><em>Phalcon\Mvc\Model\Query</em></a>:</p>
+<p>PHQL 查询可以通过类 <a class="reference internal" href="../api/Phalcon_Mvc_Model_Query.html"><em>Phalcon\Mvc\Model\Query</em></a> 进行实例化：</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
 
 <span class="k">use</span> <span class="nx">Phalcon\Mvc\Model\Query</span><span class="p">;</span>
@@ -222,7 +217,7 @@ finally it converts it to the respective SQL dialect of the target RDBMS.</p>
 <span class="nv">$cars</span> <span class="o">=</span> <span class="nv">$query</span><span class="o">-&gt;</span><span class="na">execute</span><span class="p">();</span>
 </pre></div>
 </div>
-<p>From a controller or a view, it&#8217;s easy to create/execute them using an injected <a class="reference internal" href="../api/Phalcon_Mvc_Model_Manager.html"><em>models manager</em></a>:</p>
+<p>在控制器或者视图中，利用注入服务 <a class="reference internal" href="../api/Phalcon_Mvc_Model_Manager.html"><em>models manager</em></a> 可以方便创建以及执行：</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
 
 <span class="c1">// Executing a simple query</span>
@@ -238,7 +233,7 @@ finally it converts it to the respective SQL dialect of the target RDBMS.</p>
 <span class="p">);</span>
 </pre></div>
 </div>
-<p>Or simply execute it:</p>
+<p>或者直接执行：</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
 
 <span class="c1">// Executing a simple query</span>

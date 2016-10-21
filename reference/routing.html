@@ -127,15 +127,10 @@
 			  
   <div class="section" id="routing">
 <h1>路由（Routing）<a class="headerlink" href="#routing" title="永久链接至标题">¶</a></h1>
-<p>The router component allows you to define routes that are mapped to controllers or handlers that should receive
-the request. A router simply parses a URI to determine this information. The router has two modes: MVC
-mode and match-only mode. The first mode is ideal for working with MVC applications.</p>
-<p>Router 组件允许定义用户请求对应到哪个控制器或 Action。Router 解析 URI 以确定这些信息。路由器有两种模式：MVC模式和匹配模式(match-only)。第一种模式是使用MVC应用程序的理想选择。</p>
+<p>Router 组件允许定义用户请求对应到哪个控制器或动作。Router 解析 URI 以确定这些信息。路由器有两种模式：MVC 模式和匹配模式(match-only)。第一种模式是使用MVC应用程序的理想选择。</p>
 <div class="section" id="defining-routes">
 <h2>定义路由（Defining Routes）<a class="headerlink" href="#defining-routes" title="永久链接至标题">¶</a></h2>
-<p><a class="reference internal" href="../api/Phalcon_Mvc_Router.html"><em>Phalcon\Mvc\Router</em></a> provides advanced routing capabilities. In MVC mode,
-you can define routes and map them to controllers/actions that you require. A route is defined as follows:</p>
-<p><a class="reference internal" href="../api/Phalcon_Mvc_Router.html"><em>Phalcon\Mvc\Router</em></a> 提供了一套先进的路由功能。在MVC模式中，你可以自定义路由规则，对应到你需要的 controllers/actions 上。路由的定义如下：</p>
+<p>在 MVC 模式中 <a class="reference internal" href="../api/Phalcon_Mvc_Router.html"><em>Phalcon\Mvc\Router</em></a> 提供了一套简单方便的高级路由功能。你可以自定义路由规则，对应到你需要的 controllers/actions 上。路由的定义如下：</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
 
 <span class="k">use</span> <span class="nx">Phalcon\Mvc\Router</span><span class="p">;</span>
@@ -165,8 +160,7 @@ you can define routes and map them to controllers/actions that you require. A ro
 </pre></div>
 </div>
 <p>add() 方法接受一个匹配模式作为第一个参数，一组可选的路径作为第二个参数。如上，如果URI就是/admin/users/my-profile的话，
-那么 &#8220;users&#8221; 控制的 &#8220;profile&#8221; 方法将被调用。当然路由器并不马上就调用这个方法，它只是收集这些信息并且通知相应的组件（
-比如  <a class="reference internal" href="../api/Phalcon_Mvc_Dispatcher.html"><em>Phalcon\Mvc\Dispatcher</em></a> ）应该调用这个控制器的这个动作。</p>
+那么 &#8220;users&#8221; 控制的 &#8220;profile&#8221; 方法将被调用。当然路由器并不马上就调用这个方法，它只是收集这些信息并且通知相应的组件（比如 <a class="reference internal" href="../api/Phalcon_Mvc_Dispatcher.html"><em>Phalcon\Mvc\Dispatcher</em></a> ）应该调用这个控制器的这个动作。</p>
 <p>一个应用程序可以由很多路径，一个一个定义是一个非常笨重的工作。这种情况下我们可以创建一个更加灵活的路由：</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
 
@@ -207,11 +201,8 @@ you can define routes and map them to controllers/actions that you require. A ro
 </tr>
 </tbody>
 </table>
-<p>The <code class="code docutils literal"><span class="pre">add()</span></code> method receives a pattern that can optionally have predefined placeholders and regular expression
-modifiers. All the routing patterns must start with a forward slash character (/). The regular expression syntax used
-is the same as the <a class="reference external" href="http://www.php.net/manual/en/book.pcre.php">PCRE regular expressions</a>. Note that, it is not necessary to add regular expression
-delimiters. All route patterns are case-insensitive.</p>
-<p>The second parameter defines how the matched parts should bind to the controller/action/parameters. Matching
+<p>方法 <code class="code docutils literal"><span class="pre">add()</span></code> 第一个参数，可以使用预定义的占位符和正则表达式的修饰符来作为匹配模式。所有的路由匹配模式第一个字符必须是斜杠（/）。正则表达式的使用跟 <a class="reference external" href="http://www.php.net/manual/en/book.pcre.php">PCRE regular expressions</a> 相同。注意，不需要添加正则表达式分隔符，所有路由匹配模式是不区分大小写的。</p>
+<p>第二个参数，定义如何将匹配到的数据绑定到对应的 <cite>controller/action/parameters</cite>。Matching
 parts are placeholders or subpatterns delimited by parentheses (round brackets). In the example given above, the
 first subpattern matched (<code class="code docutils literal"><span class="pre">:controller</span></code>) is the controller part of the route, the second the action and so on.</p>
 <div class="section" id="default-placeholders-regular-expressions">

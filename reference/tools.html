@@ -5,7 +5,7 @@
     
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Phalcon 开发工具（Phalcon Developer Tools） &mdash; Phalcon7 1.0.0 文档</title>
+    <title>Phalcon7 开发工具（Phalcon7 Developer Tools） &mdash; Phalcon7 1.0.0 文档</title>
     <meta name="keywords" content="php, phalcon, phalcon7, phalcon php, php framework, faster php framework">
     <link rel="stylesheet" type="text/css" href="../static/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="../static/phalcon.css" />
@@ -22,7 +22,7 @@
     <script src="../static/jquery.min.js"></script>
     <link rel="shortcut icon" href="../static/img/favicon.ico"/>
     <link rel="top" title="Phalcon7 1.0.0 文档" href="../index.html" />
-    <link rel="next" title="Windows 系统下使用 Phalcon 开发工具（Phalcon Developer Tools on Windows）" href="wintools.html" />
+    <link rel="next" title="提高性能：下一步该做什么？（Increasing Performance: What’s next?）" href="whats-next.html" />
     <link rel="prev" title="调试应用程序（Debugging Applications）" href="debug.html" /> 
 </head>
 <body>
@@ -64,7 +64,7 @@
           <a href="../genindex.html" title="总目录"
              accesskey="I">索引</a></li>
         <li class="right" >
-          <a href="wintools.html" title="Windows 系统下使用 Phalcon 开发工具（Phalcon Developer Tools on Windows）"
+          <a href="whats-next.html" title="提高性能：下一步该做什么？（Increasing Performance: What’s next?）"
              accesskey="N">下一页</a> |</li>
         <li class="right" >
           <a href="debug.html" title="调试应用程序（Debugging Applications）"
@@ -80,9 +80,9 @@
 		<div class="panel panel-default">
 			<div class="panel-heading"><a href="../index.html">內容目录</a></div>
 			<div class="panel-body"><ul>
-<li><a class="reference internal" href="#">Phalcon 开发工具（Phalcon Developer Tools）</a><ul>
-<li><a class="reference internal" href="#download">下载（Download）</a><ul>
-<li><a class="reference internal" href="#installation">安装（Installation）</a></li>
+<li><a class="reference internal" href="#">Phalcon7 开发工具（Phalcon7 Developer Tools）</a><ul>
+<li><a class="reference internal" href="#download">下载开发工具（Download）</a><ul>
+<li><a class="reference internal" href="#linux-phalcon-phalcon-developer-tools-on-linux">Linux 系统下使用 Phalcon 开发工具（Phalcon Developer Tools on Linux）</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#getting-available-commands">获取可用的命令（Getting Available Commands）</a></li>
@@ -91,7 +91,6 @@
 <li><a class="reference internal" href="#preparing-database-settings">数据库配置（Preparing Database Settings）</a></li>
 <li><a class="reference internal" href="#generating-models">生成模型（Generating Models）</a></li>
 <li><a class="reference internal" href="#crud-scaffold-a-crud">生成基本的 CRUD（Scaffold a CRUD）</a></li>
-<li><a class="reference internal" href="#web-web-interface-to-tools">工具的 Web 界面（Web Interface to Tools）</a></li>
 <li><a class="reference internal" href="#phpstorm-integrating-tools-with-phpstorm-ide">集成工具到 PhpStorm（Integrating Tools with PhpStorm IDE）</a></li>
 <li><a class="reference internal" href="#conclusion">结束语（Conclusion）</a></li>
 </ul>
@@ -101,7 +100,7 @@
 			<div class="panel-heading">上一个主题</div>
             <div class="panel-body"><p class="topless"><a href="debug.html" title="上一章">&lt; 调试应用程序（Debugging Applications）</a></p></div>
 			<div class="panel-heading">下一个主题</div>
-            <div class="panel-body"><p class="topless"><a href="wintools.html" title="下一章">Windows 系统下使用 Phalcon 开发工具（Phalcon Developer Tools on Windows） &gt;</a></p></div>
+            <div class="panel-body"><p class="topless"><a href="whats-next.html" title="下一章">提高性能：下一步该做什么？（Increasing Performance: What&#8217;s next?） &gt;</a></p></div>
 		</div>
 	</div>
   <div class="col-md-9 second-box" valign="top">
@@ -110,25 +109,23 @@
 		  <div class="bodywrapper">
 			<div class="body" >
 			  
-  <div class="section" id="phalcon-phalcon-developer-tools">
-<h1>Phalcon 开发工具（Phalcon Developer Tools）<a class="headerlink" href="#phalcon-phalcon-developer-tools" title="永久链接至标题">¶</a></h1>
-<p>Phalcon提供的这个开发工具主要是用来辅助开发，比如生成一些程序的基本框架，生成控制器模型等。使用这个工具我们只需要一个简单的命令即可生成应用的基本框架。</p>
+  <div class="section" id="phalcon7-phalcon7-developer-tools">
+<h1>Phalcon7 开发工具（Phalcon7 Developer Tools）<a class="headerlink" href="#phalcon7-phalcon7-developer-tools" title="永久链接至标题">¶</a></h1>
+<p>Phalcon7 提供的这个开发工具主要是用来辅助开发，比如生成一些程序的基本框架，生成控制器、模型等。使用这个工具我们只需要一个简单的命令即可生成应用的基本框架。</p>
 <blockquote class="highlights">
-<div><strong>非常重要:</strong> 要使用这个工具我们必须要安装Phalcon 0.5版本以上的扩展才行。这里我们推荐使用PHP5.4或更高版本的PHP. 如果你喜欢使用web版而非console版本的程序，那么在这里
-<a class="reference external" href="http://blog.phalconphp.com/post/23251010409">blog post</a> 可以看到更多的内容。</div></blockquote>
+<div><strong>非常重要:</strong> 要使用这个工具我们必须要安装 Phalcon7 扩展才行。</div></blockquote>
 <div class="section" id="download">
-<h2>下载（Download）<a class="headerlink" href="#download" title="永久链接至标题">¶</a></h2>
-<p>我们可以从 <a class="reference external" href="https://github.com/phalcon/phalcon-devtools">Github</a> 上下载或克隆下来这个跨平台的开发辅助工具。</p>
-<div class="section" id="installation">
-<h3>安装（Installation）<a class="headerlink" href="#installation" title="永久链接至标题">¶</a></h3>
-<p>下面详尽的说明了如何在不同的操作系统平台上安装这个辅助开发工具：</p>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="wintools.html">Windows 系统下使用 Phalcon 开发工具（Phalcon Developer Tools on Windows）</a></li>
-<li class="toctree-l1"><a class="reference internal" href="mactools.html">Mac OS X 系统下使用 Phalcon 开发工具（Phalcon Developer Tools on Mac OS X）</a></li>
-<li class="toctree-l1"><a class="reference internal" href="linuxtools.html">Linux 系统下使用 Phalcon 开发工具（Phalcon Developer Tools on Linux）</a></li>
-</ul>
+<h2>下载开发工具（Download）<a class="headerlink" href="#download" title="永久链接至标题">¶</a></h2>
+<p>该开发辅助工具已经包含在了源码中 <a class="reference external" href="https://github.com/dreamsxin/cphalcon7">Github</a> 。</p>
+<div class="section" id="linux-phalcon-phalcon-developer-tools-on-linux">
+<h3>Linux 系统下使用 Phalcon 开发工具（Phalcon Developer Tools on Linux）<a class="headerlink" href="#linux-phalcon-phalcon-developer-tools-on-linux" title="永久链接至标题">¶</a></h3>
+<p>为文件 <cite>phalcon.php</cite> 创建软链接：</p>
+<div class="highlight-bash"><div class="highlight"><pre>ln -s ~/cphalcon7/devtools/phalcon.php /usr/bin/phalcon
+
+chmod ugo+x /usr/bin/phalcon
+</pre></div>
 </div>
+<p>就这么简单，你已经安装好开发工具了。</p>
 </div>
 </div>
 <div class="section" id="getting-available-commands">
@@ -185,6 +182,7 @@ Options: 选项
  --directory<span class="o">=</span>s        Base path on which project will be created <span class="o">[</span>optional<span class="o">]</span> 在何外创建项目
  --type<span class="o">=</span>s             Type of the application to be generated <span class="o">(</span>cli, micro, simple, modules<span class="o">)</span> 应用的种类（微型，简单，多模块，console等）
  --template-path<span class="o">=</span>s    Specify a template path <span class="o">[</span>optional<span class="o">]</span> 指定模板路径
+ --template-engine<span class="o">=</span>s  Define the template engine, default php <span class="o">[</span>optional<span class="o">]</span> 指定模板引擎
  --use-config-ini     Use a ini file as configuration file <span class="o">[</span>optional<span class="o">]</span> 使用ini文件作为配置保存文件
  --trace              Shows the trace of the framework in <span class="k">case</span> of exception. <span class="o">[</span>optional<span class="o">]</span> 出错时是否显示框架的trace信息
  --help               Shows this <span class="nb">help</span> 显示帮助
@@ -194,7 +192,8 @@ Options: 选项
 <img class="align-center" src="../static/img/tools-6.png"></div>
 <div class="section" id="generating-controllers">
 <h2>生成控制器（Generating Controllers）<a class="headerlink" href="#generating-controllers" title="永久链接至标题">¶</a></h2>
-<p>我们可以使用phalcon create-controller &#8211;name test或phalcon controller &#8211;name test来生成名为test的控制器. 当然要使用此命令当前的执行命令目录必须为已存在的phalcon项目内.</p>
+<p>我们可以使用`phalcon create-controller &#8211;name test`或`phalcon controller &#8211;name test`来生成名为`test`的控制器。
+当然要使用此命令当前的执行命令目录必须为已存在的phalcon项目内。</p>
 <div class="highlight-sh"><div class="highlight"><pre>$ phalcon create-controller --name <span class="nb">test</span>
 </pre></div>
 </div>
@@ -213,7 +212,7 @@ Options: 选项
 </div>
 <div class="section" id="preparing-database-settings">
 <h2>数据库配置（Preparing Database Settings）<a class="headerlink" href="#preparing-database-settings" title="永久链接至标题">¶</a></h2>
-<p>当我们使用phalcon的辅助开发工具生成项目时，则生成的配置信息会被放在 <em>app/config/config.ini</em> 文件内。 我们必须要正确的配置连接信息才可生成模型或基本的CRUD操作。</p>
+<p>当我们使用phalcon的辅助开发工具生成项目时，则生成的配置信息会被放在 <em>app/config/config.ini</em> 文件内。我们必须要正确的配置连接信息才可生成模型或基本的CRUD操作。</p>
 <p>可以在config.ini中进行修改配置信息：</p>
 <div class="highlight-ini"><div class="highlight"><pre><span class="k">[database]</span>
 <span class="na">adapter</span>  <span class="o">=</span> <span class="s">Mysql</span>
@@ -391,8 +390,8 @@ Options: 选项
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>另一个非常好的特性即是在我们多次生成模型时，原有的对模型的更改依然会存在。 这样我们就可以不用担心对模型的属性进行修会被后来再次执模型的生成命令所覆盖。下面的截图显示了这是如何工作的：</p>
-<div align="center"><iframe src="http://player.vimeo.com/video/39213020" width="500" height="266" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe></div></div>
+<p>另一个非常好的特性即是在我们多次生成模型时，原有的对模型的更改依然会存在。</p>
+</div>
 <div class="section" id="crud-scaffold-a-crud">
 <h2>生成基本的 CRUD（Scaffold a CRUD）<a class="headerlink" href="#crud-scaffold-a-crud" title="永久链接至标题">¶</a></h2>
 <p>使用phalcon开发辅助工具我们可以直接快速的生成一个模型的CRUD操作。 如果我们想快速的生成模型的CRUD操作只需要使用phalcon辅助开发工具的中scaffold命令即可。</p>
@@ -435,19 +434,15 @@ Options: 选项
 </table>
 <p>在生成的Products控制器中，我们可以看到一个搜索表单和一个生成新product的链接：</p>
 <img class="align-center" src="../static/img/tools-10.png"><p>在创建页面我们可以生成经过验证的Products记录。 Phalcon会自动的验证数据库中的非空字段。</p>
-<img class="align-center" src="../static/img/tools-11.png"><p>执行搜索后，分页组件会显示颁后的结果。 我们在结果列表的前面放置Edit或Delete链接，以实现相应的操作。</p>
+<img class="align-center" src="../static/img/tools-11.png"><p>执行搜索后，分页组件会显示颁后的结果。我们在结果列表的前面放置Edit或Delete链接，以实现相应的操作。</p>
 <img class="align-center" src="../static/img/tools-12.png"></div>
-<div class="section" id="web-web-interface-to-tools">
-<h2>工具的 Web 界面（Web Interface to Tools）<a class="headerlink" href="#web-web-interface-to-tools" title="永久链接至标题">¶</a></h2>
-<p>另外，如果你喜欢我们还可以在生成项目时通过添加参数以实现在项目中使用Phalcon开发工具的web接口。 下面的视频中展示了如何工作的：</p>
-<div align="center"><iframe src="http://player.vimeo.com/video/42367665" width="500" height="266" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe></div></div>
 <div class="section" id="phpstorm-integrating-tools-with-phpstorm-ide">
 <h2>集成工具到 PhpStorm（Integrating Tools with PhpStorm IDE）<a class="headerlink" href="#phpstorm-integrating-tools-with-phpstorm-ide" title="永久链接至标题">¶</a></h2>
-<p>下面的视频中展示了如何在 <a class="reference external" href="http://www.jetbrains.com/phpstorm/">PhpStorm IDE</a> 中集成辅助开发工具。 这个配置步骤也适用于其它的PHP IDE.</p>
-<div align="center"><iframe src="http://player.vimeo.com/video/43455647" width="500" height="266" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe></div></div>
+<p>在 PHP IDE 中包含 <cite>devtoolside1.1.0</cite> 就能在 IDE 中实现 Phalcon7 相关类和方法的自动提示。</p>
+</div>
 <div class="section" id="conclusion">
 <h2>结束语（Conclusion）<a class="headerlink" href="#conclusion" title="永久链接至标题">¶</a></h2>
-<p>Phalcon开发辅助工具为我们提供了一种简易的产生应用代码的方法， 这可以减少开发时间及潜在的错误。</p>
+<p>Phalcon开发辅助工具为我们提供了一种简易的产生应用代码的方法，这可以减少开发时间及潜在的错误。</p>
 </div>
 </div>
 
@@ -464,7 +459,7 @@ Options: 选项
           <a href="../genindex.html" title="总目录"
              >索引</a></li>
         <li class="right" >
-          <a href="wintools.html" title="Windows 系统下使用 Phalcon 开发工具（Phalcon Developer Tools on Windows）"
+          <a href="whats-next.html" title="提高性能：下一步该做什么？（Increasing Performance: What’s next?）"
              >下一页</a> |</li>
         <li class="right" >
           <a href="debug.html" title="调试应用程序（Debugging Applications）"

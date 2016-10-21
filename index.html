@@ -148,7 +148,7 @@ Phalcon7 源自 Phalcon 所以具备了 Phalcon 所有与生俱来的特性，�
 <li class="toctree-l2"><a class="reference internal" href="reference/tutorial-invo.html#project-structure">项目结构（Project Structure）</a></li>
 <li class="toctree-l2"><a class="reference internal" href="reference/tutorial-invo.html#routing">路由（Routing）</a></li>
 <li class="toctree-l2"><a class="reference internal" href="reference/tutorial-invo.html#configuration">配置（Configuration）</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reference/tutorial-invo.html#autoloaders">自动加载（Autoloaders）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/tutorial-invo.html#autoloaders">自动加载器（Autoloaders）</a></li>
 <li class="toctree-l2"><a class="reference internal" href="reference/tutorial-invo.html#registering-services">注册服务（Registering services）</a></li>
 <li class="toctree-l2"><a class="reference internal" href="reference/tutorial-invo.html#handling-the-request">处理请求（Handling the Request）</a></li>
 <li class="toctree-l2"><a class="reference internal" href="reference/tutorial-invo.html#dependency-injection">依赖注入（Dependency Injection）</a></li>
@@ -524,7 +524,7 @@ Phalcon7 源自 Phalcon 所以具备了 Phalcon 所有与生俱来的特性，�
 <li class="toctree-l2"><a class="reference internal" href="reference/micro.html#using-controllers-as-handlers">使用控制器处理（Using Controllers as Handlers）</a></li>
 <li class="toctree-l2"><a class="reference internal" href="reference/micro.html#returning-responses">返回响应（Returning Responses）</a></li>
 <li class="toctree-l2"><a class="reference internal" href="reference/micro.html#rendering-views">渲染视图（Rendering Views）</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reference/micro.html#error-handling">Error Handling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/micro.html#error-handling">异常处理（Error Handling）</a></li>
 <li class="toctree-l2"><a class="reference internal" href="reference/micro.html#related-sources">相关资源（Related Sources）</a></li>
 </ul>
 </li>
@@ -703,11 +703,11 @@ Phalcon7 源自 Phalcon 所以具备了 Phalcon 所有与生俱来的特性，�
 <li class="toctree-l2"><a class="reference internal" href="reference/security.html#password-hashing">密码散列（Password Hashing）</a></li>
 <li class="toctree-l2"><a class="reference internal" href="reference/security.html#cross-site-request-forgery-csrf-protection">防止跨站点请求伪造攻击（Cross-Site Request Forgery (CSRF) protection）</a></li>
 <li class="toctree-l2"><a class="reference internal" href="reference/security.html#setting-up-the-component">设置组件（Setting up the component）</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reference/security.html#random">Random</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/security.html#random">随机数（Random）</a></li>
 <li class="toctree-l2"><a class="reference internal" href="reference/security.html#external-resources">外部资源（External Resources）</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="reference/crypt.html">Encryption/Decryption</a><ul>
+<li class="toctree-l1"><a class="reference internal" href="reference/crypt.html">加密与解密（Encryption/Decryption）</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="reference/crypt.html#id1">基本使用</a></li>
 <li class="toctree-l2"><a class="reference internal" href="reference/crypt.html#encryption-options">加密选项（Encryption Options）</a></li>
 <li class="toctree-l2"><a class="reference internal" href="reference/crypt.html#base64-base64-support">提供 Base64（Base64 Support）</a></li>
@@ -732,7 +732,7 @@ Phalcon7 源自 Phalcon 所以具备了 Phalcon 所有与生俱来的特性，�
 <li class="toctree-l2"><a class="reference internal" href="reference/translate.html#implementing-your-own-adapters">自定义适配器（Implementing your own adapters）</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="reference/loader.html">Universal Class Loader</a><ul>
+<li class="toctree-l1"><a class="reference internal" href="reference/loader.html">自动加载器（Universal Class Loader）</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="reference/loader.html#registering-namespaces">注册命名空间（Registering Namespaces）</a></li>
 <li class="toctree-l2"><a class="reference internal" href="reference/loader.html#registering-prefixes">注册前缀（Registering Prefixes）</a></li>
 <li class="toctree-l2"><a class="reference internal" href="reference/loader.html#registering-directories">注册文件夹（Registering Directories）</a></li>
@@ -900,9 +900,9 @@ Phalcon7 源自 Phalcon 所以具备了 Phalcon 所有与生俱来的特性，�
 <li class="toctree-l2"><a class="reference internal" href="reference/debug.html#xdebug-using-xdebug">使用 XDebug（Using XDebug）</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="reference/tools.html">Phalcon 开发工具（Phalcon Developer Tools）</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="reference/tools.html#download">下载（Download）</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="reference/tools.html#installation">安装（Installation）</a></li>
+<li class="toctree-l1"><a class="reference internal" href="reference/tools.html">Phalcon7 开发工具（Phalcon7 Developer Tools）</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="reference/tools.html#download">下载开发工具（Download）</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="reference/tools.html#linux-phalcon-phalcon-developer-tools-on-linux">Linux 系统下使用 Phalcon 开发工具（Phalcon Developer Tools on Linux）</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="reference/tools.html#getting-available-commands">获取可用的命令（Getting Available Commands）</a></li>
@@ -911,7 +911,6 @@ Phalcon7 源自 Phalcon 所以具备了 Phalcon 所有与生俱来的特性，�
 <li class="toctree-l2"><a class="reference internal" href="reference/tools.html#preparing-database-settings">数据库配置（Preparing Database Settings）</a></li>
 <li class="toctree-l2"><a class="reference internal" href="reference/tools.html#generating-models">生成模型（Generating Models）</a></li>
 <li class="toctree-l2"><a class="reference internal" href="reference/tools.html#crud-scaffold-a-crud">生成基本的 CRUD（Scaffold a CRUD）</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reference/tools.html#web-web-interface-to-tools">工具的 Web 界面（Web Interface to Tools）</a></li>
 <li class="toctree-l2"><a class="reference internal" href="reference/tools.html#phpstorm-integrating-tools-with-phpstorm-ide">集成工具到 PhpStorm（Integrating Tools with PhpStorm IDE）</a></li>
 <li class="toctree-l2"><a class="reference internal" href="reference/tools.html#conclusion">结束语（Conclusion）</a></li>
 </ul>
