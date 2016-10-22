@@ -112,7 +112,7 @@
 <p>在Phalcon，策划MVC操作背后的全部困难工作通常都可以通过 <a class="reference internal" href="../api/Phalcon_Mvc_Application.html"><em>Phalcon\Mvc\Application</em></a> 做到。这个组件封装了全部后端所需要的复杂操作，实例化每一个需要用到的组件并与项目整合在一起，从而使得MVC模式可以如期地运行。</p>
 <div class="section" id="single-or-multi-module-applications">
 <h2>单模块或多模块应用（Single or Multi Module Applications）<a class="headerlink" href="#single-or-multi-module-applications" title="永久链接至标题">¶</a></h2>
-<p>通过这个组件，你可以运行各式各样的MVC结构：</p>
+<p>通过这个组件，你可以运行各式各样的MVC结构，多模块跟单模块的区别就是多模块会根据路由返回的模块名称，之后去设置自动加载器、视图、调度器等各类服务和组件。</p>
 <div class="section" id="single-module">
 <h3>单模块（Single Module）<a class="headerlink" href="#single-module" title="永久链接至标题">¶</a></h3>
 <p>单一的MVC应用仅仅包含了一个模块。可以使用命名空间，但不是必需的。
@@ -233,7 +233,7 @@
 <span class="x">    js/</span>
 </pre></div>
 </div>
-<p>在apps/下的每一个目录都有自己的MVC结构。Module.php文件代表了各个模块不同的配置，如自动加载器和自定义服务：</p>
+<p>在apps/下的每一个目录都有自己的MVC结构。<cite>Module.php</cite> 文件代表了各个模块不同的配置，如自动加载器和自定义服务：</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
 
 <span class="k">namespace</span> <span class="nx">Multiple\Backend</span><span class="p">;</span>
@@ -244,7 +244,7 @@
 <span class="k">use</span> <span class="nx">Phalcon\Mvc\Dispatcher</span><span class="p">;</span>
 <span class="k">use</span> <span class="nx">Phalcon\Mvc\ModuleDefinitionInterface</span><span class="p">;</span>
 
-<span class="k">class</span> <span class="nc">Module</span> <span class="k">implements</span> <span class="nx">ModuleDefinitionInterface</span>
+<span class="k">class</span> <span class="nc">BackendModule</span> <span class="k">implements</span> <span class="nx">ModuleDefinitionInterface</span>
 <span class="p">{</span>
     <span class="sd">/**</span>
 <span class="sd">     * 注册自定义加载器</span>
@@ -336,7 +336,7 @@
     <span class="c1">// 创建应用</span>
     <span class="nv">$application</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Application</span><span class="p">(</span><span class="nv">$di</span><span class="p">);</span>
 
-    <span class="c1">// 注册模块</span>
+    <span class="c1">// 注册模块，包含设置模块定义类加载位置</span>
     <span class="nv">$application</span><span class="o">-&gt;</span><span class="na">registerModules</span><span class="p">(</span>
         <span class="k">array</span><span class="p">(</span>
             <span class="s1">&#39;frontend&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
@@ -344,7 +344,7 @@
                 <span class="s1">&#39;path&#39;</span>      <span class="o">=&gt;</span> <span class="s1">&#39;../apps/frontend/Module.php&#39;</span><span class="p">,</span>
             <span class="p">),</span>
             <span class="s1">&#39;backend&#39;</span>  <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
-                <span class="s1">&#39;className&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Multiple\Backend\Module&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;className&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Multiple\Backend\BackendModule&#39;</span><span class="p">,</span>
                 <span class="s1">&#39;path&#39;</span>      <span class="o">=&gt;</span> <span class="s1">&#39;../apps/backend/Module.php&#39;</span><span class="p">,</span>
             <span class="p">)</span>
         <span class="p">)</span>
@@ -358,7 +358,22 @@
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>如果你想在启动文件保持模块的配置，你可以使用匿名函数来注册对应的模块：</p>
+<p>你也可以直接实例化模块定义类，类进行注册：</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+
+    <span class="k">require</span><span class="p">(</span><span class="s1">&#39;../apps/backend/Module.php&#39;</span><span class="p">);</span>
+    <span class="k">require</span><span class="p">(</span><span class="s1">&#39;../apps/frontend/Module.php&#39;</span><span class="p">);</span>
+
+    <span class="c1">// 注册模块</span>
+    <span class="nv">$application</span><span class="o">-&gt;</span><span class="na">registerModules</span><span class="p">(</span>
+        <span class="k">array</span><span class="p">(</span>
+            <span class="s1">&#39;frontend&#39;</span> <span class="o">=&gt;</span> <span class="k">new</span> <span class="nx">FrontendModule</span><span class="p">,</span>
+            <span class="s1">&#39;backend&#39;</span>  <span class="o">=&gt;</span> <span class="k">new</span> <span class="nx">BackendModule</span>
+        <span class="p">)</span>
+    <span class="p">);</span>
+</pre></div>
+</div>
+<p>如果你想在启动文件进行相关组件配置，你可以使用匿名函数来注册对应的模块：</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
 
 <span class="k">use</span> <span class="nx">Phalcon\Mvc\View</span><span class="p">;</span>
