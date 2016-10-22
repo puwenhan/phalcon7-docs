@@ -21,6 +21,8 @@
 
     <script src="../static/jquery.min.js"></script>
     <link rel="shortcut icon" href="../static/img/favicon.ico"/>
+    <link rel="index" title="索引" href="../index.html" />
+    <link rel="search" title="搜索" href="../search.html" />
     <link rel="top" title="Phalcon7 1.0.0 文档" href="../index.html" />
     <link rel="up" title="安装（Installation）" href="install.html" />
     <link rel="next" title="教程：让我们通过例子来学习（Tutorial: Let’s learn by example）" href="tutorial.html" />
@@ -96,11 +98,11 @@
 <h1>使用 PHP 内置 web 服务器（Using PHP Built-in webserver）<a class="headerlink" href="#php-web-using-php-built-in-webserver" title="永久链接至标题">¶</a></h1>
 <p>对于PHP 5.4.0或以上版本, 你可以为项目开发使用PHP内置的web服务器。</p>
 <p>为了启动web服务器，需要：</p>
-<div class="highlight-bash"><div class="highlight"><pre>php -S localhost:8000 -t /public
+<div class="highlight-bash"><div class="highlight"><pre><span></span>php -S localhost:8000 -t /public
 </pre></div>
 </div>
 <p>如果你想重写URI并指向index.php文件，可以使用以下路由文件（.htrouter.php）：</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nb">file_exists</span><span class="p">(</span><span class="nx">__DIR__</span> <span class="o">.</span> <span class="s1">&#39;/&#39;</span> <span class="o">.</span> <span class="nv">$_SERVER</span><span class="p">[</span><span class="s1">&#39;REQUEST_URI&#39;</span><span class="p">]))</span> <span class="p">{</span>
     <span class="nv">$_GET</span><span class="p">[</span><span class="s1">&#39;_url&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$_SERVER</span><span class="p">[</span><span class="s1">&#39;REQUEST_URI&#39;</span><span class="p">];</span>
 <span class="p">}</span>
@@ -108,7 +110,7 @@
 </pre></div>
 </div>
 <p>然后这样启动服务器：</p>
-<div class="highlight-bash"><div class="highlight"><pre>php -S localhost:8000 -t /public .htrouter.php
+<div class="highlight-bash"><div class="highlight"><pre><span></span>php -S localhost:8000 -t /public .htrouter.php
 </pre></div>
 </div>
 <p>最然打开浏览器输入并跳转到 <a class="reference external" href="http://localhost:8000/">http://localhost:8000/</a>，检测是否可以正常访问。</p>

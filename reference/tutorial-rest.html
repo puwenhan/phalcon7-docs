@@ -21,6 +21,8 @@
 
     <script src="../static/jquery.min.js"></script>
     <link rel="shortcut icon" href="../static/img/favicon.ico"/>
+    <link rel="index" title="索引" href="../index.html" />
+    <link rel="search" title="搜索" href="../search.html" />
     <link rel="top" title="Phalcon7 1.0.0 文档" href="../index.html" />
     <link rel="next" title="教程：运行环境（Tutorial: Environments）" href="tutorial-environment.html" />
     <link rel="prev" title="教程: 保护INVO（Tutorial: Securing INVO）" href="tutorial-invo-2.html" /> 
@@ -161,9 +163,9 @@
 <div class="section" id="creating-the-application">
 <h2>创建应用（Creating the Application）<a class="headerlink" href="#creating-the-application" title="永久链接至标题">¶</a></h2>
 <p>As the application is so simple, we will not implement any full MVC environment to develop it. In this case,
-we will use a <a class="reference internal" href="micro.html"><em>micro application</em></a> to meet our goal.</p>
+we will use a <a class="reference internal" href="micro.html"><span class="doc">micro application</span></a> to meet our goal.</p>
 <p>The following file structure is more than enough:</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="x">my-rest-api/</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="x">my-rest-api/</span>
 <span class="x">    models/</span>
 <span class="x">        Robots.php</span>
 <span class="x">    index.php</span>
@@ -172,7 +174,7 @@ we will use a <a class="reference internal" href="micro.html"><em>micro applicat
 </div>
 <p>First, we need an .htaccess file that contains all the rules to rewrite the URIs to the index.php file,
 that is our application:</p>
-<div class="highlight-apacheconf"><div class="highlight"><pre><span class="nt">&lt;IfModule</span> <span class="s">mod_rewrite.c</span><span class="nt">&gt;</span>
+<div class="highlight-apacheconf"><div class="highlight"><pre><span></span><span class="nt">&lt;IfModule</span> <span class="s">mod_rewrite.c</span><span class="nt">&gt;</span>
     <span class="nb">RewriteEngine</span> <span class="k">On</span>
     <span class="nb">RewriteCond</span> %{REQUEST_FILENAME} !-f
     <span class="nb">RewriteRule</span> ^((?s).*)$ index.php?_url=/$1 [QSA,L]
@@ -180,7 +182,7 @@ that is our application:</p>
 </pre></div>
 </div>
 <p>Then, in the index.php file we create the following:</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="k">use</span> <span class="nx">Phalcon\Mvc\Micro</span><span class="p">;</span>
 
@@ -192,7 +194,7 @@ that is our application:</p>
 </pre></div>
 </div>
 <p>Now we will create the routes as we defined above:</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="k">use</span> <span class="nx">Phalcon\Mvc\Micro</span><span class="p">;</span>
 
@@ -242,7 +244,7 @@ by example, explicitly sets that the &#8220;id&#8221; parameter must have a nume
 access that table in an object-oriented way. We have implemented some business rules using built-in validators
 and simple validations. Doing this will give us the peace of mind that saved data meet the requirements of our
 application:</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="k">use</span> <span class="nx">Phalcon\Mvc\Model</span><span class="p">;</span>
 <span class="k">use</span> <span class="nx">Phalcon\Mvc\Model\Message</span><span class="p">;</span>
@@ -291,7 +293,7 @@ application:</p>
 </pre></div>
 </div>
 <p>Now, we must set up a connection to be used by this model and load it within our app:</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="k">use</span> <span class="nx">Phalcon\Loader</span><span class="p">;</span>
 <span class="k">use</span> <span class="nx">Phalcon\Mvc\Micro</span><span class="p">;</span>
@@ -330,7 +332,7 @@ application:</p>
 <h2>检索数据（Retrieving Data）<a class="headerlink" href="#retrieving-data" title="永久链接至标题">¶</a></h2>
 <p>The first &#8220;handler&#8221; that we will implement is which by method GET returns all available robots. Let&#8217;s use PHQL to
 perform this simple query returning the results as JSON:</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="c1">// Retrieves all robots</span>
 <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;/api/robots&#39;</span><span class="p">,</span> <span class="k">function</span> <span class="p">()</span> <span class="k">use</span> <span class="p">(</span><span class="nv">$app</span><span class="p">)</span> <span class="p">{</span>
@@ -350,11 +352,11 @@ perform this simple query returning the results as JSON:</p>
 <span class="p">});</span>
 </pre></div>
 </div>
-<p><a class="reference internal" href="phql.html"><em>PHQL</em></a>, allow us to write queries using a high-level, object-oriented SQL dialect that internally
+<p><a class="reference internal" href="phql.html"><span class="doc">PHQL</span></a>, allow us to write queries using a high-level, object-oriented SQL dialect that internally
 translates to the right SQL statements depending on the database system we are using. The clause &#8220;use&#8221; in the
 anonymous function allows us to pass some variables from the global to local scope easily.</p>
 <p>The searching by name handler would look like:</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="c1">// Searches for robots with $name in their name</span>
 <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;/api/robots/search/{name}&#39;</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nv">$name</span><span class="p">)</span> <span class="k">use</span> <span class="p">(</span><span class="nv">$app</span><span class="p">)</span> <span class="p">{</span>
@@ -380,7 +382,7 @@ anonymous function allows us to pass some variables from the global to local sco
 </pre></div>
 </div>
 <p>Searching by the field &#8220;id&#8221; it&#8217;s quite similar, in this case, we&#8217;re also notifying if the robot was found or not:</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="k">use</span> <span class="nx">Phalcon\Http\Response</span><span class="p">;</span>
 
@@ -421,7 +423,7 @@ anonymous function allows us to pass some variables from the global to local sco
 <div class="section" id="inserting-data">
 <h2>插入数据（Inserting Data）<a class="headerlink" href="#inserting-data" title="永久链接至标题">¶</a></h2>
 <p>Taking the data as a JSON string inserted in the body of the request, we also use PHQL for insertion:</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="k">use</span> <span class="nx">Phalcon\Http\Response</span><span class="p">;</span>
 
@@ -483,7 +485,7 @@ anonymous function allows us to pass some variables from the global to local sco
 <div class="section" id="updating-data">
 <h2>更新数据（Updating Data）<a class="headerlink" href="#updating-data" title="永久链接至标题">¶</a></h2>
 <p>The data update is similar to insertion. The &#8220;id&#8221; passed as parameter indicates what robot must be updated:</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="k">use</span> <span class="nx">Phalcon\Http\Response</span><span class="p">;</span>
 
@@ -536,7 +538,7 @@ anonymous function allows us to pass some variables from the global to local sco
 <div class="section" id="deleting-data">
 <h2>删除数据（Deleting Data）<a class="headerlink" href="#deleting-data" title="永久链接至标题">¶</a></h2>
 <p>The data delete is similar to update. The &#8220;id&#8221; passed as parameter indicates what robot must be deleted:</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="k">use</span> <span class="nx">Phalcon\Http\Response</span><span class="p">;</span>
 
@@ -584,7 +586,7 @@ anonymous function allows us to pass some variables from the global to local sco
 <h2>测试应用（Testing our Application）<a class="headerlink" href="#testing-our-application" title="永久链接至标题">¶</a></h2>
 <p>Using <a class="reference external" href="http://zh.wikipedia.org/wiki/CURL">curl</a> we&#8217;ll test every route in our application verifying its proper operation:</p>
 <p>Obtain all the robots:</p>
-<div class="highlight-bash"><div class="highlight"><pre>curl -i -X GET http://localhost/my-rest-api/api/robots
+<div class="highlight-bash"><div class="highlight"><pre><span></span>curl -i -X GET http://localhost/my-rest-api/api/robots
 
 HTTP/1.1 <span class="m">200</span> OK
 Date: Tue, <span class="m">21</span> Jul <span class="m">2015</span> 07:05:13 GMT
@@ -596,7 +598,7 @@ Content-Type: text/html<span class="p">;</span> <span class="nv">charset</span><
 </pre></div>
 </div>
 <p>Search a robot by its name:</p>
-<div class="highlight-bash"><div class="highlight"><pre>curl -i -X GET http://localhost/my-rest-api/api/robots/search/Astro
+<div class="highlight-bash"><div class="highlight"><pre><span></span>curl -i -X GET http://localhost/my-rest-api/api/robots/search/Astro
 
 HTTP/1.1 <span class="m">200</span> OK
 Date: Tue, <span class="m">21</span> Jul <span class="m">2015</span> 07:09:23 GMT
@@ -608,7 +610,7 @@ Content-Type: text/html<span class="p">;</span> <span class="nv">charset</span><
 </pre></div>
 </div>
 <p>Obtain a robot by its id:</p>
-<div class="highlight-bash"><div class="highlight"><pre>curl -i -X GET http://localhost/my-rest-api/api/robots/3
+<div class="highlight-bash"><div class="highlight"><pre><span></span>curl -i -X GET http://localhost/my-rest-api/api/robots/3
 
 HTTP/1.1 <span class="m">200</span> OK
 Date: Tue, <span class="m">21</span> Jul <span class="m">2015</span> 07:12:18 GMT
@@ -620,7 +622,7 @@ Content-Type: text/html<span class="p">;</span> <span class="nv">charset</span><
 </pre></div>
 </div>
 <p>Insert a new robot:</p>
-<div class="highlight-bash"><div class="highlight"><pre>curl -i -X POST -d <span class="s1">&#39;{&quot;name&quot;:&quot;C-3PO&quot;,&quot;type&quot;:&quot;droid&quot;,&quot;year&quot;:1977}&#39;</span>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>curl -i -X POST -d <span class="s1">&#39;{&quot;name&quot;:&quot;C-3PO&quot;,&quot;type&quot;:&quot;droid&quot;,&quot;year&quot;:1977}&#39;</span>
     http://localhost/my-rest-api/api/robots
 
 HTTP/1.1 <span class="m">201</span> Created
@@ -633,7 +635,7 @@ Content-Type: text/html<span class="p">;</span> <span class="nv">charset</span><
 </pre></div>
 </div>
 <p>Try to insert a new robot with the name of an existing robot:</p>
-<div class="highlight-bash"><div class="highlight"><pre>curl -i -X POST -d <span class="s1">&#39;{&quot;name&quot;:&quot;C-3PO&quot;,&quot;type&quot;:&quot;droid&quot;,&quot;year&quot;:1977}&#39;</span>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>curl -i -X POST -d <span class="s1">&#39;{&quot;name&quot;:&quot;C-3PO&quot;,&quot;type&quot;:&quot;droid&quot;,&quot;year&quot;:1977}&#39;</span>
     http://localhost/my-rest-api/api/robots
 
 HTTP/1.1 <span class="m">409</span> Conflict
@@ -646,7 +648,7 @@ Content-Type: text/html<span class="p">;</span> <span class="nv">charset</span><
 </pre></div>
 </div>
 <p>Or update a robot with an unknown type:</p>
-<div class="highlight-bash"><div class="highlight"><pre>curl -i -X PUT -d <span class="s1">&#39;{&quot;name&quot;:&quot;ASIMO&quot;,&quot;type&quot;:&quot;humanoid&quot;,&quot;year&quot;:2000}&#39;</span>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>curl -i -X PUT -d <span class="s1">&#39;{&quot;name&quot;:&quot;ASIMO&quot;,&quot;type&quot;:&quot;humanoid&quot;,&quot;year&quot;:2000}&#39;</span>
     http://localhost/my-rest-api/api/robots/4
 
 HTTP/1.1 <span class="m">409</span> Conflict
@@ -660,7 +662,7 @@ Content-Type: text/html<span class="p">;</span> <span class="nv">charset</span><
 </pre></div>
 </div>
 <p>Finally, delete a robot:</p>
-<div class="highlight-bash"><div class="highlight"><pre>curl -i -X DELETE http://localhost/my-rest-api/api/robots/4
+<div class="highlight-bash"><div class="highlight"><pre><span></span>curl -i -X DELETE http://localhost/my-rest-api/api/robots/4
 
 HTTP/1.1 <span class="m">200</span> OK
 Date: Tue, <span class="m">21</span> Jul <span class="m">2015</span> 08:49:29 GMT
@@ -675,7 +677,7 @@ Content-Type: text/html<span class="p">;</span> <span class="nv">charset</span><
 <div class="section" id="conclusion">
 <h2>结束语（Conclusion）<a class="headerlink" href="#conclusion" title="永久链接至标题">¶</a></h2>
 <p>As we have seen, develop a RESTful API with Phalcon is easy. Later in the documentation we&#8217;ll explain in detail how to
-use micro applications and the <a class="reference internal" href="phql.html"><em>PHQL</em></a> language.</p>
+use micro applications and the <a class="reference internal" href="phql.html"><span class="doc">PHQL</span></a> language.</p>
 </div>
 </div>
 

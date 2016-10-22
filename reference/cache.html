@@ -21,6 +21,8 @@
 
     <script src="../static/jquery.min.js"></script>
     <link rel="shortcut icon" href="../static/img/favicon.ico"/>
+    <link rel="index" title="索引" href="../index.html" />
+    <link rel="search" title="搜索" href="../search.html" />
     <link rel="top" title="Phalcon7 1.0.0 文档" href="../index.html" />
     <link rel="next" title="安全（Security）" href="security.html" />
     <link rel="prev" title="分页（Pagination）" href="pagination.html" /> 
@@ -126,8 +128,8 @@
 			  
   <div class="section" id="improving-performance-with-cache">
 <h1>使用缓存提高性能（Improving Performance with Cache）<a class="headerlink" href="#improving-performance-with-cache" title="永久链接至标题">¶</a></h1>
-<p>Phalcon提供的 <a class="reference internal" href=""><em>Phalcon\Cache</em></a> 类可以更快地接入获取使用频繁或者已经被处理的数据。
-<a class="reference internal" href=""><em>Phalcon\Cache</em></a> 是用C来编写的，因此有着更高的性能并且能够减少从后端获取昂价资源所带来的负载。
+<p>Phalcon提供的 <a class="reference internal" href="#"><span class="doc">Phalcon\Cache</span></a> 类可以更快地接入获取使用频繁或者已经被处理的数据。
+<a class="reference internal" href="#"><span class="doc">Phalcon\Cache</span></a> 是用C来编写的，因此有着更高的性能并且能够减少从后端获取昂价资源所带来的负载。
 这个类使用了由前端和后端组件组成的内部结构。前端组件如输入源或者接口，后端组件则为这个类提供了存储的选项。</p>
 <div class="section" id="when-to-implement-cache">
 <h2>什么情况下使用缓存？（When to implement cache?）<a class="headerlink" href="#when-to-implement-cache" title="永久链接至标题">¶</a></h2>
@@ -156,7 +158,7 @@
 被 ob_* 函数捕获或者直接是PHP输出，这样才能缓存起来。以下实例演示了这样的使用。
 它接收PHP生成的页面输出并保存在一个文件里面。缓存文件的内容每隔172800秒（2天）刷新一次。</p>
 <p>使用这个缓存机制，无论何时调用这块代码，我们都可以通过避免重复执行辅助插件 <code class="code docutils literal"><span class="pre">Phalcon\Tag::linkTo()</span></code> 从而获得更高的性能。</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="k">use</span> <span class="nx">Phalcon\Tag</span><span class="p">;</span>
 <span class="k">use</span> <span class="nx">Phalcon\Cache\Backend\File</span> <span class="k">as</span> <span class="nx">BackFile</span><span class="p">;</span>
@@ -218,7 +220,7 @@
 <h3>文件后端存储器例子（File Backend Example）<a class="headerlink" href="#file-backend-example" title="永久链接至标题">¶</a></h3>
 <p>其中一个缓存适配器是文件&#8217;File&#8217;。文件适配器的配置中只需要一个key：指明缓存文件存放的目录位置。
 这个配置通过cacheDir选项控制，必须，且要以反斜杠结尾。</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="k">use</span> <span class="nx">Phalcon\Cache\Backend\File</span> <span class="k">as</span> <span class="nx">BackFile</span><span class="p">;</span>
 <span class="k">use</span> <span class="nx">Phalcon\Cache\Frontend\Data</span> <span class="k">as</span> <span class="nx">FrontData</span><span class="p">;</span>
@@ -267,7 +269,7 @@
 <div class="section" id="memcached-memcached-backend-example">
 <h3>Memcached 后端存储器例子（Memcached Backend Example）<a class="headerlink" href="#memcached-memcached-backend-example" title="永久链接至标题">¶</a></h3>
 <p>当我们改用Memcached作为后端存储器时，上面的实例改动很轻微（特别就配置而言）。</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="k">use</span> <span class="nx">Phalcon\Cache\Frontend\Data</span> <span class="k">as</span> <span class="nx">FrontData</span><span class="p">;</span>
 <span class="k">use</span> <span class="nx">Phalcon\Cache\Backend\Libmemcached</span> <span class="k">as</span> <span class="nx">BackMemCached</span><span class="p">;</span>
@@ -323,14 +325,14 @@
 <h2>查询缓存（Querying the cache）<a class="headerlink" href="#querying-the-cache" title="永久链接至标题">¶</a></h2>
 <p>添加到缓存的元素根据唯一的key进行识别区分。这使用文件缓存作为后端时，key就是实际的文件名。
 为了从缓存中获得数据，我们仅仅需要通过唯一的key调用即可。如果key不存在，get方法将会返回null。</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="c1">// Retrieve products by key &quot;myProducts&quot;</span>
 <span class="nv">$products</span> <span class="o">=</span> <span class="nv">$cache</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s2">&quot;myProducts&quot;</span><span class="p">);</span>
 </pre></div>
 </div>
 <p>如果你想知道在缓存中存放了哪些key，你可以调用queryKeys方法：</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="c1">// Query all keys used in the cache</span>
 <span class="nv">$keys</span> <span class="o">=</span> <span class="nv">$cache</span><span class="o">-&gt;</span><span class="na">queryKeys</span><span class="p">();</span>
@@ -348,7 +350,7 @@
 <h2>删除缓存数据（Deleting data from the cache）<a class="headerlink" href="#deleting-data-from-the-cache" title="永久链接至标题">¶</a></h2>
 <p>有些时机你需要强制废除一个缓存的实体（如对被缓存的数据进行了更新）。
 而仅仅需要做的只是知道对应缓存的数据存放于哪个key即可。</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="c1">// Delete an item with a specific key</span>
 <span class="nv">$cache</span><span class="o">-&gt;</span><span class="na">delete</span><span class="p">(</span><span class="s2">&quot;someKey&quot;</span><span class="p">);</span>
@@ -364,7 +366,7 @@
 <div class="section" id="checking-cache-existence">
 <h2>检查缓存是否存在（Checking cache existence）<a class="headerlink" href="#checking-cache-existence" title="永久链接至标题">¶</a></h2>
 <p>也有可能需要根据一个给定的key来判断缓存是否存在：</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="k">if</span> <span class="p">(</span><span class="nv">$cache</span><span class="o">-&gt;</span><span class="na">exists</span><span class="p">(</span><span class="s2">&quot;someKey&quot;</span><span class="p">))</span> <span class="p">{</span>
     <span class="k">echo</span> <span class="nv">$cache</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s2">&quot;someKey&quot;</span><span class="p">);</span>
@@ -379,7 +381,7 @@
 <p>“有效期”是指缓存可以多久时间（在以秒为单位）内有效。默认情况下，全部被创建的缓存都使用前端构建中设定的有效期。
 你可以在创建时指定一个有效期或者在从缓存中获取数据时：</p>
 <p>Setting the lifetime when retrieving:</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="nv">$cacheKey</span> <span class="o">=</span> <span class="s1">&#39;my.cache&#39;</span><span class="p">;</span>
 
@@ -395,7 +397,7 @@
 </pre></div>
 </div>
 <p>在保存时设置有效期：</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="nv">$cacheKey</span> <span class="o">=</span> <span class="s1">&#39;my.cache&#39;</span><span class="p">;</span>
 
@@ -414,7 +416,7 @@
 <h2>多级缓存（Multi-Level Cache）<a class="headerlink" href="#multi-level-cache" title="永久链接至标题">¶</a></h2>
 <p>缓存组件的特点，就是允许开发人员使用多级缓存。这个新特性非常有用，
 因为你可以在多个缓存媒介结合不同的有效期中保存相同的数据，并在有效期内从首个最快的缓存适配器开始读取，直至到最慢的适配器。</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="k">use</span> <span class="nx">Phalcon\Cache\Multiple</span><span class="p">;</span>
 <span class="k">use</span> <span class="nx">Phalcon\Cache\Backend\Apc</span> <span class="k">as</span> <span class="nx">ApcCache</span><span class="p">;</span>
@@ -490,34 +492,34 @@
 <tbody valign="top">
 <tr class="row-even"><td>Output</td>
 <td>从标准PHP输出读取输入数据</td>
-<td><a class="reference internal" href="../api/Phalcon_Cache_Frontend_Output.html"><em>Phalcon\Cache\Frontend\Output</em></a></td>
+<td><a class="reference internal" href="../api/Phalcon_Cache_Frontend_Output.html"><span class="doc">Phalcon\Cache\Frontend\Output</span></a></td>
 </tr>
 <tr class="row-odd"><td>Data</td>
 <td>可用于缓存任何类型的PHP数据（大数组，对象，文本等）。在存入后端前数据将会被序列化。</td>
-<td><a class="reference internal" href="../api/Phalcon_Cache_Frontend_Data.html"><em>Phalcon\Cache\Frontend\Data</em></a></td>
+<td><a class="reference internal" href="../api/Phalcon_Cache_Frontend_Data.html"><span class="doc">Phalcon\Cache\Frontend\Data</span></a></td>
 </tr>
 <tr class="row-even"><td>Base64</td>
 <td>可用于缓存二进制数据。在存入后端前数据会以base64_encode编码进行序列化。</td>
-<td><a class="reference internal" href="../api/Phalcon_Cache_Frontend_Base64.html"><em>Phalcon\Cache\Frontend\Base64</em></a></td>
+<td><a class="reference internal" href="../api/Phalcon_Cache_Frontend_Base64.html"><span class="doc">Phalcon\Cache\Frontend\Base64</span></a></td>
 </tr>
 <tr class="row-odd"><td>Json</td>
 <td>在存入后端前数据使用JSON编码。从缓存获取后进行JSON解码。此前端适配器可用于跨语言和跨框架共享数据。</td>
-<td><a class="reference internal" href="../api/Phalcon_Cache_Frontend_Json.html"><em>Phalcon\Cache\Frontend\Json</em></a></td>
+<td><a class="reference internal" href="../api/Phalcon_Cache_Frontend_Json.html"><span class="doc">Phalcon\Cache\Frontend\Json</span></a></td>
 </tr>
 <tr class="row-even"><td>IgBinary</td>
 <td>用于缓存任何类型的PHP数据（大数组，对象，文本等）。在存入后端前数据会使用IgBinary进行序列化。</td>
-<td><a class="reference internal" href="../api/Phalcon_Cache_Frontend_Igbinary.html"><em>Phalcon\Cache\Frontend\Igbinary</em></a></td>
+<td><a class="reference internal" href="../api/Phalcon_Cache_Frontend_Igbinary.html"><span class="doc">Phalcon\Cache\Frontend\Igbinary</span></a></td>
 </tr>
 <tr class="row-odd"><td>None</td>
 <td>用于缓存任何类型的PHP数据而不作任何序列化操作。</td>
-<td><a class="reference internal" href="../api/Phalcon_Cache_Frontend_None.html"><em>Phalcon\Cache\Frontend\None</em></a></td>
+<td><a class="reference internal" href="../api/Phalcon_Cache_Frontend_None.html"><span class="doc">Phalcon\Cache\Frontend\None</span></a></td>
 </tr>
 </tbody>
 </table>
 <div class="section" id="implementing-your-own-frontend-adapters">
 <h3>自定义前端适配器（Implementing your own Frontend adapters）<a class="headerlink" href="#implementing-your-own-frontend-adapters" title="永久链接至标题">¶</a></h3>
 <p>为了创建你自己的前端适配器或者扩展已有的适配器，你必须
-实现 <a class="reference internal" href="../api/Phalcon_Cache_FrontendInterface.html"><em>Phalcon\Cache\FrontendInterface</em></a> 接口。</p>
+实现 <a class="reference internal" href="../api/Phalcon_Cache_FrontendInterface.html"><span class="doc">Phalcon\Cache\FrontendInterface</span></a> 接口。</p>
 </div>
 </div>
 <div class="section" id="backend-adapters">
@@ -544,37 +546,37 @@
 <td>在本地绝对路径的文件上存放数据</td>
 <td>&nbsp;</td>
 <td>&nbsp;</td>
-<td><a class="reference internal" href="../api/Phalcon_Cache_Backend_File.html"><em>Phalcon\Cache\Backend\File</em></a></td>
+<td><a class="reference internal" href="../api/Phalcon_Cache_Backend_File.html"><span class="doc">Phalcon\Cache\Backend\File</span></a></td>
 </tr>
 <tr class="row-odd"><td>Memcached</td>
 <td>在memcached服务器存放数据</td>
 <td><a class="reference external" href="http://www.php.net/memcache">Memcached</a></td>
 <td><a class="reference external" href="http://pecl.php.net/package/memcache">memcache</a></td>
-<td><a class="reference internal" href="../api/Phalcon_Cache_Backend_Memcache.html"><em>Phalcon\Cache\Backend\Memcache</em></a></td>
+<td><a class="reference internal" href="../api/Phalcon_Cache_Backend_Memcache.html"><span class="doc">Phalcon\Cache\Backend\Memcache</span></a></td>
 </tr>
 <tr class="row-even"><td>APC</td>
 <td>在opcode缓存           （APC）中存放数据</td>
 <td><a class="reference external" href="http://php.net/apc">APC</a></td>
 <td><a class="reference external" href="http://pecl.php.net/package/APC">APC extension</a></td>
-<td><a class="reference internal" href="../api/Phalcon_Cache_Backend_Apc.html"><em>Phalcon\Cache\Backend\Apc</em></a></td>
+<td><a class="reference internal" href="../api/Phalcon_Cache_Backend_Apc.html"><span class="doc">Phalcon\Cache\Backend\Apc</span></a></td>
 </tr>
 <tr class="row-odd"><td>Mongo</td>
 <td>在Mongo数据库中存放数据</td>
 <td><a class="reference external" href="http://mongodb.org/">MongoDb</a></td>
 <td><a class="reference external" href="http://pecl.php.net/package/mongo">Mongo</a></td>
-<td><a class="reference internal" href="../api/Phalcon_Cache_Backend_Mongo.html"><em>Phalcon\Cache\Backend\Mongo</em></a></td>
+<td><a class="reference internal" href="../api/Phalcon_Cache_Backend_Mongo.html"><span class="doc">Phalcon\Cache\Backend\Mongo</span></a></td>
 </tr>
 <tr class="row-even"><td>XCache</td>
 <td>在XCache中存放数据</td>
 <td><a class="reference external" href="http://xcache.lighttpd.net/">XCache</a></td>
 <td><a class="reference external" href="http://pecl.php.net/package/xcache">xcache extension</a></td>
-<td><a class="reference internal" href="../api/Phalcon_Cache_Backend_Xcache.html"><em>Phalcon\Cache\Backend\Xcache</em></a></td>
+<td><a class="reference internal" href="../api/Phalcon_Cache_Backend_Xcache.html"><span class="doc">Phalcon\Cache\Backend\Xcache</span></a></td>
 </tr>
 <tr class="row-odd"><td>Redis</td>
 <td>Stores data in Redis</td>
 <td><a class="reference external" href="http://redis.io/">Redis</a></td>
 <td><a class="reference external" href="http://pecl.php.net/package/redis">redis extension</a></td>
-<td><a class="reference internal" href="../api/Phalcon_Cache_Backend_Redis.html"><em>Phalcon\Cache\Backend\Redis</em></a></td>
+<td><a class="reference internal" href="../api/Phalcon_Cache_Backend_Redis.html"><span class="doc">Phalcon\Cache\Backend\Redis</span></a></td>
 </tr>
 <tr class="row-even"><td>Memeory</td>
 <td>存储数据在内存中，请求完成后释放</td>
@@ -587,7 +589,7 @@
 <div class="section" id="implementing-your-own-backend-adapters">
 <h3>自定义后端适配器（Implementing your own Backend adapters）<a class="headerlink" href="#implementing-your-own-backend-adapters" title="永久链接至标题">¶</a></h3>
 <p>为了创建你自己的后端适配器或者扩展已有的后端适配器，你必须
-实现 <a class="reference internal" href="../api/Phalcon_Cache_BackendInterface.html"><em>Phalcon\Cache\BackendInterface</em></a> 接口。</p>
+实现 <a class="reference internal" href="../api/Phalcon_Cache_BackendInterface.html"><span class="doc">Phalcon\Cache\BackendInterface</span></a> 接口。</p>
 </div>
 <div class="section" id="file-backend-options">
 <h3>文件后端存储器选项（File Backend Options）<a class="headerlink" href="#file-backend-options" title="永久链接至标题">¶</a></h3>

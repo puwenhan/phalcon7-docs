@@ -21,6 +21,8 @@
 
     <script src="../static/jquery.min.js"></script>
     <link rel="shortcut icon" href="../static/img/favicon.ico"/>
+    <link rel="index" title="索引" href="../index.html" />
+    <link rel="search" title="搜索" href="../search.html" />
     <link rel="top" title="Phalcon7 1.0.0 文档" href="../index.html" />
     <link rel="next" title="模型元数据（Models Meta-Data）" href="models-metadata.html" />
     <link rel="prev" title="使用控制器（Using Controllers）" href="controllers.html" /> 
@@ -108,8 +110,14 @@
 <li><a class="reference internal" href="#cascade-restrict-actions">级联与限制动作（Cascade/Restrict actions）</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#generating-calculations">生成运算（Generating Calculations）</a></li>
-<li><a class="reference internal" href="#hydration-modes">Hydration Modes</a></li>
+<li><a class="reference internal" href="#generating-calculations">聚合运算（Generating Calculations）</a><ul>
+<li><a class="reference internal" href="#count">累计（Count）</a></li>
+<li><a class="reference internal" href="#sum">累加（Sum）</a></li>
+<li><a class="reference internal" href="#average">平均（Average）</a></li>
+<li><a class="reference internal" href="#max-min">最大/最小（Max/Min）</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#hydration-modes">结果集类型（Hydration Modes）</a></li>
 <li><a class="reference internal" href="#creating-updating-records">创建与更新记录（Creating Updating/Records）</a><ul>
 <li><a class="reference internal" href="#create-update-with-confidence">创建与更新结果判断（Create/Update with Confidence）</a></li>
 <li><a class="reference internal" href="#auto-generated-identity-columns">自动生成标识列（Auto-generated identity columns）</a></li>
@@ -180,17 +188,17 @@
 <p>模型代表了应用程序中的信息（数据）和处理数据的规则。模型主要用于管理与相应数据库表进行交互的规则。
 大多数情况中，在应用程序中，数据库中每个表将对应一个模型。
 应用程序中的大部分业务逻辑都将集中在模型里。</p>
-<p><a class="reference internal" href="../api/Phalcon_Mvc_Model.html"><em>Phalcon\Mvc\Model</em></a> 是 Phalcon 应用程序中所有模型的基类。它保证了数据库的独立性，基本的 CURD 操作，
+<p><a class="reference internal" href="../api/Phalcon_Mvc_Model.html"><span class="doc">Phalcon\Mvc\Model</span></a> 是 Phalcon 应用程序中所有模型的基类。它保证了数据库的独立性，基本的 CURD 操作，
 高级的查询功能，多表关联等功能。
-<a class="reference internal" href="../api/Phalcon_Mvc_Model.html"><em>Phalcon\Mvc\Model</em></a> 不需要直接使用 SQL 语句，因为它的转换方法，会动态的调用相应的数据库引擎进行处理。</p>
+<a class="reference internal" href="../api/Phalcon_Mvc_Model.html"><span class="doc">Phalcon\Mvc\Model</span></a> 不需要直接使用 SQL 语句，因为它的转换方法，会动态的调用相应的数据库引擎进行处理。</p>
 <blockquote class="highlights">
 <div>模型是数据库的高级抽象层。如果您想进行低层次的数据库操作，您可以查看
-<a class="reference internal" href="../api/Phalcon_Db.html"><em>Phalcon\Db</em></a> 组件文档。</div></blockquote>
+<a class="reference internal" href="../api/Phalcon_Db.html"><span class="doc">Phalcon\Db</span></a> 组件文档。</div></blockquote>
 <div class="section" id="creating-models">
 <h2>创建模型（Creating Models）<a class="headerlink" href="#creating-models" title="永久链接至标题">¶</a></h2>
-<p>模型是一个继承自 <a class="reference internal" href="../api/Phalcon_Mvc_Model.html"><em>Phalcon\Mvc\Model</em></a> 的一个类。 它必须放到 models 文件夹。一个模型文件必须包含一个类，
+<p>模型是一个继承自 <a class="reference internal" href="../api/Phalcon_Mvc_Model.html"><span class="doc">Phalcon\Mvc\Model</span></a> 的一个类。 它必须放到 models 文件夹。一个模型文件必须包含一个类，
 同时它的类名必须符合驼峰命名法：</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="k">use</span> <span class="nx">Phalcon\Mvc\Model</span><span class="p">;</span>
 
@@ -200,10 +208,10 @@
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>上面的例子显示了 &#8220;Robots&#8221; 模型的实现。 需要注意的是 Robots 继承自 <a class="reference internal" href="../api/Phalcon_Mvc_Model.html"><em>Phalcon\Mvc\Model</em></a> 。
+<p>上面的例子显示了 &#8220;Robots&#8221; 模型的实现。 需要注意的是 Robots 继承自 <a class="reference internal" href="../api/Phalcon_Mvc_Model.html"><span class="doc">Phalcon\Mvc\Model</span></a> 。
 因此，Robots 模型拥有了大量继承自该组件功能，包括基本的数据库 CRUD (Create, Read, Update, Delete) 操作，数据验证以及复杂的搜索支持，并且可以同时关联多个模型。</p>
 <p>默认情况下，模型 &#8220;Robots&#8221; 对应的是数据库表 &#8220;robots&#8221;， 如果想映射到其他数据库表，可以使用 <code class="code docutils literal"><span class="pre">getSource()</span></code> 方法：</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="k">use</span> <span class="nx">Phalcon\Mvc\Model</span><span class="p">;</span>
 
@@ -218,7 +226,7 @@
 </div>
 <p>模型 Robots 现在映射到了 &#8220;the_robots&#8221; 表。<code class="code docutils literal"><span class="pre">initialize()</span></code> 方法可以帮助在模型中建立自定义行为，例如指定不同的数据库表。
 <code class="code docutils literal"><span class="pre">initialize()</span></code> 方法在请求期间只被调用一次。</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="k">use</span> <span class="nx">Phalcon\Mvc\Model</span><span class="p">;</span>
 
@@ -233,7 +241,7 @@
 </div>
 <p><code class="code docutils literal"><span class="pre">initialize()</span></code> 方法在请求期间仅会被调用一次，目的是为应用中所有该模型的实例进行初始化。如果需要为每一个实例在创建的时候单独进行初始化，
 可以使用 &#8216;onConstruct&#8217; 事件：</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="k">use</span> <span class="nx">Phalcon\Mvc\Model</span><span class="p">;</span>
 
@@ -249,7 +257,7 @@
 <div class="section" id="setters-getters-public-properties-vs-setters-getters">
 <h3>公共属性对比设置与取值 Setters/Getters（Public properties vs. Setters/Getters）<a class="headerlink" href="#setters-getters-public-properties-vs-setters-getters" title="永久链接至标题">¶</a></h3>
 <p>模型可以通过公共属性的方式实现，意味着模型的所有属性在实例化该模型的地方可以无限制的读取和更新。</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="k">use</span> <span class="nx">Phalcon\Mvc\Model</span><span class="p">;</span>
 
@@ -264,7 +272,7 @@
 </pre></div>
 </div>
 <p>通过使用 getters/setters 方法，可以控制哪些属性可以公开访问，并且对属性值执行不同的形式的转换，同时可以保存在模型中的数据添加相应的验证规则。</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="k">use</span> <span class="nx">Phalcon\Mvc\Model</span><span class="p">;</span>
 
@@ -318,7 +326,7 @@
 <div class="section" id="models-in-namespaces">
 <h3>模型放入命名空间（Models in Namespaces）<a class="headerlink" href="#models-in-namespaces" title="永久链接至标题">¶</a></h3>
 <p>命名空间可以用来避免类名的冲突。ORM通过类名来映射相应的表名。比如 &#8216;Robots&#8217;：</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="k">namespace</span> <span class="nx">Store\Toys</span><span class="p">;</span>
 
@@ -331,7 +339,7 @@
 </pre></div>
 </div>
 <p>Namespaces make part of model names when they are within strings:</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="k">namespace</span> <span class="nx">Store\Toys</span><span class="p">;</span>
 
@@ -356,7 +364,7 @@
 <h2>理解记录对象（Understanding Records To Objects）<a class="headerlink" href="#understanding-records-to-objects" title="永久链接至标题">¶</a></h2>
 <p>每个模型的实例对应一条数据表中的记录。可以方便的通过读取对象的属性来访问相应的数据。比如，
 一个表 &#8220;robots&#8221; 有如下数据：</p>
-<div class="highlight-bash"><div class="highlight"><pre>mysql&gt; <span class="k">select</span> * from robots<span class="p">;</span>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>mysql&gt; <span class="k">select</span> * from robots<span class="p">;</span>
 +----+------------+------------+------+
 <span class="p">|</span> id <span class="p">|</span> name       <span class="p">|</span> <span class="nb">type</span>       <span class="p">|</span> year <span class="p">|</span>
 +----+------------+------------+------+
@@ -368,7 +376,7 @@
 </pre></div>
 </div>
 <p>你可以通过主键找到某一条记录并且打印它的名称：</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="c1">// Find record with id = 3</span>
 <span class="nv">$robot</span> <span class="o">=</span> <span class="nx">Robots</span><span class="o">::</span><span class="na">findFirst</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>
@@ -378,19 +386,19 @@
 </pre></div>
 </div>
 <p>一旦记录被加载到内存中之后，你可以修改它的数据并保存所做的修改：</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="nv">$robot</span>       <span class="o">=</span> <span class="nx">Robots</span><span class="o">::</span><span class="na">findFirst</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>
 <span class="nv">$robot</span><span class="o">-&gt;</span><span class="na">name</span> <span class="o">=</span> <span class="s2">&quot;RoboCop&quot;</span><span class="p">;</span>
 <span class="nv">$robot</span><span class="o">-&gt;</span><span class="na">save</span><span class="p">();</span>
 </pre></div>
 </div>
-<p>如上所示，不需要写任何SQL语句。<a class="reference internal" href="../api/Phalcon_Mvc_Model.html"><em>Phalcon\Mvc\Model</em></a> 为web应用提供了高层数据库抽象。</p>
+<p>如上所示，不需要写任何SQL语句。<a class="reference internal" href="../api/Phalcon_Mvc_Model.html"><span class="doc">Phalcon\Mvc\Model</span></a> 为web应用提供了高层数据库抽象。</p>
 </div>
 <div class="section" id="finding-records">
 <h2>查找记录（Finding Records）<a class="headerlink" href="#finding-records" title="永久链接至标题">¶</a></h2>
-<p><a class="reference internal" href="../api/Phalcon_Mvc_Model.html"><em>Phalcon\Mvc\Model</em></a> 为数据查询提供了多种方法。下面的例子将演示如何从一个模型中查找一条或者多条记录：</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<p><a class="reference internal" href="../api/Phalcon_Mvc_Model.html"><span class="doc">Phalcon\Mvc\Model</span></a> 为数据查询提供了多种方法。下面的例子将演示如何从一个模型中查找一条或者多条记录：</p>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="c1">// How many robots are there?</span>
 <span class="nv">$robots</span> <span class="o">=</span> <span class="nx">Robots</span><span class="o">::</span><span class="na">find</span><span class="p">();</span>
@@ -427,7 +435,7 @@
 <blockquote class="highlights">
 <div>如果需要通过外部数据（比如用户输入）或变量来查询记录，则必须要用`Binding Parameters`（绑定参数）的方式来防止SQL注入.</div></blockquote>
 <p>你可以使用 <code class="code docutils literal"><span class="pre">findFirst()</span></code> 方法获取第一条符合查询条件的结果：</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="c1">// What&#39;s the first robot in robots table?</span>
 <span class="nv">$robot</span> <span class="o">=</span> <span class="nx">Robots</span><span class="o">::</span><span class="na">findFirst</span><span class="p">();</span>
@@ -448,7 +456,7 @@
 </pre></div>
 </div>
 <p><code class="code docutils literal"><span class="pre">find()</span></code> 和 <code class="code docutils literal"><span class="pre">findFirst()</span></code> 方法都接受关联数组作为查询条件：</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="nv">$robot</span> <span class="o">=</span> <span class="nx">Robots</span><span class="o">::</span><span class="na">findFirst</span><span class="p">(</span>
     <span class="k">array</span><span class="p">(</span>
@@ -481,7 +489,7 @@
 </thead>
 <tbody valign="top">
 <tr class="row-even"><td>conditions</td>
-<td>查询操作的搜索条件。用于提取只有那些满足指定条件的记录。默认情况下 <a class="reference internal" href="../api/Phalcon_Mvc_Model.html"><em>Phalcon\Mvc\Model</em></a> 假定第一个参数就是查询条件。</td>
+<td>查询操作的搜索条件。用于提取只有那些满足指定条件的记录。默认情况下 <a class="reference internal" href="../api/Phalcon_Mvc_Model.html"><span class="doc">Phalcon\Mvc\Model</span></a> 假定第一个参数就是查询条件。</td>
 <td><code class="code docutils literal"><span class="pre">&quot;conditions&quot;</span> <span class="pre">=&gt;</span> <span class="pre">&quot;name</span> <span class="pre">LIKE</span> <span class="pre">'steve%'&quot;</span></code></td>
 </tr>
 <tr class="row-odd"><td>columns</td>
@@ -513,11 +521,11 @@
 <td><code class="code docutils literal"><span class="pre">&quot;group&quot;</span> <span class="pre">=&gt;</span> <span class="pre">&quot;name,</span> <span class="pre">status&quot;</span></code></td>
 </tr>
 <tr class="row-even"><td>for_update</td>
-<td>通过这个选项， <a class="reference internal" href="../api/Phalcon_Mvc_Model.html"><em>Phalcon\Mvc\Model</em></a>  读取最新的可用数据，并且为读到的每条记录设置独占锁。</td>
+<td>通过这个选项， <a class="reference internal" href="../api/Phalcon_Mvc_Model.html"><span class="doc">Phalcon\Mvc\Model</span></a>  读取最新的可用数据，并且为读到的每条记录设置独占锁。</td>
 <td><code class="code docutils literal"><span class="pre">&quot;for_update&quot;</span> <span class="pre">=&gt;</span> <span class="pre">true</span></code></td>
 </tr>
 <tr class="row-odd"><td>shared_lock</td>
-<td>通过这个选项， <a class="reference internal" href="../api/Phalcon_Mvc_Model.html"><em>Phalcon\Mvc\Model</em></a>  读取最新的可用数据，并且为读到的每条记录设置共享锁。</td>
+<td>通过这个选项， <a class="reference internal" href="../api/Phalcon_Mvc_Model.html"><span class="doc">Phalcon\Mvc\Model</span></a>  读取最新的可用数据，并且为读到的每条记录设置共享锁。</td>
 <td><code class="code docutils literal"><span class="pre">&quot;shared_lock&quot;</span> <span class="pre">=&gt;</span> <span class="pre">true</span></code></td>
 </tr>
 <tr class="row-even"><td>cache</td>
@@ -531,7 +539,7 @@
 </tbody>
 </table>
 <p>如果你愿意，除了使用数组作为查询参数外，还可以通过一种面向对象的方式来创建查询：</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="nv">$robots</span> <span class="o">=</span> <span class="nx">Robots</span><span class="o">::</span><span class="na">query</span><span class="p">()</span>
     <span class="o">-&gt;</span><span class="na">where</span><span class="p">(</span><span class="s2">&quot;type = :type:&quot;</span><span class="p">)</span>
@@ -541,11 +549,11 @@
     <span class="o">-&gt;</span><span class="na">execute</span><span class="p">();</span>
 </pre></div>
 </div>
-<p>静态方法 <code class="code docutils literal"><span class="pre">query()</span></code> 返回一个对IDE自动完成友好的 <a class="reference internal" href="../api/Phalcon_Mvc_Model_Criteria.html"><em>Phalcon\Mvc\Model\Criteria</em></a>  对象。</p>
-<p>所有查询在内部都以 <a class="reference internal" href="phql.html"><em>PHQL</em></a> 查询的方式处理。PHQL是一个高层的、面向对象的类SQL语言。通过PHQL语言你可以使用更多的比如join其他模型、定义分组、添加聚集等特性。</p>
+<p>静态方法 <code class="code docutils literal"><span class="pre">query()</span></code> 返回一个对IDE自动完成友好的 <a class="reference internal" href="../api/Phalcon_Mvc_Model_Criteria.html"><span class="doc">Phalcon\Mvc\Model\Criteria</span></a>  对象。</p>
+<p>所有查询在内部都以 <a class="reference internal" href="phql.html"><span class="doc">PHQL</span></a> 查询的方式处理。PHQL是一个高层的、面向对象的类SQL语言。通过PHQL语言你可以使用更多的比如join其他模型、定义分组、添加聚集等特性。</p>
 <p>最后，还有一个 <code class="code docutils literal"><span class="pre">findFirstBy&lt;property-name&gt;()</span></code> 方法。这个方法扩展了前面提及的 <code class="code docutils literal"><span class="pre">findFirst()</span></code> 方法。它允许您利用方法名中的属性名称，通过将要搜索的该字段的内容作为参数传给它，来快速从一个表执行检索操作。</p>
 <p>还是用上面用过的 Robots 模型来举例说明：</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="k">use</span> <span class="nx">Phalcon\Mvc\Model</span><span class="p">;</span>
 
@@ -560,7 +568,7 @@
 </pre></div>
 </div>
 <p>我们这里有3个属性：<code class="code docutils literal"><span class="pre">$id</span></code>, <code class="code docutils literal"><span class="pre">$name</span></code> 和 <code class="code docutils literal"><span class="pre">$price</span></code>。因此，我们以想要查询第一个名称为 &#8216;Terminator&#8217; 的记录为例，可以这样写：</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="nv">$name</span>  <span class="o">=</span> <span class="s2">&quot;Terminator&quot;</span><span class="p">;</span>
 <span class="nv">$robot</span> <span class="o">=</span> <span class="nx">Robots</span><span class="o">::</span><span class="na">findFirstByName</span><span class="p">(</span><span class="nv">$name</span><span class="p">);</span>
@@ -575,9 +583,9 @@
 <p>请注意我们在方法调用中用的是 &#8216;Name&#8217;，并向它传递了变量 <code class="code docutils literal"><span class="pre">$name</span></code>， <code class="code docutils literal"><span class="pre">$name</span></code> 的值就是我们想要找的记录的名称。另外注意，当我们的查询找到了符合的记录后，这个记录的其他属性也都是可用的。</p>
 <div class="section" id="model-resultsets">
 <h3>模型结果集（Model Resultsets）<a class="headerlink" href="#model-resultsets" title="永久链接至标题">¶</a></h3>
-<p><code class="code docutils literal"><span class="pre">findFirst()</span></code> 方法直接返回一个被调用对象的实例（如果有结果返回的话），而 <code class="code docutils literal"><span class="pre">find()</span></code> 方法返回一个 <a class="reference internal" href="../api/Phalcon_Mvc_Model_Resultset_Simple.html"><em>Phalcon\Mvc\Model\Resultset\Simple</em></a> 对象。这个对象也封装进了所有结果集的功能，比如遍历、查找特定的记录、统计等等。</p>
-<p>这些对象比一般数组功能更强大。最大的特点是 <a class="reference internal" href="../api/Phalcon_Mvc_Model_Resultset.html"><em>Phalcon\Mvc\Model\Resultset</em></a> 每时每刻只有一个结果在内存中。这对操作大数据量时的内存管理相当有帮助。</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<p><code class="code docutils literal"><span class="pre">findFirst()</span></code> 方法直接返回一个被调用对象的实例（如果有结果返回的话），而 <code class="code docutils literal"><span class="pre">find()</span></code> 方法返回一个 <a class="reference internal" href="../api/Phalcon_Mvc_Model_Resultset_Simple.html"><span class="doc">Phalcon\Mvc\Model\Resultset\Simple</span></a> 对象。这个对象也封装进了所有结果集的功能，比如遍历、查找特定的记录、统计等等。</p>
+<p>这些对象比一般数组功能更强大。最大的特点是 <a class="reference internal" href="../api/Phalcon_Mvc_Model_Resultset.html"><span class="doc">Phalcon\Mvc\Model\Resultset</span></a> 每时每刻只有一个结果在内存中。这对操作大数据量时的内存管理相当有帮助。</p>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="c1">// Get all robots</span>
 <span class="nv">$robots</span> <span class="o">=</span> <span class="nx">Robots</span><span class="o">::</span><span class="na">find</span><span class="p">();</span>
@@ -623,9 +631,9 @@
 <p>Phalcon 的结果集模拟了可滚动的游标，你可以通过位置，或者内部指针去访问任何一条特定的记录。注意有一些数据库系统不支持滚动游标，这就使得查询会被重复执行，
 以便回放光标到最开始的位置，然后获得相应的记录。类似地，如果多次遍历结果集，那么必须执行相同的查询次数。</p>
 <p>将大数据量的查询结果存储在内存会消耗很多资源，正因为如此，分成每32行一块从数据库中获得结果集，以减少重复执行查询请求的次数，在一些情况下也节省内存。</p>
-<p>注意结果集可以序列化后保存在一个后端缓存里面。 <a class="reference internal" href="cache.html"><em>Phalcon\Cache</em></a> 可以用来实现这个。但是，序列化数据会导致 <a class="reference internal" href="../api/Phalcon_Mvc_Model.html"><em>Phalcon\Mvc\Model</em></a>
+<p>注意结果集可以序列化后保存在一个后端缓存里面。 <a class="reference internal" href="cache.html"><span class="doc">Phalcon\Cache</span></a> 可以用来实现这个。但是，序列化数据会导致 <a class="reference internal" href="../api/Phalcon_Mvc_Model.html"><span class="doc">Phalcon\Mvc\Model</span></a>
 将从数据库检索到的所有数据以一个数组的方式保存，因此在这样执行的地方会消耗更多的内存。</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="c1">// Query all records from model parts</span>
 <span class="nv">$parts</span> <span class="o">=</span> <span class="nx">Parts</span><span class="o">::</span><span class="na">find</span><span class="p">();</span>
@@ -646,7 +654,7 @@
 <div class="section" id="filtering-resultsets">
 <h3>过滤结果集（Filtering Resultsets）<a class="headerlink" href="#filtering-resultsets" title="永久链接至标题">¶</a></h3>
 <p>过滤数据最有效的方法是设置一些查询条件，数据库会利用表的索引快速返回数据。Phalcon 额外的允许你通过任何数据库不支持的方式过滤数据。</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="nv">$customers</span> <span class="o">=</span> <span class="nx">Customers</span><span class="o">::</span><span class="na">find</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">filter</span><span class="p">(</span>
     <span class="k">function</span> <span class="p">(</span><span class="nv">$customer</span><span class="p">)</span> <span class="p">{</span>
@@ -662,7 +670,7 @@
 </div>
 <div class="section" id="resultsets-convert-to-array">
 <h3>将结果集转为数组（Resultsets Convert To Array）<a class="headerlink" href="#resultsets-convert-to-array" title="永久链接至标题">¶</a></h3>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="nv">$customers</span> <span class="o">=</span> <span class="nx">Customers</span><span class="o">::</span><span class="na">find</span><span class="p">();</span>
 <span class="nv">$arr</span> <span class="o">=</span> <span class="nv">$customers</span><span class="o">-&gt;</span><span class="na">toArray</span><span class="p">();</span>
@@ -671,9 +679,9 @@
 </div>
 <div class="section" id="binding-parameters">
 <h3>绑定参数（Binding Parameters）<a class="headerlink" href="#binding-parameters" title="永久链接至标题">¶</a></h3>
-<p>在 <a class="reference internal" href="../api/Phalcon_Mvc_Model.html"><em>Phalcon\Mvc\Model</em></a> 中也支持绑定参数。即使使用绑定参数对性能有一点很小的影响，还是强烈建议您使用这种方法，以消除代码受SQL注入攻击的可能性。
+<p>在 <a class="reference internal" href="../api/Phalcon_Mvc_Model.html"><span class="doc">Phalcon\Mvc\Model</span></a> 中也支持绑定参数。即使使用绑定参数对性能有一点很小的影响，还是强烈建议您使用这种方法，以消除代码受SQL注入攻击的可能性。
 绑定参数支持字符串和整数占位符。实现方法如下：</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="c1">// Query robots binding parameters with string placeholders</span>
 <span class="nv">$conditions</span> <span class="o">=</span> <span class="s2">&quot;name = :name: AND type = :type:&quot;</span><span class="p">;</span>
@@ -726,7 +734,7 @@ and not numbers, so the placeholder could not be successfully replaced.</p>
 the correct charset in the connection parameters or in the database configuration, as a wrong charset will produce undesired effects
 when storing or retrieving data.</p>
 <p>Additionally you can set the parameter &#8220;bindTypes&#8221;, this allows defining how the parameters should be bound according to its data type:</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="k">use</span> <span class="nx">Phalcon\Db\Column</span><span class="p">;</span>
 
@@ -756,7 +764,7 @@ when storing or retrieving data.</p>
 <div>Since the default bind-type is <code class="code docutils literal"><span class="pre">Phalcon\Db\Column::BIND_PARAM_STR</span></code>, there is no need to specify the
 &#8220;bindTypes&#8221; parameter if all of the columns are of that type.</div></blockquote>
 <p>If you bind arrays in bound parameters, keep in mind, that keys must be numbered from zero:</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="nv">$array</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;a&quot;</span><span class="p">,</span><span class="s2">&quot;b&quot;</span><span class="p">,</span><span class="s2">&quot;c&quot;</span><span class="p">];</span> <span class="c1">// $array: [[0] =&gt; &quot;a&quot;, [1] =&gt; &quot;b&quot;, [2] =&gt; &quot;c&quot;]</span>
 
@@ -779,7 +787,7 @@ when storing or retrieving data.</p>
 <div>Bound parameters are available for all query methods such as <code class="code docutils literal"><span class="pre">find()</span></code> and <code class="code docutils literal"><span class="pre">findFirst()</span></code> but also the calculation
 methods like <code class="code docutils literal"><span class="pre">count()</span></code>, <code class="code docutils literal"><span class="pre">sum()</span></code>, <code class="code docutils literal"><span class="pre">average()</span></code> etc.</div></blockquote>
 <p>If you&#8217;re using &#8220;finders&#8221;, bound parameters are automatically used for you:</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="c1">// Explicit query using bound parameters</span>
 <span class="nv">$robots</span> <span class="o">=</span> <span class="nx">Robots</span><span class="o">::</span><span class="na">find</span><span class="p">(</span>
@@ -800,7 +808,7 @@ methods like <code class="code docutils literal"><span class="pre">count()</span
 <p>May be the case that after obtaining a record from the database is necessary to initialise the data before
 being used by the rest of the application. You can implement the method &#8216;afterFetch&#8217; in a model, this event
 will be executed just after create the instance and assign the data to it:</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="k">use</span> <span class="nx">Phalcon\Mvc\Model</span><span class="p">;</span>
 
@@ -839,7 +847,7 @@ will be executed just after create the instance and assign the data to it:</p>
 </div>
 <p>If you use getters/setters instead of/or together with public properties, you can initialize the field once it is
 accessed:</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="k">use</span> <span class="nx">Phalcon\Mvc\Model</span><span class="p">;</span>
 
@@ -906,7 +914,7 @@ another model. Each of these methods requires 3 parameters: local fields, refere
 </tbody>
 </table>
 <p>The following schema shows 3 tables whose relations will serve us as an example regarding relationships:</p>
-<div class="highlight-sql"><div class="highlight"><pre><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="o">`</span><span class="n">robots</span><span class="o">`</span> <span class="p">(</span>
+<div class="highlight-sql"><div class="highlight"><pre><span></span><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="o">`</span><span class="n">robots</span><span class="o">`</span> <span class="p">(</span>
     <span class="o">`</span><span class="n">id</span><span class="o">`</span> <span class="nb">int</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="n">unsigned</span> <span class="k">NOT</span> <span class="k">NULL</span> <span class="n">AUTO_INCREMENT</span><span class="p">,</span>
     <span class="o">`</span><span class="n">name</span><span class="o">`</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">70</span><span class="p">)</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
     <span class="o">`</span><span class="k">type</span><span class="o">`</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">32</span><span class="p">)</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
@@ -939,7 +947,7 @@ another model. Each of these methods requires 3 parameters: local fields, refere
 </ul>
 <p>Check the EER diagram to understand better the relations:</p>
 <img class="align-center" src="../static/img/eer-1.png"><p>The models with their relations could be implemented as follows:</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="k">use</span> <span class="nx">Phalcon\Mvc\Model</span><span class="p">;</span>
 
@@ -956,7 +964,7 @@ another model. Each of these methods requires 3 parameters: local fields, refere
 <span class="p">}</span>
 </pre></div>
 </div>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="k">use</span> <span class="nx">Phalcon\Mvc\Model</span><span class="p">;</span>
 
@@ -973,7 +981,7 @@ another model. Each of these methods requires 3 parameters: local fields, refere
 <span class="p">}</span>
 </pre></div>
 </div>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="k">use</span> <span class="nx">Phalcon\Mvc\Model</span><span class="p">;</span>
 
@@ -996,7 +1004,7 @@ another model. Each of these methods requires 3 parameters: local fields, refere
 <p>The first parameter indicates the field of the local model used in the relationship; the second indicates the name
 of the referenced model and the third the field name in the referenced model. You could also use arrays to define multiple fields in the relationship.</p>
 <p>Many to many relationships require 3 models and define the attributes involved in the relationship:</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="k">use</span> <span class="nx">Phalcon\Mvc\Model</span><span class="p">;</span>
 
@@ -1023,7 +1031,7 @@ of the referenced model and the third the field name in the referenced model. Yo
 <div class="section" id="taking-advantage-of-relationships">
 <h3>使用关系（Taking advantage of relationships）<a class="headerlink" href="#taking-advantage-of-relationships" title="永久链接至标题">¶</a></h3>
 <p>When explicitly defining the relationships between models, it is easy to find related records for a particular record.</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="nv">$robot</span> <span class="o">=</span> <span class="nx">Robots</span><span class="o">::</span><span class="na">findFirst</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
 <span class="k">foreach</span> <span class="p">(</span><span class="nv">$robot</span><span class="o">-&gt;</span><span class="na">robotsParts</span> <span class="k">as</span> <span class="nv">$robotPart</span><span class="p">)</span> <span class="p">{</span>
@@ -1033,24 +1041,24 @@ of the referenced model and the third the field name in the referenced model. Yo
 </div>
 <p>Phalcon uses the magic methods <code class="code docutils literal"><span class="pre">__set</span></code>/<code class="code docutils literal"><span class="pre">__get</span></code>/<code class="code docutils literal"><span class="pre">__call</span></code> to store or retrieve related data using relationships.</p>
 <p>By accessing an attribute with the same name as the relationship will retrieve all its related record(s).</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="nv">$robot</span>       <span class="o">=</span> <span class="nx">Robots</span><span class="o">::</span><span class="na">findFirst</span><span class="p">();</span>
 <span class="nv">$robotsParts</span> <span class="o">=</span> <span class="nv">$robot</span><span class="o">-&gt;</span><span class="na">robotsParts</span><span class="p">;</span> <span class="c1">// All the related records in RobotsParts</span>
 </pre></div>
 </div>
 <p>Also, you can use a magic getter:</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="nv">$robot</span>       <span class="o">=</span> <span class="nx">Robots</span><span class="o">::</span><span class="na">findFirst</span><span class="p">();</span>
 <span class="nv">$robotsParts</span> <span class="o">=</span> <span class="nv">$robot</span><span class="o">-&gt;</span><span class="na">getRobotsParts</span><span class="p">();</span> <span class="c1">// All the related records in RobotsParts</span>
 <span class="nv">$robotsParts</span> <span class="o">=</span> <span class="nv">$robot</span><span class="o">-&gt;</span><span class="na">getRobotsParts</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s1">&#39;limit&#39;</span> <span class="o">=&gt;</span> <span class="mi">5</span><span class="p">));</span> <span class="c1">// Passing parameters</span>
 </pre></div>
 </div>
-<p>If the called method has a &#8220;get&#8221; prefix <a class="reference internal" href="../api/Phalcon_Mvc_Model.html"><em>Phalcon\Mvc\Model</em></a> will return a
+<p>If the called method has a &#8220;get&#8221; prefix <a class="reference internal" href="../api/Phalcon_Mvc_Model.html"><span class="doc">Phalcon\Mvc\Model</span></a> will return a
 <code class="code docutils literal"><span class="pre">findFirst()</span></code>/<code class="code docutils literal"><span class="pre">find()</span></code> result. The following example compares retrieving related results with using magic methods
 and without:</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="nv">$robot</span>       <span class="o">=</span> <span class="nx">Robots</span><span class="o">::</span><span class="na">findFirst</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
 
@@ -1079,7 +1087,7 @@ and without:</p>
 </pre></div>
 </div>
 <p>Getting related records manually:</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="nv">$robot</span>       <span class="o">=</span> <span class="nx">Robots</span><span class="o">::</span><span class="na">findFirst</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
 
@@ -1133,7 +1141,7 @@ and without:</p>
 </tbody>
 </table>
 <p>You can also use &#8220;count&#8221; prefix to return an integer denoting the count of the related records:</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="nv">$robot</span> <span class="o">=</span> <span class="nx">Robots</span><span class="o">::</span><span class="na">findFirst</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
 <span class="k">echo</span> <span class="s2">&quot;The robot has &quot;</span><span class="p">,</span> <span class="nv">$robot</span><span class="o">-&gt;</span><span class="na">countRobotsParts</span><span class="p">(),</span> <span class="s2">&quot; parts</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">;</span>
@@ -1144,7 +1152,7 @@ and without:</p>
 <h3>定义关系（Aliasing Relationships）<a class="headerlink" href="#aliasing-relationships" title="永久链接至标题">¶</a></h3>
 <p>To explain better how aliases work, let&#8217;s check the following example:</p>
 <p>The &#8220;robots_similar&#8221; table has the function to define what robots are similar to others:</p>
-<div class="highlight-bash"><div class="highlight"><pre>mysql&gt; desc robots_similar<span class="p">;</span>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>mysql&gt; desc robots_similar<span class="p">;</span>
 +-------------------+------------------+------+-----+---------+----------------+
 <span class="p">|</span> Field             <span class="p">|</span> Type             <span class="p">|</span> Null <span class="p">|</span> Key <span class="p">|</span> Default <span class="p">|</span> Extra          <span class="p">|</span>
 +-------------------+------------------+------+-----+---------+----------------+
@@ -1157,7 +1165,7 @@ and without:</p>
 </div>
 <p>Both &#8220;robots_id&#8221; and &#8220;similar_robots_id&#8221; have a relation to the model Robots:</p>
 <img class="align-center" src="../static/img/eer-2.png"><p>A model that maps this table and its relationships is the following:</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="k">class</span> <span class="nc">RobotsSimilar</span> <span class="k">extends</span> <span class="nx">Phalcon\Mvc\Model</span>
 <span class="p">{</span>
@@ -1170,7 +1178,7 @@ and without:</p>
 </pre></div>
 </div>
 <p>Since both relations point to the same model (Robots), obtain the records related to the relationship could not be clear:</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="nv">$robotsSimilar</span> <span class="o">=</span> <span class="nx">RobotsSimilar</span><span class="o">::</span><span class="na">findFirst</span><span class="p">();</span>
 
@@ -1184,7 +1192,7 @@ and without:</p>
 </pre></div>
 </div>
 <p>The aliases allow us to rename both relationships to solve these problems:</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="k">use</span> <span class="nx">Phalcon\Mvc\Model</span><span class="p">;</span>
 
@@ -1214,7 +1222,7 @@ and without:</p>
 </pre></div>
 </div>
 <p>With the aliasing we can get the related records easily:</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="nv">$robotsSimilar</span> <span class="o">=</span> <span class="nx">RobotsSimilar</span><span class="o">::</span><span class="na">findFirst</span><span class="p">();</span>
 
@@ -1233,7 +1241,7 @@ and without:</p>
 <p>Most IDEs and editors with auto-completion capabilities can not infer the correct types when using magic getters,
 instead of use the magic getters you can optionally define those methods explicitly with the corresponding
 docblocks helping the IDE to produce a better auto-completion:</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="k">use</span> <span class="nx">Phalcon\Mvc\Model</span><span class="p">;</span>
 
@@ -1268,7 +1276,7 @@ docblocks helping the IDE to produce a better auto-completion:</p>
 value in the referenced model, Phalcon will not produce a validation message. You can modify this behavior by adding a fourth parameter
 when defining a relationship.</p>
 <p>The RobotsPart model can be changed to demonstrate this feature:</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="k">use</span> <span class="nx">Phalcon\Mvc\Model</span><span class="p">;</span>
 
@@ -1308,7 +1316,7 @@ when defining a relationship.</p>
 <p>If you alter a <code class="code docutils literal"><span class="pre">belongsTo()</span></code> relationship to act as foreign key, it will validate that the values inserted/updated on those fields have a
 valid value on the referenced model. Similarly, if a <code class="code docutils literal"><span class="pre">hasMany()</span></code>/<code class="code docutils literal"><span class="pre">hasOne()</span></code> is altered it will validate that the records cannot be deleted
 if that record is used on a referenced model.</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="k">use</span> <span class="nx">Phalcon\Mvc\Model</span><span class="p">;</span>
 
@@ -1331,7 +1339,7 @@ if that record is used on a referenced model.</p>
 </pre></div>
 </div>
 <p>A virtual foreign key can be set up to allow null values as follows:</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="k">use</span> <span class="nx">Phalcon\Mvc\Model</span><span class="p">;</span>
 
@@ -1364,7 +1372,7 @@ if that record is used on a referenced model.</p>
 <h3>级联与限制动作（Cascade/Restrict actions）<a class="headerlink" href="#cascade-restrict-actions" title="永久链接至标题">¶</a></h3>
 <p>Relationships that act as virtual foreign keys by default restrict the creation/update/deletion of records
 to maintain the integrity of data:</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="k">namespace</span> <span class="nx">Store\Models</span><span class="p">;</span>
 
@@ -1397,11 +1405,11 @@ to maintain the integrity of data:</p>
 </div>
 </div>
 <div class="section" id="generating-calculations">
-<h2>生成运算（Generating Calculations）<a class="headerlink" href="#generating-calculations" title="永久链接至标题">¶</a></h2>
-<p>Calculations (or aggregations) are helpers for commonly used functions of database systems such as COUNT, SUM, MAX, MIN or AVG.
-<a class="reference internal" href="../api/Phalcon_Mvc_Model.html"><em>Phalcon\Mvc\Model</em></a> allows to use these functions directly from the exposed methods.</p>
-<p>Count examples:</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<h2>聚合运算（Generating Calculations）<a class="headerlink" href="#generating-calculations" title="永久链接至标题">¶</a></h2>
+<p>模型类 <a class="reference internal" href="../api/Phalcon_Mvc_Model.html"><span class="doc">Phalcon\Mvc\Model</span></a> 提供的聚合运算方法，使用的是数据库内置函数计算结果，例如：COUNT, SUM, MAX, MIN or AVG。</p>
+<div class="section" id="count">
+<h3>累计（Count）<a class="headerlink" href="#count" title="永久链接至标题">¶</a></h3>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="c1">// How many employees are?</span>
 <span class="nv">$rowcount</span> <span class="o">=</span> <span class="nx">Employees</span><span class="o">::</span><span class="na">count</span><span class="p">();</span>
@@ -1445,8 +1453,10 @@ to maintain the integrity of data:</p>
 <span class="p">);</span>
 </pre></div>
 </div>
-<p>Sum examples:</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+</div>
+<div class="section" id="sum">
+<h3>累加（Sum）<a class="headerlink" href="#sum" title="永久链接至标题">¶</a></h3>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="c1">// How much are the salaries of all employees?</span>
 <span class="nv">$total</span> <span class="o">=</span> <span class="nx">Employees</span><span class="o">::</span><span class="na">sum</span><span class="p">(</span>
@@ -1493,8 +1503,10 @@ to maintain the integrity of data:</p>
 <span class="p">);</span>
 </pre></div>
 </div>
-<p>Average examples:</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+</div>
+<div class="section" id="average">
+<h3>平均（Average）<a class="headerlink" href="#average" title="永久链接至标题">¶</a></h3>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="c1">// What is the average salary for all employees?</span>
 <span class="nv">$average</span> <span class="o">=</span> <span class="nx">Employees</span><span class="o">::</span><span class="na">average</span><span class="p">(</span>
@@ -1521,8 +1533,10 @@ to maintain the integrity of data:</p>
 <span class="p">);</span>
 </pre></div>
 </div>
-<p>Max/Min examples:</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+</div>
+<div class="section" id="max-min">
+<h3>最大/最小（Max/Min）<a class="headerlink" href="#max-min" title="永久链接至标题">¶</a></h3>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="c1">// What is the oldest age of all employees?</span>
 <span class="nv">$age</span> <span class="o">=</span> <span class="nx">Employees</span><span class="o">::</span><span class="na">maximum</span><span class="p">(</span>
@@ -1548,11 +1562,12 @@ to maintain the integrity of data:</p>
 </pre></div>
 </div>
 </div>
+</div>
 <div class="section" id="hydration-modes">
-<h2>Hydration Modes<a class="headerlink" href="#hydration-modes" title="永久链接至标题">¶</a></h2>
+<h2>结果集类型（Hydration Modes）<a class="headerlink" href="#hydration-modes" title="永久链接至标题">¶</a></h2>
 <p>As mentioned above, resultsets are collections of complete objects, this means that every returned result is an object
 representing a row in the database. These objects can be modified and saved again to persistence:</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="c1">// Manipulating a resultset of complete objects</span>
 <span class="k">foreach</span> <span class="p">(</span><span class="nx">Robots</span><span class="o">::</span><span class="na">find</span><span class="p">()</span> <span class="k">as</span> <span class="nv">$robot</span><span class="p">)</span> <span class="p">{</span>
@@ -1564,7 +1579,7 @@ representing a row in the database. These objects can be modified and saved agai
 <p>Sometimes records are obtained only to be presented to a user in read-only mode, in these cases it may be useful
 to change the way in which records are represented to facilitate their handling. The strategy used to represent objects
 returned in a resultset is called &#8216;hydration mode&#8217;:</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="k">use</span> <span class="nx">Phalcon\Mvc\Model\Resultset</span><span class="p">;</span>
 
@@ -1593,7 +1608,7 @@ returned in a resultset is called &#8216;hydration mode&#8217;:</p>
 </pre></div>
 </div>
 <p>Hydration mode can also be passed as a parameter of &#8216;find&#8217;:</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="k">use</span> <span class="nx">Phalcon\Mvc\Model\Resultset</span><span class="p">;</span>
 
@@ -1611,9 +1626,9 @@ returned in a resultset is called &#8216;hydration mode&#8217;:</p>
 </div>
 <div class="section" id="creating-updating-records">
 <h2>创建与更新记录（Creating Updating/Records）<a class="headerlink" href="#creating-updating-records" title="永久链接至标题">¶</a></h2>
-<p>Phalcon\Mvc\Model::save() 方法允许你创建/更新记录。save方法自动调用 <a class="reference internal" href="../api/Phalcon_Mvc_Model.html"><em>Phalcon\Mvc\Model</em></a> 内部的create和update方法，如果想达到预期般的工作效果，正确定义实体主键是非常必须的，以确保创建和更新记录成功。</p>
+<p>Phalcon\Mvc\Model::save() 方法允许你创建/更新记录。save方法自动调用 <a class="reference internal" href="../api/Phalcon_Mvc_Model.html"><span class="doc">Phalcon\Mvc\Model</span></a> 内部的create和update方法，如果想达到预期般的工作效果，正确定义实体主键是非常必须的，以确保创建和更新记录成功。</p>
 <p>Also the method executes associated validators, virtual foreign keys and events that are defined in the model:</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="nv">$robot</span>       <span class="o">=</span> <span class="k">new</span> <span class="nx">Robots</span><span class="p">();</span>
 <span class="nv">$robot</span><span class="o">-&gt;</span><span class="na">type</span> <span class="o">=</span> <span class="s2">&quot;mechanical&quot;</span><span class="p">;</span>
@@ -1630,9 +1645,9 @@ returned in a resultset is called &#8216;hydration mode&#8217;:</p>
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>An array could be passed to &#8220;save&#8221; to avoid assign every column manually. <a class="reference internal" href="../api/Phalcon_Mvc_Model.html"><em>Phalcon\Mvc\Model</em></a> will check if there are setters implemented for
+<p>An array could be passed to &#8220;save&#8221; to avoid assign every column manually. <a class="reference internal" href="../api/Phalcon_Mvc_Model.html"><span class="doc">Phalcon\Mvc\Model</span></a> will check if there are setters implemented for
 the columns passed in the array giving priority to them instead of assign directly the values of the attributes:</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="nv">$robot</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Robots</span><span class="p">();</span>
 
@@ -1647,7 +1662,7 @@ the columns passed in the array giving priority to them instead of assign direct
 </div>
 <p>Values assigned directly or via the array of attributes are escaped/sanitized according to the related attribute data type. So you can pass
 an insecure array without worrying about possible SQL injections:</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="nv">$robot</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Robots</span><span class="p">();</span>
 <span class="nv">$robot</span><span class="o">-&gt;</span><span class="na">save</span><span class="p">(</span><span class="nv">$_POST</span><span class="p">);</span>
@@ -1659,7 +1674,7 @@ if you want to permit a user to insert/update every column in the model, even if
 form.</div></blockquote>
 <p>You can set an additional parameter in &#8216;save&#8217; to set a whitelist of fields that only must taken into account when doing
 the mass assignment:</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="nv">$robot</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Robots</span><span class="p">();</span>
 
@@ -1677,7 +1692,7 @@ the mass assignment:</p>
 <p>When an application has a lot of competition, we could be expecting create a record but it is actually updated. This
 could happen if we use <code class="code docutils literal"><span class="pre">Phalcon\Mvc\Model::save()</span></code> to persist the records in the database. If we want to be absolutely
 sure that a record is created or updated, we can change the <code class="code docutils literal"><span class="pre">save()</span></code> call with <code class="code docutils literal"><span class="pre">create()</span></code> or <code class="code docutils literal"><span class="pre">update()</span></code>:</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="nv">$robot</span>       <span class="o">=</span> <span class="k">new</span> <span class="nx">Robots</span><span class="p">();</span>
 <span class="nv">$robot</span><span class="o">-&gt;</span><span class="na">type</span> <span class="o">=</span> <span class="s2">&quot;mechanical&quot;</span><span class="p">;</span>
@@ -1699,21 +1714,21 @@ sure that a record is created or updated, we can change the <code class="code do
 </div>
 <div class="section" id="auto-generated-identity-columns">
 <h3>自动生成标识列（Auto-generated identity columns）<a class="headerlink" href="#auto-generated-identity-columns" title="永久链接至标题">¶</a></h3>
-<p>Some models may have identity columns. These columns usually are the primary key of the mapped table. <a class="reference internal" href="../api/Phalcon_Mvc_Model.html"><em>Phalcon\Mvc\Model</em></a>
+<p>Some models may have identity columns. These columns usually are the primary key of the mapped table. <a class="reference internal" href="../api/Phalcon_Mvc_Model.html"><span class="doc">Phalcon\Mvc\Model</span></a>
 can recognize the identity column omitting it in the generated SQL INSERT, so the database system can generate an auto-generated value for it.
 Always after creating a record, the identity field will be registered with the value generated in the database system for it:</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="nv">$robot</span><span class="o">-&gt;</span><span class="na">save</span><span class="p">();</span>
 
 <span class="k">echo</span> <span class="s2">&quot;The generated id is: &quot;</span><span class="p">,</span> <span class="nv">$robot</span><span class="o">-&gt;</span><span class="na">id</span><span class="p">;</span>
 </pre></div>
 </div>
-<p><a class="reference internal" href="../api/Phalcon_Mvc_Model.html"><em>Phalcon\Mvc\Model</em></a> is able to recognize the identity column. Depending on the database system, those columns may be
+<p><a class="reference internal" href="../api/Phalcon_Mvc_Model.html"><span class="doc">Phalcon\Mvc\Model</span></a> is able to recognize the identity column. Depending on the database system, those columns may be
 serial columns like in PostgreSQL or auto_increment columns in the case of MySQL.</p>
 <p>PostgreSQL uses sequences to generate auto-numeric values, by default, Phalcon tries to obtain the generated value from the sequence &#8220;table_field_seq&#8221;,
 for example: robots_id_seq, if that sequence has a different name, the method &#8220;getSequenceName&#8221; needs to be implemented:</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="k">use</span> <span class="nx">Phalcon\Mvc\Model</span><span class="p">;</span>
 
@@ -1730,7 +1745,7 @@ for example: robots_id_seq, if that sequence has a different name, the method &#
 <div class="section" id="storing-related-records">
 <h3>存储关系记录（Storing related records）<a class="headerlink" href="#storing-related-records" title="永久链接至标题">¶</a></h3>
 <p>Magic properties can be used to store a records and its related properties:</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="c1">// Create an artist</span>
 <span class="nv">$artist</span>          <span class="o">=</span> <span class="k">new</span> <span class="nx">Artists</span><span class="p">();</span>
@@ -1748,7 +1763,7 @@ for example: robots_id_seq, if that sequence has a different name, the method &#
 </pre></div>
 </div>
 <p>Saving a record and its related records in a has-many relation:</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="c1">// Get an existing artist</span>
 <span class="nv">$artist</span> <span class="o">=</span> <span class="nx">Artists</span><span class="o">::</span><span class="na">findFirst</span><span class="p">(</span><span class="s1">&#39;name = &quot;Shinichi Osawa&quot;&#39;</span><span class="p">);</span>
@@ -1792,12 +1807,12 @@ passed back to the user for information regarding any errors.</p>
 </div>
 <div class="section" id="validation-messages">
 <h3>验证信息（Validation Messages）<a class="headerlink" href="#validation-messages" title="永久链接至标题">¶</a></h3>
-<p><a class="reference internal" href="../api/Phalcon_Mvc_Model.html"><em>Phalcon\Mvc\Model</em></a> has a messaging subsystem that provides a flexible way to output or store the
+<p><a class="reference internal" href="../api/Phalcon_Mvc_Model.html"><span class="doc">Phalcon\Mvc\Model</span></a> has a messaging subsystem that provides a flexible way to output or store the
 validation messages generated during the insert/update processes.</p>
-<p>Each message consists of an instance of the class <a class="reference internal" href="../api/Phalcon_Validation_Message.html"><em>Phalcon\Mvc\Model\Message</em></a>. The set of
+<p>Each message consists of an instance of the class <a class="reference internal" href="../api/Phalcon_Validation_Message.html"><span class="doc">Phalcon\Mvc\Model\Message</span></a>. The set of
 messages generated can be retrieved with the <code class="code docutils literal"><span class="pre">getMessages()</span></code> method. Each message provides extended information like the field name that
 generated the message or the message type:</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="k">if</span> <span class="p">(</span><span class="nv">$robot</span><span class="o">-&gt;</span><span class="na">save</span><span class="p">()</span> <span class="o">==</span> <span class="k">false</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">foreach</span> <span class="p">(</span><span class="nv">$robot</span><span class="o">-&gt;</span><span class="na">getMessages</span><span class="p">()</span> <span class="k">as</span> <span class="nv">$message</span><span class="p">)</span> <span class="p">{</span>
@@ -1808,7 +1823,7 @@ generated the message or the message type:</p>
 <span class="p">}</span>
 </pre></div>
 </div>
-<p><a class="reference internal" href="../api/Phalcon_Mvc_Model.html"><em>Phalcon\Mvc\Model</em></a> can generate the following types of validation messages:</p>
+<p><a class="reference internal" href="../api/Phalcon_Mvc_Model.html"><span class="doc">Phalcon\Mvc\Model</span></a> can generate the following types of validation messages:</p>
 <table border="1" class="docutils">
 <colgroup>
 <col width="14%" />
@@ -1838,7 +1853,7 @@ generated the message or the message type:</p>
 </tbody>
 </table>
 <p>The <code class="code docutils literal"><span class="pre">getMessages()</span></code> method can be overridden in a model to replace/translate the default messages generated automatically by the ORM:</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="k">use</span> <span class="nx">Phalcon\Mvc\Model</span><span class="p">;</span>
 
@@ -1870,7 +1885,7 @@ generated the message or the message type:</p>
 <div class="section" id="events-and-events-manager">
 <h3>事件与事件管理器（Events and Events Manager）<a class="headerlink" href="#events-and-events-manager" title="永久链接至标题">¶</a></h3>
 <p>Models allow you to implement events that will be thrown when performing an insert/update/delete. They help define business rules for a
-certain model. The following are the events supported by <a class="reference internal" href="../api/Phalcon_Mvc_Model.html"><em>Phalcon\Mvc\Model</em></a> and their order of execution:</p>
+certain model. The following are the events supported by <a class="reference internal" href="../api/Phalcon_Mvc_Model.html"><span class="doc">Phalcon\Mvc\Model</span></a> and their order of execution:</p>
 <table border="1" class="docutils">
 <colgroup>
 <col width="10%" />
@@ -1957,7 +1972,7 @@ certain model. The following are the events supported by <a class="reference int
 <div class="section" id="implementing-events-in-the-model-s-class">
 <h3>模型中自定义事件（Implementing Events in the Model&#8217;s class）<a class="headerlink" href="#implementing-events-in-the-model-s-class" title="永久链接至标题">¶</a></h3>
 <p>The easier way to make a model react to events is implement a method with the same name of the event in the model&#8217;s class:</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="k">use</span> <span class="nx">Phalcon\Mvc\Model</span><span class="p">;</span>
 
@@ -1971,7 +1986,7 @@ certain model. The following are the events supported by <a class="reference int
 </pre></div>
 </div>
 <p>Events can be useful to assign values before performing an operation, for example:</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="k">use</span> <span class="nx">Phalcon\Mvc\Model</span><span class="p">;</span>
 
@@ -1994,9 +2009,9 @@ certain model. The following are the events supported by <a class="reference int
 </div>
 <div class="section" id="using-a-custom-events-manager">
 <h3>使用自定义事件管理器（Using a custom Events Manager）<a class="headerlink" href="#using-a-custom-events-manager" title="永久链接至标题">¶</a></h3>
-<p>Additionally, this component is integrated with <a class="reference internal" href="../api/Phalcon_Events_Manager.html"><em>Phalcon\Events\Manager</em></a>,
+<p>Additionally, this component is integrated with <a class="reference internal" href="../api/Phalcon_Events_Manager.html"><span class="doc">Phalcon\Events\Manager</span></a>,
 this means we can create listeners that run when an event is triggered.</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="k">use</span> <span class="nx">Phalcon\Mvc\Model</span><span class="p">;</span>
 <span class="k">use</span> <span class="nx">Phalcon\Events\Manager</span> <span class="k">as</span> <span class="nx">EventsManager</span><span class="p">;</span>
@@ -2027,7 +2042,7 @@ this means we can create listeners that run when an event is triggered.</p>
 </div>
 <p>In the example given above, the Events Manager only acts as a bridge between an object and a listener (the anonymous function).
 Events will be fired to the listener when &#8216;robots&#8217; are saved:</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="nv">$robot</span>       <span class="o">=</span> <span class="k">new</span> <span class="nx">Robots</span><span class="p">();</span>
 <span class="nv">$robot</span><span class="o">-&gt;</span><span class="na">name</span> <span class="o">=</span> <span class="s1">&#39;Scooby Doo&#39;</span><span class="p">;</span>
@@ -2037,7 +2052,7 @@ Events will be fired to the listener when &#8216;robots&#8217; are saved:</p>
 </pre></div>
 </div>
 <p>If we want all objects created in our application use the same EventsManager, then we need to assign it to the Models Manager:</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="c1">// Registering the modelsManager service</span>
 <span class="nv">$di</span><span class="o">-&gt;</span><span class="na">setShared</span><span class="p">(</span><span class="s1">&#39;modelsManager&#39;</span><span class="p">,</span> <span class="k">function</span> <span class="p">()</span> <span class="p">{</span>
@@ -2078,7 +2093,7 @@ the events listed in the table above.</p>
 <p>We recommend that validation methods are declared protected to prevent that business logic implementation
 from being exposed publicly.</p>
 <p>The following example implements an event that validates the year cannot be smaller than 0 on update or insert:</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="k">use</span> <span class="nx">Phalcon\Mvc\Model</span><span class="p">;</span>
 
@@ -2094,15 +2109,15 @@ from being exposed publicly.</p>
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>Some events return false as an indication to stop the current operation. If an event doesn&#8217;t return anything, <a class="reference internal" href="../api/Phalcon_Mvc_Model.html"><em>Phalcon\Mvc\Model</em></a>
+<p>Some events return false as an indication to stop the current operation. If an event doesn&#8217;t return anything, <a class="reference internal" href="../api/Phalcon_Mvc_Model.html"><span class="doc">Phalcon\Mvc\Model</span></a>
 will assume a true value.</p>
 </div>
 <div class="section" id="validating-data-integrity">
 <h3>验证数据完整性（Validating Data Integrity）<a class="headerlink" href="#validating-data-integrity" title="永久链接至标题">¶</a></h3>
-<p><a class="reference internal" href="../api/Phalcon_Mvc_Model.html"><em>Phalcon\Mvc\Model</em></a> provides several events to validate data and implement business rules. The special &#8220;validation&#8221;
+<p><a class="reference internal" href="../api/Phalcon_Mvc_Model.html"><span class="doc">Phalcon\Mvc\Model</span></a> provides several events to validate data and implement business rules. The special &#8220;validation&#8221;
 event allows us to call built-in validators over the record. Phalcon exposes a few built-in validators that can be used at this stage of validation.</p>
 <p>The following example shows how to use it:</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="k">use</span> <span class="nx">Phalcon\Mvc\Model</span><span class="p">;</span>
 <span class="k">use</span> <span class="nx">Phalcon\Validation\Validator\Uniqueness</span><span class="p">;</span>
@@ -2148,44 +2163,44 @@ the value is not included in the method then the validator will fail and return 
 <tbody valign="top">
 <tr class="row-even"><td>PresenceOf</td>
 <td>Validates that a field&#8217;s value isn&#8217;t null or empty string. This validator is automatically added based on the attributes marked as not null on the mapped table</td>
-<td><a class="reference internal" href="../api/Phalcon_Validation_Validator_PresenceOf.html"><em>Example</em></a></td>
+<td><a class="reference internal" href="../api/Phalcon_Validation_Validator_PresenceOf.html"><span class="doc">Example</span></a></td>
 </tr>
 <tr class="row-odd"><td>Email</td>
 <td>Validates that field contains a valid email format</td>
-<td><a class="reference internal" href="../api/Phalcon_Validation_Validator_Email.html"><em>Example</em></a></td>
+<td><a class="reference internal" href="../api/Phalcon_Validation_Validator_Email.html"><span class="doc">Example</span></a></td>
 </tr>
 <tr class="row-even"><td>ExclusionIn</td>
 <td>Validates that a value is not within a list of possible values</td>
-<td><a class="reference internal" href="../api/Phalcon_Validation_Validator_ExclusionIn.html"><em>Example</em></a></td>
+<td><a class="reference internal" href="../api/Phalcon_Validation_Validator_ExclusionIn.html"><span class="doc">Example</span></a></td>
 </tr>
 <tr class="row-odd"><td>InclusionIn</td>
 <td>Validates that a value is within a list of possible values</td>
-<td><a class="reference internal" href="../api/Phalcon_Validation_Validator_InclusionIn.html"><em>Example</em></a></td>
+<td><a class="reference internal" href="../api/Phalcon_Validation_Validator_InclusionIn.html"><span class="doc">Example</span></a></td>
 </tr>
 <tr class="row-even"><td>Numericality</td>
 <td>Validates that a field has a numeric format</td>
-<td><a class="reference internal" href="../api/Phalcon_Validation_Validator_Numericality.html"><em>Example</em></a></td>
+<td><a class="reference internal" href="../api/Phalcon_Validation_Validator_Numericality.html"><span class="doc">Example</span></a></td>
 </tr>
 <tr class="row-odd"><td>Regex</td>
 <td>Validates that the value of a field matches a regular expression</td>
-<td><a class="reference internal" href="../api/Phalcon_Validation_Validator_Regex.html"><em>Example</em></a></td>
+<td><a class="reference internal" href="../api/Phalcon_Validation_Validator_Regex.html"><span class="doc">Example</span></a></td>
 </tr>
 <tr class="row-even"><td>Uniqueness</td>
 <td>Validates that a field or a combination of a set of fields are not present more than once in the existing records of the related table</td>
-<td><a class="reference internal" href="../api/Phalcon_Validation_Validator_Uniqueness.html"><em>Example</em></a></td>
+<td><a class="reference internal" href="../api/Phalcon_Validation_Validator_Uniqueness.html"><span class="doc">Example</span></a></td>
 </tr>
 <tr class="row-odd"><td>StringLength</td>
 <td>Validates the length of a string</td>
-<td><a class="reference internal" href="../api/Phalcon_Validation_Validator_StringLength.html"><em>Example</em></a></td>
+<td><a class="reference internal" href="../api/Phalcon_Validation_Validator_StringLength.html"><span class="doc">Example</span></a></td>
 </tr>
 <tr class="row-even"><td>Url</td>
 <td>Validates that a value has a valid URL format</td>
-<td><a class="reference internal" href="../api/Phalcon_Validation_Validator_Url.html"><em>Example</em></a></td>
+<td><a class="reference internal" href="../api/Phalcon_Validation_Validator_Url.html"><span class="doc">Example</span></a></td>
 </tr>
 </tbody>
 </table>
 <p>In addition to the built-in validators, you can create your own validators:</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="k">use</span> <span class="nx">Phalcon\Validation\Validator</span><span class="p">;</span>
 <span class="k">use</span> <span class="nx">Phalcon\Validation\ValidatorInterface</span><span class="p">;</span>
@@ -2212,10 +2227,10 @@ the value is not included in the method then the validator will fail and return 
 </pre></div>
 </div>
 <blockquote class="highlights">
-<div><em>NOTE</em> Up to version 2.0.4 <code class="code docutils literal"><span class="pre">$model</span></code> must be <a class="reference internal" href="../api/Phalcon_Mvc_ModelInterface.html"><em>Phalcon\Mvc\ModelInterface</em></a>
+<div><em>NOTE</em> Up to version 2.0.4 <code class="code docutils literal"><span class="pre">$model</span></code> must be <a class="reference internal" href="../api/Phalcon_Mvc_ModelInterface.html"><span class="doc">Phalcon\Mvc\ModelInterface</span></a>
 instance (<code class="code docutils literal"><span class="pre">public</span> <span class="pre">function</span> <span class="pre">validate(Phalcon\Mvc\ModelInterface</span> <span class="pre">$model)</span></code>).</div></blockquote>
 <p>Adding the validator to a model:</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="k">use</span> <span class="nx">Phalcon\Mvc\Model</span><span class="p">;</span>
 
@@ -2238,7 +2253,7 @@ instance (<code class="code docutils literal"><span class="pre">public</span> <s
 </pre></div>
 </div>
 <p>The idea of creating validators is make them reusable between several models. A validator can also be as simple as:</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="k">use</span> <span class="nx">Phalcon\Mvc\Model</span><span class="p">;</span>
 <span class="k">use</span> <span class="nx">Phalcon\Validation\Message</span><span class="p">;</span>
@@ -2270,7 +2285,7 @@ instance (<code class="code docutils literal"><span class="pre">public</span> <s
 <p>Every value assigned to a model attribute is escaped depending of its data type. A developer doesn&#8217;t need to escape manually
 each value before storing it on the database. Phalcon uses internally the <a class="reference external" href="http://php.net/manual/en/pdostatement.bindparam.php">bound parameters</a>
 capability provided by PDO to automatically escape every value to be stored in the database.</p>
-<div class="highlight-bash"><div class="highlight"><pre>mysql&gt; desc products<span class="p">;</span>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>mysql&gt; desc products<span class="p">;</span>
 +------------------+------------------+------+-----+---------+----------------+
 <span class="p">|</span> Field            <span class="p">|</span> Type             <span class="p">|</span> Null <span class="p">|</span> Key <span class="p">|</span> Default <span class="p">|</span> Extra          <span class="p">|</span>
 +------------------+------------------+------+-----+---------+----------------+
@@ -2284,7 +2299,7 @@ capability provided by PDO to automatically escape every value to be stored in t
 </pre></div>
 </div>
 <p>If we use just PDO to store a record in a secure way, we need to write the following code:</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="nv">$name</span>           <span class="o">=</span> <span class="s1">&#39;Artichoke&#39;</span><span class="p">;</span>
 <span class="nv">$price</span>          <span class="o">=</span> <span class="mf">10.5</span><span class="p">;</span>
@@ -2303,7 +2318,7 @@ capability provided by PDO to automatically escape every value to be stored in t
 </pre></div>
 </div>
 <p>The good news is that Phalcon do this for you automatically:</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="nv">$product</span>                   <span class="o">=</span> <span class="k">new</span> <span class="nx">Products</span><span class="p">();</span>
 <span class="nv">$product</span><span class="o">-&gt;</span><span class="na">product_types_id</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
@@ -2318,9 +2333,9 @@ capability provided by PDO to automatically escape every value to be stored in t
 </div>
 <div class="section" id="skipping-columns">
 <h2>忽略指定列的数据（Skipping Columns）<a class="headerlink" href="#skipping-columns" title="永久链接至标题">¶</a></h2>
-<p>To tell <a class="reference internal" href="../api/Phalcon_Mvc_Model.html"><em>Phalcon\Mvc\Model</em></a> that always omits some fields in the creation and/or update of records in order
+<p>To tell <a class="reference internal" href="../api/Phalcon_Mvc_Model.html"><span class="doc">Phalcon\Mvc\Model</span></a> that always omits some fields in the creation and/or update of records in order
 to delegate the database system the assignation of the values by a trigger or a default:</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="k">use</span> <span class="nx">Phalcon\Mvc\Model</span><span class="p">;</span>
 
@@ -2356,7 +2371,7 @@ to delegate the database system the assignation of the values by a trigger or a 
 <p>This will ignore globally these fields on each INSERT/UPDATE operation on the whole application.
 If you want to ignore different attributes on different INSERT/UPDATE operations, you can specify the second parameter (boolean) - true
 for replacement. Forcing a default value can be done in the following way:</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="k">use</span> <span class="nx">Phalcon\Db\RawValue</span><span class="p">;</span>
 
@@ -2369,7 +2384,7 @@ for replacement. Forcing a default value can be done in the following way:</p>
 </pre></div>
 </div>
 <p>A callback also can be used to create a conditional assignment of automatic default values:</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="k">use</span> <span class="nx">Phalcon\Mvc\Model</span><span class="p">;</span>
 <span class="k">use</span> <span class="nx">Phalcon\Db\RawValue</span><span class="p">;</span>
@@ -2386,7 +2401,7 @@ for replacement. Forcing a default value can be done in the following way:</p>
 </pre></div>
 </div>
 <blockquote class="highlights">
-<div>Never use a <a class="reference internal" href="../api/Phalcon_Db_RawValue.html"><em>Phalcon\Db\RawValue</em></a> to assign external data (such as user input)
+<div>Never use a <a class="reference internal" href="../api/Phalcon_Db_RawValue.html"><span class="doc">Phalcon\Db\RawValue</span></a> to assign external data (such as user input)
 or variable data. The value of these fields is ignored when binding parameters to the query.
 So it could be used to attack the application injecting SQL.</div></blockquote>
 <div class="section" id="dynamic-update">
@@ -2396,7 +2411,7 @@ You can change specific models to make dynamic updates, in this case, just the f
 are used to create the final SQL statement.</p>
 <p>In some cases this could improve the performance by reducing the traffic between the application and the database server,
 this specially helps when the table has blob/text fields:</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="k">use</span> <span class="nx">Phalcon\Mvc\Model</span><span class="p">;</span>
 
@@ -2414,7 +2429,7 @@ this specially helps when the table has blob/text fields:</p>
 <div class="section" id="deleting-records">
 <h2>删除记录（Deleting Records）<a class="headerlink" href="#deleting-records" title="永久链接至标题">¶</a></h2>
 <p>The method <code class="code docutils literal"><span class="pre">Phalcon\Mvc\Model::delete()</span></code> allows to delete a record. You can use it as follows:</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="nv">$robot</span> <span class="o">=</span> <span class="nx">Robots</span><span class="o">::</span><span class="na">findFirst</span><span class="p">(</span><span class="mi">11</span><span class="p">);</span>
 
@@ -2432,7 +2447,7 @@ this specially helps when the table has blob/text fields:</p>
 </pre></div>
 </div>
 <p>You can also delete many records by traversing a resultset with a foreach:</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="k">foreach</span> <span class="p">(</span><span class="nx">Robots</span><span class="o">::</span><span class="na">find</span><span class="p">(</span><span class="s2">&quot;type=&#39;mechanical&#39;&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="nv">$robot</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">if</span> <span class="p">(</span><span class="nv">$robot</span><span class="o">-&gt;</span><span class="na">delete</span><span class="p">()</span> <span class="o">==</span> <span class="k">false</span><span class="p">)</span> <span class="p">{</span>
@@ -2477,7 +2492,7 @@ performed:</p>
 </tbody>
 </table>
 <p>With the above events can also define business rules in the models:</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="k">use</span> <span class="nx">Phalcon\Mvc\Model</span><span class="p">;</span>
 
@@ -2529,7 +2544,7 @@ performed:</p>
 <p>Behaviors are shared conducts that several models may adopt in order to re-use code, the ORM provides an API to implement
 behaviors in your models. Also, you can use the events and callbacks as seen before as an alternative to implement Behaviors with more freedom.</p>
 <p>A behavior must be added in the model initializer, a model can have zero or more behaviors:</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="k">use</span> <span class="nx">Phalcon\Mvc\Model</span><span class="p">;</span>
 <span class="k">use</span> <span class="nx">Phalcon\Mvc\Model\Behavior\Timestampable</span><span class="p">;</span>
@@ -2581,7 +2596,7 @@ behaviors in your models. Also, you can use the events and callbacks as seen bef
 <div class="section" id="timestampable">
 <h3>生成时间戳（Timestampable）<a class="headerlink" href="#timestampable" title="永久链接至标题">¶</a></h3>
 <p>This behavior receives an array of options, the first level key must be an event name indicating when the column must be assigned:</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="k">use</span> <span class="nx">Phalcon\Mvc\Model\Behavior\Timestampable</span><span class="p">;</span>
 
@@ -2602,7 +2617,7 @@ behaviors in your models. Also, you can use the events and callbacks as seen bef
 </div>
 <p>Each event can have its own options, &#8216;field&#8217; is the name of the column that must be updated, if &#8216;format&#8217; is a string it will be used
 as format of the PHP&#8217;s function <a class="reference external" href="http://php.net/manual/en/function.date.php">date</a>, format can also be an anonymous function providing you the free to generate any kind timestamp:</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="k">use</span> <span class="nx">Phalcon\Mvc\Model\Behavior\Timestampable</span><span class="p">;</span>
 
@@ -2629,7 +2644,7 @@ as format of the PHP&#8217;s function <a class="reference external" href="http:/
 <div class="section" id="softdelete">
 <h3>软删除（SoftDelete）<a class="headerlink" href="#softdelete" title="永久链接至标题">¶</a></h3>
 <p>This behavior can be used in the following way:</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="k">use</span> <span class="nx">Phalcon\Mvc\Model</span><span class="p">;</span>
 <span class="k">use</span> <span class="nx">Phalcon\Mvc\Model\Behavior\SoftDelete</span><span class="p">;</span>
@@ -2662,7 +2677,7 @@ as format of the PHP&#8217;s function <a class="reference external" href="http:/
 </div>
 <p>This behavior accepts two options: &#8216;field&#8217; and &#8216;value&#8217;, &#8216;field&#8217; determines what field must be updated and &#8216;value&#8217; the value to be deleted.
 Let&#8217;s pretend the table &#8216;users&#8217; has the following data:</p>
-<div class="highlight-bash"><div class="highlight"><pre>mysql&gt; <span class="k">select</span> * from users<span class="p">;</span>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>mysql&gt; <span class="k">select</span> * from users<span class="p">;</span>
 +----+---------+--------+
 <span class="p">|</span> id <span class="p">|</span> name    <span class="p">|</span> status <span class="p">|</span>
 +----+---------+--------+
@@ -2673,13 +2688,13 @@ Let&#8217;s pretend the table &#8216;users&#8217; has the following data:</p>
 </pre></div>
 </div>
 <p>If we delete any of the two records the status will be updated instead of delete the record:</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="nx">Users</span><span class="o">::</span><span class="na">findFirst</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">delete</span><span class="p">();</span>
 </pre></div>
 </div>
 <p>The operation will result in the following data in the table:</p>
-<div class="highlight-bash"><div class="highlight"><pre>mysql&gt; <span class="k">select</span> * from users<span class="p">;</span>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>mysql&gt; <span class="k">select</span> * from users<span class="p">;</span>
 +----+---------+--------+
 <span class="p">|</span> id <span class="p">|</span> name    <span class="p">|</span> status <span class="p">|</span>
 +----+---------+--------+
@@ -2693,11 +2708,11 @@ Let&#8217;s pretend the table &#8216;users&#8217; has the following data:</p>
 </div>
 <div class="section" id="creating-your-own-behaviors">
 <h3>创建行为（Creating your own behaviors）<a class="headerlink" href="#creating-your-own-behaviors" title="永久链接至标题">¶</a></h3>
-<p>The ORM provides an API to create your own behaviors. A behavior must be a class implementing the <a class="reference internal" href="../api/Phalcon_Mvc_Model_BehaviorInterface.html"><em>Phalcon\Mvc\Model\BehaviorInterface</em></a>.
-Also, <a class="reference internal" href="../api/Phalcon_Mvc_Model_Behavior.html"><em>Phalcon\Mvc\Model\Behavior</em></a> provides most of the methods needed to ease the implementation of behaviors.</p>
+<p>The ORM provides an API to create your own behaviors. A behavior must be a class implementing the <a class="reference internal" href="../api/Phalcon_Mvc_Model_BehaviorInterface.html"><span class="doc">Phalcon\Mvc\Model\BehaviorInterface</span></a>.
+Also, <a class="reference internal" href="../api/Phalcon_Mvc_Model_Behavior.html"><span class="doc">Phalcon\Mvc\Model\Behavior</span></a> provides most of the methods needed to ease the implementation of behaviors.</p>
 <p>The following behavior is an example, it implements the Blameable behavior which helps identify the user
 that is performed operations over a model:</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="k">use</span> <span class="nx">Phalcon\Mvc\Model\Behavior</span><span class="p">;</span>
 <span class="k">use</span> <span class="nx">Phalcon\Mvc\Model\BehaviorInterface</span><span class="p">;</span>
@@ -2730,7 +2745,7 @@ that is performed operations over a model:</p>
 </pre></div>
 </div>
 <p>The former is a very simple behavior, but it illustrates how to create a behavior, now let&#8217;s add this behavior to a model:</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="k">use</span> <span class="nx">Phalcon\Mvc\Model</span><span class="p">;</span>
 
@@ -2744,7 +2759,7 @@ that is performed operations over a model:</p>
 </pre></div>
 </div>
 <p>A behavior is also capable of intercepting missing methods on your models:</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="k">use</span> <span class="nx">Phalcon\Tag</span><span class="p">;</span>
 <span class="k">use</span> <span class="nx">Phalcon\Mvc\Model\Behavior</span><span class="p">;</span>
@@ -2763,7 +2778,7 @@ that is performed operations over a model:</p>
 </pre></div>
 </div>
 <p>Call that method on a model that implements Sluggable returns a SEO friendly title:</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="nv">$title</span> <span class="o">=</span> <span class="nv">$post</span><span class="o">-&gt;</span><span class="na">getSlug</span><span class="p">();</span>
 </pre></div>
@@ -2773,7 +2788,7 @@ that is performed operations over a model:</p>
 <h3>使用 Traits 实现行为(Using Traits as behaviors)<a class="headerlink" href="#traits-using-traits-as-behaviors" title="永久链接至标题">¶</a></h3>
 <p>Starting from PHP 5.4 you can use <a class="reference external" href="http://php.net/manual/en/language.oop5.traits.php">Traits</a> to re-use code in your classes, this is another way to implement
 custom behaviors. The following trait implements a simple version of the Timestampable behavior:</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="k">trait</span> <span class="nx">MyTimestampable</span>
 <span class="p">{</span>
@@ -2790,7 +2805,7 @@ custom behaviors. The following trait implements a simple version of the Timesta
 </pre></div>
 </div>
 <p>Then you can use it in your model as follows:</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="k">use</span> <span class="nx">Phalcon\Mvc\Model</span><span class="p">;</span>
 
@@ -2808,7 +2823,7 @@ custom behaviors. The following trait implements a simple version of the Timesta
 the table. Phalcon will recognize the new column names and will rename them accordingly to match the respective columns in the database.
 This is a great feature when one needs to rename fields in the database without having to worry about all the queries
 in the code. A change in the column map in the model will take care of the rest. For example:</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="k">use</span> <span class="nx">Phalcon\Mvc\Model</span><span class="p">;</span>
 
@@ -2837,7 +2852,7 @@ in the code. A change in the column map in the model will take care of the rest.
 </pre></div>
 </div>
 <p>Then you can use the new names naturally in your code:</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="c1">// Find a robot by its name</span>
 <span class="nv">$robot</span> <span class="o">=</span> <span class="nx">Robots</span><span class="o">::</span><span class="na">findFirst</span><span class="p">(</span><span class="s2">&quot;theName = &#39;Voltron&#39;&quot;</span><span class="p">);</span>
@@ -2881,7 +2896,7 @@ in the code. A change in the column map in the model will take care of the rest.
 <div class="section" id="updating-related-records">
 <h3>更新关联表记录（Updating related records）<a class="headerlink" href="#updating-related-records" title="永久链接至标题">¶</a></h3>
 <p>Instead of doing this:</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="k">foreach</span> <span class="p">(</span><span class="nv">$robots</span><span class="o">-&gt;</span><span class="na">getParts</span><span class="p">()</span> <span class="k">as</span> <span class="nv">$part</span><span class="p">)</span> <span class="p">{</span>
     <span class="nv">$part</span><span class="o">-&gt;</span><span class="na">stock</span>      <span class="o">=</span> <span class="mi">100</span><span class="p">;</span>
@@ -2898,7 +2913,7 @@ in the code. A change in the column map in the model will take care of the rest.
 </pre></div>
 </div>
 <p>you can do this:</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="nv">$robots</span><span class="o">-&gt;</span><span class="na">getParts</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">update</span><span class="p">(</span>
     <span class="k">array</span><span class="p">(</span>
@@ -2909,7 +2924,7 @@ in the code. A change in the column map in the model will take care of the rest.
 </pre></div>
 </div>
 <p>&#8216;update&#8217; also accepts an anonymous function to filter what records must be updated:</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="nv">$data</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
     <span class="s1">&#39;stock&#39;</span>      <span class="o">=&gt;</span> <span class="mi">100</span><span class="p">,</span>
@@ -2930,7 +2945,7 @@ in the code. A change in the column map in the model will take care of the rest.
 <div class="section" id="deleting-related-records">
 <h3>删除关联表记录（Deleting related records）<a class="headerlink" href="#deleting-related-records" title="永久链接至标题">¶</a></h3>
 <p>Instead of doing this:</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="k">foreach</span> <span class="p">(</span><span class="nv">$robots</span><span class="o">-&gt;</span><span class="na">getParts</span><span class="p">()</span> <span class="k">as</span> <span class="nv">$part</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">if</span> <span class="p">(</span><span class="nv">$part</span><span class="o">-&gt;</span><span class="na">delete</span><span class="p">()</span> <span class="o">==</span> <span class="k">false</span><span class="p">)</span> <span class="p">{</span>
@@ -2944,13 +2959,13 @@ in the code. A change in the column map in the model will take care of the rest.
 </pre></div>
 </div>
 <p>you can do this:</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="nv">$robots</span><span class="o">-&gt;</span><span class="na">getParts</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">delete</span><span class="p">();</span>
 </pre></div>
 </div>
 <p>&#8216;delete&#8217; also accepts an anonymous function to filter what records must be deleted:</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="c1">// Delete only whose stock is greater or equal than zero</span>
 <span class="nv">$robots</span><span class="o">-&gt;</span><span class="na">getParts</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">delete</span><span class="p">(</span><span class="k">function</span> <span class="p">(</span><span class="nv">$part</span><span class="p">)</span> <span class="p">{</span>
@@ -2967,7 +2982,7 @@ in the code. A change in the column map in the model will take care of the rest.
 <div class="section" id="use-dynamic-update">
 <h2>动态更新（Use Dynamic Update）<a class="headerlink" href="#use-dynamic-update" title="永久链接至标题">¶</a></h2>
 <p>设置了动态更新，模型将会自动根据查询快照，去判断是否有字段值发生了更改，如果有更改才会去保存更新：</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="k">use</span> <span class="nx">Phalcon\Mvc\Model</span><span class="p">;</span>
 
@@ -2981,7 +2996,7 @@ in the code. A change in the column map in the model will take care of the rest.
 </pre></div>
 </div>
 <p>获取发生变化的字段列表：</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="c1">// Get a record from the database</span>
 <span class="nv">$robot</span> <span class="o">=</span> <span class="nx">Robots</span><span class="o">::</span><span class="na">findFirst</span><span class="p">();</span>
@@ -2999,7 +3014,7 @@ in the code. A change in the column map in the model will take care of the rest.
 <h2>设置模式（Pointing to a different schema）<a class="headerlink" href="#pointing-to-a-different-schema" title="永久链接至标题">¶</a></h2>
 <p>If a model is mapped to a table that is in a different schemas/databases than the default. You can use the getSchema method to define that:</p>
 <p>如果一个模型映射到一个在非默认的schemas/数据库中的表，你可以通过 getSchema 方法去定义它：</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="k">use</span> <span class="nx">Phalcon\Mvc\Model</span><span class="p">;</span>
 
@@ -3016,11 +3031,11 @@ in the code. A change in the column map in the model will take care of the rest.
 <div class="section" id="setting-multiple-databases">
 <h2>设置多个数据库（Setting multiple databases）<a class="headerlink" href="#setting-multiple-databases" title="永久链接至标题">¶</a></h2>
 <p>In Phalcon, all models can belong to the same database connection or have an individual one. Actually, when
-<a class="reference internal" href="../api/Phalcon_Mvc_Model.html"><em>Phalcon\Mvc\Model</em></a> needs to connect to the database it requests the &#8220;db&#8221; service
+<a class="reference internal" href="../api/Phalcon_Mvc_Model.html"><span class="doc">Phalcon\Mvc\Model</span></a> needs to connect to the database it requests the &#8220;db&#8221; service
 in the application&#8217;s services container. You can overwrite this service setting it in the initialize method:</p>
-<p>在Phalcon中，所有模型可以属于同一个数据库连接，也可以分属独立的数据库连接。实际上，当 <a class="reference internal" href="../api/Phalcon_Mvc_Model.html"><em>Phalcon\Mvc\Model</em></a>
+<p>在Phalcon中，所有模型可以属于同一个数据库连接，也可以分属独立的数据库连接。实际上，当 <a class="reference internal" href="../api/Phalcon_Mvc_Model.html"><span class="doc">Phalcon\Mvc\Model</span></a>
 需要连接数据库的时候，它在应用服务容器内请求&#8221;db&#8221;这个服务。 可以通过在 initialize 方法内重写这个服务的设置。</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="k">use</span> <span class="nx">Phalcon\Db\Adapter\Pdo\Mysql</span> <span class="k">as</span> <span class="nx">MysqlPdo</span><span class="p">;</span>
 <span class="k">use</span> <span class="nx">Phalcon\Db\Adapter\Pdo\PostgreSQL</span> <span class="k">as</span> <span class="nx">PostgreSQLPdo</span><span class="p">;</span>
@@ -3052,7 +3067,7 @@ in the application&#8217;s services container. You can overwrite this service se
 </div>
 <p>Then, in the initialize method, we define the connection service for the model:</p>
 <p>然后，在 Initialize 方法内，我们为这个模型定义数据库连接。</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="k">use</span> <span class="nx">Phalcon\Mvc\Model</span><span class="p">;</span>
 
@@ -3070,7 +3085,7 @@ in the application&#8217;s services container. You can overwrite this service se
 <p>But Phalcon offers you more flexibility, you can define the connection that must be used to &#8216;read&#8217; and for &#8216;write&#8217;. This is specially useful
 to balance the load to your databases implementing a master-slave architecture:</p>
 <p>另外Phalcon还提供了更多的灵活性，你可分别定义用来读取和写入的数据库连接。这对实现主从架构的数据库负载均衡非常有用。</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="k">use</span> <span class="nx">Phalcon\Mvc\Model</span><span class="p">;</span>
 
@@ -3085,7 +3100,7 @@ to balance the load to your databases implementing a master-slave architecture:<
 </pre></div>
 </div>
 <p>也可以用如下方法实现：</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="k">use</span> <span class="nx">Phalcon\Mvc\Model</span><span class="p">;</span>
 
@@ -3120,7 +3135,7 @@ to balance the load to your databases implementing a master-slave architecture:<
 <p>The ORM also provides Horizontal Sharding facilities, by allowing you to implement a &#8216;shard&#8217; selection
 according to the current query conditions:</p>
 <p>另外ORM还可以通过根据当前查询条件来实现一个 &#8216;shard&#8217; 选择器，来实现水平切分的功能。</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="k">use</span> <span class="nx">Phalcon\Mvc\Model</span><span class="p">;</span>
 
@@ -3178,23 +3193,23 @@ according to the current query conditions:</p>
 <p>The method &#8216;selectReadConnection&#8217; is called to choose the right connection, this method intercepts any new
 query executed:</p>
 <p>&#8216;selectReadConnection&#8217; 方法用来选择正确的数据库连接，这个方法拦截任何新的查询操作：</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="nv">$robot</span> <span class="o">=</span> <span class="nx">Robots</span><span class="o">::</span><span class="na">findFirst</span><span class="p">(</span><span class="s1">&#39;id = 101&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
 <blockquote class="highlights">
-<div>在 <a class="reference internal" href="phql.html"><em>Model查询器</em></a> 中可实现同样的功能。</div></blockquote>
+<div>在 <a class="reference internal" href="phql.html"><span class="doc">Model查询器</span></a> 中可实现同样的功能。</div></blockquote>
 </div>
 </div>
 <div class="section" id="sql-logging-low-level-sql-statements">
 <h2>记录底层 SQL 语句（Logging Low-Level SQL Statements）<a class="headerlink" href="#sql-logging-low-level-sql-statements" title="永久链接至标题">¶</a></h2>
-<p>When using high-level abstraction components such as <a class="reference internal" href="../api/Phalcon_Mvc_Model.html"><em>Phalcon\Mvc\Model</em></a> to access a database, it is
-difficult to understand which statements are finally sent to the database system. <a class="reference internal" href="../api/Phalcon_Mvc_Model.html"><em>Phalcon\Mvc\Model</em></a>
-is supported internally by <a class="reference internal" href="../api/Phalcon_Db.html"><em>Phalcon\Db</em></a>. <a class="reference internal" href="../api/Phalcon_Logger.html"><em>Phalcon\Logger</em></a> interacts
-with <a class="reference internal" href="../api/Phalcon_Db.html"><em>Phalcon\Db</em></a>, providing logging capabilities on the database abstraction layer, thus allowing us to log SQL
+<p>When using high-level abstraction components such as <a class="reference internal" href="../api/Phalcon_Mvc_Model.html"><span class="doc">Phalcon\Mvc\Model</span></a> to access a database, it is
+difficult to understand which statements are finally sent to the database system. <a class="reference internal" href="../api/Phalcon_Mvc_Model.html"><span class="doc">Phalcon\Mvc\Model</span></a>
+is supported internally by <a class="reference internal" href="../api/Phalcon_Db.html"><span class="doc">Phalcon\Db</span></a>. <a class="reference internal" href="../api/Phalcon_Logger.html"><span class="doc">Phalcon\Logger</span></a> interacts
+with <a class="reference internal" href="../api/Phalcon_Db.html"><span class="doc">Phalcon\Db</span></a>, providing logging capabilities on the database abstraction layer, thus allowing us to log SQL
 statements as they happen.</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="k">use</span> <span class="nx">Phalcon\Logger</span><span class="p">;</span>
 <span class="k">use</span> <span class="nx">Phalcon\Events\Manager</span><span class="p">;</span>
@@ -3231,7 +3246,7 @@ statements as they happen.</p>
 </pre></div>
 </div>
 <p>As models access the default database connection, all SQL statements that are sent to the database system will be logged in the file:</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="nv">$robot</span>             <span class="o">=</span> <span class="k">new</span> <span class="nx">Robots</span><span class="p">();</span>
 <span class="nv">$robot</span><span class="o">-&gt;</span><span class="na">name</span>       <span class="o">=</span> <span class="s2">&quot;Robby the Robot&quot;</span><span class="p">;</span>
@@ -3243,17 +3258,17 @@ statements as they happen.</p>
 </pre></div>
 </div>
 <p>As above, the file <em>app/logs/db.log</em> will contain something like this:</p>
-<div class="highlight-irc"><div class="highlight"><pre>[Mon, 30 Apr 12 13:47:18 -0500][DEBUG][Resource Id #77] INSERT INTO robots
+<div class="highlight-irc"><div class="highlight"><pre><span></span>[Mon, 30 Apr 12 13:47:18 -0500][DEBUG][Resource Id #77] INSERT INTO robots
 (name, created_at) VALUES (&#39;Robby the Robot&#39;, &#39;1956-07-21&#39;)
 </pre></div>
 </div>
 </div>
 <div class="section" id="sql-profiling-sql-statements">
 <h2>分析 SQL 语句（Profiling SQL Statements）<a class="headerlink" href="#sql-profiling-sql-statements" title="永久链接至标题">¶</a></h2>
-<p>Thanks to <a class="reference internal" href="../api/Phalcon_Db.html"><em>Phalcon\Db</em></a>, the underlying component of <a class="reference internal" href="../api/Phalcon_Mvc_Model.html"><em>Phalcon\Mvc\Model</em></a>,
+<p>Thanks to <a class="reference internal" href="../api/Phalcon_Db.html"><span class="doc">Phalcon\Db</span></a>, the underlying component of <a class="reference internal" href="../api/Phalcon_Mvc_Model.html"><span class="doc">Phalcon\Mvc\Model</span></a>,
 it&#8217;s possible to profile the SQL statements generated by the ORM in order to analyze the performance of database operations. With
 this you can diagnose performance problems and to discover bottlenecks.</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="k">use</span> <span class="nx">Phalcon\Db\Profiler</span> <span class="k">as</span> <span class="nx">ProfilerDb</span><span class="p">;</span>
 <span class="k">use</span> <span class="nx">Phalcon\Events\Manager</span> <span class="k">as</span> <span class="nx">EventsManager</span><span class="p">;</span>
@@ -3298,7 +3313,7 @@ this you can diagnose performance problems and to discover bottlenecks.</p>
 </pre></div>
 </div>
 <p>Profiling some queries:</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="c1">// Send some SQL statements to the database</span>
 <span class="nx">Robots</span><span class="o">::</span><span class="na">find</span><span class="p">();</span>
@@ -3330,7 +3345,7 @@ this you can diagnose performance problems and to discover bottlenecks.</p>
 <h2>注入服务到模型（Injecting services into Models）<a class="headerlink" href="#injecting-services-into-models" title="永久链接至标题">¶</a></h2>
 <p>You may be required to access the application services within a model, the following example explains how to do that:</p>
 <p>你可能需要在模型中用到应用中注入的服务，下面的例子会教你如何去做：</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="k">use</span> <span class="nx">Phalcon\Mvc\Model</span><span class="p">;</span>
 
@@ -3357,7 +3372,7 @@ obtaining the &#8220;flash&#8221; service from the DI container. By doing this, 
 <h2>禁用或启用特性（Disabling/Enabling Features）<a class="headerlink" href="#disabling-enabling-features" title="永久链接至标题">¶</a></h2>
 <p>In the ORM we have implemented a mechanism that allow you to enable/disable specific features or options globally on the fly.
 According to how you use the ORM you can disable that you aren&#8217;t using. These options can also be temporarily disabled if required:</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="k">use</span> <span class="nx">Phalcon\Mvc\Model</span><span class="p">;</span>
 
@@ -3412,8 +3427,8 @@ According to how you use the ORM you can disable that you aren&#8217;t using. Th
 </div>
 <div class="section" id="stand-alone-component">
 <h2>独立的组件（Stand-Alone component）<a class="headerlink" href="#stand-alone-component" title="永久链接至标题">¶</a></h2>
-<p>Using <a class="reference internal" href=""><em>Phalcon\Mvc\Model</em></a> in a stand-alone mode can be demonstrated below:</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<p>Using <a class="reference internal" href="#"><span class="doc">Phalcon\Mvc\Model</span></a> in a stand-alone mode can be demonstrated below:</p>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="k">use</span> <span class="nx">Phalcon\Di</span><span class="p">;</span>
 <span class="k">use</span> <span class="nx">Phalcon\Mvc\Model</span><span class="p">;</span>
@@ -3455,12 +3470,12 @@ According to how you use the ORM you can disable that you aren&#8217;t using. Th
 <p>在这里将介绍如何获取模型在数据库中对应表的元数据。</p>
 <div class="section" id="manual-meta-data">
 <h3>自定义元数据（Manual Meta-Data）<a class="headerlink" href="#manual-meta-data" title="永久链接至标题">¶</a></h3>
-<p>在模型中添加 <code class="code docutils literal"><span class="pre">metaData</span></code> 方法即可。 <a class="reference internal" href="models-metadata.html"><em>了解更多</em></a></p>
+<p>在模型中添加 <code class="code docutils literal"><span class="pre">metaData</span></code> 方法即可。 <a class="reference internal" href="models-metadata.html"><span class="doc">了解更多</span></a></p>
 </div>
 <div class="section" id="manual-fields">
 <h3>自定义字段（Manual Fields）<a class="headerlink" href="#manual-fields" title="永久链接至标题">¶</a></h3>
 <p>有时候我们只是想简单的隐藏一些字段，在模型中覆盖 <code class="code docutils literal"><span class="pre">getAttributes</span></code> 方法即可，实现代码如下：</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="c1">// Create a model</span>
 <span class="k">class</span> <span class="nc">Robots</span> <span class="k">extends</span> <span class="nx">Model</span>
@@ -3476,7 +3491,7 @@ According to how you use the ORM you can disable that you aren&#8217;t using. Th
 <div class="section" id="gets-real-field">
 <h3>获取字段真实名称（Gets Real Field）<a class="headerlink" href="#gets-real-field" title="永久链接至标题">¶</a></h3>
 <p>实现代码如下：</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 
 <span class="k">use</span> <span class="nx">Phalcon\Mvc\Model</span><span class="p">;</span>

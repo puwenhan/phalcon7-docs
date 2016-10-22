@@ -21,6 +21,8 @@
 
     <script src="../static/jquery.min.js"></script>
     <link rel="shortcut icon" href="../static/img/favicon.ico"/>
+    <link rel="index" title="索引" href="../index.html" />
+    <link rel="search" title="搜索" href="../search.html" />
     <link rel="top" title="Phalcon7 1.0.0 文档" href="../index.html" />
     <link rel="next" title="事务管理（Model Transactions）" href="model-transactions.html" />
     <link rel="prev" title="使用模型（Working with Models）" href="models.html" /> 
@@ -106,11 +108,11 @@
 			  
   <div class="section" id="models-meta-data">
 <h1>模型元数据（Models Meta-Data）<a class="headerlink" href="#models-meta-data" title="永久链接至标题">¶</a></h1>
-<p>To speed up development <a class="reference internal" href="../api/Phalcon_Mvc_Model.html"><em>Phalcon\Mvc\Model</em></a> helps you to query fields and constraints from tables
-related to models. To achieve this, <a class="reference internal" href="../api/Phalcon_Mvc_Model_MetaData.html"><em>Phalcon\Mvc\Model\MetaData</em></a> is available to manage
+<p>To speed up development <a class="reference internal" href="../api/Phalcon_Mvc_Model.html"><span class="doc">Phalcon\Mvc\Model</span></a> helps you to query fields and constraints from tables
+related to models. To achieve this, <a class="reference internal" href="../api/Phalcon_Mvc_Model_MetaData.html"><span class="doc">Phalcon\Mvc\Model\MetaData</span></a> is available to manage
 and cache table meta-data.</p>
 <p>Sometimes it is necessary to get those attributes when working with models. You can get a meta-data instance as follows:</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="nv">$robot</span>      <span class="o">=</span> <span class="k">new</span> <span class="nx">Robots</span><span class="p">();</span>
 
@@ -145,28 +147,28 @@ time you use the table. This could be done caching the meta-data using any of th
 <tbody valign="top">
 <tr class="row-even"><td>Memory</td>
 <td>这个是默认适配器，将元数据缓存在内存中。当请求完成时，元数据缓存将被释放，适合在应用程序开发阶段使用，每个请求都会重新获取字段信息。</td>
-<td><a class="reference internal" href="../api/Phalcon_Mvc_Model_MetaData_Memory.html"><em>Phalcon\Mvc\Model\MetaData\Memory</em></a></td>
+<td><a class="reference internal" href="../api/Phalcon_Mvc_Model_MetaData_Memory.html"><span class="doc">Phalcon\Mvc\Model\MetaData\Memory</span></a></td>
 </tr>
 <tr class="row-odd"><td>Session</td>
 <td>这个适配器将元数据缓存在 <code class="code docutils literal"><span class="pre">$_SESSION</span></code> 超全局变量中。该适配器只适合在拥有少量模型的时候使用，每次启动新的 Session 该适配器缓存就会失效。必须在 <code class="code docutils literal"><span class="pre">session_start()</span></code> 启动 Session 之后使用。</td>
-<td><a class="reference internal" href="../api/Phalcon_Mvc_Model_MetaData_Session.html"><em>Phalcon\Mvc\Model\MetaData\Session</em></a></td>
+<td><a class="reference internal" href="../api/Phalcon_Mvc_Model_MetaData_Session.html"><span class="doc">Phalcon\Mvc\Model\MetaData\Session</span></a></td>
 </tr>
 <tr class="row-even"><td>Apc</td>
 <td>This adapter uses the <a class="reference external" href="http://www.php.net/manual/en/book.apc.php">Alternative PHP Cache (APC)</a> to store the table meta-data. You can specify the lifetime of the meta-data with options. This is the most recommended way to store meta-data when the application is in production stage.</td>
-<td><a class="reference internal" href="../api/Phalcon_Mvc_Model_MetaData_Apc.html"><em>Phalcon\Mvc\Model\MetaData\Apc</em></a></td>
+<td><a class="reference internal" href="../api/Phalcon_Mvc_Model_MetaData_Apc.html"><span class="doc">Phalcon\Mvc\Model\MetaData\Apc</span></a></td>
 </tr>
 <tr class="row-odd"><td>XCache</td>
 <td>This adapter uses <a class="reference external" href="http://xcache.lighttpd.net/">XCache</a> to store the table meta-data. You can specify the lifetime of the meta-data with options. This is the most recommended way to store meta-data when the application is in production stage.</td>
-<td><a class="reference internal" href="../api/Phalcon_Mvc_Model_MetaData_Xcache.html"><em>Phalcon\Mvc\Model\MetaData\Xcache</em></a></td>
+<td><a class="reference internal" href="../api/Phalcon_Mvc_Model_MetaData_Xcache.html"><span class="doc">Phalcon\Mvc\Model\MetaData\Xcache</span></a></td>
 </tr>
 <tr class="row-even"><td>Files</td>
 <td>This adapter uses plain files to store meta-data. By using this adapter the disk-reading is increased but the database access is reduced</td>
-<td><a class="reference internal" href="../api/Phalcon_Mvc_Model_MetaData_Files.html"><em>Phalcon\Mvc\Model\MetaData\Files</em></a></td>
+<td><a class="reference internal" href="../api/Phalcon_Mvc_Model_MetaData_Files.html"><span class="doc">Phalcon\Mvc\Model\MetaData\Files</span></a></td>
 </tr>
 </tbody>
 </table>
 <p>As other ORM&#8217;s dependencies, the metadata manager is requested from the services container:</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="k">use</span> <span class="nx">Phalcon\Mvc\Model\MetaData\Apc</span> <span class="k">as</span> <span class="nx">ApcMetaData</span><span class="p">;</span>
 
@@ -190,7 +192,7 @@ time you use the table. This could be done caching the meta-data using any of th
 <p>As mentioned above the default strategy to obtain the model&#8217;s meta-data is database introspection. In this strategy, the information
 schema is used to know the fields in a table, its primary key, nullable fields, data types, etc.</p>
 <p>You can change the default meta-data introspection in the following way:</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="k">use</span> <span class="nx">Phalcon\Mvc\Model\MetaData\Apc</span> <span class="k">as</span> <span class="nx">ApcMetaData</span><span class="p">;</span>
 
@@ -217,8 +219,8 @@ schema is used to know the fields in a table, its primary key, nullable fields, 
 </div>
 <div class="section" id="annotations-strategy">
 <h3>注释策略（Annotations Strategy）<a class="headerlink" href="#annotations-strategy" title="永久链接至标题">¶</a></h3>
-<p>This strategy makes use of <a class="reference internal" href="annotations.html"><em>annotations</em></a> to describe the columns in a model:</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<p>This strategy makes use of <a class="reference internal" href="annotations.html"><span class="doc">annotations</span></a> to describe the columns in a model:</p>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="k">use</span> <span class="nx">Phalcon\Mvc\Model</span><span class="p">;</span>
 
@@ -297,7 +299,7 @@ are handled as simple class attributes.</p>
 </tbody>
 </table>
 <p>The annotations strategy could be set up this way:</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="k">use</span> <span class="nx">Phalcon\Mvc\Model\MetaData\Apc</span> <span class="k">as</span> <span class="nx">ApcMetaData</span><span class="p">;</span>
 <span class="k">use</span> <span class="nx">Phalcon\Mvc\Model\MetaData\Strategy\Annotations</span> <span class="k">as</span> <span class="nx">StrategyAnnotations</span><span class="p">;</span>
@@ -329,7 +331,7 @@ using any of the introspection strategies presented above.</p>
 any strategy set in the  meta-data manager. New columns added/modified/removed to/from the mapped
 table must be added/modified/removed also for everything to work properly.</p>
 <p>The following example shows how to define the meta-data manually:</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="k">use</span> <span class="nx">Phalcon\Mvc\Model</span><span class="p">;</span>
 <span class="k">use</span> <span class="nx">Phalcon\Db\Column</span><span class="p">;</span>

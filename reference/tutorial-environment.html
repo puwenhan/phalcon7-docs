@@ -21,6 +21,8 @@
 
     <script src="../static/jquery.min.js"></script>
     <link rel="shortcut icon" href="../static/img/favicon.ico"/>
+    <link rel="index" title="索引" href="../index.html" />
+    <link rel="search" title="搜索" href="../search.html" />
     <link rel="top" title="Phalcon7 1.0.0 文档" href="../index.html" />
     <link rel="next" title="示例列表（List of examples）" href="samples.html" />
     <link rel="prev" title="教程：创建简单的 REST API（Tutorial: Creating a Simple REST API）" href="tutorial-rest.html" /> 
@@ -105,7 +107,7 @@
 <div class="section" id="project-structure">
 <h2>项目结构（Project Structure）<a class="headerlink" href="#project-structure" title="永久链接至标题">¶</a></h2>
 <p>下面是我们的项目结构：</p>
-<div class="highlight-bash"><div class="highlight"><pre>evn/
+<div class="highlight-bash"><div class="highlight"><pre><span></span>evn/
 app/
     config/
     config.php
@@ -125,7 +127,7 @@ app/
 <div class="section" id="bootstrap">
 <h2>引导文件（Bootstrap）<a class="headerlink" href="#bootstrap" title="永久链接至标题">¶</a></h2>
 <p>下面是引导文件 <cite>public/index.php</cite> 的实现，在这里我们是通过域名的不同来区别开发或生产环境，你们也可以通过配置来设定环境变量：</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="nv">$config_basedir</span> <span class="o">=</span> <span class="nx">__DIR__</span> <span class="o">.</span> <span class="s1">&#39;/../apps/config/&#39;</span><span class="p">;</span>
 <span class="nx">Phalcon\Config\Adapter\Php</span><span class="o">::</span><span class="na">setBasePath</span><span class="p">(</span><span class="nv">$config_basedir</span><span class="p">);</span>

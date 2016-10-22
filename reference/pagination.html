@@ -21,6 +21,8 @@
 
     <script src="../static/jquery.min.js"></script>
     <link rel="shortcut icon" href="../static/img/favicon.ico"/>
+    <link rel="index" title="索引" href="../index.html" />
+    <link rel="search" title="搜索" href="../search.html" />
     <link rel="top" title="Phalcon7 1.0.0 文档" href="../index.html" />
     <link rel="next" title="使用缓存提高性能（Improving Performance with Cache）" href="cache.html" />
     <link rel="prev" title="数组助手（Array Helper）" href="arr.html" /> 
@@ -120,14 +122,14 @@ fast and convenient way to split these sets of data into browsable pages.</p>
 </tr>
 </thead>
 <tbody valign="top">
-<tr class="row-even"><td><a class="reference internal" href="../api/Phalcon_Paginator_Adapter_NativeArray.html"><em>NativeArray</em></a></td>
+<tr class="row-even"><td><a class="reference internal" href="../api/Phalcon_Paginator_Adapter_NativeArray.html"><span class="doc">NativeArray</span></a></td>
 <td>Use a PHP array as source data</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="../api/Phalcon_Paginator_Adapter_Model.html"><em>Model</em></a></td>
-<td>Use a <a class="reference internal" href="../api/Phalcon_Mvc_Model_Resultset.html"><em>Phalcon\Mvc\Model\Resultset</em></a> object as source data. Since PDO doesn&#8217;t support scrollable cursors this adapter shouldn&#8217;t be used to paginate a large number of records</td>
+<tr class="row-odd"><td><a class="reference internal" href="../api/Phalcon_Paginator_Adapter_Model.html"><span class="doc">Model</span></a></td>
+<td>Use a <a class="reference internal" href="../api/Phalcon_Mvc_Model_Resultset.html"><span class="doc">Phalcon\Mvc\Model\Resultset</span></a> object as source data. Since PDO doesn&#8217;t support scrollable cursors this adapter shouldn&#8217;t be used to paginate a large number of records</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="../api/Phalcon_Paginator_Adapter_QueryBuilder.html"><em>QueryBuilder</em></a></td>
-<td>Use a <a class="reference internal" href="../api/Phalcon_Mvc_Model_Query_Builder.html"><em>Phalcon\Mvc\Model\Query\Builder</em></a> object as source data</td>
+<tr class="row-even"><td><a class="reference internal" href="../api/Phalcon_Paginator_Adapter_QueryBuilder.html"><span class="doc">QueryBuilder</span></a></td>
+<td>Use a <a class="reference internal" href="../api/Phalcon_Mvc_Model_Query_Builder.html"><span class="doc">Phalcon\Mvc\Model\Query\Builder</span></a> object as source data</td>
 </tr>
 </tbody>
 </table>
@@ -135,7 +137,7 @@ fast and convenient way to split these sets of data into browsable pages.</p>
 <div class="section" id="examples">
 <h2>示例（Examples）<a class="headerlink" href="#examples" title="永久链接至标题">¶</a></h2>
 <p>In the example below, the paginator will use the result of a query from a model as its source data, and limit the displayed data to 10 records per page:</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="k">use</span> <span class="nx">Phalcon\Paginator\Adapter\Model</span> <span class="k">as</span> <span class="nx">PaginatorModel</span><span class="p">;</span>
 
@@ -163,7 +165,7 @@ fast and convenient way to split these sets of data into browsable pages.</p>
 </div>
 <p>The <code class="code docutils literal"><span class="pre">$currentPage</span></code> variable controls the page to be displayed. The <code class="code docutils literal"><span class="pre">$paginator-&gt;getPaginate()</span></code> returns a <code class="code docutils literal"><span class="pre">$page</span></code>
 object that contains the paginated data. It can be used for generating the pagination:</p>
-<div class="highlight-html+php"><div class="highlight"><pre><span class="p">&lt;</span><span class="nt">table</span><span class="p">&gt;</span>
+<div class="highlight-html+php"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">table</span><span class="p">&gt;</span>
     <span class="p">&lt;</span><span class="nt">tr</span><span class="p">&gt;</span>
         <span class="p">&lt;</span><span class="nt">th</span><span class="p">&gt;</span>Id<span class="p">&lt;/</span><span class="nt">th</span><span class="p">&gt;</span>
         <span class="p">&lt;</span><span class="nt">th</span><span class="p">&gt;</span>Name<span class="p">&lt;/</span><span class="nt">th</span><span class="p">&gt;</span>
@@ -180,7 +182,7 @@ object that contains the paginated data. It can be used for generating the pagin
 </pre></div>
 </div>
 <p>The <code class="code docutils literal"><span class="pre">$page</span></code> object also contains navigation data:</p>
-<div class="highlight-html+php"><div class="highlight"><pre><span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;/robots/search&quot;</span><span class="p">&gt;</span>First<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+<div class="highlight-html+php"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;/robots/search&quot;</span><span class="p">&gt;</span>First<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
 <span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;/robots/search?page=</span><span class="cp">&lt;?</span><span class="o">=</span> <span class="nv">$page</span><span class="o">-&gt;</span><span class="na">before</span><span class="p">;</span> <span class="cp">?&gt;</span><span class="s">&quot;</span><span class="p">&gt;</span>Previous<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
 <span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;/robots/search?page=</span><span class="cp">&lt;?</span><span class="o">=</span> <span class="nv">$page</span><span class="o">-&gt;</span><span class="na">next</span><span class="p">;</span> <span class="cp">?&gt;</span><span class="s">&quot;</span><span class="p">&gt;</span>Next<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
 <span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;/robots/search?page=</span><span class="cp">&lt;?</span><span class="o">=</span> <span class="nv">$page</span><span class="o">-&gt;</span><span class="na">last</span><span class="p">;</span> <span class="cp">?&gt;</span><span class="s">&quot;</span><span class="p">&gt;</span>Last<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
@@ -192,7 +194,7 @@ object that contains the paginated data. It can be used for generating the pagin
 <div class="section" id="adapters-usage">
 <h2>适配器使用（Adapters Usage）<a class="headerlink" href="#adapters-usage" title="永久链接至标题">¶</a></h2>
 <p>An example of the source data that must be used for each adapter:</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="k">use</span> <span class="nx">Phalcon\Paginator\Adapter\Model</span> <span class="k">as</span> <span class="nx">PaginatorModel</span><span class="p">;</span>
 <span class="k">use</span> <span class="nx">Phalcon\Paginator\Adapter\NativeArray</span> <span class="k">as</span> <span class="nx">PaginatorArray</span><span class="p">;</span>
@@ -279,8 +281,8 @@ object that contains the paginated data. It can be used for generating the pagin
 </div>
 <div class="section" id="implementing-your-own-adapters">
 <h2>自定义适配器（Implementing your own adapters）<a class="headerlink" href="#implementing-your-own-adapters" title="永久链接至标题">¶</a></h2>
-<p>The <a class="reference internal" href="../api/Phalcon_Paginator_AdapterInterface.html"><em>Phalcon\Paginator\AdapterInterface</em></a> interface must be implemented in order to create your own paginator adapters or extend the existing ones:</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<p>The <a class="reference internal" href="../api/Phalcon_Paginator_AdapterInterface.html"><span class="doc">Phalcon\Paginator\AdapterInterface</span></a> interface must be implemented in order to create your own paginator adapters or extend the existing ones:</p>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="k">use</span> <span class="nx">Phalcon\Paginator\AdapterInterface</span> <span class="k">as</span> <span class="nx">PaginatorInterface</span><span class="p">;</span>
 

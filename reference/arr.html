@@ -21,6 +21,8 @@
 
     <script src="../static/jquery.min.js"></script>
     <link rel="shortcut icon" href="../static/img/favicon.ico"/>
+    <link rel="index" title="索引" href="../index.html" />
+    <link rel="search" title="搜索" href="../search.html" />
     <link rel="top" title="Phalcon7 1.0.0 文档" href="../index.html" />
     <link rel="next" title="分页（Pagination）" href="pagination.html" />
     <link rel="prev" title="读取配置（Reading Configurations）" href="config.html" /> 
@@ -107,7 +109,7 @@
 <p>Phalcon中提供了 <code class="code docutils literal"><span class="pre">Phalcon\Arr</span></code> 数组助手类，让你更高效地处理数组。</p>
 <div class="section" id="gets-value">
 <h2>获取值（Gets Value）<a class="headerlink" href="#gets-value" title="永久链接至标题">¶</a></h2>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="nv">$value</span> <span class="o">=</span> <span class="nx">\Phalcon\Arr</span><span class="o">::</span><span class="na">get</span><span class="p">(</span><span class="nv">$_GET</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span><span class="p">);</span>
 <span class="nv">$value</span> <span class="o">=</span> <span class="nx">\Phalcon\Arr</span><span class="o">::</span><span class="na">get</span><span class="p">(</span><span class="nv">$user</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span><span class="p">);</span>
@@ -121,7 +123,7 @@
 <li>回调函数</li>
 </ul>
 <p>用原生PHP从一个对象、数组、或者包含这两者的一个复杂数据结构中获取数据是非常繁琐的。你首先得使用isset 检查 key 是否存在, 然后如果存在你就获取它，如果不存在，则提供一个默认返回值，Phalcon 提供了一个非常方便的方法来做这件事：</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="nv">$data</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
     <span class="s1">&#39;username&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Dreamszhu&#39;</span><span class="p">,</span>
@@ -139,7 +141,7 @@
 </div>
 <div class="section" id="id1">
 <h3>通过路径获取值（Gets Value）<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h3>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="nv">$value</span> <span class="o">=</span> <span class="nx">\Phalcon\Arr</span><span class="o">::</span><span class="na">path</span><span class="p">(</span><span class="nv">$_GET</span><span class="p">,</span> <span class="s1">&#39;foo.bar.name&#39;</span><span class="p">);</span>
 </pre></div>
@@ -155,13 +157,13 @@
 <div class="section" id="converts-an-object-into-an-array">
 <h2>对象转换为数组（Converts an object into an array）<a class="headerlink" href="#converts-an-object-into-an-array" title="永久链接至标题">¶</a></h2>
 <p>你经常要将一个对象或者对象的数组转换成一个数组，如下代码可完成这个工作：</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="nv">$arr</span> <span class="o">=</span> <span class="nx">\Phalcon\Arr</span><span class="o">::</span><span class="na">toArray</span><span class="p">(</span><span class="nv">$object</span><span class="p">);</span>
 </pre></div>
 </div>
 <p>下面的例子中展示了基本的使用方法：</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="nv">$data</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
     <span class="s1">&#39;username&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Dreamszhu&#39;</span><span class="p">,</span>
