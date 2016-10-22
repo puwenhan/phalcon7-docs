@@ -83,7 +83,10 @@
 <li><a class="reference internal" href="#">MVC 应用（MVC Applications）</a><ul>
 <li><a class="reference internal" href="#single-or-multi-module-applications">单模块或多模块应用（Single or Multi Module Applications）</a><ul>
 <li><a class="reference internal" href="#single-module">单模块（Single Module）</a></li>
-<li><a class="reference internal" href="#multi-module">多模块（Multi Module）</a></li>
+<li><a class="reference internal" href="#multi-module">多模块（Multi Module）</a><ul>
+<li><a class="reference internal" href="#module-define-class">模块定义类（Module Define Class）</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li><a class="reference internal" href="#understanding-the-default-behavior">理解默认行为（Understanding the default behavior）</a></li>
@@ -112,7 +115,7 @@
 <p>在Phalcon，策划MVC操作背后的全部困难工作通常都可以通过 <a class="reference internal" href="../api/Phalcon_Mvc_Application.html"><em>Phalcon\Mvc\Application</em></a> 做到。这个组件封装了全部后端所需要的复杂操作，实例化每一个需要用到的组件并与项目整合在一起，从而使得MVC模式可以如期地运行。</p>
 <div class="section" id="single-or-multi-module-applications">
 <h2>单模块或多模块应用（Single or Multi Module Applications）<a class="headerlink" href="#single-or-multi-module-applications" title="永久链接至标题">¶</a></h2>
-<p>通过这个组件，你可以运行各式各样的MVC结构，多模块跟单模块的区别就是多模块会根据路由返回的模块名称，之后去设置自动加载器、视图、调度器等各类服务和组件。</p>
+<p>通过这个组件，你可以运行各式各样的MVC结构，多模块跟单模块的区别就是，多模块会在路由返回的模块名称，之后去设置自动加载器、视图、调度器等各类服务和组件。</p>
 <div class="section" id="single-module">
 <h3>单模块（Single Module）<a class="headerlink" href="#single-module" title="永久链接至标题">¶</a></h3>
 <p>单一的MVC应用仅仅包含了一个模块。可以使用命名空间，但不是必需的。
@@ -233,7 +236,9 @@
 <span class="x">    js/</span>
 </pre></div>
 </div>
-<p>在apps/下的每一个目录都有自己的MVC结构。<cite>Module.php</cite> 文件代表了各个模块不同的配置，如自动加载器和自定义服务：</p>
+<div class="section" id="module-define-class">
+<h4>模块定义类（Module Define Class）<a class="headerlink" href="#module-define-class" title="永久链接至标题">¶</a></h4>
+<p>在`apps/<cite>下的每一个目录都有自己的 MVC 结构。`Module.php</cite> 文件定义了各个模块不同的配置，如自动加载器、视图和自定义服务：</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
 
 <span class="k">namespace</span> <span class="nx">Multiple\Backend</span><span class="p">;</span>
@@ -407,6 +412,7 @@
 每个都是需要的，以便每一个被匹配到的路由都能返回一个有效的模块。每个已经注册的模块都有一个相关的类来提供建立和启动自身的函数。
 而每个模块定义的类都必须实现registerAutoloaders()和registerServices()这两个方法，这两个函数会在模块即被执行时被
 <a class="reference internal" href="../api/Phalcon_Mvc_Application.html"><em>Phalcon\Mvc\Application</em></a> 调用。</p>
+</div>
 </div>
 </div>
 <div class="section" id="understanding-the-default-behavior">
