@@ -88,6 +88,7 @@
 			  
   <div class="section" id="class-phalcon-events-event">
 <h1>Class <strong>Phalcon\Events\Event</strong><a class="headerlink" href="#class-phalcon-events-event" title="永久链接至标题">¶</a></h1>
+<p><em>implements</em> <a class="reference internal" href="Phalcon_Events_EventInterface.html"><em>Phalcon\Events\EventInterface</em></a></p>
 <p><span class="raw-html"><a href="https://github.com/dreamsxin/cphalcon7/blob/master/ext/events/event.c" class="btn btn-default btn-sm">Source on GitHub</a></span></p>
 <p>This class offers contextual information of a fired event in the EventsManager</p>
 <div class="section" id="methods">
@@ -98,6 +99,8 @@
 <p>Set the event&#8217;s type</p>
 <p>public <em>string</em>  <strong>getType</strong> ()</p>
 <p>Returns the event&#8217;s type</p>
+<p>public <em>object</em>  <strong>setSource</strong> (<em>unknown</em> $source)</p>
+<p>Sets the event&#8217;s source</p>
 <p>public <em>object</em>  <strong>getSource</strong> ()</p>
 <p>Returns the event&#8217;s source</p>
 <p>public  <strong>setData</strong> (<em>string</em> $data)</p>
@@ -106,12 +109,14 @@
 <p>Returns the event&#8217;s data</p>
 <p>public  <strong>setCancelable</strong> (<em>boolean</em> $cancelable)</p>
 <p>Sets if the event is cancelable</p>
-<p>public <em>boolean</em>  <strong>getCancelable</strong> ()</p>
+<p>public <em>boolean</em>  <strong>isCancelable</strong> ()</p>
 <p>Check whether the event is cancelable</p>
 <p>public  <strong>stop</strong> ()</p>
 <p>Stops the event preventing propagation</p>
 <p>public  <strong>isStopped</strong> ()</p>
 <p>Check whether the event is currently stopped</p>
+<p>public  <strong>getCancelable</strong> ()</p>
+<p>...</p>
 </div>
 </div>
 

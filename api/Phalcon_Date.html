@@ -136,8 +136,8 @@
 <p>Converts a DOS timestamp to UNIX format.There are very few cases where this is needed, but some binary formats use it (eg: zip files.) $unix = Phalcon\Date::dos2unix($dos);</p>
 <p>public static <em>string</em>  <strong>formatted_time</strong> ([<em>string</em> $datetime_str], [<em>string</em> $timestamp_format], [<em>string</em> $timezone])</p>
 <p>Returns a date/time string with the specified timestamp format $time = Phalcon\Date::formatted_time(&#8216;5 minutes ago&#8217;);</p>
-<p>public static <em>string</em>  <strong>valid</strong> (<em>unknown</em> $date, [<em>unknown</em> $format])</p>
-<p>Returns a date/time string with the specified timestamp format $ret = Phalcon\Date::valid(&#8216;2012-01-22&#8217;); $ret = Phalcon\Date::valid(&#8216;2012-01-22 11:00:00&#8217;, &#8216;Y-m-d H:i:s&#8217;);</p>
+<p>public static <em>boolean</em>  <strong>valid</strong> (<em>unknown</em> $date, [<em>unknown</em> $format])</p>
+<p>Checks if a value is a valid date $ret = Phalcon\Date::valid(&#8216;2012-01-22&#8217;); $ret = Phalcon\Date::valid(&#8216;2012-01-22 11:00:00&#8217;, &#8216;Y-m-d H:i:s&#8217;);</p>
 </div>
 </div>
 

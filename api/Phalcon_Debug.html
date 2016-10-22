@@ -134,10 +134,6 @@
 <p>Handles user-defined error</p>
 <p>public <em>boolean</em>  <strong>onShutdown</strong> ()</p>
 <p>Handles user-defined error</p>
-<p>public static <em>string</em>  <strong>getCharset</strong> ()</p>
-<p>Returns the character set used to display the HTML</p>
-<p>public <a class="reference internal" href=""><em>Phalcon\Debug</em></a>  <strong>setCharset</strong> (<em>string</em> $charset)</p>
-<p>Sets the character set used to display the HTML</p>
 <p>public <em>int</em>  <strong>getLinesBeforeContext</strong> ()</p>
 <p>Returns the number of lines deplayed before the error line</p>
 <p>public <a class="reference internal" href=""><em>Phalcon\Debug</em></a>  <strong>setLinesBeforeContext</strong> (<em>int</em> $lines)</p>
@@ -148,8 +144,12 @@
 <p>Sets the number of lines deplayed after the error line</p>
 <p>protected  <strong>getFileLink</strong> (<em>unknown</em> $file, <em>unknown</em> $line, <em>unknown</em> $format)</p>
 <p>...</p>
-<p>public static <a class="reference internal" href=""><em>Phalcon\Debug</em></a>  <strong>enable</strong> ()</p>
+<p>public static  <strong>enable</strong> ([<a class="reference internal" href="Phalcon_Logger_AdapterInterface.html"><em>Phalcon\Logger\AdapterInterface</em></a> $logger])</p>
 <p>Enable simple debug mode</p>
+<p>public static  <strong>disable</strong> ()</p>
+<p>Disable simple debug mode</p>
+<p>public static  <strong>log</strong> (<em>string</em> $message, [<em>mixed</em> $type], [<em>array</em> $context])</p>
+<p>Logs messages</p>
 </div>
 </div>
 

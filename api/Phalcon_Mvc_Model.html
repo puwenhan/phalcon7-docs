@@ -121,7 +121,7 @@
 </div>
 <div class="section" id="methods">
 <h2>Methods<a class="headerlink" href="#methods" title="永久链接至标题">¶</a></h2>
-<p>final public  <strong>__construct</strong> ([<code class="xref doc docutils literal"><span class="pre">Phalcon\DiInterface</span></code> $dependencyInjector])</p>
+<p>final public  <strong>__construct</strong> ([<em>unknown</em> $data], [<code class="xref doc docutils literal"><span class="pre">Phalcon\DiInterface</span></code> $dependencyInjector])</p>
 <p>Phalcon\Mvc\Model constructor</p>
 <p>public  <strong>setEventsManager</strong> (<a class="reference internal" href="Phalcon_Events_ManagerInterface.html"><em>Phalcon\Events\ManagerInterface</em></a> $eventsManager)</p>
 <p>Sets a custom events manager</p>
@@ -824,6 +824,14 @@
 <p>...</p>
 <p>public  <strong>getRealAttributes</strong> ()</p>
 <p>...</p>
+<p>public <em>array</em>  <strong>jsonSerialize</strong> ()</p>
+<p>Returns serialised model as array for json_encode.</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+
+ <span class="nv">$robot</span> <span class="o">=</span> <span class="nx">Robots</span><span class="o">::</span><span class="na">findFirst</span><span class="p">();</span>
+ <span class="k">echo</span> <span class="nb">json_encode</span><span class="p">(</span><span class="nv">$robot</span><span class="p">);</span>
+</pre></div>
+</div>
 <p>public  <strong>setDI</strong> (<code class="xref doc docutils literal"><span class="pre">Phalcon\DiInterface</span></code> $dependencyInjector) inherited from Phalcon\DI\Injectable</p>
 <p>Sets the dependency injector</p>
 <p>public <code class="xref doc docutils literal"><span class="pre">Phalcon\DiInterface</span></code>  <strong>getDI</strong> ([<em>unknown</em> $error]) inherited from Phalcon\DI\Injectable</p>

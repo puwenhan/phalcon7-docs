@@ -254,17 +254,20 @@
  <span class="p">{{</span> <span class="nx">radio_field</span><span class="p">(</span><span class="s1">&#39;Save&#39;</span><span class="p">)</span> <span class="p">}}</span>
 </pre></div>
 </div>
-<p>public static <em>string</em>  <strong>imageInput</strong> (<em>array</em> $parameters)</p>
-<p>Builds a HTML input[type=&#8221;image&#8221;] tag</p>
+<p>public static <em>string</em>  <strong>imageInput</strong> ([<em>array</em> $parameters], [<em>boolean</em> $local])</p>
+<p>Builds HTML IMG tags</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
 
- <span class="k">echo</span> <span class="nx">Phalcon\Tag</span><span class="o">::</span><span class="na">imageInput</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s2">&quot;src&quot;</span> <span class="o">=&gt;</span> <span class="s2">&quot;/img/button.png&quot;</span><span class="p">));</span>
+    <span class="k">echo</span> <span class="nx">Phalcon\Tag</span><span class="o">::</span><span class="na">image</span><span class="p">(</span><span class="s2">&quot;img/bg.png&quot;</span><span class="p">);</span>
+    <span class="k">echo</span> <span class="nx">Phalcon\Tag</span><span class="o">::</span><span class="na">image</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s2">&quot;img/photo.jpg&quot;</span><span class="p">,</span> <span class="s2">&quot;alt&quot;</span> <span class="o">=&gt;</span> <span class="s2">&quot;Some Photo&quot;</span><span class="p">));</span>
 </pre></div>
 </div>
-<p>Volt syntax:</p>
+<p>Volt Syntax:</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
 
- <span class="p">{{</span> <span class="nx">image_input</span><span class="p">(</span><span class="s1">&#39;src&#39;</span><span class="o">:</span> <span class="s1">&#39;/img/button.png&#39;</span><span class="p">)</span> <span class="p">}}</span>
+    <span class="p">{{</span> <span class="nx">image</span><span class="p">(</span><span class="s2">&quot;img/bg.png&quot;</span><span class="p">)</span> <span class="p">}}</span>
+    <span class="p">{{</span> <span class="nx">image</span><span class="p">(</span><span class="s2">&quot;img/photo.jpg&quot;</span><span class="p">,</span> <span class="s2">&quot;alt&quot;</span><span class="o">:</span> <span class="s2">&quot;Some Photo&quot;</span><span class="p">)</span> <span class="p">}}</span>
+    <span class="p">{{</span> <span class="nx">image</span><span class="p">(</span><span class="s2">&quot;http://static.mywebsite.com/img/bg.png&quot;</span><span class="p">,</span> <span class="k">false</span><span class="p">)</span> <span class="p">}}</span>
 </pre></div>
 </div>
 <p>public static <em>string</em>  <strong>submitButton</strong> (<em>array</em> $parameters)</p>
@@ -406,22 +409,6 @@
  <span class="p">{{</span> <span class="nx">javascript_include</span><span class="p">(</span><span class="s2">&quot;javascript/jquery.js&quot;</span><span class="p">)</span> <span class="p">}}</span>
 </pre></div>
 </div>
-<p>public static <em>string</em>  <strong>image</strong> ([<em>array</em> $parameters], [<em>boolean</em> $local])</p>
-<p>Builds HTML IMG tags</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
-
-    <span class="k">echo</span> <span class="nx">Phalcon\Tag</span><span class="o">::</span><span class="na">image</span><span class="p">(</span><span class="s2">&quot;img/bg.png&quot;</span><span class="p">);</span>
-    <span class="k">echo</span> <span class="nx">Phalcon\Tag</span><span class="o">::</span><span class="na">image</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s2">&quot;img/photo.jpg&quot;</span><span class="p">,</span> <span class="s2">&quot;alt&quot;</span> <span class="o">=&gt;</span> <span class="s2">&quot;Some Photo&quot;</span><span class="p">));</span>
-</pre></div>
-</div>
-<p>Volt Syntax:</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
-
-    <span class="p">{{</span> <span class="nx">image</span><span class="p">(</span><span class="s2">&quot;img/bg.png&quot;</span><span class="p">)</span> <span class="p">}}</span>
-    <span class="p">{{</span> <span class="nx">image</span><span class="p">(</span><span class="s2">&quot;img/photo.jpg&quot;</span><span class="p">,</span> <span class="s2">&quot;alt&quot;</span><span class="o">:</span> <span class="s2">&quot;Some Photo&quot;</span><span class="p">)</span> <span class="p">}}</span>
-    <span class="p">{{</span> <span class="nx">image</span><span class="p">(</span><span class="s2">&quot;http://static.mywebsite.com/img/bg.png&quot;</span><span class="p">,</span> <span class="k">false</span><span class="p">)</span> <span class="p">}}</span>
-</pre></div>
-</div>
 <p>public static <em>text</em>  <strong>friendlyTitle</strong> (<em>string</em> $text, [<em>string</em> $separator], [<em>boolean</em> $lowercase])</p>
 <p>Converts texts into URL-friendly titles</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
@@ -456,6 +443,48 @@
 <p>public static <em>array</em>  <strong>getDefaultParams</strong> ()</p>
 <p>Returns default params</p>
 <p>public static  <strong>choice</strong> (<em>unknown</em> $expression, <em>unknown</em> $value1, [<em>unknown</em> $value2])</p>
+<p>...</p>
+<p>public static  <strong>color</strong> (<em>unknown</em> $parameters)</p>
+<p>...</p>
+<p>public static  <strong>text</strong> (<em>unknown</em> $parameters)</p>
+<p>...</p>
+<p>public static  <strong>number</strong> (<em>unknown</em> $parameters)</p>
+<p>...</p>
+<p>public static  <strong>range</strong> (<em>unknown</em> $parameters)</p>
+<p>...</p>
+<p>public static  <strong>email</strong> (<em>unknown</em> $parameters)</p>
+<p>...</p>
+<p>public static  <strong>date</strong> (<em>unknown</em> $parameters)</p>
+<p>...</p>
+<p>public static  <strong>dateTime</strong> (<em>unknown</em> $parameters)</p>
+<p>...</p>
+<p>public static  <strong>dateTimeLocal</strong> (<em>unknown</em> $parameters)</p>
+<p>...</p>
+<p>public static  <strong>month</strong> (<em>unknown</em> $parameters)</p>
+<p>...</p>
+<p>public static  <strong>time</strong> (<em>unknown</em> $parameters)</p>
+<p>...</p>
+<p>public static  <strong>week</strong> (<em>unknown</em> $parameters)</p>
+<p>...</p>
+<p>public static  <strong>password</strong> (<em>unknown</em> $parameters)</p>
+<p>...</p>
+<p>public static  <strong>hidden</strong> (<em>unknown</em> $parameters)</p>
+<p>...</p>
+<p>public static  <strong>search</strong> (<em>unknown</em> $parameters)</p>
+<p>...</p>
+<p>public static  <strong>tel</strong> (<em>unknown</em> $parameters)</p>
+<p>...</p>
+<p>public static  <strong>url</strong> (<em>unknown</em> $parameters)</p>
+<p>...</p>
+<p>public static  <strong>file</strong> (<em>unknown</em> $parameters)</p>
+<p>...</p>
+<p>public static  <strong>check</strong> (<em>unknown</em> $parameters)</p>
+<p>...</p>
+<p>public static  <strong>radio</strong> (<em>unknown</em> $parameters)</p>
+<p>...</p>
+<p>public static  <strong>image</strong> (<em>unknown</em> $parameters)</p>
+<p>...</p>
+<p>public static  <strong>submit</strong> (<em>unknown</em> $parameters)</p>
 <p>...</p>
 </div>
 </div>

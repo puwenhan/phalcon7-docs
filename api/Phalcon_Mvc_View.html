@@ -212,6 +212,8 @@
 <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">view</span><span class="o">-&gt;</span><span class="na">setParamToView</span><span class="p">(</span><span class="s1">&#39;products&#39;</span><span class="p">,</span> <span class="nv">$products</span><span class="p">);</span>
 </pre></div>
 </div>
+<p>public <em>array</em>  <strong>getParamsToView</strong> ()</p>
+<p>Returns parameters to views</p>
 <p>public <a class="reference internal" href=""><em>Phalcon\Mvc\View</em></a>  <strong>setVars</strong> (<em>array</em> $params, [<em>boolean</em> $merge])</p>
 <p>Set all the render params</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
@@ -228,17 +230,15 @@
 </div>
 <p>public <em>mixed</em>  <strong>getVar</strong> (<em>string</em> $key)</p>
 <p>Returns a parameter previously set in the view</p>
-<p>public <em>array</em>  <strong>getParamsToView</strong> ()</p>
-<p>Returns parameters to views</p>
-<p>public <a class="reference internal" href=""><em>Phalcon\Mvc\View</em></a>  <strong>setControllerName</strong> ()</p>
+<p>public <a class="reference internal" href=""><em>Phalcon\Mvc\View</em></a>  <strong>setControllerName</strong> (<em>string</em> $controllerName)</p>
 <p>Sets the controller name to be view</p>
 <p>public <em>string</em>  <strong>getControllerName</strong> ()</p>
 <p>Gets the name of the controller rendered</p>
-<p>public <a class="reference internal" href=""><em>Phalcon\Mvc\View</em></a>  <strong>setActionName</strong> ()</p>
+<p>public <a class="reference internal" href=""><em>Phalcon\Mvc\View</em></a>  <strong>setActionName</strong> (<em>string</em> $actionName)</p>
 <p>Sets the action name to be view</p>
 <p>public <em>string</em>  <strong>getActionName</strong> ()</p>
 <p>Gets the name of the action rendered</p>
-<p>public <a class="reference internal" href=""><em>Phalcon\Mvc\View</em></a>  <strong>setParams</strong> ()</p>
+<p>public <a class="reference internal" href=""><em>Phalcon\Mvc\View</em></a>  <strong>setParams</strong> (<em>array</em> $params)</p>
 <p>Sets the extra parameters to be view</p>
 <p>public <em>array</em>  <strong>getParams</strong> ()</p>
 <p>Gets extra parameters of the action rendered</p>
@@ -267,8 +267,8 @@
 <p>Returns the registered templating engines</p>
 <p>public <em>array</em>  <strong>getEngines</strong> ()</p>
 <p>Returns the registered templating engines, if none is registered it will use Phalcon\Mvc\View\Engine\Php</p>
-<p>public  <strong>exists</strong> (<em>unknown</em> $view)</p>
-<p>...</p>
+<p>public <em>boolean</em>  <strong>exists</strong> (<em>string</em> $view, [<em>unknown</em> $absolute_path])</p>
+<p>Checks whether a view file exists</p>
 <p>public <a class="reference internal" href=""><em>Phalcon\Mvc\View</em></a>  <strong>render</strong> (<em>string</em> $controllerName, <em>string</em> $actionName, [<em>array</em> $params], [<em>unknown</em> $namespace], [<a class="reference internal" href="Phalcon_Mvc_View_ModelInterface.html"><em>Phalcon\Mvc\View\ModelInterface</em></a> $viewModel])</p>
 <p>Executes render process from dispatching data</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
@@ -340,6 +340,12 @@
 </div>
 <p>public <em>string</em>  <strong>getContent</strong> ()</p>
 <p>Returns cached output from another view stage</p>
+<p>public  <strong>startSection</strong> (<em>string</em> $name)</p>
+<p>Start a new section block</p>
+<p>public <em>string</em>  <strong>stopSection</strong> ()</p>
+<p>Stop the current section block</p>
+<p>public <em>string|null</em>  <strong>section</strong> (<em>string</em> $name, [<em>unknown</em> $defaultValue])</p>
+<p>Returns the content for a section block</p>
 <p>public <em>string</em>  <strong>getActiveRenderPath</strong> ()</p>
 <p>Returns the path of the view that is currently rendered</p>
 <p>public <a class="reference internal" href=""><em>Phalcon\Mvc\View</em></a>  <strong>disable</strong> ()</p>
@@ -348,6 +354,18 @@
 <p>Enables the auto-rendering process</p>
 <p>public <em>bool</em>  <strong>isDisabled</strong> ()</p>
 <p>Whether automatic rendering is enabled</p>
+<p>public <a class="reference internal" href=""><em>Phalcon\Mvc\View</em></a>  <strong>enableNamespaceView</strong> ()</p>
+<p>Enables namespace view render</p>
+<p>public <a class="reference internal" href=""><em>Phalcon\Mvc\View</em></a>  <strong>disableNamespaceView</strong> ()</p>
+<p>Disables namespace view render</p>
+<p>public <a class="reference internal" href=""><em>Phalcon\Mvc\View</em></a>  <strong>enableLowerCase</strong> ()</p>
+<p>Enables to lower case view path</p>
+<p>public <a class="reference internal" href=""><em>Phalcon\Mvc\View</em></a>  <strong>disableLowerCase</strong> ()</p>
+<p>Whether to lower case view path</p>
+<p>public <a class="reference internal" href=""><em>Phalcon\Mvc\View</em></a>  <strong>setConverter</strong> (<em>string</em> $name, <em>callable</em> $converter)</p>
+<p>Adds a converter</p>
+<p>public <em>callable|null</em>  <strong>getConverter</strong> (<em>unknown</em> $name)</p>
+<p>Returns the router converter</p>
 <p>public <a class="reference internal" href=""><em>Phalcon\Mvc\View</em></a>  <strong>reset</strong> ()</p>
 <p>Resets the view component to its factory default values</p>
 <p>public  <strong>__set</strong> (<em>unknown</em> $property, <em>mixed</em> $value)</p>
@@ -371,18 +389,8 @@
 <span class="nb">isset</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">view</span><span class="o">-&gt;</span><span class="na">products</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>public <a class="reference internal" href=""><em>Phalcon\Mvc\View</em></a>  <strong>enableNamespaceView</strong> ()</p>
-<p>Enables the auto-rendering process</p>
-<p>public <a class="reference internal" href=""><em>Phalcon\Mvc\View</em></a>  <strong>disableNamespaceView</strong> ()</p>
-<p>Whether automatic rendering is enabled</p>
-<p>public <a class="reference internal" href=""><em>Phalcon\Mvc\View</em></a>  <strong>enableLowerCase</strong> ()</p>
-<p>Enables to lower case view path</p>
-<p>public <a class="reference internal" href=""><em>Phalcon\Mvc\View</em></a>  <strong>disableLowerCase</strong> ()</p>
-<p>Whether to lower case view path</p>
-<p>public <a class="reference internal" href=""><em>Phalcon\Mvc\View</em></a>  <strong>setConverter</strong> ()</p>
-<p>Adds a converter</p>
-<p>public <em>callable|null</em>  <strong>getConverter</strong> ()</p>
-<p>Returns the router converter</p>
+<p>public  <strong>insert</strong> (<em>unknown</em> $partialPath)</p>
+<p>...</p>
 <p>public  <strong>setDI</strong> (<code class="xref doc docutils literal"><span class="pre">Phalcon\DiInterface</span></code> $dependencyInjector) inherited from Phalcon\DI\Injectable</p>
 <p>Sets the dependency injector</p>
 <p>public <code class="xref doc docutils literal"><span class="pre">Phalcon\DiInterface</span></code>  <strong>getDI</strong> ([<em>unknown</em> $error]) inherited from Phalcon\DI\Injectable</p>

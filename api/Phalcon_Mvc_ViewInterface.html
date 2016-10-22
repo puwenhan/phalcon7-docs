@@ -104,16 +104,22 @@
 <p>Sets a partials sub-directory. Must be a directory under the views directory. Depending of your platform, always add a trailing slash or backslash</p>
 <p>abstract public <em>string</em>  <strong>getPartialsDir</strong> ()</p>
 <p>Gets the current partials sub-directory</p>
-<p>abstract public  <strong>setBasePath</strong> (<em>string</em> $basePath)</p>
+<p>abstract public <a class="reference internal" href=""><em>Phalcon\Mvc\ViewInterface</em></a>  <strong>setBasePath</strong> (<em>string</em> $basePath)</p>
 <p>Sets base path. Depending of your platform, always add a trailing slash or backslash</p>
+<p>abstract public <em>string</em>  <strong>getBasePath</strong> ()</p>
+<p>Gets base path</p>
 <p>abstract public <em>string</em>  <strong>getCurrentRenderLevel</strong> ()</p>
 <p>Gets the current render level</p>
 <p>abstract public <em>string</em>  <strong>getRenderLevel</strong> ()</p>
 <p>Gets the render level for the view</p>
-<p>abstract public  <strong>setRenderLevel</strong> (<em>string</em> $level)</p>
+<p>abstract public <a class="reference internal" href=""><em>Phalcon\Mvc\ViewInterface</em></a>  <strong>setRenderLevel</strong> (<em>string</em> $level)</p>
 <p>Sets the render level for the view</p>
-<p>abstract public  <strong>setMainView</strong> (<em>string</em> $viewPath)</p>
-<p>Sets default view name. Must be a file without extension in the views directory</p>
+<p>abstract public  <strong>disableLevel</strong> (<em>string</em> $level)</p>
+<p>Sets the render level for the view</p>
+<p>abstract public  <strong>getDisabledLevels</strong> ()</p>
+<p>...</p>
+<p>abstract public <a class="reference internal" href=""><em>Phalcon\Mvc\ViewInterface</em></a>  <strong>setMainView</strong> (<em>unknown</em> $viewPath)</p>
+<p>Disables a specific level of rendering</p>
 <p>abstract public <em>string</em>  <strong>getMainView</strong> ()</p>
 <p>Returns the name of the main view</p>
 <p>abstract public  <strong>setLayout</strong> (<em>string</em> $layout)</p>
@@ -130,14 +136,24 @@
 <p>Resets any template before layouts</p>
 <p>abstract public  <strong>setParamToView</strong> (<em>string</em> $key, <em>mixed</em> $value)</p>
 <p>Adds parameters to views (alias of setVar)</p>
-<p>abstract public  <strong>setVar</strong> (<em>string</em> $key, <em>mixed</em> $value)</p>
-<p>Adds parameters to views</p>
 <p>abstract public <em>array</em>  <strong>getParamsToView</strong> ()</p>
 <p>Returns parameters to views</p>
+<p>abstract public <a class="reference internal" href=""><em>Phalcon\Mvc\ViewInterface</em></a>  <strong>setVars</strong> (<em>array</em> $params, [<em>boolean</em> $merge])</p>
+<p>Set all the render params</p>
+<p>abstract public <a class="reference internal" href=""><em>Phalcon\Mvc\ViewInterface</em></a>  <strong>setVar</strong> (<em>string</em> $key, <em>mixed</em> $value)</p>
+<p>Adds parameters to views</p>
+<p>abstract public <em>mixed</em>  <strong>getVar</strong> (<em>string</em> $key)</p>
+<p>Returns a parameter previously set in the view</p>
+<p>abstract public <a class="reference internal" href=""><em>Phalcon\Mvc\ViewInterface</em></a>  <strong>setControllerName</strong> (<em>string</em> $controllerName)</p>
+<p>Sets the controller name to be view</p>
 <p>abstract public <em>string</em>  <strong>getControllerName</strong> ()</p>
 <p>Gets the name of the controller rendered</p>
+<p>abstract public <a class="reference internal" href=""><em>Phalcon\Mvc\ViewInterface</em></a>  <strong>setActionName</strong> (<em>string</em> $actionName)</p>
+<p>Sets the action name to be view</p>
 <p>abstract public <em>string</em>  <strong>getActionName</strong> ()</p>
 <p>Gets the name of the action rendered</p>
+<p>abstract public <a class="reference internal" href=""><em>Phalcon\Mvc\ViewInterface</em></a>  <strong>setParams</strong> (<em>array</em> $params)</p>
+<p>Sets the extra parameters to be view</p>
 <p>abstract public <em>array</em>  <strong>getParams</strong> ()</p>
 <p>Gets extra parameters of the action rendered</p>
 <p>abstract public  <strong>start</strong> ()</p>
@@ -146,16 +162,22 @@
 <p>Register templating engines</p>
 <p>abstract public  <strong>getRegisteredEngines</strong> ()</p>
 <p>...</p>
-<p>abstract public  <strong>getEngines</strong> ()</p>
-<p>...</p>
+<p>abstract public <em>array</em>  <strong>getEngines</strong> ()</p>
+<p>Returns the registered templating engines, if none is registered it will use Phalcon\Mvc\View\Engine\Php</p>
+<p>abstract public <em>boolean</em>  <strong>exists</strong> (<em>string</em> $view, [<em>unknown</em> $absolute_path])</p>
+<p>Checks whether a view file exists</p>
 <p>abstract public  <strong>render</strong> (<em>string</em> $controllerName, <em>string</em> $actionName, [<em>array</em> $params], [<em>unknown</em> $namespace], [<em>unknown</em> $viewModel])</p>
 <p>Executes render process from dispatching data</p>
 <p>abstract public  <strong>pick</strong> (<em>string</em> $renderView)</p>
 <p>Choose a view different to render than last-controller/last-action</p>
 <p>abstract public <em>string</em>  <strong>partial</strong> (<em>string</em> $partialPath)</p>
 <p>Renders a partial view</p>
-<p>abstract public  <strong>finish</strong> ()</p>
+<p>abstract public <em>string</em>  <strong>getRender</strong> (<em>string</em> $controllerName, <em>string</em> $actionName, [<em>array</em> $params], [<em>mixed</em> $configCallback])</p>
+<p>Perform the automatic rendering returning the output as a string</p>
+<p>abstract public <a class="reference internal" href=""><em>Phalcon\Mvc\ViewInterface</em></a>  <strong>finish</strong> ()</p>
 <p>Finishes the render process by stopping the output buffering</p>
+<p>abstract public <em>boolean</em>  <strong>isCaching</strong> ()</p>
+<p>Check if the component is currently caching the output content</p>
 <p>abstract public <a class="reference internal" href="Phalcon_Cache_BackendInterface.html"><em>Phalcon\Cache\BackendInterface</em></a>  <strong>getCache</strong> ()</p>
 <p>Returns the cache instance used to cache</p>
 <p>abstract public  <strong>cache</strong> ([<em>boolean|array</em> $options])</p>
@@ -164,16 +186,34 @@
 <p>Externally sets the view content</p>
 <p>abstract public <em>string</em>  <strong>getContent</strong> ()</p>
 <p>Returns cached ouput from another view stage</p>
+<p>abstract public  <strong>startSection</strong> (<em>string</em> $name)</p>
+<p>Start a new section block</p>
+<p>abstract public  <strong>stopSection</strong> ()</p>
+<p>Stop the current section block</p>
+<p>abstract public <em>string</em>  <strong>section</strong> (<em>unknown</em> $name, [<em>unknown</em> $defaultValue])</p>
+<p>Returns the content for a section block</p>
 <p>abstract public <em>string</em>  <strong>getActiveRenderPath</strong> ()</p>
 <p>Returns the path of the view that is currently rendered</p>
 <p>abstract public  <strong>disable</strong> ()</p>
 <p>Disables the auto-rendering process</p>
 <p>abstract public  <strong>enable</strong> ()</p>
 <p>Enables the auto-rendering process</p>
+<p>abstract public <em>bool</em>  <strong>isDisabled</strong> ()</p>
+<p>Whether automatic rendering is enabled</p>
+<p>abstract public <a class="reference internal" href=""><em>Phalcon\Mvc\ViewInterface</em></a>  <strong>enableNamespaceView</strong> ()</p>
+<p>Enables namespace view render</p>
+<p>abstract public <a class="reference internal" href=""><em>Phalcon\Mvc\ViewInterface</em></a>  <strong>disableNamespaceView</strong> ()</p>
+<p>Disables namespace view render</p>
+<p>abstract public <a class="reference internal" href=""><em>Phalcon\Mvc\ViewInterface</em></a>  <strong>enableLowerCase</strong> ()</p>
+<p>Enables to lower case view path</p>
+<p>abstract public <a class="reference internal" href=""><em>Phalcon\Mvc\ViewInterface</em></a>  <strong>disableLowerCase</strong> ()</p>
+<p>Disables to lower case view path</p>
+<p>abstract public <a class="reference internal" href=""><em>Phalcon\Mvc\ViewInterface</em></a>  <strong>setConverter</strong> (<em>string</em> $name, <em>callable</em> $converter)</p>
+<p>Adds a converter</p>
+<p>abstract public <em>callable|null</em>  <strong>getConverter</strong> (<em>unknown</em> $name)</p>
+<p>Returns the router converter</p>
 <p>abstract public  <strong>reset</strong> ()</p>
 <p>Resets the view component to its factory default values</p>
-<p>abstract public <em>bool</em>  <strong>isDisabled</strong> ()</p>
-<p>Whether the automatic rendering is disabled</p>
 </div>
 </div>
 
