@@ -83,7 +83,10 @@
 			<div class="panel-heading"><a href="../index.html">內容目录</a></div>
 			<div class="panel-body"><ul>
 <li><a class="reference internal" href="#">表单（Forms）</a><ul>
-<li><a class="reference internal" href="#forms-elements">表单元素（Forms Elements）</a></li>
+<li><a class="reference internal" href="#forms-elements">表单元素（Forms Elements）</a><ul>
+<li><a class="reference internal" href="#id1">渲染表单元素</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#initializing-forms">初始化表单（Initializing forms）</a></li>
 <li><a class="reference internal" href="#validation">验证（Validation）</a></li>
 <li><a class="reference internal" href="#filtering">过滤（Filtering）</a></li>
@@ -93,7 +96,7 @@
 <li><a class="reference internal" href="#event-callbacks">事件回调（Event Callbacks）</a></li>
 <li><a class="reference internal" href="#rendering-forms">渲染表单（Rendering Forms）</a></li>
 <li><a class="reference internal" href="#creating-form-elements">创建表单控件（Creating Form Elements）</a></li>
-<li><a class="reference internal" href="#id1">表单元素转换为数组（Creating Form Elements）</a></li>
+<li><a class="reference internal" href="#id2">表单元素转换为数组（Creating Form Elements）</a></li>
 <li><a class="reference internal" href="#forms-manager">表单管理（Forms Manager）</a></li>
 <li><a class="reference internal" href="#external-resources">外部资源（External Resources)</a></li>
 </ul>
@@ -198,6 +201,14 @@
 </pre></div>
 </div>
 <p>构造函数的第一个参数是元素名称（name），第二个参数是元素属性，第三个参数是用户选项值（自定义数据），第四个参数是选项值（比如下拉列表的值）。</p>
+<div class="section" id="id1">
+<h3>渲染表单元素<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h3>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+
+<span class="k">echo</span> <span class="nv">$element</span><span class="o">-&gt;</span><span class="na">render</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
 </div>
 <div class="section" id="initializing-forms">
 <h2>初始化表单（Initializing forms）<a class="headerlink" href="#initializing-forms" title="永久链接至标题">¶</a></h2>
@@ -544,7 +555,7 @@
 </div>
 <div class="section" id="rendering-forms">
 <h2>渲染表单（Rendering Forms）<a class="headerlink" href="#rendering-forms" title="永久链接至标题">¶</a></h2>
-<p>开发者对表单的渲染操作有完全的控制， 下面的的例子展示了如何使用标准方法渲染html元素：</p>
+<p>开发者对表单的渲染操作有完全的控制，下面的的例子展示了如何使用标准方法渲染html元素：</p>
 <div class="highlight-html+php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="o">&lt;</span><span class="nx">form</span> <span class="nx">method</span><span class="o">=</span><span class="s2">&quot;post&quot;</span><span class="o">&gt;</span>
@@ -573,6 +584,12 @@
     <span class="cp">?&gt;</span>
     <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;submit&quot;</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;Send&quot;</span><span class="p">/&gt;</span>
 <span class="p">&lt;/</span><span class="nt">form</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+<p>或者可以使用更简单的方式：</p>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+
+<span class="k">echo</span> <span class="nv">$form</span><span class="o">-&gt;</span><span class="na">render</span><span class="p">();</span>
 </pre></div>
 </div>
 <p>或是在登录表单中重用表单类：</p>
@@ -638,8 +655,8 @@
 </pre></div>
 </div>
 </div>
-<div class="section" id="id1">
-<h2>表单元素转换为数组（Creating Form Elements）<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h2>
+<div class="section" id="id2">
+<h2>表单元素转换为数组（Creating Form Elements）<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h2>
 <div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="nv">$nameElement</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">\Phalcon\Forms\Element</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;class&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;big-input&#39;</span><span class="p">),</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;some&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;value&#39;</span><span class="p">),</span> <span class="k">NULL</span><span class="p">,</span> <span class="s2">&quot;text&quot;</span><span class="p">);</span>

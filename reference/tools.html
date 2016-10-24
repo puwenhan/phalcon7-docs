@@ -135,7 +135,7 @@ chmod ugo+x /usr/bin/phalcon
 <p>我们可以在虚拟控制台上输入如下命令： <code class="code docutils literal"><span class="pre">phalcon</span> <span class="pre">commands</span></code></p>
 <div class="highlight-sh"><div class="highlight"><pre><span></span>$ phalcon commands
 
-Phalcon DevTools <span class="o">(</span>2.0.8<span class="o">)</span>
+Phalcon7 DevTools <span class="o">(</span>1.1.1<span class="o">)</span>
 
 Available commands:
   commands         <span class="o">(</span><span class="nb">alias</span> of: list, enumerate<span class="o">)</span>
@@ -145,7 +145,6 @@ Available commands:
   project          <span class="o">(</span><span class="nb">alias</span> of: create-project<span class="o">)</span>
   scaffold         <span class="o">(</span><span class="nb">alias</span> of: create-scaffold<span class="o">)</span>
   migration        <span class="o">(</span><span class="nb">alias</span> of: create-migration<span class="o">)</span>
-  webtools         <span class="o">(</span><span class="nb">alias</span> of: create-webtools<span class="o">)</span>
 </pre></div>
 </div>
 </div>
@@ -179,14 +178,17 @@ Example 例子
   phalcon project store simple
 
 Options: 选项
- --name               Name of the new project 新项目的名字
- --enable-webtools    Determines <span class="k">if</span> webtools should be enabled <span class="o">[</span>optional<span class="o">]</span> 此选项决定了新的项目中是否使用webtools开发辅助组件
- --directory<span class="o">=</span>s        Base path on which project will be created <span class="o">[</span>optional<span class="o">]</span> 在何外创建项目
- --type<span class="o">=</span>s             Type of the application to be generated <span class="o">(</span>cli, micro, simple, modules<span class="o">)</span> 应用的种类（微型，简单，多模块，console等）
- --template-path<span class="o">=</span>s    Specify a template path <span class="o">[</span>optional<span class="o">]</span> 指定模板路径
- --template-engine<span class="o">=</span>s  Define the template engine, default php <span class="o">[</span>optional<span class="o">]</span> 指定模板引擎
- --use-config-ini     Use a ini file as configuration file <span class="o">[</span>optional<span class="o">]</span> 使用ini文件作为配置保存文件
- --trace              Shows the trace of the framework in <span class="k">case</span> of exception. <span class="o">[</span>optional<span class="o">]</span> 出错时是否显示框架的trace信息
+ --name               项目的名字
+ --directory<span class="o">=</span>s        项目路径，默认当前路径
+ --type<span class="o">=</span>s             项目类型（cli, micro, simple），默认 simple
+ --template-path<span class="o">=</span>s    指定模板路径，默认 simple
+ --template-engine<span class="o">=</span>s  指定模板引擎，默认 php
+ --use-config-ini     是否使用ini文件作为配置保存文件，默认不使用
+ --adapter<span class="o">=</span>s          指定数据库适配器，默认 Mysql
+ --username<span class="o">=</span>s         设置数据库账户，默认 root
+ --password<span class="o">=</span>s         设置数据库密码，默认为空
+ --dbname<span class="o">=</span>s           设置数据库名称，默认为项目名
+ --trace              出错时是否显示框架的trace信息
  --help               Shows this <span class="nb">help</span> 显示帮助
 </pre></div>
 </div>
