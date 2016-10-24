@@ -6,6 +6,12 @@
 
 ```shell
 sudo apt-get install sphinx-common
+# or
+sudo apt install python-pip
+git clone https://github.com/dreamsxin/sphinx.git
+cd sphinx
+pip install . -i http://pypi.douban.com/simple --trusted-host pypi.douban.com
+
 cd zh
 make html
 ```
