@@ -21,6 +21,8 @@
 
     <script src="../static/jquery.min.js"></script>
     <link rel="shortcut icon" href="../static/img/favicon.ico"/>
+    <link rel="index" title="索引" href="../index.html" />
+    <link rel="search" title="搜索" href="../search.html" />
     <link rel="top" title="Phalcon7 1.0.0 文档" href="../index.html" /> 
 </head>
 <body>
@@ -89,8 +91,8 @@
 			  
   <div class="section" id="class-phalcon-mvc-model-resultset-simple">
 <h1>Class <strong>Phalcon\Mvc\Model\Resultset\Simple</strong><a class="headerlink" href="#class-phalcon-mvc-model-resultset-simple" title="永久链接至标题">¶</a></h1>
-<p><em>extends</em> abstract class <a class="reference internal" href="Phalcon_Mvc_Model_Resultset.html"><em>Phalcon\Mvc\Model\Resultset</em></a></p>
-<p><em>implements</em> Serializable, ArrayAccess, Countable, SeekableIterator, Traversable, Iterator, <a class="reference internal" href="Phalcon_Mvc_Model_ResultsetInterface.html"><em>Phalcon\Mvc\Model\ResultsetInterface</em></a></p>
+<p><em>extends</em> abstract class <a class="reference internal" href="Phalcon_Mvc_Model_Resultset.html"><span class="doc">Phalcon\Mvc\Model\Resultset</span></a></p>
+<p><em>implements</em> Serializable, ArrayAccess, Countable, SeekableIterator, Traversable, Iterator, <a class="reference internal" href="Phalcon_Mvc_Model_ResultsetInterface.html"><span class="doc">Phalcon\Mvc\Model\ResultsetInterface</span></a></p>
 <p><span class="raw-html"><a href="https://github.com/dreamsxin/cphalcon7/blob/master/ext/mvc/model/resultset/simple.c" class="btn btn-default btn-sm">Source on GitHub</a></span></p>
 <p>Simple resultsets only contains complete objects. This class builds every complete object as it is required</p>
 <div class="section" id="constants">
@@ -103,7 +105,7 @@
 </div>
 <div class="section" id="methods">
 <h2>Methods<a class="headerlink" href="#methods" title="永久链接至标题">¶</a></h2>
-<p>public  <strong>__construct</strong> (<em>array</em> $columnMap, <a class="reference internal" href="Phalcon_Mvc_ModelInterface.html"><em>Phalcon\Mvc\ModelInterface</em></a> $model, <a class="reference internal" href="Phalcon_Db_Result_Pdo.html"><em>Phalcon\Db\Result\Pdo</em></a> $result, [<a class="reference internal" href="Phalcon_Cache_BackendInterface.html"><em>Phalcon\Cache\BackendInterface</em></a> $cache], [<em>unknown</em> $sourceModel])</p>
+<p>public  <strong>__construct</strong> (<em>array</em> $columnMap, <a class="reference internal" href="Phalcon_Mvc_ModelInterface.html"><span class="doc">Phalcon\Mvc\ModelInterface</span></a> $model, <a class="reference internal" href="Phalcon_Db_Result_Pdo.html"><span class="doc">Phalcon\Db\Result\Pdo</span></a> $result, [<a class="reference internal" href="Phalcon_Cache_BackendInterface.html"><span class="doc">Phalcon\Cache\BackendInterface</span></a> $cache], [<em>unknown</em> $sourceModel])</p>
 <p>Phalcon\Mvc\Model\Resultset\Simple constructor</p>
 <p>public <em>boolean</em>  <strong>valid</strong> ()</p>
 <p>Check whether the internal resource has rows to fetch</p>
@@ -125,37 +127,37 @@
 <p>Counts how many rows are in the resultset</p>
 <p>public <em>boolean</em>  <strong>offsetExists</strong> (<em>unknown</em> $property) inherited from Phalcon\Mvc\Model\Resultset</p>
 <p>Checks whether offset exists in the resultset</p>
-<p>public <a class="reference internal" href="Phalcon_Mvc_ModelInterface.html"><em>Phalcon\Mvc\ModelInterface</em></a>  <strong>offsetGet</strong> (<em>unknown</em> $property) inherited from Phalcon\Mvc\Model\Resultset</p>
+<p>public <a class="reference internal" href="Phalcon_Mvc_ModelInterface.html"><span class="doc">Phalcon\Mvc\ModelInterface</span></a>  <strong>offsetGet</strong> (<em>unknown</em> $property) inherited from Phalcon\Mvc\Model\Resultset</p>
 <p>Gets row in a specific position of the resultset</p>
-<p>public  <strong>offsetSet</strong> (<em>unknown</em> $property, <a class="reference internal" href="Phalcon_Mvc_ModelInterface.html"><em>Phalcon\Mvc\ModelInterface</em></a> $value) inherited from Phalcon\Mvc\Model\Resultset</p>
+<p>public  <strong>offsetSet</strong> (<em>unknown</em> $property, <a class="reference internal" href="Phalcon_Mvc_ModelInterface.html"><span class="doc">Phalcon\Mvc\ModelInterface</span></a> $value) inherited from Phalcon\Mvc\Model\Resultset</p>
 <p>Resultsets cannot be changed. It has only been implemented to meet the definition of the ArrayAccess interface</p>
 <p>public  <strong>offsetUnset</strong> (<em>unknown</em> $property) inherited from Phalcon\Mvc\Model\Resultset</p>
 <p>Resultsets cannot be changed. It has only been implemented to meet the definition of the ArrayAccess interface</p>
 <p>public <em>int</em>  <strong>getType</strong> () inherited from Phalcon\Mvc\Model\Resultset</p>
 <p>Returns the internal type of data retrieval that the resultset is using</p>
-<p>public <a class="reference internal" href="Phalcon_Mvc_ModelInterface.html"><em>Phalcon\Mvc\ModelInterface</em></a>  <strong>getFirst</strong> () inherited from Phalcon\Mvc\Model\Resultset</p>
+<p>public <a class="reference internal" href="Phalcon_Mvc_ModelInterface.html"><span class="doc">Phalcon\Mvc\ModelInterface</span></a>  <strong>getFirst</strong> () inherited from Phalcon\Mvc\Model\Resultset</p>
 <p>Get first row in the resultset</p>
-<p>public <a class="reference internal" href="Phalcon_Mvc_ModelInterface.html"><em>Phalcon\Mvc\ModelInterface</em></a>  <strong>getLast</strong> () inherited from Phalcon\Mvc\Model\Resultset</p>
+<p>public <a class="reference internal" href="Phalcon_Mvc_ModelInterface.html"><span class="doc">Phalcon\Mvc\ModelInterface</span></a>  <strong>getLast</strong> () inherited from Phalcon\Mvc\Model\Resultset</p>
 <p>Get last row in the resultset</p>
-<p>public <a class="reference internal" href="Phalcon_Mvc_Model_Resultset.html"><em>Phalcon\Mvc\Model\Resultset</em></a>  <strong>setIsFresh</strong> (<em>boolean</em> $isFresh) inherited from Phalcon\Mvc\Model\Resultset</p>
+<p>public <a class="reference internal" href="Phalcon_Mvc_Model_Resultset.html"><span class="doc">Phalcon\Mvc\Model\Resultset</span></a>  <strong>setIsFresh</strong> (<em>boolean</em> $isFresh) inherited from Phalcon\Mvc\Model\Resultset</p>
 <p>Set if the resultset is fresh or an old one cached</p>
 <p>public <em>boolean</em>  <strong>isFresh</strong> () inherited from Phalcon\Mvc\Model\Resultset</p>
 <p>Tell if the resultset if fresh or an old one cached</p>
-<p>public <a class="reference internal" href="Phalcon_Mvc_Model_Resultset.html"><em>Phalcon\Mvc\Model\Resultset</em></a>  <strong>setHydrateMode</strong> (<em>int</em> $hydrateMode) inherited from Phalcon\Mvc\Model\Resultset</p>
+<p>public <a class="reference internal" href="Phalcon_Mvc_Model_Resultset.html"><span class="doc">Phalcon\Mvc\Model\Resultset</span></a>  <strong>setHydrateMode</strong> (<em>int</em> $hydrateMode) inherited from Phalcon\Mvc\Model\Resultset</p>
 <p>Sets the hydration mode in the resultset</p>
 <p>public <em>int</em>  <strong>getHydrateMode</strong> () inherited from Phalcon\Mvc\Model\Resultset</p>
 <p>Returns the current hydration mode</p>
-<p>public <a class="reference internal" href="Phalcon_Cache_BackendInterface.html"><em>Phalcon\Cache\BackendInterface</em></a>  <strong>getCache</strong> () inherited from Phalcon\Mvc\Model\Resultset</p>
+<p>public <a class="reference internal" href="Phalcon_Cache_BackendInterface.html"><span class="doc">Phalcon\Cache\BackendInterface</span></a>  <strong>getCache</strong> () inherited from Phalcon\Mvc\Model\Resultset</p>
 <p>Returns the associated cache for the resultset</p>
-<p>public <a class="reference internal" href="Phalcon_Mvc_ModelInterface.html"><em>Phalcon\Mvc\ModelInterface</em></a>  <strong>current</strong> () inherited from Phalcon\Mvc\Model\Resultset</p>
+<p>public <a class="reference internal" href="Phalcon_Mvc_ModelInterface.html"><span class="doc">Phalcon\Mvc\ModelInterface</span></a>  <strong>current</strong> () inherited from Phalcon\Mvc\Model\Resultset</p>
 <p>Returns current row in the resultset</p>
 <p>public <em>Phalcon\Mvc\Model\MessageInterface[]</em>  <strong>getMessages</strong> () inherited from Phalcon\Mvc\Model\Resultset</p>
 <p>Returns the error messages produced by a batch operation</p>
 <p>public <em>boolean</em>  <strong>delete</strong> ([<em>Closure</em> $conditionCallback]) inherited from Phalcon\Mvc\Model\Resultset</p>
 <p>Deletes every record in the resultset</p>
-<p>public <a class="reference internal" href="Phalcon_Mvc_Model.html"><em>Phalcon\Mvc\Model</em></a> [] <strong>filter</strong> (<em>callback</em> $filter) inherited from Phalcon\Mvc\Model\Resultset</p>
+<p>public <a class="reference internal" href="Phalcon_Mvc_Model.html"><span class="doc">Phalcon\Mvc\Model</span></a> [] <strong>filter</strong> (<em>callback</em> $filter) inherited from Phalcon\Mvc\Model\Resultset</p>
 <p>Filters a resultset returning only those the developer requires</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
  <span class="nv">$filtered</span> <span class="o">=</span> <span class="nv">$robots</span><span class="o">-&gt;</span><span class="na">filter</span><span class="p">(</span><span class="k">function</span><span class="p">(</span><span class="nv">$robot</span><span class="p">){</span>
     <span class="k">if</span> <span class="p">(</span><span class="nv">$robot</span><span class="o">-&gt;</span><span class="na">id</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">)</span> <span class="p">{</span>
@@ -168,7 +170,7 @@
 <p>Updates every record in the resultset</p>
 <p>public <em>array</em>  <strong>jsonSerialize</strong> () inherited from Phalcon\Mvc\Model\Resultset</p>
 <p>Returns serialised model objects as array for json_encode. Calls jsonSerialize on each object if present</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
  <span class="nv">$robots</span> <span class="o">=</span> <span class="nx">Robots</span><span class="o">::</span><span class="na">find</span><span class="p">();</span>
  <span class="k">echo</span> <span class="nb">json_encode</span><span class="p">(</span><span class="nv">$robots</span><span class="p">);</span>
@@ -221,7 +223,7 @@
                   Phalcon7 Framework is released under the <a href="https://github.com/dreamsxin/cphalcon7/blob/master/docs/LICENSE.md">new BSD license</a>.<br>
                   Except where otherwise noted, content on this site is licensed under the
                   <a href="http://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0 License.</a>
-
+              </p>
               <div class="design">
                   <span>Designed by:</span>
 

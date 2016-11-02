@@ -21,6 +21,8 @@
 
     <script src="../static/jquery.min.js"></script>
     <link rel="shortcut icon" href="../static/img/favicon.ico"/>
+    <link rel="index" title="索引" href="../index.html" />
+    <link rel="search" title="搜索" href="../search.html" />
     <link rel="top" title="Phalcon7 1.0.0 文档" href="../index.html" /> 
 </head>
 <body>
@@ -88,29 +90,29 @@
 			  
   <div class="section" id="class-phalcon-db-dialect-mysql">
 <h1>Class <strong>Phalcon\Db\Dialect\Mysql</strong><a class="headerlink" href="#class-phalcon-db-dialect-mysql" title="永久链接至标题">¶</a></h1>
-<p><em>extends</em> abstract class <a class="reference internal" href="Phalcon_Db_Dialect.html"><em>Phalcon\Db\Dialect</em></a></p>
-<p><em>implements</em> <a class="reference internal" href="Phalcon_Db_DialectInterface.html"><em>Phalcon\Db\DialectInterface</em></a></p>
+<p><em>extends</em> abstract class <a class="reference internal" href="Phalcon_Db_Dialect.html"><span class="doc">Phalcon\Db\Dialect</span></a></p>
+<p><em>implements</em> <a class="reference internal" href="Phalcon_Db_DialectInterface.html"><span class="doc">Phalcon\Db\DialectInterface</span></a></p>
 <p><span class="raw-html"><a href="https://github.com/dreamsxin/cphalcon7/blob/master/ext/db/dialect/mysql.c" class="btn btn-default btn-sm">Source on GitHub</a></span></p>
 <p>Generates database specific SQL for the MySQL RBDMS</p>
 <div class="section" id="methods">
 <h2>Methods<a class="headerlink" href="#methods" title="永久链接至标题">¶</a></h2>
-<p>public <em>string</em>  <strong>getColumnDefinition</strong> (<a class="reference internal" href="Phalcon_Db_ColumnInterface.html"><em>Phalcon\Db\ColumnInterface</em></a> $column)</p>
+<p>public <em>string</em>  <strong>getColumnDefinition</strong> (<a class="reference internal" href="Phalcon_Db_ColumnInterface.html"><span class="doc">Phalcon\Db\ColumnInterface</span></a> $column)</p>
 <p>Gets the column name in MySQL</p>
-<p>public <em>string</em>  <strong>addColumn</strong> (<em>string</em> $tableName, <em>string</em> $schemaName, <a class="reference internal" href="Phalcon_Db_ColumnInterface.html"><em>Phalcon\Db\ColumnInterface</em></a> $column)</p>
+<p>public <em>string</em>  <strong>addColumn</strong> (<em>string</em> $tableName, <em>string</em> $schemaName, <a class="reference internal" href="Phalcon_Db_ColumnInterface.html"><span class="doc">Phalcon\Db\ColumnInterface</span></a> $column)</p>
 <p>Generates SQL to add a column to a table</p>
-<p>public <em>string</em>  <strong>modifyColumn</strong> (<em>string</em> $tableName, <em>string</em> $schemaName, <a class="reference internal" href="Phalcon_Db_ColumnInterface.html"><em>Phalcon\Db\ColumnInterface</em></a> $column)</p>
+<p>public <em>string</em>  <strong>modifyColumn</strong> (<em>string</em> $tableName, <em>string</em> $schemaName, <a class="reference internal" href="Phalcon_Db_ColumnInterface.html"><span class="doc">Phalcon\Db\ColumnInterface</span></a> $column, [<em>unknown</em> $currentColumn])</p>
 <p>Generates SQL to modify a column in a table</p>
 <p>public <em>string</em>  <strong>dropColumn</strong> (<em>string</em> $tableName, <em>string</em> $schemaName, <em>string</em> $columnName)</p>
 <p>Generates SQL to delete a column from a table</p>
-<p>public <em>string</em>  <strong>addIndex</strong> (<em>string</em> $tableName, <em>string</em> $schemaName, <a class="reference internal" href="Phalcon_Db_IndexInterface.html"><em>Phalcon\Db\IndexInterface</em></a> $index)</p>
+<p>public <em>string</em>  <strong>addIndex</strong> (<em>string</em> $tableName, <em>string</em> $schemaName, <a class="reference internal" href="Phalcon_Db_IndexInterface.html"><span class="doc">Phalcon\Db\IndexInterface</span></a> $index)</p>
 <p>Generates SQL to add an index to a table</p>
 <p>public <em>string</em>  <strong>dropIndex</strong> (<em>string</em> $tableName, <em>string</em> $schemaName, <em>string</em> $indexName)</p>
 <p>Generates SQL to delete an index from a table</p>
-<p>public <em>string</em>  <strong>addPrimaryKey</strong> (<em>string</em> $tableName, <em>string</em> $schemaName, <a class="reference internal" href="Phalcon_Db_IndexInterface.html"><em>Phalcon\Db\IndexInterface</em></a> $index)</p>
+<p>public <em>string</em>  <strong>addPrimaryKey</strong> (<em>string</em> $tableName, <em>string</em> $schemaName, <a class="reference internal" href="Phalcon_Db_IndexInterface.html"><span class="doc">Phalcon\Db\IndexInterface</span></a> $index)</p>
 <p>Generates SQL to add the primary key to a table</p>
 <p>public <em>string</em>  <strong>dropPrimaryKey</strong> (<em>string</em> $tableName, <em>string</em> $schemaName)</p>
 <p>Generates SQL to delete primary key from a table</p>
-<p>public <em>string</em>  <strong>addForeignKey</strong> (<em>string</em> $tableName, <em>string</em> $schemaName, <a class="reference internal" href="Phalcon_Db_ReferenceInterface.html"><em>Phalcon\Db\ReferenceInterface</em></a> $reference)</p>
+<p>public <em>string</em>  <strong>addForeignKey</strong> (<em>string</em> $tableName, <em>string</em> $schemaName, <a class="reference internal" href="Phalcon_Db_ReferenceInterface.html"><span class="doc">Phalcon\Db\ReferenceInterface</span></a> $reference)</p>
 <p>Generates SQL to add an index to a table</p>
 <p>public <em>string</em>  <strong>dropForeignKey</strong> (<em>string</em> $tableName, <em>string</em> $schemaName, <em>string</em> $referenceName)</p>
 <p>Generates SQL to delete a foreign key from a table</p>
@@ -126,7 +128,7 @@
 <p>Generates SQL to drop a view</p>
 <p>public <em>string</em>  <strong>tableExists</strong> (<em>string</em> $tableName, [<em>string</em> $schemaName])</p>
 <p>Generates SQL checking for the existence of a schema.table</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
  <span class="k">echo</span> <span class="nv">$dialect</span><span class="o">-&gt;</span><span class="na">tableExists</span><span class="p">(</span><span class="s2">&quot;posts&quot;</span><span class="p">,</span> <span class="s2">&quot;blog&quot;</span><span class="p">);</span>
  <span class="k">echo</span> <span class="nv">$dialect</span><span class="o">-&gt;</span><span class="na">tableExists</span><span class="p">(</span><span class="s2">&quot;posts&quot;</span><span class="p">);</span>
@@ -136,19 +138,19 @@
 <p>Generates SQL checking for the existence of a schema.view</p>
 <p>public <em>string</em>  <strong>describeColumns</strong> (<em>string</em> $table, [<em>string</em> $schema])</p>
 <p>Generates SQL describing a table</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="nb">print_r</span><span class="p">(</span><span class="nv">$dialect</span><span class="o">-&gt;</span><span class="na">describeColumns</span><span class="p">(</span><span class="s2">&quot;posts&quot;</span><span class="p">))</span> <span class="cp">?&gt;</span><span class="x"></span>
 </pre></div>
 </div>
-<p>public <em>array</em>  <strong>listTables</strong> ([<em>string</em> $schemaName])</p>
-<p>List all tables on database</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<p>public <em>string</em>  <strong>listTables</strong> ([<em>string</em> $schemaName])</p>
+<p>Generates SQL list all tables on database</p>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="nb">print_r</span><span class="p">(</span><span class="nv">$dialect</span><span class="o">-&gt;</span><span class="na">listTables</span><span class="p">(</span><span class="s2">&quot;blog&quot;</span><span class="p">))</span> <span class="cp">?&gt;</span><span class="x"></span>
 </pre></div>
 </div>
-<p>public <em>array</em>  <strong>listViews</strong> ([<em>string</em> $schemaName])</p>
+<p>public <em>string</em>  <strong>listViews</strong> ([<em>string</em> $schemaName])</p>
 <p>Generates the SQL to list all views of a schema or user</p>
 <p>public <em>string</em>  <strong>describeIndexes</strong> (<em>string</em> $table, [<em>string</em> $schema])</p>
 <p>Generates SQL to query indexes on a table</p>
@@ -158,7 +160,7 @@
 <p>Generates the SQL to describe the table creation options</p>
 <p>public <em>string</em>  <strong>limit</strong> (<em>string</em> $sqlQuery, <em>int</em> $number) inherited from Phalcon\Db\Dialect</p>
 <p>Generates the SQL for LIMIT clause</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
  <span class="nv">$sql</span> <span class="o">=</span> <span class="nv">$dialect</span><span class="o">-&gt;</span><span class="na">limit</span><span class="p">(</span><span class="s1">&#39;SELECT * FROM robots&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">);</span>
  <span class="k">echo</span> <span class="nv">$sql</span><span class="p">;</span> <span class="c1">// SELECT * FROM robots LIMIT 10</span>
@@ -166,7 +168,7 @@
 </div>
 <p>public <em>string</em>  <strong>forUpdate</strong> (<em>string</em> $sqlQuery) inherited from Phalcon\Db\Dialect</p>
 <p>Returns a SQL modified with a FOR UPDATE clause</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
  <span class="nv">$sql</span> <span class="o">=</span> <span class="nv">$dialect</span><span class="o">-&gt;</span><span class="na">forUpdate</span><span class="p">(</span><span class="s1">&#39;SELECT * FROM robots&#39;</span><span class="p">);</span>
  <span class="k">echo</span> <span class="nv">$sql</span><span class="p">;</span> <span class="c1">// SELECT * FROM robots FOR UPDATE</span>
@@ -174,7 +176,7 @@
 </div>
 <p>public <em>string</em>  <strong>sharedLock</strong> (<em>string</em> $sqlQuery) inherited from Phalcon\Db\Dialect</p>
 <p>Returns a SQL modified with a LOCK IN SHARE MODE clause</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
  <span class="nv">$sql</span> <span class="o">=</span> <span class="nv">$dialect</span><span class="o">-&gt;</span><span class="na">sharedLock</span><span class="p">(</span><span class="s1">&#39;SELECT * FROM robots&#39;</span><span class="p">);</span>
  <span class="k">echo</span> <span class="nv">$sql</span><span class="p">;</span> <span class="c1">// SELECT * FROM robots LOCK IN SHARE MODE</span>
@@ -182,7 +184,7 @@
 </div>
 <p>public <em>string</em>  <strong>getColumnList</strong> (<em>array</em> $columnList) inherited from Phalcon\Db\Dialect</p>
 <p>Gets a list of columns with escaped identifiers</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
  <span class="k">echo</span> <span class="nv">$dialect</span><span class="o">-&gt;</span><span class="na">getColumnList</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s1">&#39;column1&#39;</span><span class="p">,</span> <span class="s1">&#39;column&#39;</span><span class="p">));</span>
 </pre></div>
@@ -219,6 +221,12 @@
 <p>Registers custom SQL functions</p>
 <p>public <em>array</em>  <strong>getCustomFunctions</strong> () inherited from Phalcon\Db\Dialect</p>
 <p>Returns registered functions</p>
+<p>public <em>string</em>  <strong>escape</strong> (<em>string</em> $str, [<em>string</em> $escapeChar]) inherited from Phalcon\Db\Dialect</p>
+<p>Escape identifiers</p>
+<p>public <em>string</em>  <strong>escapeSchema</strong> (<em>string</em> $schema, [<em>string</em> $escapeChar]) inherited from Phalcon\Db\Dialect</p>
+<p>Escape Schema</p>
+<p>public <em>string</em>  <strong>prepareTable</strong> (<em>string</em> $table, [<em>string</em> $schema], [<em>string</em> $alias], [<em>string</em> $escapeChar]) inherited from Phalcon\Db\Dialect</p>
+<p>Prepares table for this RDBMS</p>
 </div>
 </div>
 
@@ -266,7 +274,7 @@
                   Phalcon7 Framework is released under the <a href="https://github.com/dreamsxin/cphalcon7/blob/master/docs/LICENSE.md">new BSD license</a>.<br>
                   Except where otherwise noted, content on this site is licensed under the
                   <a href="http://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0 License.</a>
-
+              </p>
               <div class="design">
                   <span>Designed by:</span>
 

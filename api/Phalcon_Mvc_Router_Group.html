@@ -21,6 +21,8 @@
 
     <script src="../static/jquery.min.js"></script>
     <link rel="shortcut icon" href="../static/img/favicon.ico"/>
+    <link rel="index" title="索引" href="../index.html" />
+    <link rel="search" title="搜索" href="../search.html" />
     <link rel="top" title="Phalcon7 1.0.0 文档" href="../index.html" /> 
 </head>
 <body>
@@ -90,7 +92,7 @@
 <h1>Class <strong>Phalcon\Mvc\Router\Group</strong><a class="headerlink" href="#class-phalcon-mvc-router-group" title="永久链接至标题">¶</a></h1>
 <p><span class="raw-html"><a href="https://github.com/dreamsxin/cphalcon7/blob/master/ext/mvc/router/group.c" class="btn btn-default btn-sm">Source on GitHub</a></span></p>
 <p>Helper class to create a group of routes with common attributes</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
  <span class="nv">$router</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phalcon\Mvc\Router</span><span class="p">();</span>
 
@@ -127,54 +129,54 @@
 <h2>Methods<a class="headerlink" href="#methods" title="永久链接至标题">¶</a></h2>
 <p>public  <strong>__construct</strong> ([<em>array</em> $paths])</p>
 <p>Phalcon\Mvc\Router\Group constructor</p>
-<p>public <a class="reference internal" href=""><em>Phalcon\Mvc\Router\Group</em></a>  <strong>setHostname</strong> (<em>string</em> $hostname)</p>
+<p>public <a class="reference internal" href="#"><span class="doc">Phalcon\Mvc\Router\Group</span></a>  <strong>setHostname</strong> (<em>string</em> $hostname)</p>
 <p>Set a hostname restriction for all the routes in the group</p>
 <p>public <em>string</em>  <strong>getHostname</strong> ()</p>
 <p>Returns the hostname restriction</p>
-<p>public <a class="reference internal" href=""><em>Phalcon\Mvc\Router\Group</em></a>  <strong>setPrefix</strong> (<em>string</em> $prefix)</p>
+<p>public <a class="reference internal" href="#"><span class="doc">Phalcon\Mvc\Router\Group</span></a>  <strong>setPrefix</strong> (<em>string</em> $prefix)</p>
 <p>Set a common uri prefix for all the routes in this group</p>
 <p>public <em>string</em>  <strong>getPrefix</strong> ()</p>
 <p>Returns the common prefix for all the routes</p>
-<p>public <a class="reference internal" href=""><em>Phalcon\Mvc\Router\Group</em></a>  <strong>beforeMatch</strong> (<em>unknown</em> $beforeMatch)</p>
+<p>public <a class="reference internal" href="#"><span class="doc">Phalcon\Mvc\Router\Group</span></a>  <strong>beforeMatch</strong> (<em>unknown</em> $beforeMatch)</p>
 <p>Set a before-match condition for the whole group</p>
 <p>public <em>string</em>  <strong>getBeforeMatch</strong> ()</p>
 <p>Returns the before-match condition if any</p>
-<p>public <a class="reference internal" href=""><em>Phalcon\Mvc\Router\Group</em></a>  <strong>setPaths</strong> (<em>array</em> $paths)</p>
+<p>public <a class="reference internal" href="#"><span class="doc">Phalcon\Mvc\Router\Group</span></a>  <strong>setPaths</strong> (<em>array</em> $paths)</p>
 <p>Set common paths for all the routes in the group</p>
 <p>public <em>array|string</em>  <strong>getPaths</strong> ()</p>
 <p>Returns the common paths defined for this group</p>
-<p>public <a class="reference internal" href="Phalcon_Mvc_Router_Route.html"><em>Phalcon\Mvc\Router\Route</em></a> [] <strong>getRoutes</strong> ()</p>
+<p>public <a class="reference internal" href="Phalcon_Mvc_Router_Route.html"><span class="doc">Phalcon\Mvc\Router\Route</span></a> [] <strong>getRoutes</strong> ()</p>
 <p>Returns the routes added to the group</p>
-<p>protected <a class="reference internal" href="Phalcon_Mvc_Router_Route.html"><em>Phalcon\Mvc\Router\Route</em></a>  <strong>_addRoute</strong> ()</p>
+<p>protected <a class="reference internal" href="Phalcon_Mvc_Router_Route.html"><span class="doc">Phalcon\Mvc\Router\Route</span></a>  <strong>_addRoute</strong> ()</p>
 <p>Adds a route applying the common attributes</p>
-<p>public <a class="reference internal" href="Phalcon_Mvc_Router_Route.html"><em>Phalcon\Mvc\Router\Route</em></a>  <strong>add</strong> (<em>string</em> $pattern, [<em>string/array</em> $paths], [<em>string</em> $httpMethods])</p>
+<p>public <a class="reference internal" href="Phalcon_Mvc_Router_Route.html"><span class="doc">Phalcon\Mvc\Router\Route</span></a>  <strong>add</strong> (<em>string</em> $pattern, [<em>string/array</em> $paths], [<em>string</em> $httpMethods])</p>
 <p>Adds a route to the router on any HTTP method</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
  <span class="nv">$router</span><span class="o">-&gt;</span><span class="na">add</span><span class="p">(</span><span class="s1">&#39;/about&#39;</span><span class="p">,</span> <span class="s1">&#39;About::index&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
-<p>public <a class="reference internal" href="Phalcon_Mvc_Router_Route.html"><em>Phalcon\Mvc\Router\Route</em></a>  <strong>addGet</strong> (<em>string</em> $pattern, [<em>string/array</em> $paths])</p>
+<p>public <a class="reference internal" href="Phalcon_Mvc_Router_Route.html"><span class="doc">Phalcon\Mvc\Router\Route</span></a>  <strong>addGet</strong> (<em>string</em> $pattern, [<em>string/array</em> $paths])</p>
 <p>Adds a route to the router that only match if the HTTP method is GET</p>
-<p>public <a class="reference internal" href="Phalcon_Mvc_Router_Route.html"><em>Phalcon\Mvc\Router\Route</em></a>  <strong>addPost</strong> (<em>string</em> $pattern, [<em>string/array</em> $paths])</p>
+<p>public <a class="reference internal" href="Phalcon_Mvc_Router_Route.html"><span class="doc">Phalcon\Mvc\Router\Route</span></a>  <strong>addPost</strong> (<em>string</em> $pattern, [<em>string/array</em> $paths])</p>
 <p>Adds a route to the router that only match if the HTTP method is POST</p>
-<p>public <a class="reference internal" href="Phalcon_Mvc_Router_Route.html"><em>Phalcon\Mvc\Router\Route</em></a>  <strong>addPut</strong> (<em>string</em> $pattern, [<em>string/array</em> $paths])</p>
+<p>public <a class="reference internal" href="Phalcon_Mvc_Router_Route.html"><span class="doc">Phalcon\Mvc\Router\Route</span></a>  <strong>addPut</strong> (<em>string</em> $pattern, [<em>string/array</em> $paths])</p>
 <p>Adds a route to the router that only match if the HTTP method is PUT</p>
-<p>public <a class="reference internal" href="Phalcon_Mvc_Router_Route.html"><em>Phalcon\Mvc\Router\Route</em></a>  <strong>addPatch</strong> (<em>string</em> $pattern, [<em>string/array</em> $paths])</p>
+<p>public <a class="reference internal" href="Phalcon_Mvc_Router_Route.html"><span class="doc">Phalcon\Mvc\Router\Route</span></a>  <strong>addPatch</strong> (<em>string</em> $pattern, [<em>string/array</em> $paths])</p>
 <p>Adds a route to the router that only match if the HTTP method is PATCH</p>
-<p>public <a class="reference internal" href="Phalcon_Mvc_Router_Route.html"><em>Phalcon\Mvc\Router\Route</em></a>  <strong>addDelete</strong> (<em>string</em> $pattern, [<em>string/array</em> $paths])</p>
+<p>public <a class="reference internal" href="Phalcon_Mvc_Router_Route.html"><span class="doc">Phalcon\Mvc\Router\Route</span></a>  <strong>addDelete</strong> (<em>string</em> $pattern, [<em>string/array</em> $paths])</p>
 <p>Adds a route to the router that only match if the HTTP method is DELETE</p>
-<p>public <a class="reference internal" href="Phalcon_Mvc_Router_Route.html"><em>Phalcon\Mvc\Router\Route</em></a>  <strong>addOptions</strong> (<em>string</em> $pattern, [<em>string/array</em> $paths])</p>
+<p>public <a class="reference internal" href="Phalcon_Mvc_Router_Route.html"><span class="doc">Phalcon\Mvc\Router\Route</span></a>  <strong>addOptions</strong> (<em>string</em> $pattern, [<em>string/array</em> $paths])</p>
 <p>Add a route to the router that only match if the HTTP method is OPTIONS</p>
-<p>public <a class="reference internal" href="Phalcon_Mvc_Router_Route.html"><em>Phalcon\Mvc\Router\Route</em></a>  <strong>addHead</strong> (<em>string</em> $pattern, [<em>string/array</em> $paths])</p>
+<p>public <a class="reference internal" href="Phalcon_Mvc_Router_Route.html"><span class="doc">Phalcon\Mvc\Router\Route</span></a>  <strong>addHead</strong> (<em>string</em> $pattern, [<em>string/array</em> $paths])</p>
 <p>Adds a route to the router that only match if the HTTP method is HEAD</p>
 <p>public  <strong>clear</strong> ()</p>
 <p>Removes all the pre-defined routes</p>
-<p>public <a class="reference internal" href=""><em>Phalcon\Mvc\Router\Group</em></a>  <strong>convert</strong> (<em>string</em> $name, <em>callable</em> $converter)</p>
+<p>public <a class="reference internal" href="#"><span class="doc">Phalcon\Mvc\Router\Group</span></a>  <strong>convert</strong> (<em>string</em> $name, <em>callable</em> $converter)</p>
 <p>Adds a converter to perform an additional transformation for certain parameter</p>
 <p>public <em>array|null</em>  <strong>getConverters</strong> ()</p>
 <p>Returns the router converter</p>
-<p>public <a class="reference internal" href=""><em>Phalcon\Mvc\Router\Group</em></a>  <strong>setName</strong> (<em>unknown</em> $name)</p>
+<p>public <a class="reference internal" href="#"><span class="doc">Phalcon\Mvc\Router\Group</span></a>  <strong>setName</strong> (<em>unknown</em> $name)</p>
 <p>Set the name of the group</p>
 <p>public <em>string</em>  <strong>getName</strong> ()</p>
 <p>Returns the name of this group</p>
@@ -225,7 +227,7 @@
                   Phalcon7 Framework is released under the <a href="https://github.com/dreamsxin/cphalcon7/blob/master/docs/LICENSE.md">new BSD license</a>.<br>
                   Except where otherwise noted, content on this site is licensed under the
                   <a href="http://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0 License.</a>
-
+              </p>
               <div class="design">
                   <span>Designed by:</span>
 
