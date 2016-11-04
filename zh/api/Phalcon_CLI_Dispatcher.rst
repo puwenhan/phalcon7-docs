@@ -168,6 +168,18 @@ Gets the lastest dispatched action name
 
 
 
+public  **setLogicBinding** (*boolean* $value) inherited from Phalcon\\Dispatcher
+
+Enable/Disable logic binding during dispatch
+
+
+
+public *boolean*  **isLogicBinding** () inherited from Phalcon\\Dispatcher
+
+Check if logic binding
+
+
+
 public  **setParams** (*array* $params) inherited from Phalcon\\Dispatcher
 
 Sets action params to be dispatched
@@ -297,13 +309,13 @@ Fires an event, implicitly calls behaviors and listeners in the events manager a
 
 
 
-public  **setDI** (:doc:`Phalcon\\DiInterface <Phalcon_DiInterface>` $dependencyInjector) inherited from Phalcon\\DI\\Injectable
+public  **setDI** (:doc:`Phalcon\\DIInterface <Phalcon_DIInterface>` $dependencyInjector) inherited from Phalcon\\DI\\Injectable
 
 Sets the dependency injector
 
 
 
-public :doc:`Phalcon\\DiInterface <Phalcon_DiInterface>`  **getDI** ([*unknown* $error]) inherited from Phalcon\\DI\\Injectable
+public :doc:`Phalcon\\DIInterface <Phalcon_DIInterface>`  **getDI** ([*unknown* $error], [*unknown* $notUseDefault]) inherited from Phalcon\\DI\\Injectable
 
 Returns the internal dependency injector
 

@@ -1,5 +1,5 @@
-Class **Phalcon\\Mvc\\User\\Module**
-====================================
+Abstract class **Phalcon\\Mvc\\User\\Logic**
+============================================
 
 *extends* abstract class :doc:`Phalcon\\DI\\Injectable <Phalcon_DI_Injectable>`
 
@@ -8,13 +8,49 @@ Class **Phalcon\\Mvc\\User\\Module**
 .. role:: raw-html(raw)
    :format: html
 
-:raw-html:`<a href="https://github.com/dreamsxin/cphalcon7/blob/master/ext/mvc/user/module.c" class="btn btn-default btn-sm">Source on GitHub</a>`
+:raw-html:`<a href="https://github.com/dreamsxin/cphalcon7/blob/master/ext/mvc/user/logic.c" class="btn btn-default btn-sm">Source on GitHub</a>`
 
-This class can be used to provide user modules easy access to services in the application
+This class can be used to provide user business logic an easy access to services in the application
 
 
 Methods
 -------
+
+public  **__construct** ([*string* $actionName], [*unknown* $arguments])
+
+Constructor for Phalcon\\Mvc\\User\\Logic
+
+
+
+public *string*  **getActionName** ()
+
+Gets the action name
+
+
+
+public *array*  **getActionParams** ()
+
+Gets action params
+
+
+
+public  **setContent** (*mixed* $content)
+
+Sets content
+
+
+
+public *mixed*  **getContent** ()
+
+Gets content
+
+
+
+public static *object*  **call** ([*string* $actionName], [*unknown* $arguments])
+
+Loads an logic and prepares it for manipulation
+
+
 
 public  **setDI** (:doc:`Phalcon\\DIInterface <Phalcon_DIInterface>` $dependencyInjector) inherited from Phalcon\\DI\\Injectable
 
