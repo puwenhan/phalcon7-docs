@@ -209,8 +209,7 @@ parts are placeholders or subpatterns delimited by parentheses (round brackets).
 first subpattern matched (<code class="code docutils literal"><span class="pre">:controller</span></code>) is the controller part of the route, the second the action and so on.</p>
 <div class="section" id="default-placeholders-regular-expressions">
 <h3>默认占位符对应正则表达式（Default Placeholders Regular Expressions）<a class="headerlink" href="#default-placeholders-regular-expressions" title="永久链接至标题">¶</a></h3>
-<p>These placeholders help writing regular expressions that are more readable for developers and easier
-to understand. The following placeholders are supported:</p>
+<p>这些占位符帮助编写开发人员更简单的书写正则表达式，而且容易理解，以下默认支持的占位符：</p>
 <table border="1" class="docutils">
 <colgroup>
 <col width="14%" />
@@ -225,20 +224,24 @@ to understand. The following placeholders are supported:</p>
 </thead>
 <tbody valign="top">
 <tr class="row-even"><td><code class="code docutils literal"><span class="pre">/:module</span></code></td>
-<td colspan="2"><code class="code docutils literal"><span class="pre">/([\\w0-9\\_\\-]+)</span></code> | Matches a valid module name with alpha-numeric characters only</td>
+<td><code class="code docutils literal"><span class="pre">/([\\w0-9\\_\\-]+)</span></code></td>
+<td>Matches a valid module name with alpha-numeric characters only</td>
 </tr>
 <tr class="row-odd"><td><code class="code docutils literal"><span class="pre">/:controller</span></code></td>
-<td colspan="2"><code class="code docutils literal"><span class="pre">/([\\w0-9\\_\\-]+)</span></code> | Matches a valid controller name with alpha-numeric characters only</td>
+<td><code class="code docutils literal"><span class="pre">/([\\w0-9\\_\\-]+)</span></code></td>
+<td>Matches a valid controller name with alpha-numeric characters only</td>
 </tr>
 <tr class="row-even"><td><code class="code docutils literal"><span class="pre">/:action</span></code></td>
-<td colspan="2"><code class="code docutils literal"><span class="pre">/([\\w0-9\\_\\-]+)</span></code>   | Matches a valid action name with alpha-numeric characters only</td>
+<td><code class="code docutils literal"><span class="pre">/([\\w0-9\\_\\-]+)</span></code></td>
+<td>Matches a valid action name with alpha-numeric characters only</td>
 </tr>
 <tr class="row-odd"><td><code class="code docutils literal"><span class="pre">/:params</span></code></td>
 <td><code class="code docutils literal"><span class="pre">(/.*)*</span></code></td>
 <td>Matches a list of optional words separated by slashes. Only use this placeholder at the end of a route</td>
 </tr>
 <tr class="row-even"><td><code class="code docutils literal"><span class="pre">/:namespace</span></code></td>
-<td colspan="2"><code class="code docutils literal"><span class="pre">/([\\w0-9\\_\\-]+)</span></code> | Matches a single level namespace name</td>
+<td><code class="code docutils literal"><span class="pre">/([\\w0-9\\_\\-]+)</span></code></td>
+<td>Matches a single level namespace name</td>
 </tr>
 <tr class="row-odd"><td><code class="code docutils literal"><span class="pre">/:int</span></code></td>
 <td><code class="code docutils literal"><span class="pre">/([0-9]+)</span></code></td>

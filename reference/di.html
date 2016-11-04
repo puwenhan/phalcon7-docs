@@ -947,7 +947,7 @@ The following events are supported:</p>
     <span class="k">return</span> <span class="nv">$component</span><span class="p">;</span>
 <span class="p">},</span> <span class="k">true</span><span class="p">);</span>
 
-<span class="c1">// 把一个控制器注册为服务</span>
+<span class="c1">// 把一个组件注册为服务</span>
 <span class="nv">$di</span><span class="o">-&gt;</span><span class="na">set</span><span class="p">(</span><span class="s1">&#39;MyOtherComponent&#39;</span><span class="p">,</span> <span class="k">function</span> <span class="p">()</span> <span class="p">{</span>
     <span class="c1">// 实际上返回另外一个组件</span>
     <span class="nv">$component</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">AnotherComponent</span><span class="p">();</span>
@@ -1250,7 +1250,7 @@ DI会回退到一个有效的自动加载类中，去加载这个类。通过这
 </div>
 <div class="section" id="implementing-your-own-di">
 <h2>自定义注入器（Implementing your own DI）<a class="headerlink" href="#implementing-your-own-di" title="永久链接至标题">¶</a></h2>
-<p>如果你要创建一个自定义注入器或者继承一个已有的，接口 <a class="reference internal" href="../api/Phalcon_DIInterface.html"><span class="doc">Phalcon\DiInterface</span></a> 必须被实现。</p>
+<p>如果你要创建一个自定义注入器或者继承一个已有的，接口 <a class="reference internal" href="../api/Phalcon_DIInterface.html"><span class="doc">Phalcon\DIInterface</span></a> 必须被实现。</p>
 </div>
 </div>
 
