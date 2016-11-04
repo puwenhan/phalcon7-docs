@@ -213,7 +213,8 @@
 </div>
 <div class="section" id="logic-class">
 <h2>逻辑类（Logic Class）<a class="headerlink" href="#logic-class" title="永久链接至标题">¶</a></h2>
-<p>一般用于处理业务逻辑，可以设置调度器绑定逻辑类，会根据控制器方法参数自动调用逻辑类静态方法 <cite>call</cite> 完成实例化：</p>
+<p>一般用于处理业务逻辑，可以设置调度器绑定逻辑类，会根据控制器方法参数自动调用逻辑类静态方法 <cite>call</cite> 完成实例化，然后调用 <cite>start</cite> 完成初始化操作，
+当控制器方法执行结束后，将调用 <cite>finish</cite> 方法：</p>
 <div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="nv">$di</span><span class="o">-&gt;</span><span class="na">set</span><span class="p">(</span><span class="s1">&#39;dispatcher&#39;</span><span class="p">,</span> <span class="k">function</span> <span class="p">()</span> <span class="p">{</span>
@@ -241,6 +242,17 @@
 <span class="k">class</span> <span class="nc">MyLogic</span> <span class="k">extends</span> <span class="nx">Phalcon\Mvc\User\Logic</span>
 <span class="p">{</span>
     <span class="k">public</span> <span class="nv">$num</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">start</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="c1">// ...</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">finish</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="c1">// ...</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">view</span><span class="o">-&gt;</span><span class="na">data</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getContent</span><span class="p">();</span>
+    <span class="p">}</span>
 
     <span class="c1">// 该方法可以不实现</span>
     <span class="k">public</span> <span class="k">static</span> <span class="k">function</span> <span class="nf">call</span><span class="p">(</span><span class="nv">$action</span> <span class="o">=</span> <span class="k">NULL</span><span class="p">,</span> <span class="nv">$params</span> <span class="o">=</span> <span class="k">NULL</span><span class="p">)</span>
