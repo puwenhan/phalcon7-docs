@@ -117,12 +117,20 @@
 <span class="k">echo</span> <span class="nx">Phalcon\Text</span><span class="o">::</span><span class="na">uncamelize</span><span class="p">(</span><span class="s1">&#39;CocoBongo&#39;</span><span class="p">);</span> <span class="c1">//coco_bongo</span>
 </pre></div>
 </div>
-<p>public static <em>string</em>  <strong>increment</strong> (<em>string</em> $str, [<em>string</em> $separator])</p>
+<p>public static <em>string</em>  <strong>increment</strong> (<em>string</em> $str, [<em>string|int</em> $separator])</p>
 <p>Adds a number to a string or increment that number if it already is defined</p>
 <div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="k">echo</span> <span class="nx">Phalcon\Text</span><span class="o">::</span><span class="na">increment</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">);</span> <span class="c1">// &quot;a_1&quot;</span>
 <span class="k">echo</span> <span class="nx">Phalcon\Text</span><span class="o">::</span><span class="na">increment</span><span class="p">(</span><span class="s2">&quot;a_1&quot;</span><span class="p">);</span> <span class="c1">// &quot;a_2&quot;</span>
+</pre></div>
+</div>
+<p>public static <em>string</em>  <strong>decrement</strong> (<em>string</em> $str, [<em>string|int</em> $separator])</p>
+<p>Adds a number to a string or decrement that number if it already is defined</p>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+
+<span class="k">echo</span> <span class="nx">Phalcon\Text</span><span class="o">::</span><span class="na">decrement</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">);</span> <span class="c1">// &quot;a_1&quot;</span>
+<span class="k">echo</span> <span class="nx">Phalcon\Text</span><span class="o">::</span><span class="na">decrement</span><span class="p">(</span><span class="s2">&quot;a_1&quot;</span><span class="p">);</span> <span class="c1">// &quot;a_0&quot;</span>
 </pre></div>
 </div>
 <p>public static <em>string</em>  <strong>random</strong> (<em>int</em> $type, [<em>int</em> $length])</p>
@@ -170,6 +178,22 @@
 
     <span class="nv">$str</span> <span class="o">=</span> <span class="nx">Phalcon\Text</span><span class="o">::</span><span class="na">concat</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">,</span> <span class="s2">&quot;/tmp/&quot;</span><span class="p">,</span> <span class="s2">&quot;/folder_1/&quot;</span><span class="p">,</span> <span class="s2">&quot;/folder_2&quot;</span><span class="p">,</span> <span class="s2">&quot;folder_3/&quot;</span><span class="p">);</span>
     <span class="k">echo</span> <span class="nv">$str</span><span class="p">;</span> <span class="c1">// /tmp/folder_1/folder_2/folder_3/</span>
+</pre></div>
+</div>
+<p>public static  <strong>underscore</strong> (<em>unknown</em> $str)</p>
+<p>Makes a phrase underscored instead of spaced</p>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+
+   <span class="k">echo</span> <span class="nx">Phalcon\Text</span><span class="o">::</span><span class="na">underscore</span><span class="p">(</span><span class="s1">&#39;look behind&#39;</span><span class="p">);</span> <span class="c1">// &#39;look_behind&#39;</span>
+   <span class="k">echo</span> <span class="nx">Phalcon\Text</span><span class="o">::</span><span class="na">underscore</span><span class="p">(</span><span class="s1">&#39;Awesome Phalcon&#39;</span><span class="p">);</span> <span class="c1">// &#39;Awesome_Phalcon&#39;</span>
+</pre></div>
+</div>
+<p>public static  <strong>humanize</strong> (<em>unknown</em> $str)</p>
+<p>Makes an underscored or dashed phrase human-readable</p>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+
+   <span class="k">echo</span> <span class="nx">Phalcon\Text</span><span class="o">::</span><span class="na">humanize</span><span class="p">(</span><span class="s1">&#39;start-a-horse&#39;</span><span class="p">);</span> <span class="c1">// &#39;start a horse&#39;</span>
+   <span class="k">echo</span> <span class="nx">Phalcon\Text</span><span class="o">::</span><span class="na">humanize</span><span class="p">(</span><span class="s1">&#39;five_cats&#39;</span><span class="p">);</span> <span class="c1">// &#39;five cats&#39;</span>
 </pre></div>
 </div>
 </div>
