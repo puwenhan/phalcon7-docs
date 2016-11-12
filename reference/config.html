@@ -24,7 +24,7 @@
     <link rel="index" title="索引" href="../index.html" />
     <link rel="search" title="搜索" href="../search.html" />
     <link rel="top" title="Phalcon7 1.0.0 文档" href="../index.html" />
-    <link rel="next" title="数组助手（Array Helper）" href="arr.html" />
+    <link rel="next" title="分页（Pagination）" href="pagination.html" />
     <link rel="prev" title="表单（Forms）" href="forms.html" /> 
 </head>
 <body>
@@ -66,7 +66,7 @@
           <a href="../genindex.html" title="总目录"
              accesskey="I">索引</a></li>
         <li class="right" >
-          <a href="arr.html" title="数组助手（Array Helper）"
+          <a href="pagination.html" title="分页（Pagination）"
              accesskey="N">下一页</a> |</li>
         <li class="right" >
           <a href="forms.html" title="表单（Forms）"
@@ -85,7 +85,9 @@
 <li><a class="reference internal" href="#">读取配置（Reading Configurations）</a><ul>
 <li><a class="reference internal" href="#file-adapters">文件适配器（File Adapters）</a></li>
 <li><a class="reference internal" href="#native-arrays">原生数组（Native Arrays）</a></li>
+<li><a class="reference internal" href="#php-reading-php-files">读取 PHP 文件（Reading PHP Files）</a></li>
 <li><a class="reference internal" href="#ini-reading-ini-files">读取 INI 文件（Reading INI Files）</a></li>
+<li><a class="reference internal" href="#yaml-reading-yaml-files">读取 YAML 文件（Reading Yaml Files）</a></li>
 <li><a class="reference internal" href="#merging-configurations">合并配置（Merging Configurations）</a></li>
 </ul>
 </li>
@@ -94,7 +96,7 @@
 			<div class="panel-heading">上一个主题</div>
             <div class="panel-body"><p class="topless"><a href="forms.html" title="上一章">&lt; 表单（Forms）</a></p></div>
 			<div class="panel-heading">下一个主题</div>
-            <div class="panel-body"><p class="topless"><a href="arr.html" title="下一章">数组助手（Array Helper） &gt;</a></p></div>
+            <div class="panel-body"><p class="topless"><a href="pagination.html" title="下一章">分页（Pagination） &gt;</a></p></div>
 		</div>
 	</div>
   <div class="col-md-9 second-box" valign="top">
@@ -111,8 +113,8 @@
 <p>可用的适配器有:</p>
 <table border="1" class="docutils">
 <colgroup>
-<col width="10%" />
-<col width="90%" />
+<col width="13%" />
+<col width="87%" />
 </colgroup>
 <thead valign="bottom">
 <tr class="row-odd"><th class="head">文件类型</th>
@@ -120,11 +122,17 @@
 </tr>
 </thead>
 <tbody valign="top">
-<tr class="row-even"><td>Ini</td>
-<td>使用INI文件来存储设置。内部适配器使用PHP函数 parse_ini_file。</td>
-</tr>
-<tr class="row-odd"><td>Array</td>
+<tr class="row-even"><td>Native Array</td>
 <td>使用PHP多维数组存储设置。这个适配器提供了最好的性能</td>
+</tr>
+<tr class="row-odd"><td>Php</td>
+<td>使用PHP文件来存储设置，提供了较好的性能。</td>
+</tr>
+<tr class="row-even"><td>Ini</td>
+<td>使用INI文件来存储设置，内部使用PHP函数 parse_ini_file 来解析文件。</td>
+</tr>
+<tr class="row-odd"><td>Yaml</td>
+<td>使用YAML文件来存储设置，内部使用PHP函数 yaml_parse_file 来解析文件。</td>
 </tr>
 </tbody>
 </table>
@@ -169,9 +177,39 @@
 </pre></div>
 </div>
 </div>
+<div class="section" id="php-reading-php-files">
+<h2>读取 PHP 文件（Reading PHP Files）<a class="headerlink" href="#php-reading-php-files" title="永久链接至标题">¶</a></h2>
+<p>通过加载 PHP 文件获取配置信息，配置文件内容如下：</p>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+<span class="k">return</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s2">&quot;database&quot;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s2">&quot;adapter&quot;</span> <span class="o">=&gt;</span> <span class="s2">&quot;Mysql&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;host     =&gt; localhost&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;username =&gt; scott&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;password =&gt; cheetah&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;dbname   =&gt; test_db&quot;</span><span class="p">,</span>
+    <span class="p">),</span>
+    <span class="s2">&quot;phalcon&quot;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s2">&quot;controllersDir =&gt; &quot;</span><span class="o">../</span><span class="nx">app</span><span class="o">/</span><span class="nx">controllers</span><span class="o">/</span><span class="s2">&quot;,</span>
+<span class="s2">        &quot;</span><span class="nx">modelsDir</span>      <span class="o">=&gt;</span> <span class="s2">&quot;../app/models/&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;viewsDir       =&gt; &quot;</span><span class="o">../</span><span class="nx">app</span><span class="o">/</span><span class="nx">views</span><span class="o">/</span><span class="s2">&quot;,</span>
+<span class="s2">    ),</span>
+<span class="s2">);</span>
+</pre></div>
+</div>
+<p>访问方式如下所示：</p>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+
+<span class="nv">$config</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phalcon\Config\Adapter\Php</span><span class="p">(</span><span class="s2">&quot;path/config.php&quot;</span><span class="p">);</span>
+
+<span class="k">echo</span> <span class="nv">$config</span><span class="o">-&gt;</span><span class="na">phalcon</span><span class="o">-&gt;</span><span class="na">controllersDir</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">;</span>
+<span class="k">echo</span> <span class="nv">$config</span><span class="o">-&gt;</span><span class="na">database</span><span class="o">-&gt;</span><span class="na">username</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">;</span>
+</pre></div>
+</div>
+</div>
 <div class="section" id="ini-reading-ini-files">
 <h2>读取 INI 文件（Reading INI Files）<a class="headerlink" href="#ini-reading-ini-files" title="永久链接至标题">¶</a></h2>
-<p>INI文件是存储设置的常用方法。 <a class="reference internal" href="../api/Phalcon_Config.html"><span class="doc">Phalcon\Config</span></a> 采用优化的PHP函数parse_ini_file读取这些文件。为方便访问，文件部分解析成子设置。</p>
+<p>INI文件是存储设置的常用方法。 <a class="reference internal" href="../api/Phalcon_Config_Adapter_Ini.html"><span class="doc">Phalcon\Config\Adapter\Ini</span></a> 采用优化的PHP函数parse_ini_file读取这些文件。为方便访问，文件部分解析成子设置。</p>
 <div class="highlight-ini"><div class="highlight"><pre><span></span><span class="k">[database]</span>
 <span class="na">adapter</span>  <span class="o">=</span> <span class="s">Mysql</span>
 <span class="na">host</span>     <span class="o">=</span> <span class="s">localhost</span>
@@ -188,7 +226,7 @@
 <span class="na">metadata.adapter</span>  <span class="o">=</span> <span class="s">&quot;Memory&quot;</span>
 </pre></div>
 </div>
-<p>你可以阅读如下所示的文件:</p>
+<p>访问方式如下所示：</p>
 <div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="k">use</span> <span class="nx">Phalcon\Config\Adapter\Ini</span> <span class="k">as</span> <span class="nx">ConfigIni</span><span class="p">;</span>
@@ -198,6 +236,31 @@
 <span class="k">echo</span> <span class="nv">$config</span><span class="o">-&gt;</span><span class="na">phalcon</span><span class="o">-&gt;</span><span class="na">controllersDir</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">;</span>
 <span class="k">echo</span> <span class="nv">$config</span><span class="o">-&gt;</span><span class="na">database</span><span class="o">-&gt;</span><span class="na">username</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">;</span>
 <span class="k">echo</span> <span class="nv">$config</span><span class="o">-&gt;</span><span class="na">models</span><span class="o">-&gt;</span><span class="na">metadata</span><span class="o">-&gt;</span><span class="na">adapter</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="yaml-reading-yaml-files">
+<h2>读取 YAML 文件（Reading Yaml Files）<a class="headerlink" href="#yaml-reading-yaml-files" title="永久链接至标题">¶</a></h2>
+<p>通过解析 YAML 文件获取配置信息，配置文件内容如下：</p>
+<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">phalcon</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">baseuri</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">/phalcon/</span>
+<span class="l l-Scalar l-Scalar-Plain">models</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">metadata</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">memory</span>
+<span class="l l-Scalar l-Scalar-Plain">database</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">adapter</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">mysql</span>
+  <span class="l l-Scalar l-Scalar-Plain">host</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">localhost</span>
+  <span class="l l-Scalar l-Scalar-Plain">username</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">user</span>
+  <span class="l l-Scalar l-Scalar-Plain">password</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">passwd</span>
+  <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">demo</span>
+</pre></div>
+</div>
+<p>访问方式如下所示：</p>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+
+<span class="nv">$config</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phalcon\Config\Adapter\Php</span><span class="p">(</span><span class="s2">&quot;path/config.php&quot;</span><span class="p">);</span>
+
+<span class="k">echo</span> <span class="nv">$config</span><span class="o">-&gt;</span><span class="na">phalcon</span><span class="o">-&gt;</span><span class="na">baseuri</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">;</span>
+<span class="k">echo</span> <span class="nv">$config</span><span class="o">-&gt;</span><span class="na">database</span><span class="o">-&gt;</span><span class="na">username</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">;</span>
 </pre></div>
 </div>
 </div>
@@ -249,7 +312,6 @@
 )
 </pre></div>
 </div>
-<p>有更多的适配器可用于这个组件： <a class="reference external" href="https://github.com/phalcon/incubator">Phalcon Incubator</a></p>
 </div>
 </div>
 
@@ -266,7 +328,7 @@
           <a href="../genindex.html" title="总目录"
              >索引</a></li>
         <li class="right" >
-          <a href="arr.html" title="数组助手（Array Helper）"
+          <a href="pagination.html" title="分页（Pagination）"
              >下一页</a> |</li>
         <li class="right" >
           <a href="forms.html" title="表单（Forms）"

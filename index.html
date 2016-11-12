@@ -665,28 +665,10 @@ Phalcon7 源自 Phalcon 所以具备了 Phalcon 所有与生俱来的特性，�
 <li class="toctree-l1"><a class="reference internal" href="reference/config.html">读取配置（Reading Configurations）</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="reference/config.html#file-adapters">文件适配器（File Adapters）</a></li>
 <li class="toctree-l2"><a class="reference internal" href="reference/config.html#native-arrays">原生数组（Native Arrays）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/config.html#php-reading-php-files">读取 PHP 文件（Reading PHP Files）</a></li>
 <li class="toctree-l2"><a class="reference internal" href="reference/config.html#ini-reading-ini-files">读取 INI 文件（Reading INI Files）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/config.html#yaml-reading-yaml-files">读取 YAML 文件（Reading Yaml Files）</a></li>
 <li class="toctree-l2"><a class="reference internal" href="reference/config.html#merging-configurations">合并配置（Merging Configurations）</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="reference/arr.html">数组助手（Array Helper）</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="reference/arr.html#gets-value">获取值（Gets Value）</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="reference/arr.html#id1">通过路径获取值（Gets Value）</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="reference/arr.html#converts-an-object-into-an-array">对象转换为数组（Converts an object into an array）</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="reference/date.html">日期助手（Date Helper）</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="reference/date.html#verify-date">日期验证（Verify Date）</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reference/date.html#date-format">日期格式化（Date Format）</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reference/date.html#fuzzy-date">模糊日期（Fuzzy Date）</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="reference/text.html">文本助手（Text Helper）</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="reference/text.html#camelize">转为驼峰格式（Camelize）</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reference/text.html#uncamelize">取消驼峰格式（Uncamelize）</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reference/text.html#increment">增量（Increment）</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="reference/pagination.html">分页（Pagination）</a><ul>
@@ -868,6 +850,11 @@ Phalcon7 源自 Phalcon 所以具备了 Phalcon 所有与生俱来的特性，�
 <li class="toctree-l2"><a class="reference internal" href="reference/image.html#pixelate-image">图像像素化（Pixelate Image）</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="reference/binary.html">二进制数据读取与写入（Binary Data Read And Writer）</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="reference/binary.html#binary-data-read">二进制数据读取（Binary Data Read）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/binary.html#id1">二进制数据写入（Binary Data Read）</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="reference/http.html">HTTP 请求客户端（HTTP Request Client）</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="reference/http.html#get-get-request">GET 请求（GET Request）</a></li>
 <li class="toctree-l2"><a class="reference internal" href="reference/http.html#post-post-request">POST 请求（POST Request）</a></li>
@@ -898,6 +885,26 @@ Phalcon7 源自 Phalcon 所以具备了 Phalcon 所有与生俱来的特性，�
 <li class="toctree-l2"><a class="reference internal" href="reference/helpers.html#text-helpers">文本助手（Text Helpers）</a></li>
 <li class="toctree-l2"><a class="reference internal" href="reference/helpers.html#date-helpers">日期助手（Date Helpers）</a></li>
 <li class="toctree-l2"><a class="reference internal" href="reference/helpers.html#view-helpers">视图助手（View Helpers）</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="reference/arr.html">数组助手（Array Helper）</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="reference/arr.html#gets-value">获取值（Gets Value）</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="reference/arr.html#id1">通过路径获取值（Gets Value）</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="reference/arr.html#converts-an-object-into-an-array">对象转换为数组（Converts an object into an array）</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="reference/date.html">日期助手（Date Helper）</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="reference/date.html#verify-date">日期验证（Verify Date）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/date.html#date-format">日期格式化（Date Format）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/date.html#fuzzy-date">模糊日期（Fuzzy Date）</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="reference/text.html">文本助手（Text Helper）</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="reference/text.html#camelize">转为驼峰格式（Camelize）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/text.html#uncamelize">取消驼峰格式（Uncamelize）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/text.html#increment">增量（Increment）</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="reference/debug.html">调试应用程序（Debugging Applications）</a><ul>
