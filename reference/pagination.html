@@ -25,7 +25,7 @@
     <link rel="search" title="搜索" href="../search.html" />
     <link rel="top" title="Phalcon7 1.0.0 文档" href="../index.html" />
     <link rel="next" title="使用缓存提高性能（Improving Performance with Cache）" href="cache.html" />
-    <link rel="prev" title="数组助手（Array Helper）" href="arr.html" /> 
+    <link rel="prev" title="读取配置（Reading Configurations）" href="config.html" /> 
 </head>
 <body>
 
@@ -69,7 +69,7 @@
           <a href="cache.html" title="使用缓存提高性能（Improving Performance with Cache）"
              accesskey="N">下一页</a> |</li>
         <li class="right" >
-          <a href="arr.html" title="数组助手（Array Helper）"
+          <a href="config.html" title="读取配置（Reading Configurations）"
              accesskey="P">上一页</a> |</li>
         <li><a href="http://myleftstudio.com">Home</a> &raquo;</li>
         <li><a href="../index.html">Phalcon7 1.0.0 文档</a> &raquo;</li> 
@@ -93,7 +93,7 @@
 </ul>
 </div>
 			<div class="panel-heading">上一个主题</div>
-            <div class="panel-body"><p class="topless"><a href="arr.html" title="上一章">&lt; 数组助手（Array Helper）</a></p></div>
+            <div class="panel-body"><p class="topless"><a href="config.html" title="上一章">&lt; 读取配置（Reading Configurations）</a></p></div>
 			<div class="panel-heading">下一个主题</div>
             <div class="panel-body"><p class="topless"><a href="cache.html" title="下一章">使用缓存提高性能（Improving Performance with Cache） &gt;</a></p></div>
 		</div>
@@ -106,15 +106,14 @@
 			  
   <div class="section" id="pagination">
 <h1>分页（Pagination）<a class="headerlink" href="#pagination" title="永久链接至标题">¶</a></h1>
-<p>The process of pagination takes place when we need to present big groups of arbitrary data gradually. <code class="code docutils literal"><span class="pre">Phalcon\Paginator</span></code> offers a
-fast and convenient way to split these sets of data into browsable pages.</p>
+<p>当需要呈现大量数据时我们需要用到该分页组件。<code class="code docutils literal"><span class="pre">Phalcon\Paginator</span></code> 提供了便捷数据集访问接口。</p>
 <div class="section" id="data-adapters">
 <h2>数据适配器（Data Adapters）<a class="headerlink" href="#data-adapters" title="永久链接至标题">¶</a></h2>
 <p>This component makes use of adapters to encapsulate different sources of data:</p>
 <table border="1" class="docutils">
 <colgroup>
-<col width="24%" />
-<col width="76%" />
+<col width="31%" />
+<col width="69%" />
 </colgroup>
 <thead valign="bottom">
 <tr class="row-odd"><th class="head">Adapter</th>
@@ -123,13 +122,16 @@ fast and convenient way to split these sets of data into browsable pages.</p>
 </thead>
 <tbody valign="top">
 <tr class="row-even"><td><a class="reference internal" href="../api/Phalcon_Paginator_Adapter_NativeArray.html"><span class="doc">NativeArray</span></a></td>
-<td>Use a PHP array as source data</td>
+<td>使用数组当数据源。</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="../api/Phalcon_Paginator_Adapter_Model.html"><span class="doc">Model</span></a></td>
-<td>Use a <a class="reference internal" href="../api/Phalcon_Mvc_Model_Resultset.html"><span class="doc">Phalcon\Mvc\Model\Resultset</span></a> object as source data. Since PDO doesn&#8217;t support scrollable cursors this adapter shouldn&#8217;t be used to paginate a large number of records</td>
+<td>使用模型结果集 <cite>Phalcon\Mvc\Model\Resultset &lt;../api/Phalcon_Mvc_Model_Resultset&gt;</cite> 当数据源。因为 PDO 不支持游标，所以不适合大数据量的翻页。</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="../api/Phalcon_Paginator_Adapter_QueryBuilder.html"><span class="doc">QueryBuilder</span></a></td>
 <td>Use a <a class="reference internal" href="../api/Phalcon_Mvc_Model_Query_Builder.html"><span class="doc">Phalcon\Mvc\Model\Query\Builder</span></a> object as source data</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../api/Phalcon_Paginator_Adapter_Sql.html"><span class="doc">Sql</span></a></td>
+<td>通过设置原生 SQL 获取数据源。</td>
 </tr>
 </tbody>
 </table>
@@ -199,6 +201,7 @@ object that contains the paginated data. It can be used for generating the pagin
 <span class="k">use</span> <span class="nx">Phalcon\Paginator\Adapter\Model</span> <span class="k">as</span> <span class="nx">PaginatorModel</span><span class="p">;</span>
 <span class="k">use</span> <span class="nx">Phalcon\Paginator\Adapter\NativeArray</span> <span class="k">as</span> <span class="nx">PaginatorArray</span><span class="p">;</span>
 <span class="k">use</span> <span class="nx">Phalcon\Paginator\Adapter\QueryBuilder</span> <span class="k">as</span> <span class="nx">PaginatorQueryBuilder</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Phalcon\Paginator\Adapter\Sql</span> <span class="k">as</span> <span class="nx">PaginatorSql</span><span class="p">;</span>
 
 <span class="c1">// Passing a resultset as data</span>
 <span class="nv">$paginator</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">PaginatorModel</span><span class="p">(</span>
@@ -234,6 +237,16 @@ object that contains the paginated data. It can be used for generating the pagin
 <span class="nv">$paginator</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">PaginatorQueryBuilder</span><span class="p">(</span>
     <span class="k">array</span><span class="p">(</span>
         <span class="s2">&quot;builder&quot;</span> <span class="o">=&gt;</span> <span class="nv">$builder</span><span class="p">,</span>
+        <span class="s2">&quot;limit&quot;</span>   <span class="o">=&gt;</span> <span class="mi">20</span><span class="p">,</span>
+        <span class="s2">&quot;page&quot;</span>    <span class="o">=&gt;</span> <span class="mi">1</span>
+    <span class="p">)</span>
+<span class="p">);</span>
+
+<span class="nv">$paginator</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">PaginatorSql</span><span class="p">(</span>
+    <span class="k">array</span><span class="p">(</span>
+        <span class="s2">&quot;sql&quot;</span> <span class="o">=&gt;</span> <span class="s2">&quot;SELECT * FROM robots WHERE type = :type LIMIT :limit OFFSET :offset&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;total_sql&quot;</span> <span class="o">=&gt;</span> <span class="s2">&quot;SELECT COUNT(*) rowcount FROM robots WHERE type = :type FROM robots&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;bind&quot;</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;google&#39;</span><span class="p">],</span>
         <span class="s2">&quot;limit&quot;</span>   <span class="o">=&gt;</span> <span class="mi">20</span><span class="p">,</span>
         <span class="s2">&quot;page&quot;</span>    <span class="o">=&gt;</span> <span class="mi">1</span>
     <span class="p">)</span>
@@ -330,7 +343,7 @@ object that contains the paginated data. It can be used for generating the pagin
           <a href="cache.html" title="使用缓存提高性能（Improving Performance with Cache）"
              >下一页</a> |</li>
         <li class="right" >
-          <a href="arr.html" title="数组助手（Array Helper）"
+          <a href="config.html" title="读取配置（Reading Configurations）"
              >上一页</a> |</li> 
       </ul>
     </div>

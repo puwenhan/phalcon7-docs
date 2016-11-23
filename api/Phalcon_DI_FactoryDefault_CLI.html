@@ -108,15 +108,17 @@
 <p>Registers a service in the services container</p>
 <p>public  <strong>remove</strong> (<em>string</em> $name) inherited from Phalcon\DI</p>
 <p>Removes a service in the services container</p>
+<p>public <a class="reference internal" href="Phalcon_DI_ServiceInterface.html"><span class="doc">Phalcon\DI\ServiceInterface</span></a>  <strong>setRaw</strong> (<em>string</em> $name, [<em>mixed</em> $definition], [<em>boolean</em> $shared]) inherited from Phalcon\DI</p>
+<p>Returns a service definition without resolving</p>
 <p>public <em>mixed</em>  <strong>getRaw</strong> (<em>string</em> $name) inherited from Phalcon\DI</p>
 <p>Returns a service definition without resolving</p>
 <p>public <a class="reference internal" href="Phalcon_DI_ServiceInterface.html"><span class="doc">Phalcon\DI\ServiceInterface</span></a>  <strong>getService</strong> (<em>string</em> $name) inherited from Phalcon\DI</p>
 <p>Returns a Phalcon\DI\Service instance</p>
-<p>public <a class="reference internal" href="Phalcon_DI_ServiceInterface.html"><span class="doc">Phalcon\DI\ServiceInterface</span></a>  <strong>setService</strong> (<a class="reference internal" href="Phalcon_DI_ServiceInterface.html"><span class="doc">Phalcon\DI\ServiceInterface</span></a> $rawDefinition) inherited from Phalcon\DI</p>
+<p>public <a class="reference internal" href="Phalcon_DI_ServiceInterface.html"><span class="doc">Phalcon\DI\ServiceInterface</span></a>  <strong>setService</strong> (<em>string</em> $name, <a class="reference internal" href="Phalcon_DI_ServiceInterface.html"><span class="doc">Phalcon\DI\ServiceInterface</span></a> $rawDefinition) inherited from Phalcon\DI</p>
 <p>Sets a service using a raw Phalcon\DI\Service definition</p>
-<p>public <em>mixed</em>  <strong>get</strong> (<em>string</em> $name, [<em>array</em> $parameters], [<em>unknown</em> $noerror]) inherited from Phalcon\DI</p>
+<p>public <em>mixed</em>  <strong>get</strong> (<em>string</em> $name, [<em>array</em> $parameters], [<em>boolean</em> $noError], [<em>unknown</em> $noerror]) inherited from Phalcon\DI</p>
 <p>Resolves the service based on its configuration</p>
-<p>public <em>mixed</em>  <strong>getShared</strong> (<em>string</em> $name, [<em>array</em> $parameters], [<em>unknown</em> $noerror]) inherited from Phalcon\DI</p>
+<p>public <em>mixed</em>  <strong>getShared</strong> (<em>string</em> $name, [<em>array</em> $parameters], [<em>boolean</em> $noError]) inherited from Phalcon\DI</p>
 <p>Resolves a service, the resolved service is stored in the DI, subsequent requests for this service will return the same instance</p>
 <p>public <em>boolean</em>  <strong>has</strong> (<em>string</em> $name) inherited from Phalcon\DI</p>
 <p>Check whether the DI contains a service by a name</p>
@@ -134,8 +136,6 @@
 <p>Attempts to register a service in the services container Only is successful if a service hasn&#8217;t been registered previously with the same name</p>
 <p>public <a class="reference internal" href="Phalcon_DI_ServiceInterface.html"><span class="doc">Phalcon\DI\ServiceInterface</span></a>  <strong>setShared</strong> (<em>string</em> $name, <em>mixed</em> $definition) inherited from Phalcon\DI</p>
 <p>Registers an &#8220;always shared&#8221; service in the services container</p>
-<p>public  <strong>setRaw</strong> (<em>unknown</em> $rawDefinition) inherited from Phalcon\DI</p>
-<p>...</p>
 <p>public <em>boolean</em>  <strong>offsetExists</strong> (<em>unknown</em> $property) inherited from Phalcon\DI</p>
 <p>Check if a service is registered using the array syntax. Alias for Phalcon\Di::has()</p>
 <p>public  <strong>offsetSet</strong> (<em>unknown</em> $property, <em>unknown</em> $value) inherited from Phalcon\DI</p>

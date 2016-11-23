@@ -134,9 +134,9 @@ and cache table meta-data.</p>
 time you use the table. This could be done caching the meta-data using any of the following adapters:</p>
 <table border="1" class="docutils">
 <colgroup>
-<col width="2%" />
-<col width="74%" />
-<col width="23%" />
+<col width="3%" />
+<col width="69%" />
+<col width="28%" />
 </colgroup>
 <thead valign="bottom">
 <tr class="row-odd"><th class="head">Adapter</th>
@@ -150,11 +150,11 @@ time you use the table. This could be done caching the meta-data using any of th
 <td><a class="reference internal" href="../api/Phalcon_Mvc_Model_MetaData_Memory.html"><span class="doc">Phalcon\Mvc\Model\MetaData\Memory</span></a></td>
 </tr>
 <tr class="row-odd"><td>Session</td>
-<td>这个适配器将元数据缓存在 <code class="code docutils literal"><span class="pre">$_SESSION</span></code> 超全局变量中。该适配器只适合在拥有少量模型的时候使用，每次启动新的 Session 该适配器缓存就会失效。必须在 <code class="code docutils literal"><span class="pre">session_start()</span></code> 启动 Session 之后使用。</td>
+<td>该适配器将元数据缓存在 <code class="code docutils literal"><span class="pre">$_SESSION</span></code> 超全局变量中。该适配器只适合在拥有少量模型的时候使用，每次启动新的 Session 该适配器缓存就会失效。必须在 <code class="code docutils literal"><span class="pre">session_start()</span></code> 启动 Session 之后使用。</td>
 <td><a class="reference internal" href="../api/Phalcon_Mvc_Model_MetaData_Session.html"><span class="doc">Phalcon\Mvc\Model\MetaData\Session</span></a></td>
 </tr>
 <tr class="row-even"><td>Apc</td>
-<td>This adapter uses the <a class="reference external" href="http://www.php.net/manual/en/book.apc.php">Alternative PHP Cache (APC)</a> to store the table meta-data. You can specify the lifetime of the meta-data with options. This is the most recommended way to store meta-data when the application is in production stage.</td>
+<td>该适配器将使用 <a class="reference external" href="http://www.php.net/manual/en/book.apc.php">Alternative PHP Cache (APC)</a> 存储元数据。可以设置 <cite>lifetime</cite> 选项。推荐在生成阶段使用该适配器</td>
 <td><a class="reference internal" href="../api/Phalcon_Mvc_Model_MetaData_Apc.html"><span class="doc">Phalcon\Mvc\Model\MetaData\Apc</span></a></td>
 </tr>
 <tr class="row-odd"><td>XCache</td>
@@ -164,6 +164,10 @@ time you use the table. This could be done caching the meta-data using any of th
 <tr class="row-even"><td>Files</td>
 <td>This adapter uses plain files to store meta-data. By using this adapter the disk-reading is increased but the database access is reduced</td>
 <td><a class="reference internal" href="../api/Phalcon_Mvc_Model_MetaData_Files.html"><span class="doc">Phalcon\Mvc\Model\MetaData\Files</span></a></td>
+</tr>
+<tr class="row-odd"><td>Cache</td>
+<td>该适配器将使用缓存组件存储元数据。</td>
+<td><a class="reference internal" href="../api/Phalcon_Mvc_Model_MetaData_Cache.html"><span class="doc">Phalcon\Mvc\Model\MetaData\Cache</span></a></td>
 </tr>
 </tbody>
 </table>
