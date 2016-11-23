@@ -39,7 +39,7 @@ Sets the table to insert into
 
 
 
-public *bool*  **getTable** ()
+public *boolean*  **getTable** ()
 
 Gets the table to insert into
 

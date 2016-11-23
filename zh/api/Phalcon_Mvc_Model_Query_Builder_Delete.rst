@@ -39,7 +39,7 @@ Sets the table to delete from
 
 
 
-public *bool*  **getTable** ()
+public *boolean*  **getTable** ()
 
 Gets the table to delete from
 

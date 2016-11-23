@@ -12,6 +12,7 @@ API Indice
    Phalcon_Acl_Role
    Phalcon_Annotations_Adapter
    Phalcon_Annotations_Adapter_Apc
+   Phalcon_Annotations_Adapter_Cache
    Phalcon_Annotations_Adapter_Files
    Phalcon_Annotations_Adapter_Memory
    Phalcon_Annotations_Adapter_Xcache
@@ -20,6 +21,8 @@ API Indice
    Phalcon_Annotations_Exception
    Phalcon_Annotations_Reader
    Phalcon_Annotations_Reflection
+   Phalcon_Application
+   Phalcon_Application_Exception
    Phalcon_Arr
    Phalcon_Assets_Collection
    Phalcon_Assets_Exception
@@ -255,11 +258,16 @@ API Indice
    Phalcon_Security_Exception
    Phalcon_Security_Random
    Phalcon_Session_Adapter
+   Phalcon_Session_Adapter_Cache
    Phalcon_Session_Adapter_Files
    Phalcon_Session_Adapter_Libmemcached
    Phalcon_Session_Adapter_Memcache
    Phalcon_Session_Bag
    Phalcon_Session_Exception
+   Phalcon_Socket
+   Phalcon_Socket_Client
+   Phalcon_Socket_Exception
+   Phalcon_Socket_Server
    Phalcon_Tag
    Phalcon_Tag_Exception
    Phalcon_Tag_Select
