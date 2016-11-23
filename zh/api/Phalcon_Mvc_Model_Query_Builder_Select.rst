@@ -65,7 +65,7 @@ Sets SELECT DISTINCT / SELECT ALL flag
 
 
 
-public *bool*  **getDistinct** ()
+public *boolean*  **getDistinct** ()
 
 Returns SELECT DISTINCT / SELECT ALL flag
 

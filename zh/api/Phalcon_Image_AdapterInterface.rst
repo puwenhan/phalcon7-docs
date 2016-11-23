@@ -69,7 +69,7 @@ abstract public  **mask** (*unknown* $mask)
 ...
 
 
-abstract public :doc:`Phalcon\\Image\\Adapter <Phalcon_Image_Adapter>`  **background** (*unknown* $color, [*unknown* $quality])
+abstract public :doc:`Phalcon\\Image\\Adapter <Phalcon_Image_Adapter>`  **background** (*unknown* $color, [*unknown* $opacity])
 
 Set the background color of an image. This is only useful for images with alpha transparency.
 
@@ -85,13 +85,13 @@ abstract public  **pixelate** ([*unknown* $amount])
 ...
 
 
-abstract public :doc:`Phalcon\\Image\\Adapter <Phalcon_Image_Adapter>`  **save** ([*unknown* $file], [*unknown* $quality])
+abstract public :doc:`Phalcon\\Image\\Adapter <Phalcon_Image_Adapter>`  **save** ([*unknown* $file], [*unknown* $opacity])
 
 Save the image. If the filename is omitted, the original image will be overwritten.
 
 
 
-abstract public :doc:`Phalcon\\Image\\Adapter <Phalcon_Image_Adapter>`  **render** ([*unknown* $type], [*unknown* $quality])
+abstract public :doc:`Phalcon\\Image\\Adapter <Phalcon_Image_Adapter>`  **render** ([*unknown* $type], [*unknown* $opacity])
 
 Render the image and return the binary string.
 

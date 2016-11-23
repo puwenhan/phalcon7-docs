@@ -72,6 +72,10 @@ Constants
 
 *integer* **TYPE_TIMESTAMP**
 
+*integer* **TYPE_BYTEA**
+
+*integer* **TYPE_MONEY**
+
 *integer* **TYPE_OTHER**
 
 *integer* **BIND_PARAM_NULL**

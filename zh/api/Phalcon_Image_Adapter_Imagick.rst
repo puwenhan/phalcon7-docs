@@ -305,7 +305,7 @@ Composite one image onto another
 
 
 
-public :doc:`Phalcon\\Image\\Adapter <Phalcon_Image_Adapter>`  **background** (*unknown* $color, [*unknown* $quality]) inherited from Phalcon\\Image\\Adapter
+public :doc:`Phalcon\\Image\\Adapter <Phalcon_Image_Adapter>`  **background** (*unknown* $color, [*unknown* $opacity]) inherited from Phalcon\\Image\\Adapter
 
 Set the background color of an image. This is only useful for images with alpha transparency.
 
@@ -323,13 +323,13 @@ Pixelate image
 
 
 
-public *boolean*  **save** ([*unknown* $file], [*unknown* $quality]) inherited from Phalcon\\Image\\Adapter
+public *boolean*  **save** ([*unknown* $file], [*unknown* $opacity]) inherited from Phalcon\\Image\\Adapter
 
 Save the image. If the filename is omitted, the original image will be overwritten.
 
 
 
-public *string*  **render** ([*unknown* $type], [*unknown* $quality]) inherited from Phalcon\\Image\\Adapter
+public *string*  **render** ([*unknown* $type], [*unknown* $opacity]) inherited from Phalcon\\Image\\Adapter
 
 Render the image and return the binary string.
 
