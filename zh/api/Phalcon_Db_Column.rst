@@ -70,6 +70,8 @@ Constants
 
 *integer* **TYPE_ARRAY**
 
+*integer* **TYPE_INT_ARRAY**
+
 *integer* **TYPE_TIMESTAMP**
 
 *integer* **TYPE_BYTEA**
