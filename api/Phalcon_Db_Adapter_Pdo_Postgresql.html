@@ -118,6 +118,14 @@
 <p>Return the default identity value to insert in an identity column</p>
 <p>public <em>boolean</em>  <strong>supportSequences</strong> ()</p>
 <p>Check whether the database system requires a sequence to produce auto-numeric values</p>
+<p>public <em>string</em>  <strong>escapeBytea</strong> (<em>string</em> $value)</p>
+<p>Convert php bytea to database bytea</p>
+<p>public <em>string</em>  <strong>unescapeBytea</strong> (<em>string</em> $value)</p>
+<p>Convert database bytea to php bytea</p>
+<p>public <em>string</em>  <strong>escapeArray</strong> (<em>array</em> $value, [<em>unknown</em> $type])</p>
+<p>Convert php array to database array</p>
+<p>public <em>array</em>  <strong>unescapeArray</strong> (<em>string</em> $value, [<em>unknown</em> $type])</p>
+<p>Convert database array to php array</p>
 <p>public  <strong>__construct</strong> (<em>array</em> $descriptor) inherited from Phalcon\Db\Adapter\Pdo</p>
 <p>Constructor for Phalcon\Db\Adapter\Pdo</p>
 <p>public <em>PDOStatement</em>  <strong>prepare</strong> (<em>string</em> $sqlStatement) inherited from Phalcon\Db\Adapter\Pdo</p>

@@ -118,6 +118,14 @@
  <span class="nb">print_r</span><span class="p">(</span><span class="nv">$connection</span><span class="o">-&gt;</span><span class="na">describeColumns</span><span class="p">(</span><span class="s2">&quot;posts&quot;</span><span class="p">));</span> <span class="cp">?&gt;</span><span class="x"></span>
 </pre></div>
 </div>
+<p>public <em>string</em>  <strong>escapeBytea</strong> (<em>string</em> $value)</p>
+<p>Convert php bytea to database bytea</p>
+<p>public <em>string</em>  <strong>unescapeBytea</strong> (<em>string</em> $value)</p>
+<p>Convert database bytea to php bytea</p>
+<p>public <em>string</em>  <strong>escapeArray</strong> (<em>array</em> $value, [<em>unknown</em> $type])</p>
+<p>Convert php array to database array</p>
+<p>public <em>array</em>  <strong>unescapeArray</strong> (<em>string</em> $value, [<em>unknown</em> $type])</p>
+<p>Convert database array to php array</p>
 <p>public  <strong>__construct</strong> (<em>array</em> $descriptor) inherited from Phalcon\Db\Adapter\Pdo</p>
 <p>Constructor for Phalcon\Db\Adapter\Pdo</p>
 <p>public <em>boolean</em>  <strong>connect</strong> ([<em>array</em> $descriptor]) inherited from Phalcon\Db\Adapter\Pdo</p>

@@ -220,6 +220,14 @@
 <p>Returns the savepoint name to use for nested transactions</p>
 <p>abstract public <a class="reference internal" href="Phalcon_Db_ColumnInterface.html"><span class="doc">Phalcon\Db\ColumnInterface</span></a> [] <strong>describeColumns</strong> (<em>string</em> $table, [<em>string</em> $schema])</p>
 <p>Returns an array of Phalcon\Db\Column objects describing a table</p>
+<p>abstract public <em>string</em>  <strong>escapeBytea</strong> (<em>string</em> $value)</p>
+<p>Convert php bytea to database bytea</p>
+<p>abstract public <em>string</em>  <strong>unescapeBytea</strong> (<em>string</em> $value)</p>
+<p>Convert database bytea to php bytea</p>
+<p>abstract public <em>string</em>  <strong>escapeArray</strong> (<em>array</em> $value, [<em>int</em> $type])</p>
+<p>Convert php array to database array</p>
+<p>abstract public <em>array</em>  <strong>unescapeArray</strong> (<em>string</em> $value, [<em>int</em> $type])</p>
+<p>Convert database array to php array</p>
 </div>
 </div>
 

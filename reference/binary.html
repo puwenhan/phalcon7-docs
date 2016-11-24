@@ -5,7 +5,7 @@
     
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>二进制数据读取与写入（Binary Data Read And Writer） &mdash; Phalcon7 1.0.0 文档</title>
+    <title>二进制数据读取与写入（Binary Data Read And Write） &mdash; Phalcon7 1.0.0 文档</title>
     <meta name="keywords" content="php, phalcon, phalcon7, phalcon php, php framework, faster php framework">
     <link rel="stylesheet" type="text/css" href="../static/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="../static/phalcon.css" />
@@ -82,7 +82,7 @@
 		<div class="panel panel-default">
 			<div class="panel-heading"><a href="../index.html">內容目录</a></div>
 			<div class="panel-body"><ul>
-<li><a class="reference internal" href="#">二进制数据读取与写入（Binary Data Read And Writer）</a><ul>
+<li><a class="reference internal" href="#">二进制数据读取与写入（Binary Data Read And Write）</a><ul>
 <li><a class="reference internal" href="#binary-data-read">二进制数据读取（Binary Data Read）</a></li>
 <li><a class="reference internal" href="#binary-data-write">二进制数据写入（Binary Data Write）</a></li>
 </ul>
@@ -101,8 +101,8 @@
 		  <div class="bodywrapper">
 			<div class="body" >
 			  
-  <div class="section" id="binary-data-read-and-writer">
-<h1>二进制数据读取与写入（Binary Data Read And Writer）<a class="headerlink" href="#binary-data-read-and-writer" title="永久链接至标题">¶</a></h1>
+  <div class="section" id="binary-data-read-and-write">
+<h1>二进制数据读取与写入（Binary Data Read And Write）<a class="headerlink" href="#binary-data-read-and-write" title="永久链接至标题">¶</a></h1>
 <p>二进制数据组件给应用提供二进制数据读取、写入等功能，内部使用 <cite>pack</cite>、<cite>unpack</cite> 函数实现。</p>
 <div class="section" id="binary-data-read">
 <h2>二进制数据读取（Binary Data Read）<a class="headerlink" href="#binary-data-read" title="永久链接至标题">¶</a></h2>
@@ -125,7 +125,7 @@
 
 <span class="nv">$fp</span> <span class="o">=</span> <span class="nb">fopen</span><span class="p">(</span><span class="s1">&#39;test.bin&#39;</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">);</span>
 
-<span class="nv">$bin</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phalcon\Binary\Write</span><span class="p">(</span><span class="nv">$fp</span><span class="p">);</span>
+<span class="nv">$bin</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phalcon\Binary\Writer</span><span class="p">(</span><span class="nv">$fp</span><span class="p">);</span>
 <span class="nv">$bin</span><span class="o">-&gt;</span><span class="na">writeUnsignedChar</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
 <span class="nv">$bin</span><span class="o">-&gt;</span><span class="na">writeUnsignedInt16</span><span class="p">(</span><span class="mi">240</span><span class="p">);</span>
 <span class="nv">$bin</span><span class="o">-&gt;</span><span class="na">writeString</span><span class="p">(</span><span class="s1">&#39;Phalcon7&#39;</span><span class="p">);</span>
