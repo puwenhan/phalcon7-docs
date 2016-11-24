@@ -9,6 +9,20 @@ Class **Phalcon\\Socket\\Client**
 :raw-html:`<a href="https://github.com/dreamsxin/cphalcon7/blob/master/ext/socket/client.c" class="btn btn-default btn-sm">Source on GitHub</a>`
 
 
+.. code-block:: php
+
+    <?php
+
+    $client = new Phalcon\Socket\Client('127.0.0.1', 8989);
+    if ($client->connect()) {
+        $client->write('Hello world!');
+        while($ret = $client->read(1024, PHP_NORMAL_READ)) {
+              echo $ret;
+        }
+    } else {
+        echo 'connect fail'.PHP_EOL;
+    }
+
 
 
 Constants

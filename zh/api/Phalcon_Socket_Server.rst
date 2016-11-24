@@ -9,6 +9,34 @@ Class **Phalcon\\Socket\\Server**
 :raw-html:`<a href="https://github.com/dreamsxin/cphalcon7/blob/master/ext/socket/server.c" class="btn btn-default btn-sm">Source on GitHub</a>`
 
 
+.. code-block:: php
+
+    <?php
+
+    $server = new Phalcon\Socket\Server('127.0.0.1', 8989);
+      $server->run(
+          function(Phalcon\Socket\Client $client){
+              // Connect
+          },
+          function(Phalcon\Socket\Client $client, $mssage){
+              // Read
+              echo $mssage.PHP_EOL;
+          },
+          function(Phalcon\Socket\Client $client){
+              // Send
+              $client->write("Welcome!");
+          },
+          function(Phalcon\Socket\Client $client){
+              // Close
+          },
+          function(Phalcon\Socket\Client $client){
+              // Error
+          },
+          function(){
+              // Timeout
+          }
+      );
+
 
 
 Constants
