@@ -301,7 +301,9 @@ API Indice
    Phalcon_Validation_Validator_Url
    Phalcon_Version
    Phalcon_Acl_AdapterInterface
+   Phalcon_Acl_ResourceAware
    Phalcon_Acl_ResourceInterface
+   Phalcon_Acl_RoleAware
    Phalcon_Acl_RoleInterface
    Phalcon_Annotations_AdapterInterface
    Phalcon_Annotations_ReaderInterface
