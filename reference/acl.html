@@ -211,7 +211,7 @@
 <div class="section" id="objects-as-role-name-and-resource-name">
 <h2>使用角色感知对象与资源感知对象（Objects as role name and resource name）<a class="headerlink" href="#objects-as-role-name-and-resource-name" title="永久链接至标题">¶</a></h2>
 <p>角色感知类必须实现 <a class="reference internal" href="../api/Phalcon_Acl_RoleAware.html"><span class="doc">Phalcon\Acl\RoleAware</span></a> 接口，资源感知类必须实现 <a class="reference internal" href="../api/Phalcon_Acl_ResourceAware.html"><span class="doc">Phalcon\Acl\ResourceAware</span></a> 接口。</p>
-<p>角色感知类 <code class="code docutils literal"><span class="pre">UserRole</span></code>：</p>
+<p>角色感知类 <code class="code docutils literal"><span class="pre">UserRoles</span></code>：</p>
 <div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="k">class</span> <span class="nc">UserRoles</span> <span class="k">extends</span> <span class="nx">Phalcon\Mvc\Model</span> <span class="k">implements</span> <span class="nx">Phalcon\Acl\RoleAware</span>
@@ -229,7 +229,7 @@
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>资源感知类 <code class="code docutils literal"><span class="pre">ModelResource</span></code>：</p>
+<p>资源感知类 <code class="code docutils literal"><span class="pre">AclResources</span></code>：</p>
 <div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
 <span class="k">class</span> <span class="nc">AclResources</span> <span class="k">extends</span> <span class="nx">Phalcon\Mvc\Model</span> <span class="k">implements</span> <span class="nx">Phalcon\Acl\ResourceAware</span>
@@ -264,11 +264,11 @@
 <span class="nv">$customer</span> <span class="o">=</span> <span class="nx">AclResources</span><span class="o">::</span><span class="na">findFirst</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
 
 <span class="c1">// rolename is &quot;Designers&quot;</span>
-<span class="nv">$designer</span> <span class="o">=</span> <span class="nx">UserRolesfindFirst</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+<span class="nv">$designer</span> <span class="o">=</span> <span class="nx">UserRoles</span><span class="o">::</span><span class="na">findFirst</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
 <span class="c1">// rolename is &quot;Guests&quot;</span>
-<span class="nv">$guest</span> <span class="o">=</span> <span class="nx">UserRolesfindFirst</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+<span class="nv">$guest</span> <span class="o">=</span> <span class="nx">UserRoles</span><span class="o">::</span><span class="na">findFirst</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
 <span class="c1">// rolename is &quot;Guests&quot;</span>
-<span class="nv">$anotherGuest</span> <span class="o">=</span> <span class="nx">UserRolesfindFirst</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>
+<span class="nv">$anotherGuest</span> <span class="o">=</span> <span class="nx">UserRoles</span><span class="o">::</span><span class="na">findFirst</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>
 
 <span class="c1">// Returns false</span>
 <span class="nv">$acl</span><span class="o">-&gt;</span><span class="na">isAllowed</span><span class="p">(</span><span class="nv">$designer</span><span class="p">,</span> <span class="nv">$customer</span><span class="p">,</span> <span class="s2">&quot;search&quot;</span><span class="p">);</span>
