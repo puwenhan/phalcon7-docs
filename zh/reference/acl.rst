@@ -115,7 +115,7 @@ allow()方法指定了允许角色对资源的访问， deny()方法则反之。
 ------------------------------------------------------------------------
 角色感知类必须实现 :doc:`Phalcon\\Acl\\RoleAware <../api/Phalcon_Acl_RoleAware>` 接口，资源感知类必须实现 :doc:`Phalcon\\Acl\\ResourceAware <../api/Phalcon_Acl_ResourceAware>` 接口。
 
-角色感知类 :code:`UserRole`：
+角色感知类 :code:`UserRoles`：
 
 .. code-block:: php
 
@@ -135,7 +135,7 @@ allow()方法指定了允许角色对资源的访问， deny()方法则反之。
         }
     }
 
-资源感知类 :code:`ModelResource`：
+资源感知类 :code:`AclResources`：
 
 .. code-block:: php
 
@@ -175,11 +175,11 @@ allow()方法指定了允许角色对资源的访问， deny()方法则反之。
     $customer = AclResources::findFirst(1);
 
     // rolename is "Designers"
-    $designer = UserRolesfindFirst(1);
+    $designer = UserRoles::findFirst(1);
     // rolename is "Guests"
-    $guest = UserRolesfindFirst(2);
+    $guest = UserRoles::findFirst(2);
     // rolename is "Guests"
-    $anotherGuest = UserRolesfindFirst(3);
+    $anotherGuest = UserRoles::findFirst(3);
 
     // Returns false
     $acl->isAllowed($designer, $customer, "search");
