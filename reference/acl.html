@@ -88,6 +88,7 @@
 <li><a class="reference internal" href="#adding-resources">添加资源（Adding Resources）</a></li>
 <li><a class="reference internal" href="#defining-access-controls">定义访问控制（Defining Access Controls）</a></li>
 <li><a class="reference internal" href="#acl-querying-an-acl">查询 ACL（Querying an ACL）</a></li>
+<li><a class="reference internal" href="#objects-as-role-name-and-resource-name">使用角色感知对象与资源感知对象（Objects as role name and resource name）</a></li>
 <li><a class="reference internal" href="#roles-inheritance">角色继承（Roles Inheritance）</a></li>
 <li><a class="reference internal" href="#acl-serializing-acl-lists">序列化 ACL 列表（Serializing ACL lists）</a></li>
 <li><a class="reference internal" href="#acl-acl-events">ACL 事件（ACL Events）</a></li>
@@ -182,6 +183,18 @@
 </pre></div>
 </div>
 <p>allow()方法指定了允许角色对资源的访问， deny()方法则反之。</p>
+<p>我们还可以指定第四个参数，设置回调函数，来处理来自 <code class="code docutils literal"><span class="pre">isAllowed()</span></code> 方法的数据：</p>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+
+<span class="c1">// 设置角色对资源的访问级别</span>
+<span class="nv">$acl</span><span class="o">-&gt;</span><span class="na">allow</span><span class="p">(</span><span class="s2">&quot;Guests&quot;</span><span class="p">,</span> <span class="s2">&quot;Customers&quot;</span><span class="p">,</span> <span class="s2">&quot;search&quot;</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nv">$role</span><span class="p">,</span> <span class="nv">$resource</span><span class="p">,</span> <span class="nv">$access</span><span class="p">,</span> <span class="nv">$data</span><span class="p">,</span> <span class="nv">$allow</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nv">$data</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">===</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">});</span>
+
+<span class="c1">// Returns true</span>
+<span class="nv">$acl</span><span class="o">-&gt;</span><span class="na">isAllowed</span><span class="p">(</span><span class="s2">&quot;Guests&quot;</span><span class="p">,</span> <span class="s2">&quot;Customers&quot;</span><span class="p">,</span> <span class="s2">&quot;search&quot;</span><span class="p">,</span> <span class="mi">4</span><span class="p">);</span>
+</pre></div>
+</div>
 </div>
 <div class="section" id="acl-querying-an-acl">
 <h2>查询 ACL（Querying an ACL）<a class="headerlink" href="#acl-querying-an-acl" title="永久链接至标题">¶</a></h2>
@@ -192,6 +205,91 @@
 <span class="nv">$acl</span><span class="o">-&gt;</span><span class="na">isAllowed</span><span class="p">(</span><span class="s2">&quot;Guests&quot;</span><span class="p">,</span> <span class="s2">&quot;Customers&quot;</span><span class="p">,</span> <span class="s2">&quot;edit&quot;</span><span class="p">);</span>   <span class="c1">// Returns 0</span>
 <span class="nv">$acl</span><span class="o">-&gt;</span><span class="na">isAllowed</span><span class="p">(</span><span class="s2">&quot;Guests&quot;</span><span class="p">,</span> <span class="s2">&quot;Customers&quot;</span><span class="p">,</span> <span class="s2">&quot;search&quot;</span><span class="p">);</span> <span class="c1">// Returns 1</span>
 <span class="nv">$acl</span><span class="o">-&gt;</span><span class="na">isAllowed</span><span class="p">(</span><span class="s2">&quot;Guests&quot;</span><span class="p">,</span> <span class="s2">&quot;Customers&quot;</span><span class="p">,</span> <span class="s2">&quot;create&quot;</span><span class="p">);</span> <span class="c1">// Returns 1</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="objects-as-role-name-and-resource-name">
+<h2>使用角色感知对象与资源感知对象（Objects as role name and resource name）<a class="headerlink" href="#objects-as-role-name-and-resource-name" title="永久链接至标题">¶</a></h2>
+<p>角色感知类必须实现 <a class="reference internal" href="../api/Phalcon_Acl_RoleAware.html"><span class="doc">Phalcon\Acl\RoleAware</span></a> 接口，资源感知类必须实现 <a class="reference internal" href="../api/Phalcon_Acl_ResourceAware.html"><span class="doc">Phalcon\Acl\ResourceAware</span></a> 接口。</p>
+<p>角色感知类 <code class="code docutils literal"><span class="pre">UserRole</span></code>：</p>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+
+<span class="k">class</span> <span class="nc">UserRoles</span> <span class="k">extends</span> <span class="nx">Phalcon\Mvc\Model</span> <span class="k">implements</span> <span class="nx">Phalcon\Acl\RoleAware</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">getId</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">id</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="c1">// Implemented function from RoleAware Interface</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">getRoleName</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">rolename</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>资源感知类 <code class="code docutils literal"><span class="pre">ModelResource</span></code>：</p>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+
+<span class="k">class</span> <span class="nc">AclResources</span> <span class="k">extends</span> <span class="nx">Phalcon\Mvc\Model</span> <span class="k">implements</span> <span class="nx">Phalcon\Acl\ResourceAware</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">getId</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">id</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">getUserId</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">user_id</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="c1">// Implemented function from ResourceAware Interface</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">getResourceName</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">resourcename</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>我们可以在 <code class="code docutils literal"><span class="pre">isAllowed()</span></code> 方法中使用它们：</p>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+
+<span class="nv">$acl</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phalcon\Acl\Adapter\Memory</span><span class="p">;</span>
+<span class="nv">$acl</span><span class="o">-&gt;</span><span class="na">allow</span><span class="p">(</span><span class="s2">&quot;Guests&quot;</span><span class="p">,</span> <span class="s2">&quot;Customers&quot;</span><span class="p">,</span> <span class="s2">&quot;search&quot;</span><span class="p">);</span>
+<span class="nv">$acl</span><span class="o">-&gt;</span><span class="na">allow</span><span class="p">(</span><span class="s2">&quot;Guests&quot;</span><span class="p">,</span> <span class="s2">&quot;Customers&quot;</span><span class="p">,</span> <span class="s2">&quot;create&quot;</span><span class="p">);</span>
+<span class="nv">$acl</span><span class="o">-&gt;</span><span class="na">deny</span><span class="p">(</span><span class="s2">&quot;Guests&quot;</span><span class="p">,</span> <span class="s2">&quot;Customers&quot;</span><span class="p">,</span> <span class="s2">&quot;update&quot;</span><span class="p">);</span>
+
+<span class="c1">// resourcename is &quot;Customers&quot;, user_id is 2</span>
+<span class="nv">$customer</span> <span class="o">=</span> <span class="nx">AclResources</span><span class="o">::</span><span class="na">findFirst</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+
+<span class="c1">// rolename is &quot;Designers&quot;</span>
+<span class="nv">$designer</span> <span class="o">=</span> <span class="nx">UserRolesfindFirst</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+<span class="c1">// rolename is &quot;Guests&quot;</span>
+<span class="nv">$guest</span> <span class="o">=</span> <span class="nx">UserRolesfindFirst</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+<span class="c1">// rolename is &quot;Guests&quot;</span>
+<span class="nv">$anotherGuest</span> <span class="o">=</span> <span class="nx">UserRolesfindFirst</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>
+
+<span class="c1">// Returns false</span>
+<span class="nv">$acl</span><span class="o">-&gt;</span><span class="na">isAllowed</span><span class="p">(</span><span class="nv">$designer</span><span class="p">,</span> <span class="nv">$customer</span><span class="p">,</span> <span class="s2">&quot;search&quot;</span><span class="p">);</span>
+
+<span class="c1">// Returns true</span>
+<span class="nv">$acl</span><span class="o">-&gt;</span><span class="na">isAllowed</span><span class="p">(</span><span class="nv">$guest</span><span class="p">,</span> <span class="nv">$customer</span><span class="p">,</span> <span class="s2">&quot;search&quot;</span><span class="p">);</span>
+
+<span class="c1">// Returns true</span>
+<span class="nv">$acl</span><span class="o">-&gt;</span><span class="na">isAllowed</span><span class="p">(</span><span class="nv">$anotherGuest</span><span class="p">,</span> <span class="nv">$customer</span><span class="p">,</span> <span class="s2">&quot;search&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>我们还可以在 <code class="code docutils literal"><span class="pre">allow()</span></code> 或 <code class="code docutils literal"><span class="pre">deny()</span></code> 方法自定义回调函数，来处理角色和资源：</p>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+
+<span class="nv">$acl</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phalcon\Acl\Adapter\Memory</span><span class="p">;</span>
+<span class="nv">$acl</span><span class="o">-&gt;</span><span class="na">allow</span><span class="p">(</span><span class="s2">&quot;Guests&quot;</span><span class="p">,</span> <span class="s2">&quot;Customers&quot;</span><span class="p">,</span> <span class="s2">&quot;search&quot;</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nx">UserRoles</span> <span class="nv">$user</span><span class="p">,</span> <span class="nx">AclResources</span> <span class="nv">$resource</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nv">$user</span><span class="o">-&gt;</span><span class="na">getId</span><span class="p">()</span> <span class="o">==</span> <span class="nv">$resource</span><span class="o">-&gt;</span><span class="na">getUserId</span><span class="p">();</span>
+<span class="p">});</span>
+
+<span class="c1">// Returns false</span>
+<span class="nv">$acl</span><span class="o">-&gt;</span><span class="na">isAllowed</span><span class="p">(</span><span class="nv">$designer</span><span class="p">,</span> <span class="nv">$customer</span><span class="p">,</span> <span class="s2">&quot;search&quot;</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>

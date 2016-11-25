@@ -123,11 +123,11 @@
 <p>Adds access to resources</p>
 <p>abstract public  <strong>dropResourceAccess</strong> (<em>string</em> $resourceName, <em>mixed</em> $accessList) inherited from Phalcon\Acl\AdapterInterface</p>
 <p>Removes an access from a resource</p>
-<p>abstract public  <strong>allow</strong> (<em>string</em> $roleName, <em>string</em> $resourceName, <em>mixed</em> $access) inherited from Phalcon\Acl\AdapterInterface</p>
+<p>abstract public  <strong>allow</strong> (<em>string</em> $roleName, <em>string</em> $resourceName, <em>mixed</em> $access, [<em>unknown</em> $callback]) inherited from Phalcon\Acl\AdapterInterface</p>
 <p>Allow access to a role on a resource</p>
-<p>abstract public <em>boolean</em>  <strong>deny</strong> (<em>string</em> $roleName, <em>string</em> $resourceName, <em>mixed</em> $access) inherited from Phalcon\Acl\AdapterInterface</p>
+<p>abstract public <em>boolean</em>  <strong>deny</strong> (<em>string</em> $roleName, <em>string</em> $resourceName, <em>mixed</em> $access, [<em>unknown</em> $callback]) inherited from Phalcon\Acl\AdapterInterface</p>
 <p>Deny access to a role on a resource</p>
-<p>abstract public <em>boolean</em>  <strong>isAllowed</strong> (<em>string</em> $role, <em>string</em> $resource, <em>string</em> $access) inherited from Phalcon\Acl\AdapterInterface</p>
+<p>abstract public <em>boolean</em>  <strong>isAllowed</strong> (<em>string</em> $role, <em>string</em> $resource, <em>string</em> $access, [<em>unknown</em> $data]) inherited from Phalcon\Acl\AdapterInterface</p>
 <p>Check whether a role is allowed to access an action from a resource</p>
 <p>abstract public <a class="reference internal" href="Phalcon_Acl_RoleInterface.html"><span class="doc">Phalcon\Acl\RoleInterface</span></a> [] <strong>getRoles</strong> () inherited from Phalcon\Acl\AdapterInterface</p>
 <p>Return an array with every role registered in the list</p>

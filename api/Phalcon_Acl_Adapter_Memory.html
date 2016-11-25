@@ -180,9 +180,9 @@
 <p>Adds access to resources</p>
 <p>public  <strong>dropResourceAccess</strong> (<em>string</em> $resourceName, <em>mixed</em> $accessList)</p>
 <p>Removes an access from a resource</p>
-<p>protected  <strong>_allowOrDeny</strong> ()</p>
+<p>protected  <strong>_allowOrDeny</strong> (<em>string</em> $roleName, <em>string</em> $resourceName, <em>string</em> $access, <em>string</em> $action, [<em>callable</em> $callback])</p>
 <p>Checks if a role has access to a resource</p>
-<p>public  <strong>allow</strong> (<em>string</em> $roleName, <em>string</em> $resourceName, <em>mixed</em> $access)</p>
+<p>public  <strong>allow</strong> (<em>string</em> $roleName, <em>string</em> $resourceName, <em>mixed</em> $access, [<em>callable</em> $callback])</p>
 <p>Allow access to a role on a resource You can use &#8216;*&#8217; as wildcard Example:</p>
 <div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
@@ -199,7 +199,7 @@
  <span class="nv">$acl</span><span class="o">-&gt;</span><span class="na">allow</span><span class="p">(</span><span class="s1">&#39;*&#39;</span><span class="p">,</span> <span class="s1">&#39;*&#39;</span><span class="p">,</span> <span class="s1">&#39;browse&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
-<p>public <em>boolean</em>  <strong>deny</strong> (<em>string</em> $roleName, <em>string</em> $resourceName, <em>mixed</em> $access)</p>
+<p>public <em>boolean</em>  <strong>deny</strong> (<em>string</em> $roleName, <em>string</em> $resourceName, <em>mixed</em> $access, [<em>callable</em> $callback])</p>
 <p>Deny access to a role on a resource You can use &#8216;*&#8217; as wildcard Example:</p>
 <div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
@@ -216,7 +216,7 @@
  <span class="nv">$acl</span><span class="o">-&gt;</span><span class="na">deny</span><span class="p">(</span><span class="s1">&#39;*&#39;</span><span class="p">,</span> <span class="s1">&#39;*&#39;</span><span class="p">,</span> <span class="s1">&#39;browse&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
-<p>public <em>boolean</em>  <strong>isAllowed</strong> (<em>string</em> $role, <em>string</em> $resource, <em>string</em> $access)</p>
+<p>public <em>boolean</em>  <strong>isAllowed</strong> (<em>mixed</em> $role, <em>mixed</em> $resource, <em>string</em> $access, [<em>mixed</em> $data])</p>
 <p>Check whether a role is allowed to access an action from a resource</p>
 <div class="highlight-php"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
 
